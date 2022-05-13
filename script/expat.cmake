@@ -1,6 +1,10 @@
 # Copyright 2021 Ingemar Hedvall
 # SPDX-License-Identifier: MIT
+
+if (NOT EXPAT_ROOT)
 set(EXPAT_ROOT "k:/expat/master" CACHE PATH "The SQLite library is required for the build")
+endif()
+
 if (NOT EXPAT_FOUND)
     find_package(EXPAT REQUIRED)
 endif()

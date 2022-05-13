@@ -2,6 +2,7 @@
  * Copyright 2021 Ingemar Hedvall
  * SPDX-License-Identifier: MIT
  */
+
 /** \file cryptoutil.h
  * \brief Checksum and other encryption routines.
  *

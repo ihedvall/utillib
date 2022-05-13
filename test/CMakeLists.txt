@@ -15,7 +15,8 @@ add_executable(test_util
         testcrypto.cpp
         teststringutil.cpp
         test_message_queue.cpp
-        testlisten.cpp testlisten.h test_tempdir.cpp)
+        testlisten.cpp testlisten.h
+        test_tempdir.cpp)
 
 target_include_directories(test_util PRIVATE
         ../include
@@ -27,11 +28,11 @@ target_include_directories(test_util PRIVATE
 
 target_link_libraries(test_util PRIVATE util)
 target_link_libraries(test_util PRIVATE ${Boost_LIBRARIES})
-
 target_link_libraries(test_util PRIVATE ${EXPAT_LIBRARIES})
 target_link_libraries(test_util PRIVATE ${ZLIB_LIBRARIES})
 target_link_libraries(test_util PRIVATE ${GTEST_BOTH_LIBRARIES})
 target_link_libraries(test_util PRIVATE ${OPENSSL_CRYPTO_LIBRARY})
+
 if (WIN32)
 target_link_libraries(test_util PRIVATE ws2_32)
 target_link_libraries(test_util PRIVATE mswsock)
@@ -39,11 +40,12 @@ target_link_libraries(test_util PRIVATE bcrypt)
 endif()
 
 if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
-    target_link_options(test_util PRIVATE -static -fstack-protector )
+target_link_options(test_util PRIVATE -static -fstack-protector )
 elseif (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
-    target_compile_options(test_util PRIVATE -D_WIN32_WINNT=0x0A00)
+target_compile_options(test_util PRIVATE -D_WIN32_WINNT=0x0A00)
 endif()
 
 
-add_test(TestUtil test_util)
+include(GoogleTest)
+gtest_discover_tests(test_util)
 

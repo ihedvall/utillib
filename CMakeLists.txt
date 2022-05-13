@@ -1,14 +1,15 @@
 # Copyright 2021 Ingemar Hedvall
 # SPDX-License-Identifier: MIT
 cmake_minimum_required(VERSION 3.20)
-project(UtilLib
+project(utilLib
         VERSION 1.0
-        DESCRIPTION "Library for common supports"
+        DESCRIPTION "C++ library with generic functions for creating applications."
         LANGUAGES CXX)
 
 option(BUILD_SHARED_LIBS "Static libraries are preferred" OFF)
 option(BUILD_STATIC_LIBS "Static libraries are normally used" ON)
 option(BUILD_DOC "If doxygen is installed, then build documentation in Release mode" ON)
+
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_DEBUG_POSTFIX d)
@@ -17,7 +18,7 @@ include("script/boost.cmake")
 include("script/zlib.cmake")
 include("script/openssl.cmake")
 include("script/expat.cmake")
-include("script/sqlite3.cmake")
+
 include("script/googletest.cmake")
 include("script/doxygen.cmake")
 
@@ -90,11 +91,12 @@ if (GTEST_FOUND)
 endif()
 
 if (DOXYGEN_FOUND AND (CMAKE_BUILD_TYPE MATCHES "^[Rr]elease") )
-    set(DOXYGEN_RECURSIVE YES)
+    set(DOXYGEN_RECURSIVE NO)
     set(DOXYGEN_REPEAT_BRIEF NO)
-    set(DOXYGEN_HAVE_DOT YES)
+    set(DOXYGEN_PROJECT_NAME "UTILLib")
+    set(DOXYGEN_HTML_EXTRA_STYLESHEET doc/utillib.css)
     doxygen_add_docs( doc_libutil ALL
-            include/util
+            include/util doxygen
             COMMENT "Util Library generating API documentation with Doxygen")
 endif()
 
@@ -103,7 +105,7 @@ install(TARGETS util
         LIBRARY DESTINATION util/lib
         ARCHIVE DESTINATION util/lib
         RUNTIME DESTINATION util/bin
-        PUBLIC_HEADER DESTINATION util/include/util)
+        PUBLIC_HEADER DESTINATION util/include/util )
 
 #include(CMakePackageConfigHelpers)
 #write_basic_package_version_file(
