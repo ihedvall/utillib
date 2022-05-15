@@ -1,4 +1,5 @@
 | [Home](index.html) | [Log](log.html) | | [Listen](listen.html) | [Time](time.html) | [XML](xml.html) |
+| [Home](/index.html) | [Log](/log.html) | | [Listen](/listen.html) | [Time](/time.html) | [XML](/xml.html) |
 
 
 # Summary
