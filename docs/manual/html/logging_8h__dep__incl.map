@@ -1,0 +1,7 @@
+<map id="include/util/logging.h" name="include/util/logging.h">
+<area shape="rect" id="node1" title="Standard log interfaces." alt="" coords="151,5,291,32"/>
+<area shape="rect" id="node2" href="$logmessage_8h.html" title=" " alt="" coords="43,80,212,107"/>
+<area shape="rect" id="node5" href="$logstream_8h.html" title="Implements a stream interface to log messages. This is the file to use in most applications...." alt="" coords="236,80,392,107"/>
+<area shape="rect" id="node3" href="$ilogger_8h.html" title="Defines an interface against a generic logger." alt="" coords="5,155,143,181"/>
+<area shape="rect" id="node4" href="$logconfig_8h.html" title="Singleton that is used to configure default loggers." alt="" coords="52,229,203,256"/>
+</map>

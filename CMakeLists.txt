@@ -94,7 +94,8 @@ if (DOXYGEN_FOUND AND (CMAKE_BUILD_TYPE MATCHES "^[Rr]elease") )
     set(DOXYGEN_RECURSIVE NO)
     set(DOXYGEN_REPEAT_BRIEF NO)
     set(DOXYGEN_PROJECT_NAME "UTILLib")
-    set(DOXYGEN_HTML_EXTRA_STYLESHEET doc/utillib.css)
+    set(DOXYGEN_HTML_EXTRA_STYLESHEET doxygen/utillib.css)
+    set(DOXYGEN_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/docs/manual)
     doxygen_add_docs( doc_libutil ALL
             include/util doxygen
             COMMENT "Util Library generating API documentation with Doxygen")
