@@ -1,6 +1,4 @@
 | [Home](index.html) | [Log](log.html) | | [Listen](listen.html) | [Time](time.html) | [XML](xml.html) |
-| [Home](/index.html) | [Log](/log.html) | | [Listen](/listen.html) | [Time](/time.html) | [XML](/xml.html) |
-
 
 # Summary
 The UTIL C++ library is used as a base library for mostly applications. It contains 
