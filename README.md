@@ -13,6 +13,8 @@ The Util Library is used as a base for applications and libraries. It consists o
 - String Functions. Various string manipulations that is missing in the standard C++.
 - Time and Date Functions. Various time and date functions 
 
+## Documentation 
+The documentation can be found on GitHub Pages: [UtilLib](https://ihedvall.github.io/utillib)
 
 ## Building the project
 
@@ -26,7 +28,7 @@ needs to be downloaded and built.
 - Doxygen's application. Is required if the documentation should be built.
 - Google Test Library. Is required for running and build the unit tests.
 
-## License
+### License
 
 The project uses the MIT license. See external LICENSE file in project root.
 
