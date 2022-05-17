@@ -38,14 +38,41 @@ struct ListenPortConfig {
   }
 };
 
+/** \brief Returns the list of available listen servers.
+ *
+ * Returns a list of available listen servers on the computer.
+ *
+ * @return List of listen servers.
+ */
 [[nodiscard]] std::vector<ListenPortConfig> GetListenConfigList();
+
+/** \brief Register a new listen server
+ *
+ * Add a new listen server onto the shared memory list of servers. Note
+ * that the port should be unique.
+ *
+ * @param port_config Server configuration.
+ */
 void AddListenConfig(const ListenPortConfig& port_config);
+
+/** \brief Removes a listen server from the list.
+ *
+ * Removes a listen server from the shared memory list.
+ *
+ * @param port TCP/IP port of the server.
+ */
 void DeleteListenConfig(uint16_t port);
 
+
+/** \class ListenConfig listenconfig.h "util/listenconfig.h"
+ * \brief Implement the shared memory list of listen server configurations.
+ *
+ * Implements the shared memory list of available listen server configurations.
+ */
 class ListenConfig final {
  public:
-  ListenConfig();
-  ~ListenConfig();
+  ListenConfig(); ///< Constructor
+  ~ListenConfig(); ///< Destructor
 };
 
 } // end namespace

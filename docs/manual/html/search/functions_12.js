@@ -4,6 +4,7 @@ var searchData=
   ['_7eilogger_1',['~ILogger',['../classutil_1_1log_1_1_i_logger.html#a444ad230d26e17f5a1197b58566dd318',1,'util::log::ILogger']]],
   ['_7eixmlfile_2',['~IXmlFile',['../classutil_1_1xml_1_1_i_xml_file.html#a8ca4e7e6476f9e2a38afcd7baeebeeae',1,'util::xml::IXmlFile']]],
   ['_7eixmlnode_3',['~IXmlNode',['../classutil_1_1xml_1_1_i_xml_node.html#a67f949a2f7e6d0f0c1381c8ed8204a93',1,'util::xml::IXmlNode']]],
-  ['_7elogstream_4',['~LogStream',['../classutil_1_1log_1_1_log_stream.html#a0ddb87c1b4e8f7c3116fa401a7fad2e7',1,'util::log::LogStream']]],
-  ['_7etempdir_5',['~TempDir',['../classutil_1_1log_1_1_temp_dir.html#a3fded27618a998d246f9cf8da96134ba',1,'util::log::TempDir']]]
+  ['_7elistenconfig_4',['~ListenConfig',['../classutil_1_1log_1_1_listen_config.html#a256a48c142063e56cc938383dd953ae8',1,'util::log::ListenConfig']]],
+  ['_7elogstream_5',['~LogStream',['../classutil_1_1log_1_1_log_stream.html#a0ddb87c1b4e8f7c3116fa401a7fad2e7',1,'util::log::LogStream']]],
+  ['_7etempdir_6',['~TempDir',['../classutil_1_1log_1_1_temp_dir.html#a3fded27618a998d246f9cf8da96134ba',1,'util::log::TempDir']]]
 ];

@@ -74,6 +74,11 @@ $(function() {
   <div class="headertitle"><div class="title">util::log::ThreadSafeQueue&lt; T &gt; Class Template Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Implements a thread-safe queue.  
+ <a href="classutil_1_1log_1_1_thread_safe_queue.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="threadsafequeue_8h_source.html">threadsafequeue.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -83,19 +88,130 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aec15ad689fcd99dec70bbf3867fc53ae"><td class="memItemLeft" align="right" valign="top"><a id="aec15ad689fcd99dec70bbf3867fc53ae" name="aec15ad689fcd99dec70bbf3867fc53ae"></a>
 <a class="el" href="classutil_1_1log_1_1_thread_safe_queue.html">ThreadSafeQueue</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (const <a class="el" href="classutil_1_1log_1_1_thread_safe_queue.html">ThreadSafeQueue</a> &amp;)=delete</td></tr>
 <tr class="separator:aec15ad689fcd99dec70bbf3867fc53ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aff5492e628351265698045bcd90d4943"><td class="memItemLeft" align="right" valign="top"><a id="aff5492e628351265698045bcd90d4943" name="aff5492e628351265698045bcd90d4943"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>Put</b> (std::unique_ptr&lt; T &gt; &amp;value)</td></tr>
+<tr class="memitem:aff5492e628351265698045bcd90d4943"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classutil_1_1log_1_1_thread_safe_queue.html#aff5492e628351265698045bcd90d4943">Put</a> (std::unique_ptr&lt; T &gt; &amp;value)</td></tr>
+<tr class="memdesc:aff5492e628351265698045bcd90d4943"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a value at the end of the queue.  <a href="classutil_1_1log_1_1_thread_safe_queue.html#aff5492e628351265698045bcd90d4943">More...</a><br /></td></tr>
 <tr class="separator:aff5492e628351265698045bcd90d4943"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5bb16e51c2bf225041f9e617b620ec7f"><td class="memItemLeft" align="right" valign="top"><a id="a5bb16e51c2bf225041f9e617b620ec7f" name="a5bb16e51c2bf225041f9e617b620ec7f"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>Get</b> (std::unique_ptr&lt; T &gt; &amp;dest, bool block)</td></tr>
+<tr class="memitem:a5bb16e51c2bf225041f9e617b620ec7f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classutil_1_1log_1_1_thread_safe_queue.html#a5bb16e51c2bf225041f9e617b620ec7f">Get</a> (std::unique_ptr&lt; T &gt; &amp;dest, bool block)</td></tr>
+<tr class="memdesc:a5bb16e51c2bf225041f9e617b620ec7f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fetch the first object from the queue.  <a href="classutil_1_1log_1_1_thread_safe_queue.html#a5bb16e51c2bf225041f9e617b620ec7f">More...</a><br /></td></tr>
 <tr class="separator:a5bb16e51c2bf225041f9e617b620ec7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad6a1da4b52fb8916e22d5f29d8dcaabd"><td class="memItemLeft" align="right" valign="top"><a id="ad6a1da4b52fb8916e22d5f29d8dcaabd" name="ad6a1da4b52fb8916e22d5f29d8dcaabd"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>Empty</b> () const</td></tr>
+<tr class="memitem:ad6a1da4b52fb8916e22d5f29d8dcaabd"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classutil_1_1log_1_1_thread_safe_queue.html#ad6a1da4b52fb8916e22d5f29d8dcaabd">Empty</a> () const</td></tr>
+<tr class="memdesc:ad6a1da4b52fb8916e22d5f29d8dcaabd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if the queue is empty.  <a href="classutil_1_1log_1_1_thread_safe_queue.html#ad6a1da4b52fb8916e22d5f29d8dcaabd">More...</a><br /></td></tr>
 <tr class="separator:ad6a1da4b52fb8916e22d5f29d8dcaabd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a69969dc563ddc1f8f2fb0ef9ee036a77"><td class="memItemLeft" align="right" valign="top"><a id="a69969dc563ddc1f8f2fb0ef9ee036a77" name="a69969dc563ddc1f8f2fb0ef9ee036a77"></a>
-size_t&#160;</td><td class="memItemRight" valign="bottom"><b>Size</b> () const</td></tr>
+<tr class="memitem:a69969dc563ddc1f8f2fb0ef9ee036a77"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classutil_1_1log_1_1_thread_safe_queue.html#a69969dc563ddc1f8f2fb0ef9ee036a77">Size</a> () const</td></tr>
+<tr class="memdesc:a69969dc563ddc1f8f2fb0ef9ee036a77"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns number of items in the queue.  <a href="classutil_1_1log_1_1_thread_safe_queue.html#a69969dc563ddc1f8f2fb0ef9ee036a77">More...</a><br /></td></tr>
 <tr class="separator:a69969dc563ddc1f8f2fb0ef9ee036a77"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><div class="compoundTemplParams">template&lt;typename T&gt;<br />
+class util::log::ThreadSafeQueue&lt; T &gt;</div><p >class <a class="el" href="classutil_1_1log_1_1_thread_safe_queue.html" title="Implements a thread-safe queue.">ThreadSafeQueue</a> <a class="el" href="threadsafequeue_8h.html" title="Implements a thread-safe queue.">threadsafequeue.h</a> "util/threadsafequeue.h"</p>
+<p >Implements a thread-safe queue based upon a std::queue. The queue uses stores the objects with smart pointers.</p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>Type of object to store. </td></tr>
+  </table>
+  </dd>
+</dl>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="ad6a1da4b52fb8916e22d5f29d8dcaabd" name="ad6a1da4b52fb8916e22d5f29d8dcaabd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad6a1da4b52fb8916e22d5f29d8dcaabd">&#9670;&nbsp;</a></span>Empty()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classutil_1_1log_1_1_thread_safe_queue.html">util::log::ThreadSafeQueue</a>&lt; T &gt;::Empty</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >Returns true if the queue is empty.</p>
+<dl class="section return"><dt>Returns</dt><dd>True if list is empty. </dd></dl>
+
+</div>
+</div>
+<a id="a5bb16e51c2bf225041f9e617b620ec7f" name="a5bb16e51c2bf225041f9e617b620ec7f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5bb16e51c2bf225041f9e617b620ec7f">&#9670;&nbsp;</a></span>Get()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classutil_1_1log_1_1_thread_safe_queue.html">util::log::ThreadSafeQueue</a>&lt; T &gt;::Get </td>
+          <td>(</td>
+          <td class="paramtype">std::unique_ptr&lt; T &gt; &amp;&#160;</td>
+          <td class="paramname"><em>dest</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>block</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >Gets the first object in the queue. The function may block until a value is available. Deleting the queue will unblock the call and returning false.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">dest</td><td>Returning object </td></tr>
+    <tr><td class="paramname">block</td><td>True if the function should block until a value is available. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if a value was returned. </dd></dl>
+
+</div>
+</div>
+<a id="aff5492e628351265698045bcd90d4943" name="aff5492e628351265698045bcd90d4943"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aff5492e628351265698045bcd90d4943">&#9670;&nbsp;</a></span>Put()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classutil_1_1log_1_1_thread_safe_queue.html">util::log::ThreadSafeQueue</a>&lt; T &gt;::Put </td>
+          <td>(</td>
+          <td class="paramtype">std::unique_ptr&lt; T &gt; &amp;&#160;</td>
+          <td class="paramname"><em>value</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >Add a value last in the queue. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">value</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a69969dc563ddc1f8f2fb0ef9ee036a77" name="a69969dc563ddc1f8f2fb0ef9ee036a77"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a69969dc563ddc1f8f2fb0ef9ee036a77">&#9670;&nbsp;</a></span>Size()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t <a class="el" href="classutil_1_1log_1_1_thread_safe_queue.html">util::log::ThreadSafeQueue</a>&lt; T &gt;::Size</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>Number of items in the queue. </dd></dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>include/util/<a class="el" href="threadsafequeue_8h_source.html">threadsafequeue.h</a></li>
 </ul>

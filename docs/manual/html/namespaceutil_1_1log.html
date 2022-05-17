@@ -88,6 +88,7 @@ Classes</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interface against a generic logger.  <a href="classutil_1_1log_1_1_i_logger.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classutil_1_1log_1_1_listen_config.html">ListenConfig</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Implement the shared memory list of listen server configurations.  <a href="classutil_1_1log_1_1_listen_config.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structutil_1_1log_1_1_listen_port_config.html">ListenPortConfig</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines a listen config item in the config memory.  <a href="structutil_1_1log_1_1_listen_port_config.html#details">More...</a><br /></td></tr>
@@ -103,6 +104,7 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classutil_1_1log_1_1_temp_dir.html">TempDir</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classutil_1_1log_1_1_thread_safe_queue.html">ThreadSafeQueue</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Implements a thread-safe queue.  <a href="classutil_1_1log_1_1_thread_safe_queue.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
@@ -139,14 +141,14 @@ Functions</h2></td></tr>
 <tr class="memitem:ae77d9e9cd79811886a709d4cc451d90e"><td class="memItemLeft" align="right" valign="top"><a id="ae77d9e9cd79811886a709d4cc451d90e" name="ae77d9e9cd79811886a709d4cc451d90e"></a>
 std::unique_ptr&lt; <a class="el" href="classutil_1_1log_1_1_i_listen.html">IListen</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>CreateListen</b> (const std::string &amp;type, const std::string &amp;share_name)</td></tr>
 <tr class="separator:ae77d9e9cd79811886a709d4cc451d90e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa7be6e319b623db80f35cfe0413b09a4"><td class="memItemLeft" align="right" valign="top"><a id="aa7be6e319b623db80f35cfe0413b09a4" name="aa7be6e319b623db80f35cfe0413b09a4"></a>
-std::vector&lt; <a class="el" href="structutil_1_1log_1_1_listen_port_config.html">ListenPortConfig</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>GetListenConfigList</b> ()</td></tr>
+<tr class="memitem:aa7be6e319b623db80f35cfe0413b09a4"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="structutil_1_1log_1_1_listen_port_config.html">ListenPortConfig</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceutil_1_1log.html#aa7be6e319b623db80f35cfe0413b09a4">GetListenConfigList</a> ()</td></tr>
+<tr class="memdesc:aa7be6e319b623db80f35cfe0413b09a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the list of available listen servers.  <a href="namespaceutil_1_1log.html#aa7be6e319b623db80f35cfe0413b09a4">More...</a><br /></td></tr>
 <tr class="separator:aa7be6e319b623db80f35cfe0413b09a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a17e57acfe6602f77a46db3e89b570304"><td class="memItemLeft" align="right" valign="top"><a id="a17e57acfe6602f77a46db3e89b570304" name="a17e57acfe6602f77a46db3e89b570304"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>AddListenConfig</b> (const <a class="el" href="structutil_1_1log_1_1_listen_port_config.html">ListenPortConfig</a> &amp;port_config)</td></tr>
+<tr class="memitem:a17e57acfe6602f77a46db3e89b570304"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceutil_1_1log.html#a17e57acfe6602f77a46db3e89b570304">AddListenConfig</a> (const <a class="el" href="structutil_1_1log_1_1_listen_port_config.html">ListenPortConfig</a> &amp;port_config)</td></tr>
+<tr class="memdesc:a17e57acfe6602f77a46db3e89b570304"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register a new listen server.  <a href="namespaceutil_1_1log.html#a17e57acfe6602f77a46db3e89b570304">More...</a><br /></td></tr>
 <tr class="separator:a17e57acfe6602f77a46db3e89b570304"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7175d0b592965f5e9cf48da0e4acff6f"><td class="memItemLeft" align="right" valign="top"><a id="a7175d0b592965f5e9cf48da0e4acff6f" name="a7175d0b592965f5e9cf48da0e4acff6f"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>DeleteListenConfig</b> (uint16_t port)</td></tr>
+<tr class="memitem:a7175d0b592965f5e9cf48da0e4acff6f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceutil_1_1log.html#a7175d0b592965f5e9cf48da0e4acff6f">DeleteListenConfig</a> (uint16_t port)</td></tr>
+<tr class="memdesc:a7175d0b592965f5e9cf48da0e4acff6f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes a listen server from the list.  <a href="namespaceutil_1_1log.html#a7175d0b592965f5e9cf48da0e4acff6f">More...</a><br /></td></tr>
 <tr class="separator:a7175d0b592965f5e9cf48da0e4acff6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3c41b09115992c8633233de2672f2225"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceutil_1_1log.html#a3c41b09115992c8633233de2672f2225">ProgramDataPath</a> ()</td></tr>
 <tr class="separator:a3c41b09115992c8633233de2672f2225"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -270,6 +272,31 @@ std::string&#160;</td><td class="memItemRight" valign="bottom"><b>GetSeverityStr
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
+<a id="a17e57acfe6602f77a46db3e89b570304" name="a17e57acfe6602f77a46db3e89b570304"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a17e57acfe6602f77a46db3e89b570304">&#9670;&nbsp;</a></span>AddListenConfig()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void util::log::AddListenConfig </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structutil_1_1log_1_1_listen_port_config.html">ListenPortConfig</a> &amp;&#160;</td>
+          <td class="paramname"><em>port_config</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >Add a new listen server onto the shared memory list of servers. Note that the port should be unique.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">port_config</td><td>Server configuration. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="aba297d7d2cad53eb53effc77f386e1de" name="aba297d7d2cad53eb53effc77f386e1de"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aba297d7d2cad53eb53effc77f386e1de">&#9670;&nbsp;</a></span>BackupFiles()</h2>
 
@@ -306,6 +333,31 @@ std::string&#160;</td><td class="memItemRight" valign="bottom"><b>GetSeverityStr
 
 </div>
 </div>
+<a id="a7175d0b592965f5e9cf48da0e4acff6f" name="a7175d0b592965f5e9cf48da0e4acff6f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7175d0b592965f5e9cf48da0e4acff6f">&#9670;&nbsp;</a></span>DeleteListenConfig()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void util::log::DeleteListenConfig </td>
+          <td>(</td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>port</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >Removes a listen server from the shared memory list.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">port</td><td>TCP/IP port of the server. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="ace98a2909c42f95cd09bfce65db02440" name="ace98a2909c42f95cd09bfce65db02440"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ace98a2909c42f95cd09bfce65db02440">&#9670;&nbsp;</a></span>FindNotepad()</h2>
 
@@ -321,6 +373,25 @@ std::string&#160;</td><td class="memItemRight" valign="bottom"><b>GetSeverityStr
       </table>
 </div><div class="memdoc">
 <dl class="section return"><dt>Returns</dt><dd>The path to the Notepad++ or the Notepad application. </dd></dl>
+
+</div>
+</div>
+<a id="aa7be6e319b623db80f35cfe0413b09a4" name="aa7be6e319b623db80f35cfe0413b09a4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa7be6e319b623db80f35cfe0413b09a4">&#9670;&nbsp;</a></span>GetListenConfigList()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; <a class="el" href="structutil_1_1log_1_1_listen_port_config.html">ListenPortConfig</a> &gt; util::log::GetListenConfigList </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >Returns a list of available listen servers on the computer.</p>
+<dl class="section return"><dt>Returns</dt><dd>List of listen servers. </dd></dl>
 
 </div>
 </div>
