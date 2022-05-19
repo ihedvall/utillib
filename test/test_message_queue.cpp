@@ -46,9 +46,11 @@ void ReceiveTask(MessageQueue* queue) {
       }
       ++kTaskCount;
     } else {
+      std::cout <<  "Fail" << std::endl;
       break;
     }
   } while (!kStopTask);
+  std::cout <<  "Stop task" << std::endl;
 }
 
 } // end namespace
@@ -68,18 +70,22 @@ TEST(MessageQueue, TestMultipleSender) {
   MessageQueue master(true, kQueueName.data());
   kStopTask = false;
   auto server_task = std::thread(&ReceiveTask, &master);
-
-  std::array<std::thread, 10> task_list;
+  kTaskCount = 0;
+  std::array<std::thread, 1000> task_list;
   for (auto& task1 : task_list) {
     task1 = std::thread(&SendTask);
   }
-  for (auto& task2 : task_list) {
-    task2.join();
-  }
-  for (size_t count = 0; count < 1000 && kTaskCount < task_list.size() * 10; ++count) {
+
+  for (size_t count = 0; count < 3000 && kTaskCount < task_list.size() * 10; ++count) {
     std::this_thread::sleep_for(10ms);
   }
-
+  for (auto& task2 : task_list) {
+    std::cout << kTaskCount << std::endl;
+    if (task2.joinable()) {
+      task2.join();
+    }
+  }
+  std::cout << "stopping" << std::endl;
   kStopTask = true;
   master.Stop();
   server_task.join();

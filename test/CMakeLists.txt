@@ -39,10 +39,10 @@ target_link_libraries(test_util PRIVATE mswsock)
 target_link_libraries(test_util PRIVATE bcrypt)
 endif()
 
-if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
-target_link_options(test_util PRIVATE -static -fstack-protector )
-elseif (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
-target_compile_options(test_util PRIVATE -D_WIN32_WINNT=0x0A00)
+if (MINGW)
+    target_link_options(test_util PRIVATE -static -fstack-protector )
+elseif (MSVC)
+    target_compile_options(test_util PRIVATE -D_WIN32_WINNT=0x0A00)
 endif()
 
 

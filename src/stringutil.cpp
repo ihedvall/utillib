@@ -50,11 +50,6 @@ std::string FormatDouble(double value, uint8_t decimals, bool fixed, const std::
     fixed = false;
   }
 
-  // Find type of decimal point character
-  const auto loc = std::locale("");
-  const auto& facet = std::use_facet<std::numpunct<char>>(loc);
-  const char dec_char = facet.decimal_point();
-
   std::string text;
   auto value_int =  static_cast<int64_t> (value);
   if (value == value_int && !fixed) {
@@ -66,7 +61,7 @@ std::string FormatDouble(double value, uint8_t decimals, bool fixed, const std::
     text = std::to_string(value_int);
   } else {
     char format[20] {};
-    sprintf(format, "%%%c%df", dec_char, static_cast<int>(decimals));
+    sprintf(format, "%%.%df", static_cast<int>(decimals));
     char temp[200] {};
     sprintf(temp,format, value);
     text = temp;
@@ -81,7 +76,7 @@ std::string FormatDouble(double value, uint8_t decimals, bool fixed, const std::
   }
 
   // fill or delete trailing '0' but not if using exponent
-  const bool have_decimal = text.find(dec_char) != std::string::npos && text.find('E') == std::string::npos;
+  const bool have_decimal = text.find('.') != std::string::npos && text.find('E') == std::string::npos;
   if (!fixed && have_decimal) {
     // Remove trailing zeros
     // Check that it is a decimal point in the string
@@ -89,7 +84,7 @@ std::string FormatDouble(double value, uint8_t decimals, bool fixed, const std::
       text.pop_back();
     }
   } else if (fixed && have_decimal) {
-    const size_t dec_pos = text.find(dec_char);
+    const size_t dec_pos = text.find('.');
     const std::string dec = text.substr(dec_pos + 1);
     for (size_t nof_dec = dec.size(); nof_dec < decimals; ++nof_dec) {
       text.push_back('0');
@@ -97,7 +92,7 @@ std::string FormatDouble(double value, uint8_t decimals, bool fixed, const std::
   }
 
   // We don't want to display '22.' instead of 22
-  if (text.back() == dec_char) {
+  if (text.back() == '.') {
     text.pop_back();
   }
 

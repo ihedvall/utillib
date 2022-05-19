@@ -4,6 +4,7 @@
  */
 #include <chrono>
 #include <thread>
+#include <iostream>
 #include "messagequeue.h"
 
 using namespace boost::interprocess;
@@ -80,8 +81,8 @@ void MessageQueue::Add(const SharedListenMessage &msg) {
         auto &in_msg = mem.queue[mem.queue_in];
         in_msg = msg;
         ++mem.queue_in;
-        mem.message_semaphore.post();
         ++mem.nof_messages;
+        mem.message_semaphore.post();
         add = true;
       }
     } while (!add);
@@ -106,6 +107,7 @@ bool MessageQueue::Get(SharedListenMessage &msg, bool block) {
      --mem.nof_messages;
       return true;
    }
+
   } else {
     const bool message = mem.message_semaphore.try_wait();
     if (message && !task_stop_ && mem.nof_messages > 0) {

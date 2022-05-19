@@ -64,8 +64,10 @@ target_include_directories(util PRIVATE ${EXPAT_INCLUDE_DIRS})
 target_include_directories(util PRIVATE ${ZLIB_INCLUDE_DIRS})
 target_include_directories(util PRIVATE ${OPENSSL_INCLUDE_DIR})
 
+target_compile_definitions(util PRIVATE XML_STATIC)
+
 if (MSVC)
-target_compile_definitions(util PRIVATE -D_WIN32_WINNT=0x0A00)
+    target_compile_definitions(util PRIVATE _WIN32_WINNT=0x0A00)
 endif()
 
 set(UTIL_PUBLIC_HEADERS
