@@ -10,13 +10,8 @@
 #include <cstdarg>
 #include <cstdio>
 #include <string>
-
-// #if __has_builtin(__builtin_source_location) //__has_include("source_location")
-#if __has_include("experimental/source_location")
-#include <experimental/source_location>
-#else
 #include <source_location>
-#endif
+
 
 namespace util::log {
 ///< Defines the log severity level
@@ -34,11 +29,8 @@ enum class LogSeverity {
  * The Loc is a wrapper around the std::location library. This library is new in C++20 and some
  * treat is as experimental.
  */
-#if __has_include("experimental/source_location")
-typedef std::experimental::source_location Loc;
-#else
-typedef std::source_location Loc;
-#endif
+using Loc = std::source_location;
+
 
 void LogDebug(const Loc &loc, const char *fmt, ...); ///< Creates a debug message message
 void LogInfo(const Loc &loc, const char *fmt, ...); ///< Creates an information message

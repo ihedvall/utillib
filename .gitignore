@@ -91,3 +91,4 @@ cmake-build-*
 
 # ODS models
 odsconfigurator/model/*_?.xml
+/.vs/
