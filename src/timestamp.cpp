@@ -6,8 +6,6 @@
 #include <chrono>
 #include <sstream>
 #include <iomanip>
-
-#include <boost/endian/conversion.hpp>
 #include <boost/endian/buffers.hpp>
 #include "util/timestamp.h"
 
@@ -505,7 +503,7 @@ uint64_t OdsDateToNs(const std::string &ods_date) {
 }
 
 uint64_t FileTimeToNs(std::filesystem::file_time_type time) {
-#if defined _MSC_VER
+#if (_MSC_VER)
   const auto sys_time = std::chrono::clock_cast<std::chrono::system_clock>(time);
   return TimeStampToNs(sys_time);
 #else
