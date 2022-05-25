@@ -26,11 +26,9 @@ enum class LogSeverity {
   kEmergency  ///< Fatal error message
 };
 /** \typedef Loc
- * The Loc is a wrapper around the std::location library. This library is new in C++20 and some
- * treat is as experimental.
+ * The Loc is a wrapper around the std::location library. This library is new in C++20.
  */
 using Loc = std::source_location;
-
 
 void LogDebug(const Loc &loc, const char *fmt, ...); ///< Creates a debug message message
 void LogInfo(const Loc &loc, const char *fmt, ...); ///< Creates an information message

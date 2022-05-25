@@ -17,6 +17,7 @@ namespace {
 std::atomic<int> jj = 0;
 
 void TestLogInfo(int ii) {
+  LOG_TRACE() << "Pelle: " << ii;
   LOG_INFO() << "Olle: " << ii;
   LOG_ERROR() << "Olle: " << ii;
   LogInfo(Loc::current(), "Pelle %d", ii);

@@ -96,4 +96,53 @@ TEST(IXmlFile, ParseMdComment) //NOLINT
   EXPECT_EQ(f->RootName(), std::string("Root"));
 
 }
+
+TEST(IXmlFile, TestProperty) {
+  auto writer = CreateXmlFile();
+  writer->RootName("Olle");
+  writer->SetProperty("TextNode", "Pelle");
+  writer->SetProperty("StrNode", std::string("Olle"));
+  writer->SetProperty("TrueNode", true);
+  writer->SetProperty("FalseNode", false);
+  writer->SetProperty("IntNode", 55);
+  writer->SetProperty("FloatNode", 1.5);
+  const auto xml_string = writer->WriteString(true);
+  std::cout << xml_string << std::endl;
+
+  auto reader = CreateXmlFile();
+  reader->ParseString(xml_string);
+  EXPECT_TRUE(reader->Property<std::string>("TextNode") == "Pelle");
+  EXPECT_TRUE(reader->Property<std::string>("StrNode") == "Olle");
+  EXPECT_TRUE(reader->Property<bool>("TrueNode"));
+  EXPECT_FALSE(reader->Property<bool>("FalseNode"));
+  EXPECT_EQ(reader->Property<int>("IntNode"), 55);
+  EXPECT_EQ(reader->Property<double>("FloatNode"), 1.5);
+}
+
+TEST(IXmlNode, TestAttribute) {
+  auto writer = CreateXmlFile();
+  auto& root_node = writer->RootName("Olle");
+  auto& temp = root_node.AddNode("Temp");
+
+  temp.SetAttribute("TextAttr", "Pelle");
+  temp.SetAttribute("StrAttr", std::string("Olle"));
+  temp.SetAttribute("TrueAttr", true);
+  temp.SetAttribute("FalseAttr", false);
+  temp.SetAttribute("IntAttr", 55);
+  temp.SetAttribute("FloatAttr", 1.5);
+  const auto xml_string = writer->WriteString(true);
+  std::cout << xml_string << std::endl;
+
+  auto reader = CreateXmlFile();
+  reader->ParseString(xml_string);
+  const auto* temp_node = reader->GetNode("Temp");
+  EXPECT_TRUE(temp_node != nullptr);
+
+  EXPECT_TRUE(temp_node->Attribute<std::string>("TextAttr") == "Pelle");
+  EXPECT_TRUE(temp_node->Attribute<std::string>("StrAttr") == "Olle");
+  EXPECT_TRUE(temp_node->Attribute<bool>("TrueAttr"));
+  EXPECT_FALSE(temp_node->Attribute<bool>("FalseAttr"));
+  EXPECT_EQ(temp_node->Attribute<int>("IntAttr"), 55);
+  EXPECT_EQ(temp_node->Attribute<double>("FloatAttr"), 1.5);
+}
 } // namespace util::test

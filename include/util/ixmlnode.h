@@ -112,21 +112,9 @@ namespace util::xml {
   }
 
    template<typename T>
-   void SetAttribute(const std::string &key, const T &value) {
-     const auto val = std::to_string(value);
-     attribute_list_.insert({key, val});
-   }
+   void SetAttribute(const std::string &key, const T &value);
 
-   template<typename T = bool>
-   void SetAttribute(const std::string &key, const bool& value) {
-     const auto val = std::to_string(value);
-     attribute_list_.insert({key, value ? "yes" : "now"});
-   }
 
-   template<typename T = std::string>
-   void SetAttribute(const std::string &key, const std::string& value) {
-     attribute_list_.insert({key, value });
-   }
   /** \brief Returns a value.
    *
    * Returns the tag value
@@ -139,19 +127,9 @@ namespace util::xml {
   }
 
   template<typename T>
-  void Value(const T& value) {
-    value_ = std::to_string(value);
-  }
+  void Value(const T& value);
 
-  template<typename T = bool>
-  void Value(const std::string& value) {
-     value_ = value;
-  }
 
-  template<typename T = std::string>
-  void Value(const bool& value) {
-     value_ = value ? "yes" : "no";
-   }
   /** \brief Returns a specific tag value.
    *
    * Return a child tag value. Note that the Value() function returns this tags value.
@@ -213,6 +191,31 @@ namespace util::xml {
    NodeList node_list_;
 
 
-   virtual std::unique_ptr<IXmlNode> CreateNode(const std::string& name) const;
+   [[nodiscard]] virtual std::unique_ptr<IXmlNode> CreateNode(const std::string& name) const;
 };
+
+template<typename T>
+void IXmlNode::Value(const T &value) {
+//  value_ = std::to_string(value);
+  std::ostringstream temp;
+  temp << value;
+  value_ = temp.str();
+}
+
+template<>
+void IXmlNode::Value(const bool& value);
+
+template<>
+void IXmlNode::Value(const std::string& value);
+
+template<typename T>
+void IXmlNode::SetAttribute(const std::string &key, const T &value) {
+  std::ostringstream temp;
+  temp << value;
+  attribute_list_.insert({key, temp.str()});
+}
+
+template<>
+void IXmlNode::SetAttribute(const std::string &key, const bool& value);
+
 }

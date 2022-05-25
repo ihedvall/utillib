@@ -156,5 +156,20 @@ void IXmlNode::Write(std::ostream &dest, size_t level) { //NOLINT
   }
 }
 
+template<>
+void IXmlNode::Value(const bool& value) {
+  value_ = value ? "true" : "false";
+}
+
+template<>
+void IXmlNode::Value(const std::string& value) {
+  value_ = value;
+}
+
+template<>
+void IXmlNode::SetAttribute(const std::string &key, const bool& value) {
+  attribute_list_.insert({key, value ? "true" : "false"});
+}
+
 
 }
