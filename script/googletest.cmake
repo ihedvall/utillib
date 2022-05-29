@@ -1,7 +1,7 @@
 # Copyright 2021 Ingemar Hedvall
 # SPDX-License-Identifier: MIT
 if (NOT GTEST_ROOT)
-set(GTEST_ROOT "k:/googletest/master" CACHE PATH "Google Test is used for all unit tests")
+    set(GTEST_ROOT ${COMP_DIR}/googletest/master CACHE PATH "Google Test is used for all unit tests")
 endif()
 
 if (NOT GTest_FOUND)

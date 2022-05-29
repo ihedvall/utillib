@@ -3,7 +3,7 @@
 
 if (NOT ZLIB_FOUND)
     SET(ZLIB_USE_STATIC_LIBS ON)
-    set(ZLIB_ROOT "k:/zlib/master")
+    set(ZLIB_ROOT ${COMP_DIR}/zlib/master)
 
     find_package(ZLIB)
     message(STATUS "ZLIB Found (Try 1): " ${ZLIB_FOUND})
