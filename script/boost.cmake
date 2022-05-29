@@ -14,7 +14,7 @@ if (NOT Boost_FOUND)
     message(STATUS "Boost Include Dirs: " ${Boost_INCLUDE_DIRS})
     message(STATUS "Boost Library Dirs: " ${Boost_LIBRARY_DIRS})
     message(STATUS "Boost Libraries: " ${Boost_LIBRARIES})
-    message(STATUS "Boost Quiet: " ${Boost_FIND_QUIETLY})
+    message(STATUS "Boost Root: " ${Boost_ROOT})
     if (NOT Boost_FOUND)
 
         find_package(Boost REQUIRED COMPONENTS filesystem system locale program_options)
