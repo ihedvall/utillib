@@ -7,7 +7,7 @@ if (NOT Boost_FOUND)
     set(Boost_ARCHITECTURE -x64)
     set(Boost_NO_WARN_NEW_VERSIONS ON)
     set(Boost_DEBUG OFF)
-
+    set(Boost_ROOT "K:/boost/boost_1_79_0")
     find_package(Boost QUIET COMPONENTS filesystem system locale program_options)
     message(STATUS "Boost Found (Try 1): " ${Boost_FOUND})
     message(STATUS "Boost Version: " ${Boost_VERSION_STRING})
@@ -16,7 +16,7 @@ if (NOT Boost_FOUND)
     message(STATUS "Boost Libraries: " ${Boost_LIBRARIES})
     message(STATUS "Boost Quiet: " ${Boost_FIND_QUIETLY})
     if (NOT Boost_FOUND)
-        set(Boost_ROOT "K:/boost/boost_1_79_0")
+
         find_package(Boost REQUIRED COMPONENTS filesystem system locale program_options)
 
         message(STATUS "Boost Found (Try 2): " ${Boost_FOUND})
