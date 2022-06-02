@@ -98,6 +98,28 @@ TEST_F(TestZlib, FileCompress)
   EXPECT_EQ(md5_orig,md5_dest);
 }
 
+TEST_F(TestZlib, FileToBuffCompress)
+{
+  if (skip_test_) {
+    GTEST_SKIP() << "Skipped Test";
+  }
+
+  const auto md5_orig = CreateMd5FileString(kTestFile);
+  ByteArray buf_out;
+  EXPECT_TRUE(Deflate(kTestFile, buf_out));
+
+  std::FILE* out_file = nullptr;
+  fopen_s(&out_file, kInflateFile.c_str(), "wb");
+  ASSERT_TRUE(out_file != nullptr);
+
+  EXPECT_TRUE(Inflate(buf_out, out_file));
+  fclose(out_file);
+
+  const auto md5_dest =  CreateMd5FileString(kInflateFile);
+
+  EXPECT_EQ(md5_orig,md5_dest);
+}
+
 TEST_F(TestZlib, ArrayCompressLarge)
 {
   ByteArray buf_in(4'000'000, 0);

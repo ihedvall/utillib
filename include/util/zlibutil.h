@@ -38,6 +38,18 @@ bool Deflate(std::FILE *in, std::FILE *out); ///< Compress file to file.
  */
 bool Deflate(const ByteArray& buf_in, ByteArray& buf_out); ///< Compress array to array.
 
+/**
+ * Compress a file directly to an array.
+ *
+ * The file data is compressed and sent to an output array. Unlike the other
+ * Deflate() functions, the output buffer doesn't need to be sized before calling
+ * this function. The compress method is deflate according to ZLIB.
+ *
+ * @param filename Full name of the file to compress.
+ * @param buf_out Output byte array. The function resize the buffer
+ * @return True on success.
+ */
+bool Deflate(const std::string& filename, ByteArray& buf_out); ///< Compress array to array.
 
 bool Inflate(std::FILE* in, std::FILE* out); ///< Decompress file to file.
 bool Inflate(std::FILE* in, std::FILE* out, uint64_t nof_bytes); ///< Decompress part of file to file

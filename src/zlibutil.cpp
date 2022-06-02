@@ -4,6 +4,8 @@
  */
 #include <cstdint>
 #include <cstring>
+#include <string>
+#include <filesystem>
 #include <zlib.h>
 #include "util/zlibutil.h"
 namespace
@@ -70,6 +72,30 @@ bool Deflate(FILE *in, FILE *out) {
   return true;
 }
 
+bool Deflate(const std::string &filename, ByteArray &buf_out) {
+  try {
+    std::filesystem::path name(filename);
+    auto size = std::filesystem::file_size(name);
+
+    std::FILE* file = nullptr;
+    fopen_s(&file, filename.c_str(), "rb");
+    if (file == nullptr) {
+      return false;
+    }
+    ByteArray buf_in(size, 0);
+    const auto nof_bytes = fread(buf_in.data(), 1, size, file);
+    fclose(file);
+    if (nof_bytes < size) {
+      buf_in.resize(nof_bytes, 0);
+    }
+    if (buf_out.size() < buf_in.size()) {
+      buf_out.resize(buf_in.size(), 0);
+    }
+    return Deflate(buf_in, buf_out);
+  } catch (const std::exception& err) {
+  }
+  return false;
+}
 
 bool Deflate(const ByteArray& buf_in, ByteArray& buf_out) {
   if (buf_in.empty() || buf_out.empty()) {
@@ -354,6 +380,7 @@ void InvTranspose(ByteArray& data, size_t record_size)
     }
   }
 }
+
 
 
 }
