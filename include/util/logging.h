@@ -44,7 +44,7 @@ std::string FindNotepad();
 
 /** \brief Backup up a file with the 9 last changes.
  *
- * Backup a file by adding a sequence number 0..9 to the file (file_N.<ext>).
+ * Backup a file by adding a sequence number 0..9 to the file (file_N.ext).
  * @param filename Full path to the file.
  * @param remove_file If set to true the file will be renamed to file_0. If set to
  * false the file will copy its content to file_0. The latter is slower but safer.

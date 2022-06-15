@@ -24,7 +24,7 @@
   <td id="projectalign">
    <div id="projectname">UTILLib<span id="projectnumber">&#160;1.0</span>
    </div>
-   <div id="projectbrief">C++ library with generic functions for creating applications.</div>
+   <div id="projectbrief">Common C++ library with utilities.</div>
   </td>
  </tr>
  </tbody>
@@ -348,10 +348,11 @@ Functions</h2></td></tr>
 <p >Converts an ISO Date/Time string to nano-seconds since 1970. Note that the function also handle ODS date strings 'YYYYMMDD..'. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">iso_time</td><td>Time stamp string YYYY-MM-DDThh:mm:ss.sssssssssZ </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">local_time</td><td>Set to true if the ISO time uses local time. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Return a date and time string in format </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns nanoseconds since 1970 </dd></dl>
 
 </div>
 </div>

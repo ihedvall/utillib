@@ -91,6 +91,14 @@ namespace util::xml {
   * @return True if the tag name match.
   */
   [[nodiscard]] bool IsTagName(const std::string& tag) const;
+
+  /** \brief Checks if an attribute exist
+   *
+   * Tests if an attribute exist.
+   * @param key Attribute name
+   * @param value Attribute vallue
+   * @return
+   */
   [[nodiscard]] bool IsAttribute(const std::string& key, const std::string& value) const;
 
   /** \brief Returns an attribute.
@@ -111,6 +119,12 @@ namespace util::xml {
     return def;
   }
 
+  /** \brief Sets an attribute
+   *
+   * @tparam T Type of value
+   * @param key Attribute name
+   * @param value Attribute value
+   */
    template<typename T>
    void SetAttribute(const std::string &key, const T &value);
 
@@ -126,6 +140,12 @@ namespace util::xml {
     return XValue<T>(value_);
   }
 
+  /** \brief Sets a tag value
+   *
+   *  Sets a tag value.
+   * @tparam T Type of value
+   * @param value Value
+   */
   template<typename T>
   void Value(const T& value);
 
@@ -144,6 +164,13 @@ namespace util::xml {
     return node != nullptr ? node->Value<T>() : def;
   }
 
+  /** \brief Sets a property
+   *
+   * Sets a property
+   * @tparam T  Type of value
+   * @param key Tag name
+   * @param value Value.
+   */
   template<typename T>
   void SetProperty(const std::string &key, const T &value) {
     auto& node = AddUniqueNode(key);
@@ -154,9 +181,11 @@ namespace util::xml {
    * \brief List of pointer to child nodes.
    */
   using ChildList = std::vector<const IXmlNode *>;
+
+
   virtual void GetChildList(ChildList &child_list) const; ///< Returns the child nodes.
-  virtual const IXmlNode *GetNode(const std::string &tag) const; ///< Returns a node if it exist.
-  virtual const IXmlNode *GetNode(const std::string &tag, const std::string& key,
+  [[nodiscard]] virtual const IXmlNode *GetNode(const std::string &tag) const; ///< Returns a node if it exist.
+  [[nodiscard]] virtual const IXmlNode *GetNode(const std::string &tag, const std::string& key,
                                   const std::string& attr) const; ///< Returns a node with a specific attribute.
 
   /** \brief Returns true if the named property exist.
@@ -170,13 +199,13 @@ namespace util::xml {
     return GetNode(tag) != nullptr;
   }
 
-  virtual IXmlNode& AddNode(const std::string& name);
-  virtual IXmlNode& AddUniqueNode(const std::string& name);
-  virtual IXmlNode& AddUniqueNode(const std::string& name, const std::string& key, const std::string& attr);
+  virtual IXmlNode& AddNode(const std::string& name); ///< Adds a new tag
+  virtual IXmlNode& AddUniqueNode(const std::string& name); ///< Adds a unique tag
+  virtual IXmlNode& AddUniqueNode(const std::string& name, const std::string& key, const std::string& attr); ///< Adds a unique tag with an attribute
 
-  virtual void AddNode(std::unique_ptr<IXmlNode> p);
+  virtual void AddNode(std::unique_ptr<IXmlNode> p);///< Adds a node
 
-  virtual void Write(std::ostream& dest, size_t level);
+  virtual void Write(std::ostream& dest, size_t level); ///< Write the node to the stream
  protected:
   std::string tag_name_; ///< Name of this tag.
   std::string value_; ///< String value of this tag.
@@ -187,11 +216,14 @@ namespace util::xml {
    using AttributeList = std::unordered_map<std::string, std::string>;
    AttributeList attribute_list_; ///< Indexed list of attribute
 
+   /** \typedef NodeList
+     * \brief  List of nodes
+     */
    using NodeList = std::vector<std::unique_ptr<IXmlNode> >;
-   NodeList node_list_;
+   NodeList node_list_; ///< List of nodes
 
 
-   [[nodiscard]] virtual std::unique_ptr<IXmlNode> CreateNode(const std::string& name) const;
+   [[nodiscard]] virtual std::unique_ptr<IXmlNode> CreateNode(const std::string& name) const; ///< Create a node
 };
 
 template<typename T>
@@ -202,11 +234,20 @@ void IXmlNode::Value(const T &value) {
   value_ = temp.str();
 }
 
+/** \brief Adds a boolean value
+ *
+ * @param value Boolean value
+ */
 template<>
 void IXmlNode::Value(const bool& value);
 
+/** \brief Adds a string value
+ *
+ * @param value String value
+ */
 template<>
 void IXmlNode::Value(const std::string& value);
+
 
 template<typename T>
 void IXmlNode::SetAttribute(const std::string &key, const T &value) {
@@ -215,6 +256,11 @@ void IXmlNode::SetAttribute(const std::string &key, const T &value) {
   attribute_list_.insert({key, temp.str()});
 }
 
+/** \brief Sets a boolean attribute
+ *
+ * @param key Attribute name
+ * @param value  Attribute boolean value
+ */
 template<>
 void IXmlNode::SetAttribute(const std::string &key, const bool& value);
 

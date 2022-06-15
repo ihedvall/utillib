@@ -91,10 +91,28 @@ class CsvWriter {
 /** \brief Adds a column header string.
  *
  * Adds a header string to the first row in the file. Normally is the header text 'name [unit]'.
- * @param header The header text.
+ * @param name The column name.
+ * @param unit The column unit
+ * @param valid True if the column is valid.
  */
   void AddColumnHeader(const std::string& name, const std::string& unit, bool valid = true);
+
+  /** \brief Sets the column valid.
+   *
+   * This function is somewhat strange but it indicate if all values are invalid or
+   * at least one or more value are valid. This is used when plotting the columns.
+   * @param column Column index
+   * @param valid Sets the column valid.
+   */
   void SetColumnValid(size_t column, bool valid = true);
+
+  /** \brief Indicate if there is any valid values in this column.
+   *
+   * This function returns true if this column have any valid values. Plotting
+   * applications typically need this functionality.
+   * @param column Column index
+   * @return True if column have any valid values.
+   */
   [[nodiscard]] bool IsColumnValid(size_t column) const;
 
 /** \brief Starts a new row.
@@ -110,22 +128,62 @@ class CsvWriter {
   template <typename T>
   void AddColumnValue(const T& value);
 
+  /** \brief Returns the CSV 'file' as a string.
+   *
+   * Returns the CSV file as a string.
+   * @return CSV content as a string.
+   */
   [[nodiscard]] std::string GetText() const {
     return text_.str();
   }
 
+  /** \brief Reset the writer.
+   *
+   * Rests the writer object so it can be reused.
+   */
   void Reset();
 
+  /** \brief Returns number of columns
+   *
+   * Returns number of columns in the file.
+   * @return Number of columns.
+   */
   [[nodiscard]] size_t Columns() const {
     return max_columns_;
   }
 
+  /** \brief Number of rows in the CSV file.
+   *
+   * Returns number of rows in the writer. Note first row is
+   * typical value name and unit.
+   * @return Number of rows.
+   */
   [[nodiscard]] size_t Rows() const {
     return row_count_;
   }
 
+  /** \brief Returns suitable label text.
+   *
+   * Returns a suitable label text for a column.
+   * @param index Column index.
+   * @return Label text.
+   */
   [[nodiscard]] const std::string Label(size_t index) const;
+
+  /** \brief Returns column name.
+   *
+   * Returns the column  name.
+   * @param index Column index.
+   * @return Column name.
+   */
   [[nodiscard]] const std::string& Name(size_t index) const;
+
+  /** \brief Returns the column unit.
+   *
+   * Returns the column unit.
+   * @param index DColumn index.
+   * @return Column unit.
+   */
   [[nodiscard]] const std::string& Unit(size_t index) const;
  private:
   std::ofstream file_;
@@ -171,12 +229,25 @@ void CsvWriter::AddColumnValue(const T &value) {
 template <>
 void CsvWriter::AddColumnValue<std::string>(const std::string& value);
 
+/** \brief Adds a column float value.
+ *
+ * @param value Float value
+ */
 template <>
 void CsvWriter::AddColumnValue<float>(const float& value);
 
+/** \brief Adds a column double value
+ *
+ * Adds a double value.
+ * @param value Double value
+ */
 template <>
 void CsvWriter::AddColumnValue<double>(const double& value);
 
+/** \brief Adds a boolean column value.
+ *
+ * @param value boolean value
+ */
 template <>
 void CsvWriter::AddColumnValue<bool>(const bool& value);
 } // end namespace util::string

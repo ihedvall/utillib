@@ -24,7 +24,7 @@
   <td id="projectalign">
    <div id="projectname">UTILLib<span id="projectnumber">&#160;1.0</span>
    </div>
-   <div id="projectbrief">C++ library with generic functions for creating applications.</div>
+   <div id="projectbrief">Common C++ library with utilities.</div>
   </td>
  </tr>
  </tbody>
@@ -83,6 +83,7 @@ $(function() {
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classutil_1_1log_1_1_i_listen.html">IListen</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">An interface class that hides the actual implementation of the object.  <a href="classutil_1_1log_1_1_i_listen.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classutil_1_1log_1_1_i_logger.html">ILogger</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interface against a generic logger.  <a href="classutil_1_1log_1_1_i_logger.html#details">More...</a><br /></td></tr>
@@ -138,9 +139,6 @@ Enumerations</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ae77d9e9cd79811886a709d4cc451d90e"><td class="memItemLeft" align="right" valign="top"><a id="ae77d9e9cd79811886a709d4cc451d90e" name="ae77d9e9cd79811886a709d4cc451d90e"></a>
-std::unique_ptr&lt; <a class="el" href="classutil_1_1log_1_1_i_listen.html">IListen</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>CreateListen</b> (const std::string &amp;type, const std::string &amp;share_name)</td></tr>
-<tr class="separator:ae77d9e9cd79811886a709d4cc451d90e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa7be6e319b623db80f35cfe0413b09a4"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="structutil_1_1log_1_1_listen_port_config.html">ListenPortConfig</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceutil_1_1log.html#aa7be6e319b623db80f35cfe0413b09a4">GetListenConfigList</a> ()</td></tr>
 <tr class="memdesc:aa7be6e319b623db80f35cfe0413b09a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the list of available listen servers.  <a href="namespaceutil_1_1log.html#aa7be6e319b623db80f35cfe0413b09a4">More...</a><br /></td></tr>
 <tr class="separator:aa7be6e319b623db80f35cfe0413b09a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -180,8 +178,7 @@ std::string&#160;</td><td class="memItemRight" valign="bottom"><b>GetSeverityStr
 <tr class="separator:ae03f0cd0de808d68c350ab8aa2c0decf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p >Defines an interface against the listen functionality.</p>
-<p >The log namespace is used for all log related classes and functions. </p>
+<div class="textblock"><p >The log namespace is used for all log related classes and functions. </p>
 </div><h2 class="groupheader">Typedef Documentation</h2>
 <a id="af89872d2f3b06b8f5e5c00932b7d7279" name="af89872d2f3b06b8f5e5c00932b7d7279"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af89872d2f3b06b8f5e5c00932b7d7279">&#9670;&nbsp;</a></span>Loc</h2>
@@ -194,7 +191,7 @@ std::string&#160;</td><td class="memItemRight" valign="bottom"><b>GetSeverityStr
         </tr>
       </table>
 </div><div class="memdoc">
-<p >The Loc is a wrapper around the std::location library. This library is new in C++20 and some treat is as experimental. </p>
+<p >The Loc is a wrapper around the std::location library. This library is new in C++20. </p>
 
 </div>
 </div>
@@ -322,7 +319,7 @@ std::string&#160;</td><td class="memItemRight" valign="bottom"><b>GetSeverityStr
         </tr>
       </table>
 </div><div class="memdoc">
-<p >Backup a file by adding a sequence number 0..9 to the file (file_N.&lt;ext&gt;). </p><dl class="params"><dt>Parameters</dt><dd>
+<p >Backup a file by adding a sequence number 0..9 to the file (file_N.ext). </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">filename</td><td>Full path to the file. </td></tr>
     <tr><td class="paramname">remove_file</td><td>If set to true the file will be renamed to file_0. If set to false the file will copy its content to file_0. The latter is slower but safer. </td></tr>

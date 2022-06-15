@@ -1,7 +1,7 @@
-
-| [Home](index.html) | [Log](log.html) | | [Listen](listen.html) | [Time](time.html) | [XML](xml.html) |
-
-
+---
+layout: default
+title: Log Functions
+---
 # Log Functions 
 The log function is based upon 3 objects.
 

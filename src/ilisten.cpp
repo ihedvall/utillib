@@ -13,7 +13,7 @@
 #include "listenproxy.h"
 namespace util::log {
 
-std::unique_ptr<IListen> CreateListen(const std::string &type, const std::string &share_name) {
+std::unique_ptr<IListen> IListen::CreateListen(const std::string &type, const std::string &share_name) {
   std::unique_ptr<IListen> listen;
   if (util::string::IEquals(type, "ListenProxy") && !share_name.empty()) {
     listen = std::make_unique<detail::ListenProxy>(share_name);

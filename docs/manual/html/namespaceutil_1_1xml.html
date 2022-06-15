@@ -24,7 +24,7 @@
   <td id="projectalign">
    <div id="projectname">UTILLib<span id="projectnumber">&#160;1.0</span>
    </div>
-   <div id="projectbrief">C++ library with generic functions for creating applications.</div>
+   <div id="projectbrief">Common C++ library with utilities.</div>
   </td>
  </tr>
  </tbody>
@@ -113,19 +113,10 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 <p >Creates an XML object that either parse a file or string or saves the object to an XML file. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">type</td><td>String that creates an implementation of an XML object. By default is the Expat parser used.</td></tr>
+    <tr><td class="paramname">type</td><td>String that creates an implementation of an XML object. By default is the Expat parser used. Choose 'Expat' or 'FileWriter'. The latter only creates an XML file. </td></tr>
   </table>
   </dd>
 </dl>
-<table class="doxtable">
-<caption>Implementations</caption>
-</table>
-<p>Type</p>
-<p >Description </p>
-<p >Expat</p>
-<p >Creates a Expat SAX non-validating parser. This is the default usages. </p>
-<p >FileWriter</p>
-<p >Creates a simple XML object that saves the XML objects to a file. </p>
 <dl class="section return"><dt>Returns</dt><dd>A smart pointer to an XML object. Creates a XML parser </dd></dl>
 
 </div>

@@ -81,7 +81,8 @@ std::string NsToIsoTime(uint64_t ns_since_1970, int format = 0);
  * Converts an ISO Date/Time string to nano-seconds since 1970. Note that the
  * function also handle ODS date strings 'YYYYMMDD..'.
  * @param [in] iso_time Time stamp string YYYY-MM-DDThh:mm:ss.sssssssssZ
- * @return Return a date and time string in format
+ * @param [in] local_time Set to true if the ISO time uses local time.
+ * @return Returns nanoseconds since 1970
  */
 uint64_t IsoTimeToNs(const std::string& iso_time, bool local_time = false);
 

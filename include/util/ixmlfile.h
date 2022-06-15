@@ -124,7 +124,13 @@ class IXmlFile {
   [[nodiscard]] T Property(const std::string &key, const T &def = {}) const {
     return root_node_ ? root_node_->Property<T>(key, def) : def;
   }
-
+  /** \brief Sets a property tag value
+   *
+   * Sets a property tag value
+   * @tparam T Type of value
+   * @param key Tag name
+   * @param value Tag value
+   */
   template<typename T>
   void SetProperty(const std::string &key, const T &value) {
    if (root_node_) {
@@ -132,42 +138,48 @@ class IXmlFile {
    }
   }
 
+  /** \brief Returns a list of child tags below the root tag.
+   *
+   * Returns a list of tags below the root tag.
+   * @param child_list List of main tags in the file,
+   */
   void GetChildList(IXmlNode::ChildList &child_list) const; ///< Returns a list of XML tags (nodes).
 
+  /** \brief Returns a node with a tag name.
+   *
+   * Returns a (unique) node with a specific tag name
+   * @param tag Tag name
+   * @return Pointer ti the node.
+   */
   [[nodiscard]] const IXmlNode *GetNode(const std::string &tag) const; ///< Returns a tag node.
+
 
   virtual bool ParseFile(); ///< Parses the XML file.
   virtual bool ParseString(const std::string &input); ///< Parses a string instead of a file.
   virtual void Reset(); ///< Reset the internals i.e. ready for a new parsing.
-  virtual bool WriteFile();
+  virtual bool WriteFile(); ///< Writes the XML file.
   std::string WriteString(bool skip_header = false); ///< Creates a string that is a whole XML file.
  protected:
   IXmlFile() = default; ///< Default constructor is hidden from external users.
   std::string filename_; ///< File name with full path.
   std::string version_ = "1.0"; ///< Version of the XML file.
   std::string encoding_ = "UTF-8"; ///< Encoding of strings in the XML file.
-  std::string style_sheet_;
+  std::string style_sheet_; ///< Optional style sheet.
 
   bool standalone_ = true; ///< True of the file is standalone.
   std::unique_ptr<IXmlNode> root_node_; ///< Pointer to the root node.
 
-  virtual std::unique_ptr<IXmlNode> CreateNode(const std::string& name);
+  virtual std::unique_ptr<IXmlNode> CreateNode(const std::string& name); ///< Creates a new node.
  private:
   void WriteRoot(std::ostream& dest, bool skip_header);
 };
+
 /** \brief Creates an XML object that either parse or write.
  *
  * Creates an XML object that either parse a file or string or saves the object to an XML
  * file.
  * @param type String that creates an implementation of an XML object. By default is the Expat parser
- *             used.
- *
- *             <table><caption>Implementations</caption>
- *             <th>Type</th><th>Description</th>
- *             <tr><td>Expat</td><td>Creates a Expat SAX non-validating parser. This is the default usages.</td></tr>
- *             <tr><td>FileWriter</td><td>Creates a simple XML object that saves the XML objects to a file.</td></tr>
- *             </table>
- *
+ *             used. Choose 'Expat' or 'FileWriter'. The latter only creates an XML file.
  * @return A smart pointer to an XML object.
  */
 [[nodiscard]] std::unique_ptr<IXmlFile> CreateXmlFile(const std::string &type = "Expat"); ///< Creates a XML parser

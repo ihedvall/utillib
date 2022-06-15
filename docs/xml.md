@@ -1,5 +1,7 @@
-| [Home](index.html) | [Log](log.html) | | [Listen](listen.html) | [Time](time.html) | [XML](xml.html) |
-
+---
+layout: default
+title: XML Functions
+---
 # XML Functions
 The XML function are a simple class wrapper around the common Expat library. It's much easier than the Xerces parser
 but the parser is not a validating parser. It shall be used for smaller XML files or XML text snippets.

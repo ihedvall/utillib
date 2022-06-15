@@ -3,7 +3,7 @@
 cmake_minimum_required(VERSION 3.20)
 project(utilLib
         VERSION 1.0
-        DESCRIPTION "C++ library with generic functions for creating applications."
+        DESCRIPTION "Common C++ library with utilities."
         LANGUAGES CXX)
 
 option(BUILD_SHARED_LIBS "Static libraries are preferred" OFF)
@@ -20,7 +20,7 @@ include("script/boost.cmake")
 include("script/zlib.cmake")
 include("script/openssl.cmake")
 include("script/expat.cmake")
-
+include("script/wxwidgets.cmake")
 include("script/googletest.cmake")
 include("script/doxygen.cmake")
 
@@ -88,6 +88,18 @@ set(UTIL_PUBLIC_HEADERS
 set_target_properties(util PROPERTIES PUBLIC_HEADER "${UTIL_PUBLIC_HEADERS}")
 get_target_property(PH util PUBLIC_HEADER)
 message( STATUS "UTIL Target Includes: " "${PH}")
+
+add_subdirectory(listend)
+if (WIN32)
+    add_subdirectory(serviced)
+endif()
+
+if (wxWidgets_FOUND )
+    add_subdirectory(listenviewer)
+endif()
+if (wxWidgets_FOUND AND WIN32)
+    add_subdirectory(serviceexplorer)
+endif()
 
 if (GTEST_FOUND)
     enable_testing()

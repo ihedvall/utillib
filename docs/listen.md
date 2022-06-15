@@ -1,7 +1,7 @@
-
-| [Home](index.html) | [Log](log.html) | | [Listen](listen.html) | [Time](time.html) | [XML](xml.html) |
-
-
+---
+layout: default
+title: Listen Functions
+---
 # Listen Functions
 The listen functionality is a sort of debugging tool for applications. It transfers debug messages 
 from one or more applications to a listen window. The listen window connects to a listen TCP/IP server

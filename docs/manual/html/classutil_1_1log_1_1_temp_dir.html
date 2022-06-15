@@ -24,7 +24,7 @@
   <td id="projectalign">
    <div id="projectname">UTILLib<span id="projectnumber">&#160;1.0</span>
    </div>
-   <div id="projectbrief">C++ library with generic functions for creating applications.</div>
+   <div id="projectbrief">Common C++ library with utilities.</div>
   </td>
  </tr>
  </tbody>
@@ -85,11 +85,11 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a3fded27618a998d246f9cf8da96134ba"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classutil_1_1log_1_1_temp_dir.html#a3fded27618a998d246f9cf8da96134ba">~TempDir</a> ()</td></tr>
 <tr class="memdesc:a3fded27618a998d246f9cf8da96134ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">The destructor removes the temporary directory.  <a href="classutil_1_1log_1_1_temp_dir.html#a3fded27618a998d246f9cf8da96134ba">More...</a><br /></td></tr>
 <tr class="separator:a3fded27618a998d246f9cf8da96134ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a19ec8b8a9d8050920cf9e40b74f1af53"><td class="memItemLeft" align="right" valign="top"><a id="a19ec8b8a9d8050920cf9e40b74f1af53" name="a19ec8b8a9d8050920cf9e40b74f1af53"></a>
-const std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>Path</b> () const</td></tr>
+<tr class="memitem:a19ec8b8a9d8050920cf9e40b74f1af53"><td class="memItemLeft" align="right" valign="top">const std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classutil_1_1log_1_1_temp_dir.html#a19ec8b8a9d8050920cf9e40b74f1af53">Path</a> () const</td></tr>
+<tr class="memdesc:a19ec8b8a9d8050920cf9e40b74f1af53"><td class="mdescLeft">&#160;</td><td class="mdescRight">Full path to the temporary directory.  <a href="classutil_1_1log_1_1_temp_dir.html#a19ec8b8a9d8050920cf9e40b74f1af53">More...</a><br /></td></tr>
 <tr class="separator:a19ec8b8a9d8050920cf9e40b74f1af53"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a34007b4d3bdb3c2fc8850e76dc234783"><td class="memItemLeft" align="right" valign="top"><a id="a34007b4d3bdb3c2fc8850e76dc234783" name="a34007b4d3bdb3c2fc8850e76dc234783"></a>
-std::string&#160;</td><td class="memItemRight" valign="bottom"><b>TempFile</b> (const std::string &amp;stem, const std::string &amp;extension, bool unique_file) const</td></tr>
+<tr class="memitem:a34007b4d3bdb3c2fc8850e76dc234783"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classutil_1_1log_1_1_temp_dir.html#a34007b4d3bdb3c2fc8850e76dc234783">TempFile</a> (const std::string &amp;stem, const std::string &amp;extension, bool unique_file) const</td></tr>
+<tr class="memdesc:a34007b4d3bdb3c2fc8850e76dc234783"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generates a temporary and optional unique file name.  <a href="classutil_1_1log_1_1_temp_dir.html#a34007b4d3bdb3c2fc8850e76dc234783">More...</a><br /></td></tr>
 <tr class="separator:a34007b4d3bdb3c2fc8850e76dc234783"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -157,6 +157,76 @@ std::string&#160;</td><td class="memItemRight" valign="bottom"><b>TempFile</b> (
 </table>
 </div><div class="memdoc">
 <p >The destructor removes the created directory and its files </p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a19ec8b8a9d8050920cf9e40b74f1af53" name="a19ec8b8a9d8050920cf9e40b74f1af53"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a19ec8b8a9d8050920cf9e40b74f1af53">&#9670;&nbsp;</a></span>Path()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const std::string &amp; util::log::TempDir::Path </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p >Returns full path to the temporary directory. </p><dl class="section return"><dt>Returns</dt><dd>Path to temporary directory. </dd></dl>
+
+</div>
+</div>
+<a id="a34007b4d3bdb3c2fc8850e76dc234783" name="a34007b4d3bdb3c2fc8850e76dc234783"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a34007b4d3bdb3c2fc8850e76dc234783">&#9670;&nbsp;</a></span>TempFile()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string util::log::TempDir::TempFile </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>stem</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>extension</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>unique_file</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >Generates a temporary file name with path and extension. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">stem</td><td>Base name of the file. </td></tr>
+    <tr><td class="paramname">extension</td><td>File extension </td></tr>
+    <tr><td class="paramname">unique_file</td><td>Set to true if a unique file name should be generated. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>File name with path and extension. </dd></dl>
 
 </div>
 </div>

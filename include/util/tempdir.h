@@ -41,10 +41,23 @@ class TempDir {
    */
   virtual ~TempDir();
 
+  /** \brief Full path to the temporary directory.
+   *
+   * Returns full path to the temporary directory.
+   * @return Path to temporary directory.
+   */
   [[nodiscard]] const std::string& Path() const {
     return temp_dir_;
   }
 
+  /** \brief Generates a temporary and optional unique file name.
+   *
+   * Generates a temporary file name with path and extension.
+   * @param stem Base name of the file.
+   * @param extension File extension
+   * @param unique_file Set to true if a unique file name should be generated.
+   * @return File name with path and extension.
+   */
   [[nodiscard]] std::string TempFile(const std::string& stem, const std::string& extension, bool unique_file) const;
  private:
   std::string temp_dir_;

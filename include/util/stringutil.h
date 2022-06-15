@@ -7,8 +7,25 @@
 
 namespace util::string
 {
+  /** \brief Compare strings by ignoring case.
+   *
+   * Compare two strings by ignoring case characters.
+   * @param s1 String 1
+   * @param s2 String 2
+   * @param nChar 0 = Compare all whole string otherwise compare nChar characters.
+   * @return True if the string matches.
+   */
   bool IEquals(const std::string &s1, const std::string &s2, size_t nChar = 0);
+  /** \brief Compare wide strings by ignoring case.
+   *
+   * Compare two strings by ignoring case characters.
+   * @param s1 String 1
+   * @param s2 String 2
+   * @param nChar 0 = Compare all whole string otherwise compare nChar characters.
+   * @return True if the string matches.
+   */
   bool IEquals(const std::wstring &s1, const std::wstring &s2, size_t nChar = 0);
+
   /// This class is used when get a sorted list of string to ignoring case characters.\n
   /// Example of declaring a map:
   /// \code
@@ -21,7 +38,19 @@ namespace util::string
     bool operator()(const std::wstring &s1, const std::wstring &s2) const; ///< Compare the strings by ignoring case.
   };
 
+  /** \brief Remove white space from string.
+   *
+   * Removes white spaces from the begin and end of the string
+   * @param text String to trim
+   */
   void Trim(std::string &text);
+
+  /** \brief Remove white space from string.
+   *
+   * Remove white space from the begin and end of the string but keep original string.
+   * @param text Input string
+   * @return Output trimmed string.
+   */
   [[nodiscard]] std::string Trim(const std::string &text);
 
 /// Converts a floating point value to a string using number of decimals.\n

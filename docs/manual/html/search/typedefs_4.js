@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['systemclock_0',['SystemClock',['../namespaceutil_1_1time.html#ab887c6158a4166083e842545003e5ae7',1,'util::time']]]
+  ['nodelist_0',['NodeList',['../classutil_1_1xml_1_1_i_xml_node.html#ad7b5ac3d1177c4ea2c45dffe61779962',1,'util::xml::IXmlNode']]]
 ];

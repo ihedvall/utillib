@@ -24,7 +24,7 @@
   <td id="projectalign">
    <div id="projectname">UTILLib<span id="projectnumber">&#160;1.0</span>
    </div>
-   <div id="projectbrief">C++ library with generic functions for creating applications.</div>
+   <div id="projectbrief">Common C++ library with utilities.</div>
   </td>
  </tr>
  </tbody>
@@ -108,85 +108,98 @@ $(function() {
 <div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span> </div>
 <div class="line"><a id="l00089" name="l00089"></a><span class="lineno"><a class="line" href="classutil_1_1plot_1_1_csv_writer.html#a007fffe585b1a763a704a094b14e1737">   89</a></span>  [[nodiscard]] <span class="keywordtype">bool</span> <a class="code hl_function" href="classutil_1_1plot_1_1_csv_writer.html#a007fffe585b1a763a704a094b14e1737">IsOk</a>() <span class="keyword">const</span>;</div>
 <div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span> </div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno"><a class="line" href="classutil_1_1plot_1_1_csv_writer.html#a79f6ec4b8c1b10e092d047e32eac1c05">   96</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classutil_1_1plot_1_1_csv_writer.html#a79f6ec4b8c1b10e092d047e32eac1c05">AddColumnHeader</a>(<span class="keyword">const</span> std::string&amp; name, <span class="keyword">const</span> std::string&amp; unit, <span class="keywordtype">bool</span> valid = <span class="keyword">true</span>);</div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>  <span class="keywordtype">void</span> SetColumnValid(<span class="keywordtype">size_t</span> column, <span class="keywordtype">bool</span> valid = <span class="keyword">true</span>);</div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>  [[nodiscard]] <span class="keywordtype">bool</span> IsColumnValid(<span class="keywordtype">size_t</span> column) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno"><a class="line" href="classutil_1_1plot_1_1_csv_writer.html#a79f6ec4b8c1b10e092d047e32eac1c05">   98</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classutil_1_1plot_1_1_csv_writer.html#a79f6ec4b8c1b10e092d047e32eac1c05">AddColumnHeader</a>(<span class="keyword">const</span> std::string&amp; name, <span class="keyword">const</span> std::string&amp; unit, <span class="keywordtype">bool</span> valid = <span class="keyword">true</span>);</div>
 <div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span> </div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno"><a class="line" href="classutil_1_1plot_1_1_csv_writer.html#a6fe85583fd7ecacc5e8f244b810e0333">  103</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classutil_1_1plot_1_1_csv_writer.html#a6fe85583fd7ecacc5e8f244b810e0333">AddRow</a>();</div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span> </div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>  <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classutil_1_1plot_1_1_csv_writer.html#aa252632ffc81db2d659d931aef47c7c8">AddColumnValue</a>(<span class="keyword">const</span> T&amp; value);</div>
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span> </div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>  [[nodiscard]] std::string GetText()<span class="keyword"> const </span>{</div>
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>    <span class="keywordflow">return</span> text_.str();</div>
-<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>  }</div>
-<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span> </div>
-<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>  <span class="keywordtype">void</span> Reset();</div>
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span> </div>
-<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>  [[nodiscard]] <span class="keywordtype">size_t</span> Columns()<span class="keyword"> const </span>{</div>
-<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>    <span class="keywordflow">return</span> max_columns_;</div>
-<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>  }</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno"><a class="line" href="classutil_1_1plot_1_1_csv_writer.html#a933daebdfa6aff1d139f1216d40e8db5">  107</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classutil_1_1plot_1_1_csv_writer.html#a933daebdfa6aff1d139f1216d40e8db5">SetColumnValid</a>(<span class="keywordtype">size_t</span> column, <span class="keywordtype">bool</span> valid = <span class="keyword">true</span>);</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span> </div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno"><a class="line" href="classutil_1_1plot_1_1_csv_writer.html#a3154f0f7610c4fcdfb80279bca97933d">  116</a></span>  [[nodiscard]] <span class="keywordtype">bool</span> <a class="code hl_function" href="classutil_1_1plot_1_1_csv_writer.html#a3154f0f7610c4fcdfb80279bca97933d">IsColumnValid</a>(<span class="keywordtype">size_t</span> column) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span> </div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno"><a class="line" href="classutil_1_1plot_1_1_csv_writer.html#a6fe85583fd7ecacc5e8f244b810e0333">  121</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classutil_1_1plot_1_1_csv_writer.html#a6fe85583fd7ecacc5e8f244b810e0333">AddRow</a>();</div>
 <div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span> </div>
-<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>  [[nodiscard]] <span class="keywordtype">size_t</span> Rows()<span class="keyword"> const </span>{</div>
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>    <span class="keywordflow">return</span> row_count_;</div>
-<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>  }</div>
-<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span> </div>
-<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>  [[nodiscard]] <span class="keyword">const</span> std::string Label(<span class="keywordtype">size_t</span> index) <span class="keyword">const</span>;</div>
-<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>  [[nodiscard]] <span class="keyword">const</span> std::string&amp; Name(<span class="keywordtype">size_t</span> index) <span class="keyword">const</span>;</div>
-<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>  [[nodiscard]] <span class="keyword">const</span> std::string&amp; Unit(<span class="keywordtype">size_t</span> index) <span class="keyword">const</span>;</div>
-<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span> <span class="keyword">private</span>:</div>
-<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>  std::ofstream file_;</div>
-<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>  std::ostringstream text_;</div>
-<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>  std::ostream* output_ = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span> </div>
-<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>  std::string filename_; </div>
-<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>  <span class="keywordtype">size_t</span> column_count_ = 0; </div>
-<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>  <span class="keywordtype">size_t</span> max_columns_ = 0; </div>
-<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>  <span class="keywordtype">size_t</span> row_count_ = 0; </div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>  <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classutil_1_1plot_1_1_csv_writer.html#aa252632ffc81db2d659d931aef47c7c8">AddColumnValue</a>(<span class="keyword">const</span> T&amp; value);</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span> </div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno"><a class="line" href="classutil_1_1plot_1_1_csv_writer.html#a983f11e9a46e4f6172ecf4f5c8b1c0c1">  136</a></span>  [[nodiscard]] std::string <a class="code hl_function" href="classutil_1_1plot_1_1_csv_writer.html#a983f11e9a46e4f6172ecf4f5c8b1c0c1">GetText</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>    <span class="keywordflow">return</span> text_.str();</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>  }</div>
 <div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span> </div>
-<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>  <span class="keyword">struct </span>Header {</div>
-<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>    std::string name;   </div>
-<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>    std::string unit;   </div>
-<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>    <span class="keywordtype">bool</span> valid = <span class="keyword">false</span>; </div>
-<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>  };</div>
-<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>  <span class="keyword">using </span>NameUnitList = std::vector&lt;Header&gt;;</div>
-<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>  NameUnitList header_list_;</div>
-<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span> </div>
-<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>  <span class="keywordtype">void</span> SaveText(<span class="keyword">const</span> std::string&amp; text);</div>
-<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>};</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno"><a class="line" href="classutil_1_1plot_1_1_csv_writer.html#a925e6a9850b0cf45377a4e838f32d619">  144</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classutil_1_1plot_1_1_csv_writer.html#a925e6a9850b0cf45377a4e838f32d619">Reset</a>();</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span> </div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno"><a class="line" href="classutil_1_1plot_1_1_csv_writer.html#a90079f3c24ab9869854f24478a499da6">  151</a></span>  [[nodiscard]] <span class="keywordtype">size_t</span> <a class="code hl_function" href="classutil_1_1plot_1_1_csv_writer.html#a90079f3c24ab9869854f24478a499da6">Columns</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>    <span class="keywordflow">return</span> max_columns_;</div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>  }</div>
 <div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span> </div>
-<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span> </div>
-<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a id="l00157" name="l00157"></a><span class="lineno"><a class="line" href="classutil_1_1plot_1_1_csv_writer.html#aa252632ffc81db2d659d931aef47c7c8">  157</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classutil_1_1plot_1_1_csv_writer.html#aa252632ffc81db2d659d931aef47c7c8">CsvWriter::AddColumnValue</a>(<span class="keyword">const</span> T &amp;value) {</div>
-<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>  <span class="keyword">auto</span> temp = std::to_string(value);</div>
-<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>  SaveText(temp);</div>
-<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>  <span class="keywordflow">if</span> (row_count_ == 0) {</div>
-<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>    max_columns_ = std::max(column_count_, max_columns_);</div>
-<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>  }</div>
-<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>}</div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno"><a class="line" href="classutil_1_1plot_1_1_csv_writer.html#ab1396fc9999faf51f01e7e525a0793aa">  161</a></span>  [[nodiscard]] <span class="keywordtype">size_t</span> <a class="code hl_function" href="classutil_1_1plot_1_1_csv_writer.html#ab1396fc9999faf51f01e7e525a0793aa">Rows</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>    <span class="keywordflow">return</span> row_count_;</div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>  }</div>
 <div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span> </div>
-<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span> </div>
-<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span><span class="keyword">template</span> &lt;&gt;</div>
-<div class="line"><a id="l00172" name="l00172"></a><span class="lineno"><a class="line" href="namespaceutil_1_1plot.html#ae7fb9aacf0362a9c0e09669375114426">  172</a></span><span class="keywordtype">void</span> CsvWriter::AddColumnValue&lt;std::string&gt;(<span class="keyword">const</span> std::string&amp; value);</div>
-<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span> </div>
-<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span><span class="keyword">template</span> &lt;&gt;</div>
-<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span><span class="keywordtype">void</span> CsvWriter::AddColumnValue&lt;float&gt;(<span class="keyword">const</span> <span class="keywordtype">float</span>&amp; value);</div>
-<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span> </div>
-<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span><span class="keyword">template</span> &lt;&gt;</div>
-<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span><span class="keywordtype">void</span> CsvWriter::AddColumnValue&lt;double&gt;(<span class="keyword">const</span> <span class="keywordtype">double</span>&amp; value);</div>
-<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span> </div>
-<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span><span class="keyword">template</span> &lt;&gt;</div>
-<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span><span class="keywordtype">void</span> CsvWriter::AddColumnValue&lt;bool&gt;(<span class="keyword">const</span> <span class="keywordtype">bool</span>&amp; value);</div>
-<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>} <span class="comment">// end namespace util::string</span></div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno"><a class="line" href="classutil_1_1plot_1_1_csv_writer.html#a37043eee5e8be659ff26131f86f2bf5f">  171</a></span>  [[nodiscard]] <span class="keyword">const</span> std::string <a class="code hl_function" href="classutil_1_1plot_1_1_csv_writer.html#a37043eee5e8be659ff26131f86f2bf5f">Label</a>(<span class="keywordtype">size_t</span> index) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span> </div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno"><a class="line" href="classutil_1_1plot_1_1_csv_writer.html#a58c3d7bb7212a3a7d28bbd0d267a9bc1">  179</a></span>  [[nodiscard]] <span class="keyword">const</span> std::string&amp; <a class="code hl_function" href="classutil_1_1plot_1_1_csv_writer.html#a58c3d7bb7212a3a7d28bbd0d267a9bc1">Name</a>(<span class="keywordtype">size_t</span> index) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span> </div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno"><a class="line" href="classutil_1_1plot_1_1_csv_writer.html#aac406325b346965053ef36d37f854ec1">  187</a></span>  [[nodiscard]] <span class="keyword">const</span> std::string&amp; <a class="code hl_function" href="classutil_1_1plot_1_1_csv_writer.html#aac406325b346965053ef36d37f854ec1">Unit</a>(<span class="keywordtype">size_t</span> index) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span> <span class="keyword">private</span>:</div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>  std::ofstream file_;</div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>  std::ostringstream text_;</div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>  std::ostream* output_ = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span> </div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>  std::string filename_; </div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>  <span class="keywordtype">size_t</span> column_count_ = 0; </div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>  <span class="keywordtype">size_t</span> max_columns_ = 0; </div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>  <span class="keywordtype">size_t</span> row_count_ = 0; </div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span> </div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>  <span class="keyword">struct </span>Header {</div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>    std::string name;   </div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>    std::string unit;   </div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>    <span class="keywordtype">bool</span> valid = <span class="keyword">false</span>; </div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>  };</div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>  <span class="keyword">using </span>NameUnitList = std::vector&lt;Header&gt;;</div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>  NameUnitList header_list_;</div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span> </div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>  <span class="keywordtype">void</span> SaveText(<span class="keyword">const</span> std::string&amp; text);</div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>};</div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span> </div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span> </div>
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno"><a class="line" href="classutil_1_1plot_1_1_csv_writer.html#aa252632ffc81db2d659d931aef47c7c8">  215</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classutil_1_1plot_1_1_csv_writer.html#aa252632ffc81db2d659d931aef47c7c8">CsvWriter::AddColumnValue</a>(<span class="keyword">const</span> T &amp;value) {</div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>  <span class="keyword">auto</span> temp = std::to_string(value);</div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>  SaveText(temp);</div>
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>  <span class="keywordflow">if</span> (row_count_ == 0) {</div>
+<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>    max_columns_ = std::max(column_count_, max_columns_);</div>
+<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>  }</div>
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>}</div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span> </div>
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span> </div>
+<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span><span class="keyword">template</span> &lt;&gt;</div>
+<div class="line"><a id="l00230" name="l00230"></a><span class="lineno"><a class="line" href="namespaceutil_1_1plot.html#ae7fb9aacf0362a9c0e09669375114426">  230</a></span><span class="keywordtype">void</span> CsvWriter::AddColumnValue&lt;std::string&gt;(<span class="keyword">const</span> std::string&amp; value);</div>
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span> </div>
+<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span><span class="keyword">template</span> &lt;&gt;</div>
+<div class="line"><a id="l00237" name="l00237"></a><span class="lineno"><a class="line" href="classutil_1_1plot_1_1_csv_writer.html#ae96e06188201d276d58022050e3aa7c0">  237</a></span><span class="keywordtype">void</span> CsvWriter::AddColumnValue&lt;float&gt;(<span class="keyword">const</span> <span class="keywordtype">float</span>&amp; value);</div>
+<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span> </div>
+<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span><span class="keyword">template</span> &lt;&gt;</div>
+<div class="line"><a id="l00245" name="l00245"></a><span class="lineno"><a class="line" href="classutil_1_1plot_1_1_csv_writer.html#a4ea9f383733f9a6d6002253305664017">  245</a></span><span class="keywordtype">void</span> CsvWriter::AddColumnValue&lt;double&gt;(<span class="keyword">const</span> <span class="keywordtype">double</span>&amp; value);</div>
+<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span> </div>
+<div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span><span class="keyword">template</span> &lt;&gt;</div>
+<div class="line"><a id="l00252" name="l00252"></a><span class="lineno"><a class="line" href="classutil_1_1plot_1_1_csv_writer.html#a43027375473882e6f7748e515bc4a158">  252</a></span><span class="keywordtype">void</span> CsvWriter::AddColumnValue&lt;bool&gt;(<span class="keyword">const</span> <span class="keywordtype">bool</span>&amp; value);</div>
+<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span>} <span class="comment">// end namespace util::string</span></div>
 <div class="ttc" id="aclassutil_1_1plot_1_1_csv_writer_html"><div class="ttname"><a href="classutil_1_1plot_1_1_csv_writer.html">util::plot::CsvWriter</a></div><div class="ttdoc">Simple writer interface when creating a CSV file (comma separated value).</div><div class="ttdef"><b>Definition:</b> csvwriter.h:36</div></div>
 <div class="ttc" id="aclassutil_1_1plot_1_1_csv_writer_html_a007fffe585b1a763a704a094b14e1737"><div class="ttname"><a href="classutil_1_1plot_1_1_csv_writer.html#a007fffe585b1a763a704a094b14e1737">util::plot::CsvWriter::IsOk</a></div><div class="ttdeci">bool IsOk() const</div><div class="ttdoc">Returns true if the file is successfully opened.</div></div>
+<div class="ttc" id="aclassutil_1_1plot_1_1_csv_writer_html_a3154f0f7610c4fcdfb80279bca97933d"><div class="ttname"><a href="classutil_1_1plot_1_1_csv_writer.html#a3154f0f7610c4fcdfb80279bca97933d">util::plot::CsvWriter::IsColumnValid</a></div><div class="ttdeci">bool IsColumnValid(size_t column) const</div><div class="ttdoc">Indicate if there is any valid values in this column.</div></div>
+<div class="ttc" id="aclassutil_1_1plot_1_1_csv_writer_html_a37043eee5e8be659ff26131f86f2bf5f"><div class="ttname"><a href="classutil_1_1plot_1_1_csv_writer.html#a37043eee5e8be659ff26131f86f2bf5f">util::plot::CsvWriter::Label</a></div><div class="ttdeci">const std::string Label(size_t index) const</div><div class="ttdoc">Returns suitable label text.</div></div>
 <div class="ttc" id="aclassutil_1_1plot_1_1_csv_writer_html_a3de32256f8d3e3afca775c2ae190be43"><div class="ttname"><a href="classutil_1_1plot_1_1_csv_writer.html#a3de32256f8d3e3afca775c2ae190be43">util::plot::CsvWriter::CsvWriter</a></div><div class="ttdeci">CsvWriter(const std::string &amp;filename)</div><div class="ttdoc">Constructor that opens a CSV file.</div></div>
+<div class="ttc" id="aclassutil_1_1plot_1_1_csv_writer_html_a58c3d7bb7212a3a7d28bbd0d267a9bc1"><div class="ttname"><a href="classutil_1_1plot_1_1_csv_writer.html#a58c3d7bb7212a3a7d28bbd0d267a9bc1">util::plot::CsvWriter::Name</a></div><div class="ttdeci">const std::string &amp; Name(size_t index) const</div><div class="ttdoc">Returns column name.</div></div>
 <div class="ttc" id="aclassutil_1_1plot_1_1_csv_writer_html_a5a15a2d77ee18d9ecf866466a62611ca"><div class="ttname"><a href="classutil_1_1plot_1_1_csv_writer.html#a5a15a2d77ee18d9ecf866466a62611ca">util::plot::CsvWriter::CsvWriter</a></div><div class="ttdeci">CsvWriter()</div><div class="ttdoc">Constructor that opens a string stream instead of a physical file .</div></div>
 <div class="ttc" id="aclassutil_1_1plot_1_1_csv_writer_html_a5c57a80d644cf71bfa86ced87edaff50"><div class="ttname"><a href="classutil_1_1plot_1_1_csv_writer.html#a5c57a80d644cf71bfa86ced87edaff50">util::plot::CsvWriter::OpenFile</a></div><div class="ttdeci">void OpenFile(const std::string &amp;filename)</div></div>
 <div class="ttc" id="aclassutil_1_1plot_1_1_csv_writer_html_a6fe85583fd7ecacc5e8f244b810e0333"><div class="ttname"><a href="classutil_1_1plot_1_1_csv_writer.html#a6fe85583fd7ecacc5e8f244b810e0333">util::plot::CsvWriter::AddRow</a></div><div class="ttdeci">void AddRow()</div><div class="ttdoc">Starts a new row. S.</div></div>
 <div class="ttc" id="aclassutil_1_1plot_1_1_csv_writer_html_a79f6ec4b8c1b10e092d047e32eac1c05"><div class="ttname"><a href="classutil_1_1plot_1_1_csv_writer.html#a79f6ec4b8c1b10e092d047e32eac1c05">util::plot::CsvWriter::AddColumnHeader</a></div><div class="ttdeci">void AddColumnHeader(const std::string &amp;name, const std::string &amp;unit, bool valid=true)</div><div class="ttdoc">Adds a column header string.</div></div>
 <div class="ttc" id="aclassutil_1_1plot_1_1_csv_writer_html_a8251b91bfc7f34cd2efbbff85014637a"><div class="ttname"><a href="classutil_1_1plot_1_1_csv_writer.html#a8251b91bfc7f34cd2efbbff85014637a">util::plot::CsvWriter::FullName</a></div><div class="ttdeci">const std::string &amp; FullName() const</div><div class="ttdef"><b>Definition:</b> csvwriter.h:73</div></div>
-<div class="ttc" id="aclassutil_1_1plot_1_1_csv_writer_html_aa252632ffc81db2d659d931aef47c7c8"><div class="ttname"><a href="classutil_1_1plot_1_1_csv_writer.html#aa252632ffc81db2d659d931aef47c7c8">util::plot::CsvWriter::AddColumnValue</a></div><div class="ttdeci">void AddColumnValue(const T &amp;value)</div><div class="ttdoc">Adds a column value. Adds a column value to the file.</div><div class="ttdef"><b>Definition:</b> csvwriter.h:157</div></div>
+<div class="ttc" id="aclassutil_1_1plot_1_1_csv_writer_html_a90079f3c24ab9869854f24478a499da6"><div class="ttname"><a href="classutil_1_1plot_1_1_csv_writer.html#a90079f3c24ab9869854f24478a499da6">util::plot::CsvWriter::Columns</a></div><div class="ttdeci">size_t Columns() const</div><div class="ttdoc">Returns number of columns.</div><div class="ttdef"><b>Definition:</b> csvwriter.h:151</div></div>
+<div class="ttc" id="aclassutil_1_1plot_1_1_csv_writer_html_a925e6a9850b0cf45377a4e838f32d619"><div class="ttname"><a href="classutil_1_1plot_1_1_csv_writer.html#a925e6a9850b0cf45377a4e838f32d619">util::plot::CsvWriter::Reset</a></div><div class="ttdeci">void Reset()</div><div class="ttdoc">Reset the writer.</div></div>
+<div class="ttc" id="aclassutil_1_1plot_1_1_csv_writer_html_a933daebdfa6aff1d139f1216d40e8db5"><div class="ttname"><a href="classutil_1_1plot_1_1_csv_writer.html#a933daebdfa6aff1d139f1216d40e8db5">util::plot::CsvWriter::SetColumnValid</a></div><div class="ttdeci">void SetColumnValid(size_t column, bool valid=true)</div><div class="ttdoc">Sets the column valid.</div></div>
+<div class="ttc" id="aclassutil_1_1plot_1_1_csv_writer_html_a983f11e9a46e4f6172ecf4f5c8b1c0c1"><div class="ttname"><a href="classutil_1_1plot_1_1_csv_writer.html#a983f11e9a46e4f6172ecf4f5c8b1c0c1">util::plot::CsvWriter::GetText</a></div><div class="ttdeci">std::string GetText() const</div><div class="ttdoc">Returns the CSV 'file' as a string.</div><div class="ttdef"><b>Definition:</b> csvwriter.h:136</div></div>
+<div class="ttc" id="aclassutil_1_1plot_1_1_csv_writer_html_aa252632ffc81db2d659d931aef47c7c8"><div class="ttname"><a href="classutil_1_1plot_1_1_csv_writer.html#aa252632ffc81db2d659d931aef47c7c8">util::plot::CsvWriter::AddColumnValue</a></div><div class="ttdeci">void AddColumnValue(const T &amp;value)</div><div class="ttdoc">Adds a column value. Adds a column value to the file.</div><div class="ttdef"><b>Definition:</b> csvwriter.h:215</div></div>
+<div class="ttc" id="aclassutil_1_1plot_1_1_csv_writer_html_aac406325b346965053ef36d37f854ec1"><div class="ttname"><a href="classutil_1_1plot_1_1_csv_writer.html#aac406325b346965053ef36d37f854ec1">util::plot::CsvWriter::Unit</a></div><div class="ttdeci">const std::string &amp; Unit(size_t index) const</div><div class="ttdoc">Returns the column unit.</div></div>
+<div class="ttc" id="aclassutil_1_1plot_1_1_csv_writer_html_ab1396fc9999faf51f01e7e525a0793aa"><div class="ttname"><a href="classutil_1_1plot_1_1_csv_writer.html#ab1396fc9999faf51f01e7e525a0793aa">util::plot::CsvWriter::Rows</a></div><div class="ttdeci">size_t Rows() const</div><div class="ttdoc">Number of rows in the CSV file.</div><div class="ttdef"><b>Definition:</b> csvwriter.h:161</div></div>
 <div class="ttc" id="aclassutil_1_1plot_1_1_csv_writer_html_ac4f81cd40b2ff1d8f14fe626fb53bc6f"><div class="ttname"><a href="classutil_1_1plot_1_1_csv_writer.html#ac4f81cd40b2ff1d8f14fe626fb53bc6f">util::plot::CsvWriter::~CsvWriter</a></div><div class="ttdeci">virtual ~CsvWriter()</div><div class="ttdoc">Destructor that closes the CSV file.</div></div>
 <div class="ttc" id="aclassutil_1_1plot_1_1_csv_writer_html_ac4fe1723c84738801fdb1d18f7402a9a"><div class="ttname"><a href="classutil_1_1plot_1_1_csv_writer.html#ac4fe1723c84738801fdb1d18f7402a9a">util::plot::CsvWriter::CloseFile</a></div><div class="ttdeci">void CloseFile()</div></div>
 <div class="ttc" id="aclassutil_1_1plot_1_1_csv_writer_html_af0804fc6267739ae2e3b12733b130867"><div class="ttname"><a href="classutil_1_1plot_1_1_csv_writer.html#af0804fc6267739ae2e3b12733b130867">util::plot::CsvWriter::FileName</a></div><div class="ttdeci">std::string FileName() const</div></div>

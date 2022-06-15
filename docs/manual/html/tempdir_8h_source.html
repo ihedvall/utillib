@@ -24,7 +24,7 @@
   <td id="projectalign">
    <div id="projectname">UTILLib<span id="projectnumber">&#160;1.0</span>
    </div>
-   <div id="projectbrief">C++ library with generic functions for creating applications.</div>
+   <div id="projectbrief">Common C++ library with utilities.</div>
   </td>
  </tr>
  </tbody>
@@ -86,21 +86,23 @@ $(function() {
 <div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
 <div class="line"><a id="l00042" name="l00042"></a><span class="lineno"><a class="line" href="classutil_1_1log_1_1_temp_dir.html#a3fded27618a998d246f9cf8da96134ba">   42</a></span>  <span class="keyword">virtual</span> <a class="code hl_function" href="classutil_1_1log_1_1_temp_dir.html#a3fded27618a998d246f9cf8da96134ba">~TempDir</a>();</div>
 <div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span> </div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>  [[nodiscard]] <span class="keyword">const</span> std::string&amp; Path()<span class="keyword"> const </span>{</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    <span class="keywordflow">return</span> temp_dir_;</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>  }</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>  [[nodiscard]] std::string TempFile(<span class="keyword">const</span> std::string&amp; stem, <span class="keyword">const</span> std::string&amp; extension, <span class="keywordtype">bool</span> unique_file) <span class="keyword">const</span>;</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> <span class="keyword">private</span>:</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>  std::string temp_dir_;</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>};</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno"><a class="line" href="classutil_1_1log_1_1_temp_dir.html#a19ec8b8a9d8050920cf9e40b74f1af53">   49</a></span>  [[nodiscard]] <span class="keyword">const</span> std::string&amp; <a class="code hl_function" href="classutil_1_1log_1_1_temp_dir.html#a19ec8b8a9d8050920cf9e40b74f1af53">Path</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    <span class="keywordflow">return</span> temp_dir_;</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>  }</div>
 <div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>} <span class="comment">// end namespace util::log</span></div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno"><a class="line" href="classutil_1_1log_1_1_temp_dir.html#a34007b4d3bdb3c2fc8850e76dc234783">   61</a></span>  [[nodiscard]] std::string <a class="code hl_function" href="classutil_1_1log_1_1_temp_dir.html#a34007b4d3bdb3c2fc8850e76dc234783">TempFile</a>(<span class="keyword">const</span> std::string&amp; stem, <span class="keyword">const</span> std::string&amp; extension, <span class="keywordtype">bool</span> unique_file) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span> <span class="keyword">private</span>:</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>  std::string temp_dir_;</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>};</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span> </div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span> </div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>} <span class="comment">// end namespace util::log</span></div>
 <div class="ttc" id="aclassutil_1_1log_1_1_temp_dir_html"><div class="ttname"><a href="classutil_1_1log_1_1_temp_dir.html">util::log::TempDir</a></div><div class="ttdef"><b>Definition:</b> tempdir.h:18</div></div>
+<div class="ttc" id="aclassutil_1_1log_1_1_temp_dir_html_a19ec8b8a9d8050920cf9e40b74f1af53"><div class="ttname"><a href="classutil_1_1log_1_1_temp_dir.html#a19ec8b8a9d8050920cf9e40b74f1af53">util::log::TempDir::Path</a></div><div class="ttdeci">const std::string &amp; Path() const</div><div class="ttdoc">Full path to the temporary directory.</div><div class="ttdef"><b>Definition:</b> tempdir.h:49</div></div>
+<div class="ttc" id="aclassutil_1_1log_1_1_temp_dir_html_a34007b4d3bdb3c2fc8850e76dc234783"><div class="ttname"><a href="classutil_1_1log_1_1_temp_dir.html#a34007b4d3bdb3c2fc8850e76dc234783">util::log::TempDir::TempFile</a></div><div class="ttdeci">std::string TempFile(const std::string &amp;stem, const std::string &amp;extension, bool unique_file) const</div><div class="ttdoc">Generates a temporary and optional unique file name.</div></div>
 <div class="ttc" id="aclassutil_1_1log_1_1_temp_dir_html_a3fded27618a998d246f9cf8da96134ba"><div class="ttname"><a href="classutil_1_1log_1_1_temp_dir.html#a3fded27618a998d246f9cf8da96134ba">util::log::TempDir::~TempDir</a></div><div class="ttdeci">virtual ~TempDir()</div><div class="ttdoc">The destructor removes the temporary directory.</div></div>
 <div class="ttc" id="aclassutil_1_1log_1_1_temp_dir_html_a8df9a183f6099ce74a62af05c0611ad7"><div class="ttname"><a href="classutil_1_1log_1_1_temp_dir.html#a8df9a183f6099ce74a62af05c0611ad7">util::log::TempDir::TempDir</a></div><div class="ttdeci">TempDir(const std::string &amp;sub_dir, bool unique_dir)</div><div class="ttdoc">Creates a temporary directory.</div></div>
-<div class="ttc" id="anamespaceutil_1_1log_html"><div class="ttname"><a href="namespaceutil_1_1log.html">util::log</a></div><div class="ttdoc">The log namespace is used for log related classes and functions.</div><div class="ttdef"><b>Definition:</b> ilisten.h:14</div></div>
+<div class="ttc" id="anamespaceutil_1_1log_html"><div class="ttname"><a href="namespaceutil_1_1log.html">util::log</a></div><div class="ttdoc">The log namespace is used for log related classes and functions.</div><div class="ttdef"><b>Definition:</b> ilisten.h:20</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

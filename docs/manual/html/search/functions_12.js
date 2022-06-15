@@ -1,10 +1,7 @@
 var searchData=
 [
-  ['_7ecsvwriter_0',['~CsvWriter',['../classutil_1_1plot_1_1_csv_writer.html#ac4f81cd40b2ff1d8f14fe626fb53bc6f',1,'util::plot::CsvWriter']]],
-  ['_7eilogger_1',['~ILogger',['../classutil_1_1log_1_1_i_logger.html#a444ad230d26e17f5a1197b58566dd318',1,'util::log::ILogger']]],
-  ['_7eixmlfile_2',['~IXmlFile',['../classutil_1_1xml_1_1_i_xml_file.html#a8ca4e7e6476f9e2a38afcd7baeebeeae',1,'util::xml::IXmlFile']]],
-  ['_7eixmlnode_3',['~IXmlNode',['../classutil_1_1xml_1_1_i_xml_node.html#a67f949a2f7e6d0f0c1381c8ed8204a93',1,'util::xml::IXmlNode']]],
-  ['_7elistenconfig_4',['~ListenConfig',['../classutil_1_1log_1_1_listen_config.html#a256a48c142063e56cc938383dd953ae8',1,'util::log::ListenConfig']]],
-  ['_7elogstream_5',['~LogStream',['../classutil_1_1log_1_1_log_stream.html#a0ddb87c1b4e8f7c3116fa401a7fad2e7',1,'util::log::LogStream']]],
-  ['_7etempdir_6',['~TempDir',['../classutil_1_1log_1_1_temp_dir.html#a3fded27618a998d246f9cf8da96134ba',1,'util::log::TempDir']]]
+  ['wildcardmatch_0',['WildcardMatch',['../namespaceutil_1_1string.html#a542c1325a5b3a1fcec540519a1590707',1,'util::string']]],
+  ['write_1',['Write',['../classutil_1_1xml_1_1_i_xml_node.html#a26c222311ba56a6c16f32f7f5de4a436',1,'util::xml::IXmlNode']]],
+  ['writefile_2',['WriteFile',['../classutil_1_1xml_1_1_i_xml_file.html#a869b18e65c6e389dd8fe129f795ac470',1,'util::xml::IXmlFile']]],
+  ['writestring_3',['WriteString',['../classutil_1_1xml_1_1_i_xml_file.html#a4aed1ff2bdf4d7764496e2db3cee7e16',1,'util::xml::IXmlFile']]]
 ];

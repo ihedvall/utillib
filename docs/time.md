@@ -1,7 +1,7 @@
-
-| [Home](index.html) | [Log](log.html) | | [Listen](listen.html) | [Time](time.html) | [XML](xml.html) |
-
-
+---
+layout: default
+title: Time Functions
+---
 # Time Functions
 The 'util/timestamp.h' include file consist of a large number of time and date conversion routine. 
 The standard C++ lack support of several time and date functions, especially formatting of local date and time. 

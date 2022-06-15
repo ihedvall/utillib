@@ -24,7 +24,7 @@
   <td id="projectalign">
    <div id="projectname">UTILLib<span id="projectnumber">&#160;1.0</span>
    </div>
-   <div id="projectbrief">C++ library with generic functions for creating applications.</div>
+   <div id="projectbrief">Common C++ library with utilities.</div>
   </td>
  </tr>
  </tbody>
@@ -114,6 +114,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a25e7aacb49c2044a8cc82e0415030366"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zlibutil_8h.html#a25e7aacb49c2044a8cc82e0415030366">util::zlib::Deflate</a> (const ByteArray &amp;buf_in, ByteArray &amp;buf_out)</td></tr>
 <tr class="memdesc:a25e7aacb49c2044a8cc82e0415030366"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compress array to array.  <a href="zlibutil_8h.html#a25e7aacb49c2044a8cc82e0415030366">More...</a><br /></td></tr>
 <tr class="separator:a25e7aacb49c2044a8cc82e0415030366"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2f0c28675791eed8771714331224c077"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zlibutil_8h.html#a2f0c28675791eed8771714331224c077">util::zlib::Deflate</a> (const std::string &amp;filename, ByteArray &amp;buf_out)</td></tr>
+<tr class="memdesc:a2f0c28675791eed8771714331224c077"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compress array to array.  <a href="zlibutil_8h.html#a2f0c28675791eed8771714331224c077">More...</a><br /></td></tr>
+<tr class="separator:a2f0c28675791eed8771714331224c077"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a05606344622ebc1d3b2fdf196c7e6379"><td class="memItemLeft" align="right" valign="top"><a id="a05606344622ebc1d3b2fdf196c7e6379" name="a05606344622ebc1d3b2fdf196c7e6379"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>util::zlib::Inflate</b> (std::FILE *in, std::FILE *out)</td></tr>
 <tr class="memdesc:a05606344622ebc1d3b2fdf196c7e6379"><td class="mdescLeft">&#160;</td><td class="mdescRight">Decompress file to file. <br /></td></tr>
@@ -141,7 +144,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>util::zlib::InvTransp
 </table>
 <h2 class="groupheader">Function Documentation</h2>
 <a id="a25e7aacb49c2044a8cc82e0415030366" name="a25e7aacb49c2044a8cc82e0415030366"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a25e7aacb49c2044a8cc82e0415030366">&#9670;&nbsp;</a></span>Deflate() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a25e7aacb49c2044a8cc82e0415030366">&#9670;&nbsp;</a></span>Deflate() <span class="overload">[1/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -178,8 +181,46 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>util::zlib::InvTransp
 
 </div>
 </div>
+<a id="a2f0c28675791eed8771714331224c077" name="a2f0c28675791eed8771714331224c077"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2f0c28675791eed8771714331224c077">&#9670;&nbsp;</a></span>Deflate() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool util::zlib::Deflate </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>filename</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="zlibutil_8h.html#a78f33ae0b22e5b745b00e56d14c62875">ByteArray</a> &amp;&#160;</td>
+          <td class="paramname"><em>buf_out</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >Compress a file directly to an array.</p>
+<p >The file data is compressed and sent to an output array. Unlike the other <a class="el" href="zlibutil_8h.html#a2f0c28675791eed8771714331224c077" title="Compress array to array.">Deflate()</a> functions, the output buffer doesn't need to be sized before calling this function. The compress method is deflate according to ZLIB.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">filename</td><td>Full name of the file to compress. </td></tr>
+    <tr><td class="paramname">buf_out</td><td>Output byte array. The function resize the buffer </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True on success. </dd></dl>
+
+</div>
+</div>
 <a id="a6f7be96df414c8d9fc11655a8c0bc266" name="a6f7be96df414c8d9fc11655a8c0bc266"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6f7be96df414c8d9fc11655a8c0bc266">&#9670;&nbsp;</a></span>Deflate() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a6f7be96df414c8d9fc11655a8c0bc266">&#9670;&nbsp;</a></span>Deflate() <span class="overload">[3/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
