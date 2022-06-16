@@ -13,7 +13,7 @@
 #include <wx/choice.h>
 #include "util/stringutil.h"
 #include "util/listenconfig.h."
-#include "../../utillib/src/listenclient.h"
+#include "listenclient.h"
 #include "mainframe.h"
 #include "listenviewerid.h"
 #include "listenviewer.h"

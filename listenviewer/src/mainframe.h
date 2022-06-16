@@ -10,8 +10,8 @@
 #include <boost/circular_buffer.hpp>
 #include <wx/wx.h>
 #include <wx/listctrl.h>
-#include "../../utillib/src/listenclient.h"
-#include "../../utillib/src/listenmessage.h"
+#include "listenclient.h"
+#include "listenmessage.h"
 #include "listenlistview.h"
 
 namespace util::log::gui {

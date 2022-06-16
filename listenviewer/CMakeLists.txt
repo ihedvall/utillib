@@ -18,6 +18,7 @@ add_executable(listenviewer
 target_include_directories(listenviewer PRIVATE ${wxWidgets_INCLUDE_DIRS})
 target_include_directories(listenviewer PRIVATE ${Boost_INCLUDE_DIRS})
 target_include_directories(listenviewer PRIVATE "../../utillib/include")
+target_include_directories(listenviewer PRIVATE "../../utillib/src")
 target_compile_definitions(listenviewer PRIVATE XML_STATIC)
 
 if (MINGW)

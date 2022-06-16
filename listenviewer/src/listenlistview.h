@@ -6,7 +6,7 @@
 #include <memory>
 #include <boost/circular_buffer.hpp>
 #include <wx/listctrl.h>
-#include "../../utillib/src/listenmessage.h"
+#include "listenmessage.h"
 
 namespace util::log::gui {
 
