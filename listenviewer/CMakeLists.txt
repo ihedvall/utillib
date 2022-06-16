@@ -14,11 +14,11 @@ add_executable(listenviewer
         src/settingdialog.cpp src/settingdialog.h
         src/listendialog.cpp src/listendialog.h src/listenlistview.cpp src/listenlistview.h)
 
-
+target_include_directories(listenviewer PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/../src")
 target_include_directories(listenviewer PRIVATE ${wxWidgets_INCLUDE_DIRS})
 target_include_directories(listenviewer PRIVATE ${Boost_INCLUDE_DIRS})
-target_include_directories(listenviewer PRIVATE "../../utillib/include")
-target_include_directories(listenviewer PRIVATE "../../utillib/src")
+#target_include_directories(listenviewer PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/include")
+
 target_compile_definitions(listenviewer PRIVATE XML_STATIC)
 
 if (MINGW)
