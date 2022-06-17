@@ -22,6 +22,10 @@ The following companion applications exist.
 - **Listen Daemon**. Simple daemon executable that supervise listen servers.
 - **Listen Viewer**. GUI application that show listen messages.
 
+## Installation
+
+Installation kit for [UtilLib v1.0.0](https://github.com/ihedvall/utillib/releases/download/v1.0.0/utillib.exe).
+
 ## Documentation 
 The documentation can be found on GitHub Pages: [UtilLib](https://ihedvall.github.io/utillib)
 
