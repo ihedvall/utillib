@@ -115,27 +115,33 @@ Typedefs</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="enum-members" name="enum-members"></a>
 Enumerations</h2></td></tr>
-<tr class="memitem:acce1c2a148c64f8bfbed195ac8c333e4"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceutil_1_1log.html#acce1c2a148c64f8bfbed195ac8c333e4">LogType</a> { <a class="el" href="namespaceutil_1_1log.html#acce1c2a148c64f8bfbed195ac8c333e4a0e766dab592fbeaa7d31b15a917e100c">LogNothing</a> = 0
+<tr class="memitem:acce1c2a148c64f8bfbed195ac8c333e4"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceutil_1_1log.html#acce1c2a148c64f8bfbed195ac8c333e4">LogType</a> { <br />
+&#160;&#160;<a class="el" href="namespaceutil_1_1log.html#acce1c2a148c64f8bfbed195ac8c333e4a0e766dab592fbeaa7d31b15a917e100c">LogNothing</a> = 0
 , <a class="el" href="namespaceutil_1_1log.html#acce1c2a148c64f8bfbed195ac8c333e4a4c6f235bebb247d4b9b4bd6b71ee6719">LogToConsole</a>
 , <a class="el" href="namespaceutil_1_1log.html#acce1c2a148c64f8bfbed195ac8c333e4a582de149a5b9e814a2ae7f5d7a27db46">LogToFile</a>
 , <a class="el" href="namespaceutil_1_1log.html#acce1c2a148c64f8bfbed195ac8c333e4ace40eb3145724b182394b9b5f927dd3a">LogToListen</a>
+, <br />
+&#160;&#160;<a class="el" href="namespaceutil_1_1log.html#acce1c2a148c64f8bfbed195ac8c333e4a564f6a782b17ae713307d01873d4bc07">LogToSyslog</a>
+<br />
  }</td></tr>
 <tr class="memdesc:acce1c2a148c64f8bfbed195ac8c333e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">&lt; Defines the type of default log  <a href="namespaceutil_1_1log.html#acce1c2a148c64f8bfbed195ac8c333e4">More...</a><br /></td></tr>
 <tr class="separator:acce1c2a148c64f8bfbed195ac8c333e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2942d2aa03892df3ee778b138784c80e"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceutil_1_1log.html#a2942d2aa03892df3ee778b138784c80e">LogSeverity</a> { <br />
-&#160;&#160;<a class="el" href="namespaceutil_1_1log.html#a2942d2aa03892df3ee778b138784c80eafa21506cd249f400de4a974b5a0c8e0e">kTrace</a> = 0
-, <a class="el" href="namespaceutil_1_1log.html#a2942d2aa03892df3ee778b138784c80eabb53ce21b7c0b7c8a8f7860a41901d29">kDebug</a>
-, <a class="el" href="namespaceutil_1_1log.html#a2942d2aa03892df3ee778b138784c80ea176a473e63c17ccdac91640c67f149bf">kInfo</a>
-, <a class="el" href="namespaceutil_1_1log.html#a2942d2aa03892df3ee778b138784c80eaec0da41f4e48b52c362303eb27ed5dee">kWarning</a>
+<tr class="memitem:aa21d9be4063c51bfeb18a06859495e8a"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceutil_1_1log.html#aa21d9be4063c51bfeb18a06859495e8a">LogSeverity</a> : uint8_t { <br />
+&#160;&#160;<a class="el" href="namespaceutil_1_1log.html#aa21d9be4063c51bfeb18a06859495e8aafa21506cd249f400de4a974b5a0c8e0e">kTrace</a> = 0
+, <a class="el" href="namespaceutil_1_1log.html#aa21d9be4063c51bfeb18a06859495e8aabb53ce21b7c0b7c8a8f7860a41901d29">kDebug</a>
+, <a class="el" href="namespaceutil_1_1log.html#aa21d9be4063c51bfeb18a06859495e8aa176a473e63c17ccdac91640c67f149bf">kInfo</a>
+, <a class="el" href="namespaceutil_1_1log.html#aa21d9be4063c51bfeb18a06859495e8aa69f03ebfd6cab4eaa75fc4182f0feca9">kNotice</a>
 , <br />
-&#160;&#160;<a class="el" href="namespaceutil_1_1log.html#a2942d2aa03892df3ee778b138784c80eae3587c730cc1aa530fa4ddc9c4204e97">kError</a>
-, <a class="el" href="namespaceutil_1_1log.html#a2942d2aa03892df3ee778b138784c80ea5a20548c220f372fc701cae6de94040b">kCritical</a>
-, <a class="el" href="namespaceutil_1_1log.html#a2942d2aa03892df3ee778b138784c80eac0d18299609bebcba35e0e9253cb41c4">kAlert</a>
-, <a class="el" href="namespaceutil_1_1log.html#a2942d2aa03892df3ee778b138784c80ea1921cdd35fc6d7638aa9b2c7fc55cdef">kEmergency</a>
+&#160;&#160;<a class="el" href="namespaceutil_1_1log.html#aa21d9be4063c51bfeb18a06859495e8aaec0da41f4e48b52c362303eb27ed5dee">kWarning</a>
+, <a class="el" href="namespaceutil_1_1log.html#aa21d9be4063c51bfeb18a06859495e8aae3587c730cc1aa530fa4ddc9c4204e97">kError</a>
+, <a class="el" href="namespaceutil_1_1log.html#aa21d9be4063c51bfeb18a06859495e8aa5a20548c220f372fc701cae6de94040b">kCritical</a>
+, <a class="el" href="namespaceutil_1_1log.html#aa21d9be4063c51bfeb18a06859495e8aac0d18299609bebcba35e0e9253cb41c4">kAlert</a>
+, <br />
+&#160;&#160;<a class="el" href="namespaceutil_1_1log.html#aa21d9be4063c51bfeb18a06859495e8aa1921cdd35fc6d7638aa9b2c7fc55cdef">kEmergency</a>
 <br />
  }</td></tr>
-<tr class="memdesc:a2942d2aa03892df3ee778b138784c80e"><td class="mdescLeft">&#160;</td><td class="mdescRight">&lt; Defines the log severity level  <a href="namespaceutil_1_1log.html#a2942d2aa03892df3ee778b138784c80e">More...</a><br /></td></tr>
-<tr class="separator:a2942d2aa03892df3ee778b138784c80e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memdesc:aa21d9be4063c51bfeb18a06859495e8a"><td class="mdescLeft">&#160;</td><td class="mdescRight">&lt; Defines the log severity level  <a href="namespaceutil_1_1log.html#aa21d9be4063c51bfeb18a06859495e8a">More...</a><br /></td></tr>
+<tr class="separator:aa21d9be4063c51bfeb18a06859495e8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
@@ -163,7 +169,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>LogError</b> (const <
 <tr class="memdesc:a7975b1c262ba1bfb272c3e108a8dfdb4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates an error message. <br /></td></tr>
 <tr class="separator:a7975b1c262ba1bfb272c3e108a8dfdb4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad0f4c23bd22f6820c369f8d69dfcd098"><td class="memItemLeft" align="right" valign="top"><a id="ad0f4c23bd22f6820c369f8d69dfcd098" name="ad0f4c23bd22f6820c369f8d69dfcd098"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>LogString</b> (const <a class="el" href="namespaceutil_1_1log.html#af89872d2f3b06b8f5e5c00932b7d7279">Loc</a> &amp;loc, <a class="el" href="namespaceutil_1_1log.html#a2942d2aa03892df3ee778b138784c80e">LogSeverity</a> severity, const std::string &amp;message)</td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>LogString</b> (const <a class="el" href="namespaceutil_1_1log.html#af89872d2f3b06b8f5e5c00932b7d7279">Loc</a> &amp;loc, <a class="el" href="namespaceutil_1_1log.html#aa21d9be4063c51bfeb18a06859495e8a">LogSeverity</a> severity, const std::string &amp;message)</td></tr>
 <tr class="memdesc:ad0f4c23bd22f6820c369f8d69dfcd098"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a generic message. <br /></td></tr>
 <tr class="separator:ad0f4c23bd22f6820c369f8d69dfcd098"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ace98a2909c42f95cd09bfce65db02440"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceutil_1_1log.html#ace98a2909c42f95cd09bfce65db02440">FindNotepad</a> ()</td></tr>
@@ -173,7 +179,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>LogString</b> (const 
 <tr class="memdesc:aba297d7d2cad53eb53effc77f386e1de"><td class="mdescLeft">&#160;</td><td class="mdescRight">Backup up a file with the 9 last changes.  <a href="namespaceutil_1_1log.html#aba297d7d2cad53eb53effc77f386e1de">More...</a><br /></td></tr>
 <tr class="separator:aba297d7d2cad53eb53effc77f386e1de"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae03f0cd0de808d68c350ab8aa2c0decf"><td class="memItemLeft" align="right" valign="top"><a id="ae03f0cd0de808d68c350ab8aa2c0decf" name="ae03f0cd0de808d68c350ab8aa2c0decf"></a>
-std::string&#160;</td><td class="memItemRight" valign="bottom"><b>GetSeverityString</b> (<a class="el" href="namespaceutil_1_1log.html#a2942d2aa03892df3ee778b138784c80e">LogSeverity</a> severity)</td></tr>
+std::string&#160;</td><td class="memItemRight" valign="bottom"><b>GetSeverityString</b> (<a class="el" href="namespaceutil_1_1log.html#aa21d9be4063c51bfeb18a06859495e8a">LogSeverity</a> severity)</td></tr>
 <tr class="memdesc:ae03f0cd0de808d68c350ab8aa2c0decf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the log level as a string. <br /></td></tr>
 <tr class="separator:ae03f0cd0de808d68c350ab8aa2c0decf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -196,8 +202,8 @@ std::string&#160;</td><td class="memItemRight" valign="bottom"><b>GetSeverityStr
 </div>
 </div>
 <h2 class="groupheader">Enumeration Type Documentation</h2>
-<a id="a2942d2aa03892df3ee778b138784c80e" name="a2942d2aa03892df3ee778b138784c80e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2942d2aa03892df3ee778b138784c80e">&#9670;&nbsp;</a></span>LogSeverity</h2>
+<a id="aa21d9be4063c51bfeb18a06859495e8a" name="aa21d9be4063c51bfeb18a06859495e8a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa21d9be4063c51bfeb18a06859495e8a">&#9670;&nbsp;</a></span>LogSeverity</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -206,7 +212,7 @@ std::string&#160;</td><td class="memItemRight" valign="bottom"><b>GetSeverityStr
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">enum class <a class="el" href="namespaceutil_1_1log.html#a2942d2aa03892df3ee778b138784c80e">util::log::LogSeverity</a></td>
+          <td class="memname">enum class <a class="el" href="namespaceutil_1_1log.html#aa21d9be4063c51bfeb18a06859495e8a">util::log::LogSeverity</a> : uint8_t</td>
         </tr>
       </table>
   </td>
@@ -216,21 +222,23 @@ std::string&#160;</td><td class="memItemRight" valign="bottom"><b>GetSeverityStr
 </table>
 </div><div class="memdoc">
 <table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a2942d2aa03892df3ee778b138784c80eafa21506cd249f400de4a974b5a0c8e0e" name="a2942d2aa03892df3ee778b138784c80eafa21506cd249f400de4a974b5a0c8e0e"></a>kTrace&#160;</td><td class="fielddoc"><p >Trace or listen message. </p>
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="aa21d9be4063c51bfeb18a06859495e8aafa21506cd249f400de4a974b5a0c8e0e" name="aa21d9be4063c51bfeb18a06859495e8aafa21506cd249f400de4a974b5a0c8e0e"></a>kTrace&#160;</td><td class="fielddoc"><p >Trace or listen message. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a2942d2aa03892df3ee778b138784c80eabb53ce21b7c0b7c8a8f7860a41901d29" name="a2942d2aa03892df3ee778b138784c80eabb53ce21b7c0b7c8a8f7860a41901d29"></a>kDebug&#160;</td><td class="fielddoc"><p >Debug message. </p>
+<tr><td class="fieldname"><a id="aa21d9be4063c51bfeb18a06859495e8aabb53ce21b7c0b7c8a8f7860a41901d29" name="aa21d9be4063c51bfeb18a06859495e8aabb53ce21b7c0b7c8a8f7860a41901d29"></a>kDebug&#160;</td><td class="fielddoc"><p >Debug message. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a2942d2aa03892df3ee778b138784c80ea176a473e63c17ccdac91640c67f149bf" name="a2942d2aa03892df3ee778b138784c80ea176a473e63c17ccdac91640c67f149bf"></a>kInfo&#160;</td><td class="fielddoc"><p >Informational message. </p>
+<tr><td class="fieldname"><a id="aa21d9be4063c51bfeb18a06859495e8aa176a473e63c17ccdac91640c67f149bf" name="aa21d9be4063c51bfeb18a06859495e8aa176a473e63c17ccdac91640c67f149bf"></a>kInfo&#160;</td><td class="fielddoc"><p >Informational message. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a2942d2aa03892df3ee778b138784c80eaec0da41f4e48b52c362303eb27ed5dee" name="a2942d2aa03892df3ee778b138784c80eaec0da41f4e48b52c362303eb27ed5dee"></a>kWarning&#160;</td><td class="fielddoc"><p >Warning message. </p>
+<tr><td class="fieldname"><a id="aa21d9be4063c51bfeb18a06859495e8aa69f03ebfd6cab4eaa75fc4182f0feca9" name="aa21d9be4063c51bfeb18a06859495e8aa69f03ebfd6cab4eaa75fc4182f0feca9"></a>kNotice&#160;</td><td class="fielddoc"><p >Notice message. Notify the user. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a2942d2aa03892df3ee778b138784c80eae3587c730cc1aa530fa4ddc9c4204e97" name="a2942d2aa03892df3ee778b138784c80eae3587c730cc1aa530fa4ddc9c4204e97"></a>kError&#160;</td><td class="fielddoc"><p >Error message. </p>
+<tr><td class="fieldname"><a id="aa21d9be4063c51bfeb18a06859495e8aaec0da41f4e48b52c362303eb27ed5dee" name="aa21d9be4063c51bfeb18a06859495e8aaec0da41f4e48b52c362303eb27ed5dee"></a>kWarning&#160;</td><td class="fielddoc"><p >Warning message. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a2942d2aa03892df3ee778b138784c80ea5a20548c220f372fc701cae6de94040b" name="a2942d2aa03892df3ee778b138784c80ea5a20548c220f372fc701cae6de94040b"></a>kCritical&#160;</td><td class="fielddoc"><p >Critical message (device error) </p>
+<tr><td class="fieldname"><a id="aa21d9be4063c51bfeb18a06859495e8aae3587c730cc1aa530fa4ddc9c4204e97" name="aa21d9be4063c51bfeb18a06859495e8aae3587c730cc1aa530fa4ddc9c4204e97"></a>kError&#160;</td><td class="fielddoc"><p >Error message. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a2942d2aa03892df3ee778b138784c80eac0d18299609bebcba35e0e9253cb41c4" name="a2942d2aa03892df3ee778b138784c80eac0d18299609bebcba35e0e9253cb41c4"></a>kAlert&#160;</td><td class="fielddoc"><p >Alert or alarm message. </p>
+<tr><td class="fieldname"><a id="aa21d9be4063c51bfeb18a06859495e8aa5a20548c220f372fc701cae6de94040b" name="aa21d9be4063c51bfeb18a06859495e8aa5a20548c220f372fc701cae6de94040b"></a>kCritical&#160;</td><td class="fielddoc"><p >Critical message (device error) </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a2942d2aa03892df3ee778b138784c80ea1921cdd35fc6d7638aa9b2c7fc55cdef" name="a2942d2aa03892df3ee778b138784c80ea1921cdd35fc6d7638aa9b2c7fc55cdef"></a>kEmergency&#160;</td><td class="fielddoc"><p >Fatal error message. </p>
+<tr><td class="fieldname"><a id="aa21d9be4063c51bfeb18a06859495e8aac0d18299609bebcba35e0e9253cb41c4" name="aa21d9be4063c51bfeb18a06859495e8aac0d18299609bebcba35e0e9253cb41c4"></a>kAlert&#160;</td><td class="fielddoc"><p >Alert or alarm message. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="aa21d9be4063c51bfeb18a06859495e8aa1921cdd35fc6d7638aa9b2c7fc55cdef" name="aa21d9be4063c51bfeb18a06859495e8aa1921cdd35fc6d7638aa9b2c7fc55cdef"></a>kEmergency&#160;</td><td class="fielddoc"><p >Fatal error message. </p>
 </td></tr>
 </table>
 
@@ -262,7 +270,9 @@ std::string&#160;</td><td class="memItemRight" valign="bottom"><b>GetSeverityStr
 </td></tr>
 <tr><td class="fieldname"><a id="acce1c2a148c64f8bfbed195ac8c333e4a582de149a5b9e814a2ae7f5d7a27db46" name="acce1c2a148c64f8bfbed195ac8c333e4a582de149a5b9e814a2ae7f5d7a27db46"></a>LogToFile&#160;</td><td class="fielddoc"><p >Log to file. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="acce1c2a148c64f8bfbed195ac8c333e4ace40eb3145724b182394b9b5f927dd3a" name="acce1c2a148c64f8bfbed195ac8c333e4ace40eb3145724b182394b9b5f927dd3a"></a>LogToListen&#160;</td><td class="fielddoc"><p >Log to listen window (system messages) </p>
+<tr><td class="fieldname"><a id="acce1c2a148c64f8bfbed195ac8c333e4ace40eb3145724b182394b9b5f927dd3a" name="acce1c2a148c64f8bfbed195ac8c333e4ace40eb3145724b182394b9b5f927dd3a"></a>LogToListen&#160;</td><td class="fielddoc"><p >Log to listen window (system messages). </p>
+</td></tr>
+<tr><td class="fieldname"><a id="acce1c2a148c64f8bfbed195ac8c333e4a564f6a782b17ae713307d01873d4bc07" name="acce1c2a148c64f8bfbed195ac8c333e4a564f6a782b17ae713307d01873d4bc07"></a>LogToSyslog&#160;</td><td class="fielddoc"><p >Logs to a syslog server. </p>
 </td></tr>
 </table>
 

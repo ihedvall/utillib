@@ -20,7 +20,7 @@
 namespace util::log {
 
 
-/** \class IListen ilisten.h "util/ilisten.h
+/** \class IListen ilisten.h "util/ilisten.h"
  * \brief An interface class that hides the actual implementation of the object.
  *
  * The IListen class defines an interface against various listen implementation objects. The class

@@ -16,14 +16,15 @@ add_executable(test_util
         teststringutil.cpp
         test_message_queue.cpp
         testlisten.cpp testlisten.h
-        test_tempdir.cpp)
+        test_tempdir.cpp
+        testsyslogmessage.cpp
+        test_syslog.cpp test_syslogflexer.cpp)
 
-target_include_directories(test_util PRIVATE
-        ../include
-        ../src
-        ${GTEST_INCLUDE_DIRS}
-        ${Boost_INCLUDE_DIRS})
-
+target_include_directories(test_util PRIVATE ../include)
+target_include_directories(test_util PRIVATE ../src)
+target_include_directories(test_util PRIVATE ${GTEST_INCLUDE_DIRS})
+target_include_directories(test_util PRIVATE ${Boost_INCLUDE_DIRS})
+target_include_directories(test_util PRIVATE ${FLEX_INCLUDE_DIRS})
 
 
 target_link_libraries(test_util PRIVATE util)

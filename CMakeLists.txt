@@ -16,13 +16,36 @@ endif()
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_DEBUG_POSTFIX d)
 
-include("script/boost.cmake")
-include("script/zlib.cmake")
-include("script/openssl.cmake")
-include("script/expat.cmake")
-include("script/wxwidgets.cmake")
-include("script/googletest.cmake")
-include("script/doxygen.cmake")
+include(CMakePrintHelpers)
+include(script/boost.cmake)
+include(script/zlib.cmake)
+include(script/openssl.cmake)
+include(script/expat.cmake)
+include(script/wxwidgets.cmake)
+include(script/googletest.cmake)
+include(script/doxygen.cmake)
+include(script/flex.cmake)
+include(script/bison.cmake)
+
+if (BISON_FOUND)
+    BISON_TARGET(SYSLOG_PARSER src/syslogparser.y ${CMAKE_CURRENT_SOURCE_DIR}/src/syslogparser.cpp)
+    cmake_print_variables(BISON_SYSLOG_PARSER_DEFINED
+            BISON_SYSLOG_PARSER_INPUT
+            BISON_SYSLOG_PARSER_OUTPUT_SOURCE
+            BISON_SYSLOG_PARSER_OUTPUT_HEADER
+            BISON_SYSLOG_PARSER_OUTPUTS
+            BISON_SYSLOG_PARSER_COMPILE_FLAGS)
+endif()
+
+if (FLEX_FOUND)
+    FLEX_TARGET(SYSLOG_SCANNER src/syslogflexer.l ${CMAKE_CURRENT_SOURCE_DIR}/src/syslogflexer.cpp)
+    cmake_print_variables(FLEX_SYSLOG_SCANNER_DEFINED
+                          FLEX_SYSLOG_SCANNER_OUTPUTS
+                          FLEX_SYSLOG_SCANNER_INPUT
+                          FLEX_SYSLOG_SCANNER_OUTPUT_HEADER )
+endif()
+
+ADD_FLEX_BISON_DEPENDENCY(SYSLOG_SCANNER SYSLOG_PARSER)
 
 add_library(util STATIC
         src/logfile.cpp src/logfile.h
@@ -54,7 +77,12 @@ add_library(util STATIC
         src/writexml.cpp src/writexml.h
         src/stringparser.cpp include/util/stringparser.h
         src/gnuplot.cpp include/util/gnuplot.h
-        src/tempdir.cpp include/util/tempdir.h)
+        src/tempdir.cpp include/util/tempdir.h
+        src/syslogmessage.cpp include/util/syslogmessage.h
+        src/syslog.cpp src/syslog.h src/ilogger.cpp
+        ${BISON_SYSLOG_PARSER_OUTPUTS}
+        ${FLEX_SYSLOG_SCANNER_OUTPUTS}
+        src/syslogscanner.cpp src/syslogscanner.h src/structureddata.cpp include/util/structureddata.h)
 
 target_include_directories(util PUBLIC
         $<INSTALL_INTERFACE:include>
@@ -65,6 +93,7 @@ target_include_directories(util PRIVATE ${Boost_INCLUDE_DIRS})
 target_include_directories(util PRIVATE ${EXPAT_INCLUDE_DIRS})
 target_include_directories(util PRIVATE ${ZLIB_INCLUDE_DIRS})
 target_include_directories(util PRIVATE ${OPENSSL_INCLUDE_DIR})
+target_include_directories(util PRIVATE ${FLEX_INCLUDE_DIRS})
 
 target_compile_definitions(util PRIVATE XML_STATIC)
 

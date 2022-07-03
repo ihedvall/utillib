@@ -9,10 +9,11 @@ namespace util::log::detail {
 
 ListenLogger::ListenLogger() :
     listen_proxy_("LISLOG") {
+  ShowLocation(false);
 }
 
 void ListenLogger::AddLogMessage(const LogMessage &message) {
-  if (!listen_proxy_.IsActive()) {
+  if (!listen_proxy_.IsActive() || !IsSeverityLevelEnabled(message.severity)) {
     return;
   }
   // Log Level 0 = Show all, 1 = Show Debug.., 2 = Show Info..
@@ -24,20 +25,14 @@ void ListenLogger::AddLogMessage(const LogMessage &message) {
   const auto time = util::time::TimeStampToNs(message.timestamp);
   const std::string pre_text = util::log::GetSeverityString(message.severity);
   std::ostringstream temp;
-  temp << message.message << " [" << message.location.function_name() << "]";
+  temp << message.message;
+  if (ShowLocation()) {
+    temp << " [" << message.location.function_name() << "]";
+  }
   listen_proxy_.AddMessage(time, pre_text, temp.str());
 }
 
-void ListenLogger::Stop() {
-}
 
-bool ListenLogger::HasLogFile() const {
-  return false;
-}
-
-std::string ListenLogger::Filename() const {
-  return {};
-}
 
 }
 

@@ -16,6 +16,7 @@ using namespace std::filesystem;
 using namespace std::chrono_literals;
 
 namespace {
+
 std::string GetStem(const std::string &file) {
   try {
     std::filesystem::path p(file);
@@ -79,10 +80,12 @@ std::string LogFile::Filename() const {
 }
 
 LogFile::LogFile() noexcept {
+  EnableSeverityLevel(LogSeverity::kTrace, false); // Turn of trace level by default
   InitLogFile("");
 }
 
 LogFile::LogFile(const std::string &base_name) {
+  EnableSeverityLevel(LogSeverity::kTrace, false); // Turn of trace level by default
   InitLogFile(base_name);
 }
 
@@ -168,8 +171,7 @@ void LogFile::HandleMessage(const LogMessage &m) {
   const std::string severity = GetSeverityString(m.severity);
 
   std::ostringstream temp;
-  temp << "[" << time << "] "
-       << severity << " ";
+  temp << "[" << time << "] " << severity << " ";
   if (has_newline) {
     std::string text = m.message;
     text.pop_back();
@@ -177,10 +179,12 @@ void LogFile::HandleMessage(const LogMessage &m) {
   } else {
     temp << m.message << " ";
   }
-  temp << "    [" << GetStem(m.location.file_name()) << ":"
-       << m.location.function_name()
-       << ":" << m.location.line() << "]"
-       << std::endl;
+  if (ShowLocation()) {
+    temp << "    [" << GetStem(m.location.file_name()) << ":"
+         << m.location.function_name()
+         << ":" << m.location.line() << "]";
+  }
+  temp << std::endl;
   std::fwrite(temp.str().data(), 1, temp.str().size(), file_);
 }
 
@@ -189,9 +193,10 @@ void LogFile::HandleMessage(const LogMessage &m) {
  * @param [in] message Message to handle.
  */
 void LogFile::AddLogMessage(const LogMessage &message) {
-  if (stop_thread_) {
+  if (stop_thread_ || !IsSeverityLevelEnabled(message.severity)) {
     return;
   }
+
   {
     std::lock_guard<std::mutex> lock(locker_);
     if (stop_thread_) {

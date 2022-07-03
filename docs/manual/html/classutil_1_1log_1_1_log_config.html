@@ -104,9 +104,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a53dedb6b891c30e59d4796cee7270ea0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classutil_1_1log_1_1_log_config.html#a53dedb6b891c30e59d4796cee7270ea0">AddLogger</a> (const std::string &amp;logger_name, std::unique_ptr&lt; <a class="el" href="classutil_1_1log_1_1_i_logger.html">ILogger</a> &gt; logger)</td></tr>
 <tr class="memdesc:a53dedb6b891c30e59d4796cee7270ea0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a logger with a unique name.  <a href="classutil_1_1log_1_1_log_config.html#a53dedb6b891c30e59d4796cee7270ea0">More...</a><br /></td></tr>
 <tr class="separator:a53dedb6b891c30e59d4796cee7270ea0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a139594f58ae901999069ae8da0cdf691"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classutil_1_1log_1_1_log_config.html#a139594f58ae901999069ae8da0cdf691">AddLogger</a> (const std::string &amp;logger_name, const <a class="el" href="namespaceutil_1_1log.html#acce1c2a148c64f8bfbed195ac8c333e4">LogType</a> type)</td></tr>
-<tr class="memdesc:a139594f58ae901999069ae8da0cdf691"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a predefined logger with a unique name.  <a href="classutil_1_1log_1_1_log_config.html#a139594f58ae901999069ae8da0cdf691">More...</a><br /></td></tr>
-<tr class="separator:a139594f58ae901999069ae8da0cdf691"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa314164ed23910d6cd42d916fd3af645"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classutil_1_1log_1_1_log_config.html#aa314164ed23910d6cd42d916fd3af645">AddLogger</a> (const std::string &amp;logger_name, <a class="el" href="namespaceutil_1_1log.html#acce1c2a148c64f8bfbed195ac8c333e4">LogType</a> type, const std::vector&lt; std::string &gt; &amp;arg_list)</td></tr>
+<tr class="memdesc:aa314164ed23910d6cd42d916fd3af645"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a predefined logger with a unique name.  <a href="classutil_1_1log_1_1_log_config.html#aa314164ed23910d6cd42d916fd3af645">More...</a><br /></td></tr>
+<tr class="separator:aa314164ed23910d6cd42d916fd3af645"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a804aa58b8c0379fe70bd29684964c0fa"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classutil_1_1log_1_1_log_config.html#a804aa58b8c0379fe70bd29684964c0fa">DeleteLogger</a> (const std::string &amp;logger_name)</td></tr>
 <tr class="memdesc:a804aa58b8c0379fe70bd29684964c0fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deletes a logger.  <a href="classutil_1_1log_1_1_log_config.html#a804aa58b8c0379fe70bd29684964c0fa">More...</a><br /></td></tr>
 <tr class="separator:a804aa58b8c0379fe70bd29684964c0fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -158,6 +158,12 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>SubDir</b> (const std
 const std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>SubDir</b> () const</td></tr>
 <tr class="memdesc:af0d6a677a43c019845533b2cda27047b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the sub directory. <br /></td></tr>
 <tr class="separator:af0d6a677a43c019845533b2cda27047b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af27c73909a9a595a817afd0b99e51560"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classutil_1_1log_1_1_log_config.html#af27c73909a9a595a817afd0b99e51560">ApplicationName</a> (const std::string &amp;app_name)</td></tr>
+<tr class="memdesc:af27c73909a9a595a817afd0b99e51560"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the default application name.  <a href="classutil_1_1log_1_1_log_config.html#af27c73909a9a595a817afd0b99e51560">More...</a><br /></td></tr>
+<tr class="separator:af27c73909a9a595a817afd0b99e51560"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aec0f340697fb861f166a22f37d4d17e5"><td class="memItemLeft" align="right" valign="top">const std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classutil_1_1log_1_1_log_config.html#aec0f340697fb861f166a22f37d4d17e5">ApplicationName</a> ()</td></tr>
+<tr class="memdesc:aec0f340697fb861f166a22f37d4d17e5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the default application name.  <a href="classutil_1_1log_1_1_log_config.html#aec0f340697fb861f166a22f37d4d17e5">More...</a><br /></td></tr>
+<tr class="separator:aec0f340697fb861f166a22f37d4d17e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
@@ -180,8 +186,8 @@ Static Public Member Functions</h2></td></tr>
 <div class="ttc" id="alogstream_8h_html_a87d766158e3857c6aedba65e63f24d05"><div class="ttname"><a href="logstream_8h.html#a87d766158e3857c6aedba65e63f24d05">LOG_INFO</a></div><div class="ttdeci">#define LOG_INFO()</div><div class="ttdoc">Info log stream.</div><div class="ttdef"><b>Definition:</b> logstream.h:19</div></div>
 <div class="ttc" id="anamespaceutil_1_1log_html_acce1c2a148c64f8bfbed195ac8c333e4a582de149a5b9e814a2ae7f5d7a27db46"><div class="ttname"><a href="namespaceutil_1_1log.html#acce1c2a148c64f8bfbed195ac8c333e4a582de149a5b9e814a2ae7f5d7a27db46">util::log::LogType::LogToFile</a></div><div class="ttdeci">@ LogToFile</div><div class="ttdoc">Log to file.</div></div>
 </div><!-- fragment --> </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="a139594f58ae901999069ae8da0cdf691" name="a139594f58ae901999069ae8da0cdf691"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a139594f58ae901999069ae8da0cdf691">&#9670;&nbsp;</a></span>AddLogger() <span class="overload">[1/2]</span></h2>
+<a id="aa314164ed23910d6cd42d916fd3af645" name="aa314164ed23910d6cd42d916fd3af645"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa314164ed23910d6cd42d916fd3af645">&#9670;&nbsp;</a></span>AddLogger() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -195,8 +201,14 @@ Static Public Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="namespaceutil_1_1log.html#acce1c2a148c64f8bfbed195ac8c333e4">LogType</a>&#160;</td>
-          <td class="paramname"><em>type</em>&#160;</td>
+          <td class="paramtype"><a class="el" href="namespaceutil_1_1log.html#acce1c2a148c64f8bfbed195ac8c333e4">LogType</a>&#160;</td>
+          <td class="paramname"><em>type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::vector&lt; std::string &gt; &amp;&#160;</td>
+          <td class="paramname"><em>arg_list</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -209,6 +221,7 @@ Static Public Member Functions</h2></td></tr>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">logger_name</td><td>Unique name of the logger. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">type</td><td>Type of logger. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">arg_list</td><td>Argument list. </td></tr>
   </table>
   </dd>
 </dl>
@@ -268,6 +281,64 @@ Static Public Member Functions</h2></td></tr>
 <p >Adds a log message to all the loggers. Note that all log messages uses this function. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">message</td><td>Message to log. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="aec0f340697fb861f166a22f37d4d17e5" name="aec0f340697fb861f166a22f37d4d17e5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aec0f340697fb861f166a22f37d4d17e5">&#9670;&nbsp;</a></span>ApplicationName() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const std::string &amp; util::log::LogConfig::ApplicationName </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p >The application name property is used by some typical log related objects. </p><dl class="section return"><dt>Returns</dt><dd>Application name. </dd></dl>
+
+</div>
+</div>
+<a id="af27c73909a9a595a817afd0b99e51560" name="af27c73909a9a595a817afd0b99e51560"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af27c73909a9a595a817afd0b99e51560">&#9670;&nbsp;</a></span>ApplicationName() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void util::log::LogConfig::ApplicationName </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>app_name</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p >Some logger includes application name in their message logs. The application name may not contain any spaces. UTF8 characters should be avoided. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">app_name</td><td>Application name </td></tr>
   </table>
   </dd>
 </dl>

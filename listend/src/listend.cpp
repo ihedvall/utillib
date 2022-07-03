@@ -174,7 +174,8 @@ int main(int nof_arg, char *arg_list[]) {
          }
       }
     }
-    log_config.AddLogger("Listen Daemon Message", LogType::LogToListen);
+    const std::vector<std::string> no_arg;
+    log_config.AddLogger("Listen Daemon Message", LogType::LogToListen, no_arg);
     for (auto& server : kServerList) {
       if (!server) {
         continue;

@@ -15,10 +15,11 @@
 
 namespace util::log {
 ///< Defines the log severity level
-enum class LogSeverity {
+enum class LogSeverity : uint8_t {
   kTrace = 0, ///< Trace or listen message
   kDebug,     ///< Debug message
   kInfo,      ///< Informational message
+  kNotice,    ///< Notice message. Notify the user.
   kWarning,   ///< Warning message
   kError,     ///< Error message
   kCritical,  ///< Critical message (device error)

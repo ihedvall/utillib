@@ -13,9 +13,10 @@ var searchData=
   ['createnode_10',['CreateNode',['../classutil_1_1xml_1_1_i_xml_file.html#aa4ffe82ae2cd1306f6196392d60e4a74',1,'util::xml::IXmlFile::CreateNode()'],['../classutil_1_1xml_1_1_i_xml_node.html#aedc8e31050062b6f067ba488532b742a',1,'util::xml::IXmlNode::CreateNode()']]],
   ['createscript_11',['CreateScript',['../classutil_1_1plot_1_1_gnu_plot.html#a1e8b5a6ab27aceefc71ff60829adb014',1,'util::plot::GnuPlot']]],
   ['createxmlfile_12',['CreateXmlFile',['../namespaceutil_1_1xml.html#a44587e7983f96965b9aaf4d6caa954e0',1,'util::xml']]],
-  ['cryptoutil_2eh_13',['cryptoutil.h',['../cryptoutil_8h.html',1,'']]],
-  ['csvfile_14',['CsvFile',['../classutil_1_1plot_1_1_gnu_plot.html#aff0eaae97f2bee05ea5e6c51b5a3cc91',1,'util::plot::GnuPlot']]],
-  ['csvfilename_15',['CsvFileName',['../classutil_1_1plot_1_1_gnu_plot.html#a21b07da9e9d617c26de71a2380efa313',1,'util::plot::GnuPlot']]],
-  ['csvwriter_16',['CsvWriter',['../classutil_1_1plot_1_1_csv_writer.html#a3de32256f8d3e3afca775c2ae190be43',1,'util::plot::CsvWriter::CsvWriter(const std::string &amp;filename)'],['../classutil_1_1plot_1_1_csv_writer.html#a5a15a2d77ee18d9ecf866466a62611ca',1,'util::plot::CsvWriter::CsvWriter()'],['../classutil_1_1plot_1_1_csv_writer.html',1,'util::plot::CsvWriter']]],
-  ['csvwriter_2eh_17',['csvwriter.h',['../csvwriter_8h.html',1,'']]]
+  ['critical_13',['Critical',['../namespaceutil_1_1syslog.html#a4173932d17b5c5713372e13f197de0b0a278d01e5af56273bae1bb99a98b370cd',1,'util::syslog']]],
+  ['cryptoutil_2eh_14',['cryptoutil.h',['../cryptoutil_8h.html',1,'']]],
+  ['csvfile_15',['CsvFile',['../classutil_1_1plot_1_1_gnu_plot.html#aff0eaae97f2bee05ea5e6c51b5a3cc91',1,'util::plot::GnuPlot']]],
+  ['csvfilename_16',['CsvFileName',['../classutil_1_1plot_1_1_gnu_plot.html#a21b07da9e9d617c26de71a2380efa313',1,'util::plot::GnuPlot']]],
+  ['csvwriter_17',['CsvWriter',['../classutil_1_1plot_1_1_csv_writer.html#a3de32256f8d3e3afca775c2ae190be43',1,'util::plot::CsvWriter::CsvWriter(const std::string &amp;filename)'],['../classutil_1_1plot_1_1_csv_writer.html#a5a15a2d77ee18d9ecf866466a62611ca',1,'util::plot::CsvWriter::CsvWriter()'],['../classutil_1_1plot_1_1_csv_writer.html',1,'util::plot::CsvWriter']]],
+  ['csvwriter_2eh_18',['csvwriter.h',['../csvwriter_8h.html',1,'']]]
 ];
