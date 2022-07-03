@@ -26,12 +26,13 @@ var searchData=
   ['logmessage_23',['LogMessage',['../structutil_1_1log_1_1_log_message.html',1,'util::log']]],
   ['logmessage_2eh_24',['logmessage.h',['../logmessage_8h.html',1,'']]],
   ['lognothing_25',['LogNothing',['../namespaceutil_1_1log.html#acce1c2a148c64f8bfbed195ac8c333e4a0e766dab592fbeaa7d31b15a917e100c',1,'util::log']]],
-  ['logseverity_26',['LogSeverity',['../namespaceutil_1_1log.html#a2942d2aa03892df3ee778b138784c80e',1,'util::log']]],
+  ['logseverity_26',['LogSeverity',['../namespaceutil_1_1log.html#aa21d9be4063c51bfeb18a06859495e8a',1,'util::log']]],
   ['logstream_27',['LogStream',['../classutil_1_1log_1_1_log_stream.html#a6453689ae725bc011ffa1fa88095c6af',1,'util::log::LogStream::LogStream()'],['../classutil_1_1log_1_1_log_stream.html',1,'util::log::LogStream']]],
   ['logstream_2eh_28',['logstream.h',['../logstream_8h.html',1,'']]],
   ['logstring_29',['LogString',['../namespaceutil_1_1log.html#ad0f4c23bd22f6820c369f8d69dfcd098',1,'util::log']]],
   ['logtoconsole_30',['LogToConsole',['../namespaceutil_1_1log.html#acce1c2a148c64f8bfbed195ac8c333e4a4c6f235bebb247d4b9b4bd6b71ee6719',1,'util::log']]],
   ['logtofile_31',['LogToFile',['../namespaceutil_1_1log.html#acce1c2a148c64f8bfbed195ac8c333e4a582de149a5b9e814a2ae7f5d7a27db46',1,'util::log']]],
   ['logtolisten_32',['LogToListen',['../namespaceutil_1_1log.html#acce1c2a148c64f8bfbed195ac8c333e4ace40eb3145724b182394b9b5f927dd3a',1,'util::log']]],
-  ['logtype_33',['LogType',['../namespaceutil_1_1log.html#acce1c2a148c64f8bfbed195ac8c333e4',1,'util::log']]]
+  ['logtosyslog_33',['LogToSyslog',['../namespaceutil_1_1log.html#acce1c2a148c64f8bfbed195ac8c333e4a564f6a782b17ae713307d01873d4bc07',1,'util::log']]],
+  ['logtype_34',['LogType',['../namespaceutil_1_1log.html#acce1c2a148c64f8bfbed195ac8c333e4',1,'util::log']]]
 ];

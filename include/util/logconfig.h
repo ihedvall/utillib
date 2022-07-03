@@ -23,7 +23,8 @@ enum class LogType {
   LogNothing = 0, ///< No logger.
   LogToConsole,   ///< Log to the cout stream.
   LogToFile,      ///< Log to file.
-  LogToListen     ///< Log to listen window (system messages)
+  LogToListen,    ///< Log to listen window (system messages).
+  LogToSyslog     ///< Logs to a syslog server.
 };
 
 /**
@@ -77,25 +78,30 @@ class LogConfig final {
   bool CreateDefaultLogger(); ///< Create a logger named 'Default'.
 
   /**
- * Remove all loggers from the application.
- */
+   * Remove all loggers from the application.
+   */
   void DeleteLogChain(); ///< Clear the list of loggers.
 
-/**
+/** \brief Adds a logger with a unique name.
+ *
  * Adds a known logger to the logger list. The logger should use a unique name and any existing
  * logger with the same name, will be removed. Note that logger names is case insensitive.
  * @param [in] logger_name Unique name of the logger.
  * @param [in] logger Smart pointer to the new logger.
  */
   void AddLogger(const std::string &logger_name,
-                 std::unique_ptr<ILogger> logger); ///< Adds a logger with a unique name.
-/**
+                 std::unique_ptr<ILogger> logger);
+
+/** \brief Adds a predefined logger with a unique name.
+ *
  * Adds a new logger to the logger list. The logger should use a unique name and any existing
  * logger with the same name, will be removed. Note that logger names is case insensitive.
  * @param [in] logger_name Unique name of the logger.
  * @param [in] type Type of logger.
+ * @param [in] arg_list Argument list.
  */
-  void AddLogger(const std::string &logger_name,const LogType type); ///< Adds a predefined logger with a unique name.
+  void AddLogger(const std::string &logger_name, LogType type,
+                 const std::vector<std::string>& arg_list);
 
   /**
   * Deletes a logger by its name.
@@ -146,12 +152,32 @@ class LogConfig final {
   void SubDir(const std::string &sub_dir); ///< Sets the sub directory.
   [[nodiscard]] const std::string &SubDir() const; ///< Returns the sub directory.
 
+  /** \brief Sets the default application name.
+   *
+   * Some logger includes application name in their message logs. The application name
+   * may not contain any spaces. UTF8 characters should be avoided.
+   * @param app_name Application name
+   */
+  void ApplicationName(const std::string& app_name) {
+    application_name_ = app_name;
+  }
+
+  /** \brief Returns the default application name.
+   *
+   * The application name property is used by some typical
+   * log related objects.
+   * @return Application name.
+   */
+  [[nodiscard]] const std::string& ApplicationName() {
+    return application_name_;
+  }
  private:
   std::atomic<bool> enabled_ = true;
   std::atomic<LogType> log_type_ = LogType::LogNothing;
   std::string base_name_;
   std::string sub_dir_;
   std::string root_dir_;
+  std::string application_name_;
 
   mutable std::mutex locker_;
   std::map<std::string, std::unique_ptr<ILogger>, util::string::IgnoreCase> log_chain_;

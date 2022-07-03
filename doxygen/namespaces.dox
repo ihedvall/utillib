@@ -33,6 +33,12 @@ namespace plot {}
  */
 namespace string {}
 
+/** \brief The syslog namespace is used for the syslog interface.
+ *
+ * The syslog namespace is used for syslog message interfaces.
+ */
+namespace syslog {}
+
 /** \brief The time namespace is used for time and date functions.
  *
  * The time namespace is used for time and date functions.

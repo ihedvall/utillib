@@ -6,6 +6,7 @@
 #include <mutex>
 #include <locale>
 #include <codecvt>
+
 #ifdef WIN32
 #include <shlobj.h>
 #pragma comment(lib,"shell32")
@@ -16,6 +17,7 @@
 #include "logconsole.h"
 #include "logfile.h"
 #include "listenlogger.h"
+#include "syslog.h"
 
 namespace util::log {
 
@@ -89,6 +91,13 @@ bool LogConfig::CreateDefaultLogger() {
     }
       break;
 
+    case LogType::LogToSyslog: {
+      auto syslog = std::make_unique<detail::Syslog>("localhost", 514);
+      std::lock_guard<std::mutex> lock(locker_);
+      log_chain_.emplace("Default", std::move(syslog));
+      break;
+    }
+
     case LogType::LogToConsole:create = true;
       {
         std::unique_ptr<detail::LogConsole> log_console = std::make_unique<detail::LogConsole>();
@@ -127,20 +136,30 @@ void LogConfig::AddLogMessage(const LogMessage &message) const {
   }
 }
 
-void LogConfig::AddLogger(const std::string &logger_name, const LogType type) {
+void LogConfig::AddLogger(const std::string &logger_name, const LogType type,
+                          const std::vector<std::string>& arg_list) {
   std::unique_ptr<ILogger> logger;
   switch (type) {
     case LogType::LogToConsole:
       logger = std::make_unique<util::log::detail::LogConsole>();
       break;
 
-    case LogType::LogToFile:
-      logger = std::make_unique<util::log::detail::LogFile>(logger_name);
+    case LogType::LogToFile: {
+      const auto base_name = arg_list.empty() ? logger_name : arg_list[0];
+      logger = std::make_unique<util::log::detail::LogFile>(base_name);
       break;
+    }
 
     case LogType::LogToListen:
-      logger = std::make_unique<util::log::detail::ListenLogger>();
+      logger = std::make_unique<detail::ListenLogger>();
       break;
+
+    case LogType::LogToSyslog: {
+      const auto remote_host = arg_list.empty() ? "localhost" : arg_list[0];
+      const auto port = std::stoul(arg_list.size() < 2 ?  arg_list[1] : std::string("514"));
+      logger = std::make_unique<detail::Syslog>(remote_host, static_cast<uint16_t>(port));
+      break;
+    }
 
     default:
       return;

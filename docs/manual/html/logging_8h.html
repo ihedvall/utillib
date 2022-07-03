@@ -100,11 +100,12 @@ This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="logging_8h__dep__incl.png" border="0" usemap="#ainclude_2util_2logging_8hdep" alt=""/></div>
 <map name="ainclude_2util_2logging_8hdep" id="ainclude_2util_2logging_8hdep">
-<area shape="rect" title="Standard log interfaces." alt="" coords="151,5,291,32"/>
-<area shape="rect" href="logmessage_8h.html" title=" " alt="" coords="43,80,212,107"/>
-<area shape="rect" href="logstream_8h.html" title="Implements a stream interface to log messages. This is the file to use in most applications...." alt="" coords="236,80,392,107"/>
+<area shape="rect" title="Standard log interfaces." alt="" coords="204,5,344,32"/>
+<area shape="rect" href="logmessage_8h.html" title=" " alt="" coords="96,80,265,107"/>
+<area shape="rect" href="logstream_8h.html" title="Implements a stream interface to log messages. This is the file to use in most applications...." alt="" coords="289,80,445,107"/>
 <area shape="rect" href="ilogger_8h.html" title="Defines an interface against a generic logger." alt="" coords="5,155,143,181"/>
 <area shape="rect" href="logconfig_8h.html" title="Singleton that is used to configure default loggers." alt="" coords="52,229,203,256"/>
+<area shape="rect" href="syslogmessage_8h.html" title="Implements an interface against a syslog message." alt="" coords="219,155,409,181"/>
 </map>
 </div>
 </div>
@@ -126,20 +127,22 @@ Typedefs</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="enum-members" name="enum-members"></a>
 Enumerations</h2></td></tr>
-<tr class="memitem:a2942d2aa03892df3ee778b138784c80e"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceutil_1_1log.html#a2942d2aa03892df3ee778b138784c80e">util::log::LogSeverity</a> { <br />
-&#160;&#160;<a class="el" href="namespaceutil_1_1log.html#a2942d2aa03892df3ee778b138784c80eafa21506cd249f400de4a974b5a0c8e0e">util::log::kTrace</a> = 0
-, <a class="el" href="namespaceutil_1_1log.html#a2942d2aa03892df3ee778b138784c80eabb53ce21b7c0b7c8a8f7860a41901d29">util::log::kDebug</a>
-, <a class="el" href="namespaceutil_1_1log.html#a2942d2aa03892df3ee778b138784c80ea176a473e63c17ccdac91640c67f149bf">util::log::kInfo</a>
-, <a class="el" href="namespaceutil_1_1log.html#a2942d2aa03892df3ee778b138784c80eaec0da41f4e48b52c362303eb27ed5dee">util::log::kWarning</a>
+<tr class="memitem:aa21d9be4063c51bfeb18a06859495e8a"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceutil_1_1log.html#aa21d9be4063c51bfeb18a06859495e8a">util::log::LogSeverity</a> : uint8_t { <br />
+&#160;&#160;<a class="el" href="namespaceutil_1_1log.html#aa21d9be4063c51bfeb18a06859495e8aafa21506cd249f400de4a974b5a0c8e0e">util::log::kTrace</a> = 0
+, <a class="el" href="namespaceutil_1_1log.html#aa21d9be4063c51bfeb18a06859495e8aabb53ce21b7c0b7c8a8f7860a41901d29">util::log::kDebug</a>
+, <a class="el" href="namespaceutil_1_1log.html#aa21d9be4063c51bfeb18a06859495e8aa176a473e63c17ccdac91640c67f149bf">util::log::kInfo</a>
+, <a class="el" href="namespaceutil_1_1log.html#aa21d9be4063c51bfeb18a06859495e8aa69f03ebfd6cab4eaa75fc4182f0feca9">util::log::kNotice</a>
 , <br />
-&#160;&#160;<a class="el" href="namespaceutil_1_1log.html#a2942d2aa03892df3ee778b138784c80eae3587c730cc1aa530fa4ddc9c4204e97">util::log::kError</a>
-, <a class="el" href="namespaceutil_1_1log.html#a2942d2aa03892df3ee778b138784c80ea5a20548c220f372fc701cae6de94040b">util::log::kCritical</a>
-, <a class="el" href="namespaceutil_1_1log.html#a2942d2aa03892df3ee778b138784c80eac0d18299609bebcba35e0e9253cb41c4">util::log::kAlert</a>
-, <a class="el" href="namespaceutil_1_1log.html#a2942d2aa03892df3ee778b138784c80ea1921cdd35fc6d7638aa9b2c7fc55cdef">util::log::kEmergency</a>
+&#160;&#160;<a class="el" href="namespaceutil_1_1log.html#aa21d9be4063c51bfeb18a06859495e8aaec0da41f4e48b52c362303eb27ed5dee">util::log::kWarning</a>
+, <a class="el" href="namespaceutil_1_1log.html#aa21d9be4063c51bfeb18a06859495e8aae3587c730cc1aa530fa4ddc9c4204e97">util::log::kError</a>
+, <a class="el" href="namespaceutil_1_1log.html#aa21d9be4063c51bfeb18a06859495e8aa5a20548c220f372fc701cae6de94040b">util::log::kCritical</a>
+, <a class="el" href="namespaceutil_1_1log.html#aa21d9be4063c51bfeb18a06859495e8aac0d18299609bebcba35e0e9253cb41c4">util::log::kAlert</a>
+, <br />
+&#160;&#160;<a class="el" href="namespaceutil_1_1log.html#aa21d9be4063c51bfeb18a06859495e8aa1921cdd35fc6d7638aa9b2c7fc55cdef">util::log::kEmergency</a>
 <br />
  }</td></tr>
-<tr class="memdesc:a2942d2aa03892df3ee778b138784c80e"><td class="mdescLeft">&#160;</td><td class="mdescRight">&lt; Defines the log severity level  <a href="namespaceutil_1_1log.html#a2942d2aa03892df3ee778b138784c80e">More...</a><br /></td></tr>
-<tr class="separator:a2942d2aa03892df3ee778b138784c80e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memdesc:aa21d9be4063c51bfeb18a06859495e8a"><td class="mdescLeft">&#160;</td><td class="mdescRight">&lt; Defines the log severity level  <a href="namespaceutil_1_1log.html#aa21d9be4063c51bfeb18a06859495e8a">More...</a><br /></td></tr>
+<tr class="separator:aa21d9be4063c51bfeb18a06859495e8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
