@@ -12,10 +12,11 @@ var searchData=
   ['isattribute_9',['IsAttribute',['../classutil_1_1xml_1_1_i_xml_node.html#a97e81df4921224ad46eb286e42e0ee78',1,'util::xml::IXmlNode']]],
   ['iscolumnvalid_10',['IsColumnValid',['../classutil_1_1plot_1_1_csv_writer.html#a3154f0f7610c4fcdfb80279bca97933d',1,'util::plot::CsvWriter']]],
   ['isok_11',['IsOk',['../classutil_1_1plot_1_1_csv_writer.html#a007fffe585b1a763a704a094b14e1737',1,'util::plot::CsvWriter']]],
-  ['isotime_12',['IsoTime',['../classutil_1_1syslog_1_1_syslog_message.html#a261d7db96d7bc53d907f48a38557fc05',1,'util::syslog::SyslogMessage']]],
-  ['isotimetons_13',['IsoTimeToNs',['../namespaceutil_1_1time.html#a09c82761840df49c3351e02a0ee9fe66',1,'util::time']]],
-  ['isseveritylevelenabled_14',['IsSeverityLevelEnabled',['../classutil_1_1log_1_1_i_logger.html#a56f47cbc1dcff7dd00fa38e2a7580075',1,'util::log::ILogger']]],
-  ['istagname_15',['IsTagName',['../classutil_1_1xml_1_1_i_xml_node.html#ab50841ded9e36e33e21a3a77982999b8',1,'util::xml::IXmlNode']]],
-  ['ixmlfile_16',['IXmlFile',['../classutil_1_1xml_1_1_i_xml_file.html#a2acc8b721d95eb4781f7e8f13bfd9d85',1,'util::xml::IXmlFile']]],
-  ['ixmlnode_17',['IXmlNode',['../classutil_1_1xml_1_1_i_xml_node.html#a3e403d6a808f11146b2e56926f6554d0',1,'util::xml::IXmlNode']]]
+  ['isoperable_12',['IsOperable',['../classutil_1_1syslog_1_1_i_syslog_server.html#ad07903f423d254956cf938741c115f34',1,'util::syslog::ISyslogServer']]],
+  ['isotime_13',['IsoTime',['../classutil_1_1syslog_1_1_syslog_message.html#a261d7db96d7bc53d907f48a38557fc05',1,'util::syslog::SyslogMessage']]],
+  ['isotimetons_14',['IsoTimeToNs',['../namespaceutil_1_1time.html#a09c82761840df49c3351e02a0ee9fe66',1,'util::time']]],
+  ['isseveritylevelenabled_15',['IsSeverityLevelEnabled',['../classutil_1_1log_1_1_i_logger.html#a56f47cbc1dcff7dd00fa38e2a7580075',1,'util::log::ILogger']]],
+  ['istagname_16',['IsTagName',['../classutil_1_1xml_1_1_i_xml_node.html#ab50841ded9e36e33e21a3a77982999b8',1,'util::xml::IXmlNode']]],
+  ['ixmlfile_17',['IXmlFile',['../classutil_1_1xml_1_1_i_xml_file.html#a2acc8b721d95eb4781f7e8f13bfd9d85',1,'util::xml::IXmlFile']]],
+  ['ixmlnode_18',['IXmlNode',['../classutil_1_1xml_1_1_i_xml_node.html#a3e403d6a808f11146b2e56926f6554d0',1,'util::xml::IXmlNode']]]
 ];

@@ -10,12 +10,12 @@ var searchData=
   ['share_5fname_7',['share_name',['../structutil_1_1log_1_1_listen_port_config.html#a94cd42ed602f84f08456cca0603364fa',1,'util::log::ListenPortConfig']]],
   ['share_5fname_5f_8',['share_name_',['../classutil_1_1log_1_1_i_listen.html#a507514402d3c1bf2cfad14d0479b995c',1,'util::log::IListen']]],
   ['show_9',['Show',['../classutil_1_1plot_1_1_gnu_plot.html#a42b51cea9cc61d65e43d8be72727e6c4',1,'util::plot::GnuPlot']]],
-  ['showlocation_10',['ShowLocation',['../classutil_1_1log_1_1_i_logger.html#ac278819269e2568e283c8b17521e5b50',1,'util::log::ILogger::ShowLocation(bool show)'],['../classutil_1_1log_1_1_i_logger.html#a9e677799a1682ade0a64812a670c7de7',1,'util::log::ILogger::ShowLocation() const']]],
+  ['showlocation_10',['ShowLocation',['../classutil_1_1log_1_1_i_logger.html#a9e677799a1682ade0a64812a670c7de7',1,'util::log::ILogger::ShowLocation() const'],['../classutil_1_1log_1_1_i_logger.html#ac278819269e2568e283c8b17521e5b50',1,'util::log::ILogger::ShowLocation(bool show)']]],
   ['size_11',['Size',['../classutil_1_1log_1_1_thread_safe_queue.html#a69969dc563ddc1f8f2fb0ef9ee036a77',1,'util::log::ThreadSafeQueue']]],
   ['standalone_12',['Standalone',['../classutil_1_1xml_1_1_i_xml_file.html#a31ab6f0af2cc2ef0570935feae94a902',1,'util::xml::IXmlFile']]],
   ['standalone_5f_13',['standalone_',['../classutil_1_1xml_1_1_i_xml_file.html#a8e767134512d71449c9c704db0182b5a',1,'util::xml::IXmlFile']]],
-  ['start_14',['Start',['../classutil_1_1log_1_1_i_listen.html#a0cd30fc2224ea7477647ca127827ebca',1,'util::log::IListen']]],
-  ['stop_15',['Stop',['../classutil_1_1log_1_1_i_listen.html#a404e5a9388306af2c01db25076bdcbab',1,'util::log::IListen::Stop()'],['../classutil_1_1log_1_1_i_logger.html#afb085a277ab67bc2bc904de29e8ff56b',1,'util::log::ILogger::Stop()']]],
+  ['start_14',['Start',['../classutil_1_1syslog_1_1_i_syslog_server.html#a1f156c5219fd4c7790551bc35ecc5c6e',1,'util::syslog::ISyslogServer::Start()'],['../classutil_1_1log_1_1_i_listen.html#a0cd30fc2224ea7477647ca127827ebca',1,'util::log::IListen::Start()']]],
+  ['stop_15',['Stop',['../classutil_1_1log_1_1_i_listen.html#a404e5a9388306af2c01db25076bdcbab',1,'util::log::IListen::Stop()'],['../classutil_1_1log_1_1_i_logger.html#afb085a277ab67bc2bc904de29e8ff56b',1,'util::log::ILogger::Stop()'],['../classutil_1_1syslog_1_1_i_syslog_server.html#a97b2d462b4a96d7da780801880816447',1,'util::syslog::ISyslogServer::Stop()']]],
   ['stringparser_16',['StringParser',['../classutil_1_1string_1_1_string_parser.html#a58d1a7adfe7a1d341c4dd9b8699f1125',1,'util::string::StringParser::StringParser()'],['../classutil_1_1string_1_1_string_parser.html',1,'util::string::StringParser']]],
   ['stringparser_2eh_17',['stringparser.h',['../stringparser_8h.html',1,'']]],
   ['structureddata_18',['StructuredData',['../classutil_1_1syslog_1_1_structured_data.html',1,'util::syslog']]],
@@ -26,6 +26,7 @@ var searchData=
   ['syslogfacility_23',['SyslogFacility',['../namespaceutil_1_1syslog.html#aea7ec32390f0ccb6c98183acd95e3fd1',1,'util::syslog']]],
   ['syslogmessage_24',['SyslogMessage',['../classutil_1_1syslog_1_1_syslog_message.html#a856afbbf3ad5c0584848889fe98f8d9d',1,'util::syslog::SyslogMessage::SyslogMessage()'],['../classutil_1_1syslog_1_1_syslog_message.html#acc22b8c966a7f05d7848906b0f62441f',1,'util::syslog::SyslogMessage::SyslogMessage(const util::log::LogMessage &amp;log, bool show_location)'],['../classutil_1_1syslog_1_1_syslog_message.html',1,'util::syslog::SyslogMessage']]],
   ['syslogmessage_2eh_25',['syslogmessage.h',['../syslogmessage_8h.html',1,'']]],
-  ['syslogseverity_26',['SyslogSeverity',['../namespaceutil_1_1syslog.html#a4173932d17b5c5713372e13f197de0b0',1,'util::syslog']]],
-  ['systemclock_27',['SystemClock',['../namespaceutil_1_1time.html#ab887c6158a4166083e842545003e5ae7',1,'util::time']]]
+  ['syslogservertype_26',['SyslogServerType',['../namespaceutil_1_1syslog.html#ad934262b5d3874e9b954d93453bca07c',1,'util::syslog']]],
+  ['syslogseverity_27',['SyslogSeverity',['../namespaceutil_1_1syslog.html#a4173932d17b5c5713372e13f197de0b0',1,'util::syslog']]],
+  ['systemclock_28',['SystemClock',['../namespaceutil_1_1time.html#ab887c6158a4166083e842545003e5ae7',1,'util::time']]]
 ];

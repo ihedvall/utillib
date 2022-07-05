@@ -80,6 +80,9 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classutil_1_1syslog_1_1_i_syslog_server.html">ISyslogServer</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Define a syslog server interface.  <a href="classutil_1_1syslog_1_1_i_syslog_server.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classutil_1_1syslog_1_1_structured_data.html">StructuredData</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines a simple interface against structured data item.  <a href="classutil_1_1syslog_1_1_structured_data.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -89,6 +92,12 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="enum-members" name="enum-members"></a>
 Enumerations</h2></td></tr>
+<tr class="memitem:ad934262b5d3874e9b954d93453bca07c"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceutil_1_1syslog.html#ad934262b5d3874e9b954d93453bca07c">SyslogServerType</a> : uint8_t { <a class="el" href="namespaceutil_1_1syslog.html#ad934262b5d3874e9b954d93453bca07cae64ba469e47d438ea4887da7c8de6860">UdpServer</a> = 0
+, <a class="el" href="namespaceutil_1_1syslog.html#ad934262b5d3874e9b954d93453bca07ca668e128833306af4d62b6cd76e774529">TlsServer</a> = 1
+, <a class="el" href="namespaceutil_1_1syslog.html#ad934262b5d3874e9b954d93453bca07ca694c4ae81e346d37a0e071591a130162">TcpServer</a> = 2
+ }</td></tr>
+<tr class="memdesc:ad934262b5d3874e9b954d93453bca07c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the type of syslog server.  <a href="namespaceutil_1_1syslog.html#ad934262b5d3874e9b954d93453bca07c">More...</a><br /></td></tr>
+<tr class="separator:ad934262b5d3874e9b954d93453bca07c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4173932d17b5c5713372e13f197de0b0"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceutil_1_1syslog.html#a4173932d17b5c5713372e13f197de0b0">SyslogSeverity</a> : uint8_t { <br />
 &#160;&#160;<a class="el" href="namespaceutil_1_1syslog.html#a4173932d17b5c5713372e13f197de0b0aa3fa706f20bc0b7858b7ae6932261940">Emergency</a> = 0
 , <a class="el" href="namespaceutil_1_1syslog.html#a4173932d17b5c5713372e13f197de0b0ab92071d61c88498171928745ca53078b">Alert</a> = 1
@@ -141,6 +150,37 @@ Enumerations</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >The syslog namespace is used for syslog message interfaces. </p>
 </div><h2 class="groupheader">Enumeration Type Documentation</h2>
+<a id="ad934262b5d3874e9b954d93453bca07c" name="ad934262b5d3874e9b954d93453bca07c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad934262b5d3874e9b954d93453bca07c">&#9670;&nbsp;</a></span>SyslogServerType</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum class <a class="el" href="namespaceutil_1_1syslog.html#ad934262b5d3874e9b954d93453bca07c">util::syslog::SyslogServerType</a> : uint8_t</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">strong</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p >Enumerate that defines the protocol the syslog server uses for receiving messages. </p>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="ad934262b5d3874e9b954d93453bca07cae64ba469e47d438ea4887da7c8de6860" name="ad934262b5d3874e9b954d93453bca07cae64ba469e47d438ea4887da7c8de6860"></a>UdpServer&#160;</td><td class="fielddoc"><p >Uses UDP protocol (RFC5426). </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ad934262b5d3874e9b954d93453bca07ca668e128833306af4d62b6cd76e774529" name="ad934262b5d3874e9b954d93453bca07ca668e128833306af4d62b6cd76e774529"></a>TlsServer&#160;</td><td class="fielddoc"><p >Uses TLS on top o TCP (RFC5425). </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ad934262b5d3874e9b954d93453bca07ca694c4ae81e346d37a0e071591a130162" name="ad934262b5d3874e9b954d93453bca07ca694c4ae81e346d37a0e071591a130162"></a>TcpServer&#160;</td><td class="fielddoc"><p >Uses plain TCP protocol (RFC6587). </p>
+</td></tr>
+</table>
+
+</div>
+</div>
 <a id="a4173932d17b5c5713372e13f197de0b0" name="a4173932d17b5c5713372e13f197de0b0"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a4173932d17b5c5713372e13f197de0b0">&#9670;&nbsp;</a></span>SyslogSeverity</h2>
 

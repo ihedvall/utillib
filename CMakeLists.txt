@@ -82,7 +82,7 @@ add_library(util STATIC
         src/syslog.cpp src/syslog.h src/ilogger.cpp
         ${BISON_SYSLOG_PARSER_OUTPUTS}
         ${FLEX_SYSLOG_SCANNER_OUTPUTS}
-        src/syslogscanner.cpp src/syslogscanner.h src/structureddata.cpp include/util/structureddata.h)
+        src/syslogscanner.cpp src/syslogscanner.h src/structureddata.cpp include/util/structureddata.h src/isyslogserver.cpp include/util/isyslogserver.h src/udpsyslogserver.cpp src/udpsyslogserver.h src/utilfactory.cpp include/util/utilfactory.h)
 
 target_include_directories(util PUBLIC
         $<INSTALL_INTERFACE:include>

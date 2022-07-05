@@ -18,14 +18,7 @@
 
 namespace util::log {
 
-///< Defines the type of default log
-enum class LogType {
-  LogNothing = 0, ///< No logger.
-  LogToConsole,   ///< Log to the cout stream.
-  LogToFile,      ///< Log to file.
-  LogToListen,    ///< Log to listen window (system messages).
-  LogToSyslog     ///< Logs to a syslog server.
-};
+
 
 /**
  * Utility function that returns the default program data path

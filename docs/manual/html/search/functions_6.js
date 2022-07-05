@@ -9,9 +9,10 @@ var searchData=
   ['getlocaltimestampwithus_6',['GetLocalTimestampWithUs',['../namespaceutil_1_1time.html#a51bf36aba841364b5504f7b5aabfbc59',1,'util::time']]],
   ['getlogfile_7',['GetLogFile',['../classutil_1_1log_1_1_log_config.html#a881d2cdc0e68be09d1b40ecf26eae7ca',1,'util::log::LogConfig']]],
   ['getlogger_8',['GetLogger',['../classutil_1_1log_1_1_log_config.html#a49ef3b813e9bde90dff794bab609db51',1,'util::log::LogConfig']]],
-  ['getnode_9',['GetNode',['../classutil_1_1xml_1_1_i_xml_file.html#a2b05ea6545548206846f093276af9d54',1,'util::xml::IXmlFile::GetNode()'],['../classutil_1_1xml_1_1_i_xml_node.html#a12bf8ebf5eca3e963c6a05d34eb6253d',1,'util::xml::IXmlNode::GetNode(const std::string &amp;tag) const'],['../classutil_1_1xml_1_1_i_xml_node.html#a9e33e59fcd93a17f090a4ea7ae6b47e7',1,'util::xml::IXmlNode::GetNode(const std::string &amp;tag, const std::string &amp;key, const std::string &amp;attr) const']]],
-  ['getseveritystring_10',['GetSeverityString',['../namespaceutil_1_1log.html#ae03f0cd0de808d68c350ab8aa2c0decf',1,'util::log']]],
-  ['gettagvalue_11',['GetTagValue',['../classutil_1_1string_1_1_string_parser.html#a1b18370b9e4ddbe3a29804a260e5e4ca',1,'util::string::StringParser']]],
-  ['gettext_12',['GetText',['../classutil_1_1plot_1_1_csv_writer.html#a983f11e9a46e4f6172ecf4f5c8b1c0c1',1,'util::plot::CsvWriter']]],
-  ['gnuplot_13',['GnuPlot',['../classutil_1_1plot_1_1_gnu_plot.html#a48abaf21ed1e6c4f046fe04015340958',1,'util::plot::GnuPlot']]]
+  ['getmsg_9',['GetMsg',['../classutil_1_1syslog_1_1_i_syslog_server.html#aad4001d1b93578a181a8faaa4d9c1910',1,'util::syslog::ISyslogServer']]],
+  ['getnode_10',['GetNode',['../classutil_1_1xml_1_1_i_xml_file.html#a2b05ea6545548206846f093276af9d54',1,'util::xml::IXmlFile::GetNode()'],['../classutil_1_1xml_1_1_i_xml_node.html#a12bf8ebf5eca3e963c6a05d34eb6253d',1,'util::xml::IXmlNode::GetNode(const std::string &amp;tag) const'],['../classutil_1_1xml_1_1_i_xml_node.html#a9e33e59fcd93a17f090a4ea7ae6b47e7',1,'util::xml::IXmlNode::GetNode(const std::string &amp;tag, const std::string &amp;key, const std::string &amp;attr) const']]],
+  ['getseveritystring_11',['GetSeverityString',['../namespaceutil_1_1log.html#ae03f0cd0de808d68c350ab8aa2c0decf',1,'util::log']]],
+  ['gettagvalue_12',['GetTagValue',['../classutil_1_1string_1_1_string_parser.html#a1b18370b9e4ddbe3a29804a260e5e4ca',1,'util::string::StringParser']]],
+  ['gettext_13',['GetText',['../classutil_1_1plot_1_1_csv_writer.html#a983f11e9a46e4f6172ecf4f5c8b1c0c1',1,'util::plot::CsvWriter']]],
+  ['gnuplot_14',['GnuPlot',['../classutil_1_1plot_1_1_gnu_plot.html#a48abaf21ed1e6c4f046fe04015340958',1,'util::plot::GnuPlot']]]
 ];

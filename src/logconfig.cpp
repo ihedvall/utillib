@@ -156,7 +156,7 @@ void LogConfig::AddLogger(const std::string &logger_name, const LogType type,
 
     case LogType::LogToSyslog: {
       const auto remote_host = arg_list.empty() ? "localhost" : arg_list[0];
-      const auto port = std::stoul(arg_list.size() < 2 ?  arg_list[1] : std::string("514"));
+      const auto port = std::stoul(arg_list.size() < 2 ?  std::string("514") : arg_list[1]);
       logger = std::make_unique<detail::Syslog>(remote_host, static_cast<uint16_t>(port));
       break;
     }

@@ -107,7 +107,14 @@ std::string SyslogMessage::GenerateMessage() const {
   msg <<  static_cast<int>(version_);
 
   // TIMESTAMP
-  msg << " " << util::time::NsToIsoTime(timestamp_, 0); // Selected us resolution
+  int resolution = 0; // Second resolution
+  if (timestamp_ % 1'000'000 != 0) {
+    resolution = 2;
+  } else if (timestamp_ % 1'000'000'000 != 0) {
+    resolution = 1;
+  }
+
+  msg << " " << util::time::NsToIsoTime(timestamp_, resolution); 
 
   // HOSTNAME
   if (hostname_.empty()) {

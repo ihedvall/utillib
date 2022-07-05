@@ -37,19 +37,22 @@ void Syslog::WorkerThread() {
   // to the syslog server.
   do {
     std::unique_lock<std::mutex> lock(locker_);
+    const auto list_empty = message_list_.empty();
     condition_.wait_for(lock, 2s, [&] {
-      return stop_thread_.load();
+      return stop_thread_.load() || !list_empty;
     });
 
     while(!message_list_.empty()) {
         // Connect to the syslog server
       LogMessage m = message_list_.front();
       message_list_.pop();
+      lock.unlock();
+
       SyslogMessage msg(m, ShowLocation());
       const auto data = msg.GenerateMessage();
       const auto buffer = boost::asio::buffer(data);
 
-      lock.unlock();
+
       try {
         auto end_points = resolver.resolve(ip::udp::v4(), remote_host_, std::to_string(port_));
         ip::udp::socket socket(context);
@@ -68,6 +71,7 @@ void Syslog::WorkerThread() {
          }
          in_service = false;
       }
+
       lock.lock();
     }
   } while (!stop_thread_);

@@ -13,6 +13,18 @@
 
 namespace util::log {
 
+/** \enum LogType
+ * \ brief Defines type of pre-defined loggers in the system
+ *
+ */
+enum class LogType {
+  LogNothing = 0, ///< No logger.
+  LogToConsole,   ///< Log to the cout stream.
+  LogToFile,      ///< Log to file.
+  LogToListen,    ///< Log to listen window (system messages).
+  LogToSyslog     ///< Logs to a syslog server.
+};
+
 /** \class ILogger ilogger.h "util/ilogger.h"
  * \brief Interface against a generic logger.
  *
