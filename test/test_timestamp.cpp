@@ -149,66 +149,12 @@ TEST(Timestamp, TimeStampToNs) // NOLINT
 
 }
 
-TEST(Timestamp, Mdf3Date) // NOLINT
-{
-  const auto timestamp = SystemClock::now();
-  const auto ns = TimeStampToNs(timestamp);
-  const auto local_date = GetLocalDateTime(timestamp);
-  const auto mdf_date = NanoSecToDDMMYYYY(ns);
 
-  std::cout << "MDF Date: " << mdf_date << ", Local Date: " << local_date <<  std::endl;
 
-  EXPECT_EQ(mdf_date.size(),kMdf3Date.size());
-}
 
-TEST(Timestamp, Mdf3Date_epoch) // NOLINT
-{
-  const auto mdf_date = NanoSecToDDMMYYYY(0);
-  std::cout << "MDF Epoch: " << mdf_date << std::endl;
 
-  EXPECT_EQ(mdf_date.size(),kMdf3Date.size());
-}
 
-TEST(Timestamp, Mdf3Time) // NOLINT
-{
-  const auto timestamp = SystemClock::now();
-  const auto ns = TimeStampToNs(timestamp);
-  const auto local_date = GetLocalDateTime(timestamp);
-  const auto mdf_time = NanoSecToHHMMSS(ns);
 
-  std::cout << "MDF Time: " << mdf_time << ", Local Date: " << local_date <<  std::endl;
 
-  EXPECT_EQ(mdf_time.size(),kMdf3Time.size());
-}
-
-TEST(Timestamp, TimeZoneOffset) // NOLINT
-{
-  const auto offset = TimeZoneOffset();
-  std::cout << "Time Zone Offset: " << offset <<  std::endl;
-}
-
-TEST(Timestamp, CANopenDate) { //NOLINT
-  {
-    const auto before = TimeStampToNs();
-    const auto date_array = NsToCanOpenDateArray(before);
-    const auto after = CanOpenDateArrayToNs(date_array);
-    EXPECT_EQ(before / 1'000'000, after /1'000'000);
-  }
-  {
-    const auto before = 0;
-    const auto date_array = NsToCanOpenDateArray(before);
-    const auto after = CanOpenDateArrayToNs(date_array);
-    EXPECT_EQ(before / 1'000'000, after /1'000'000);
-  }
-}
-
-TEST(Timestamp, CANopenTime) { //NOLINT
-  {
-    const auto before = TimeStampToNs();
-    const auto time_array = NsToCanOpenTimeArray(before);
-    const auto after = CanOpenTimeArrayToNs(time_array);
-    EXPECT_EQ(before / 1'000'000, after /1'000'000);
-  }
-}
 
 } // namespace util::test

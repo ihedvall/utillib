@@ -33,11 +33,12 @@ ListenServer::~ListenServer() {
 void ListenServer::WorkerTask() {
   try {
     const auto& count = context_.run();
-    LOG_INFO() << "Stopped main worker thread. Name: " << Name() << ", Count: " << count;
+    LOG_DEBUG() << "Stopped main worker thread. Name: " << Name() << ", Count: " << count;
   } catch (const std::exception& error) {
     LOG_ERROR() << "Context error. Name: " << Name() << ", Error: " << error.what();
   }
 }
+
 bool ListenServer::IsActive() const {
   return active_;
 }

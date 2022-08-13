@@ -26,6 +26,7 @@ enum class LogSeverity : uint8_t {
   kAlert,     ///< Alert or alarm message
   kEmergency  ///< Fatal error message
 };
+
 /** \typedef Loc
  * The Loc is a wrapper around the std::location library. This library is new in C++20.
  */

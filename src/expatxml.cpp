@@ -116,14 +116,14 @@ bool ExpatXml::ParseFile() {
       const auto column = XML_GetCurrentColumnNumber(p.parser_);
       const auto error = XML_GetErrorCode(p.parser_);
       const auto* error_text = XML_ErrorString(error);
-      util::log::LOG_ERROR() << "XML parser error.  Line: " << line << ", Column: " << column
+      LOG_ERROR() << "XML parser error.  Line: " << line << ", Column: " << column
         << ", Error: " << error_text << ", File: " << filename_;
       ok = false;
       break;
     }
   }
   if (ok && !std::feof(file)) {
-    util::log::LOG_ERROR() << "XML file error.  Error: Not entire file was read. File: " << filename_;
+    LOG_ERROR() << "XML file error.  Error: Not entire file was read. File: " << filename_;
     ok = false;
   }
 
@@ -141,7 +141,7 @@ bool ExpatXml::ParseString(const std::string &input) {
     const auto column = XML_GetCurrentColumnNumber(p.parser_);
     const auto error = XML_GetErrorCode(p.parser_);
     const auto* error_text = XML_ErrorString(error);
-    util::log::LOG_ERROR() << "XML parser error.  Line: " << line << ", Column: " << column
+    LOG_ERROR() << "XML parser error.  Line: " << line << ", Column: " << column
                            << ", Error: " << error_text << ", File: " << filename_;
     ok = false;
   }

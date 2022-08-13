@@ -14,10 +14,10 @@
 
 namespace util::log {
 
-#define LOG_TRACE() LogStream(util::log::Loc::current(), util::log::LogSeverity::kTrace) ///< Trace log stream
-#define LOG_DEBUG() LogStream(util::log::Loc::current(), util::log::LogSeverity::kDebug) ///< Debug log stream
-#define LOG_INFO() LogStream(util::log::Loc::current(), util::log::LogSeverity::kInfo) ///< Info log stream
-#define LOG_ERROR() LogStream(util::log::Loc::current(), util::log::LogSeverity::kError) ///< Error log stream
+#define LOG_TRACE() util::log::LogStream(util::log::Loc::current(), util::log::LogSeverity::kTrace) ///< Trace log stream
+#define LOG_DEBUG() util::log::LogStream(util::log::Loc::current(), util::log::LogSeverity::kDebug) ///< Debug log stream
+#define LOG_INFO() util::log::LogStream(util::log::Loc::current(), util::log::LogSeverity::kInfo) ///< Info log stream
+#define LOG_ERROR() util::log::LogStream(util::log::Loc::current(), util::log::LogSeverity::kError) ///< Error log stream
 
 /** \class LogStream logstream.h "util/logstream,h"
  * \brief This class implements a stream interface around a log message.

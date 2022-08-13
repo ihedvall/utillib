@@ -110,7 +110,7 @@ void LogFile::WorkerThread() {
   try {
     BackupFiles(filename_);
   } catch (const std::exception &error) {
-    util::log::LOG_ERROR() << "Failed to backup log files at start. Error: " << error.what();
+    LOG_ERROR() << "Failed to backup log files at start. Error: " << error.what();
   }
 
   do {
@@ -139,7 +139,7 @@ void LogFile::WorkerThread() {
         }
       }
     } catch (const std::exception &error) {
-      util::log::LOG_ERROR() << "Failed to backup log files. Error: " << error.what();
+      LOG_ERROR() << "Failed to backup log files. Error: " << error.what();
     }
   } while (!stop_thread_);
 

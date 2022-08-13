@@ -26,7 +26,8 @@ include(script/googletest.cmake)
 include(script/doxygen.cmake)
 include(script/flex.cmake)
 include(script/bison.cmake)
-
+include(script/mqtt.cmake)
+#include(script/mqtt_cpp.cmake)
 if (BISON_FOUND)
     BISON_TARGET(SYSLOG_PARSER src/syslogparser.y ${CMAKE_CURRENT_SOURCE_DIR}/src/syslogparser.cpp)
     cmake_print_variables(BISON_SYSLOG_PARSER_DEFINED
@@ -82,7 +83,15 @@ add_library(util STATIC
         src/syslog.cpp src/syslog.h src/ilogger.cpp
         ${BISON_SYSLOG_PARSER_OUTPUTS}
         ${FLEX_SYSLOG_SCANNER_OUTPUTS}
-        src/syslogscanner.cpp src/syslogscanner.h src/structureddata.cpp include/util/structureddata.h src/isyslogserver.cpp include/util/isyslogserver.h src/udpsyslogserver.cpp src/udpsyslogserver.h src/utilfactory.cpp include/util/utilfactory.h)
+        src/syslogscanner.cpp src/syslogscanner.h
+        src/structureddata.cpp include/util/structureddata.h
+        src/isyslogserver.cpp include/util/isyslogserver.h
+        src/udpsyslogserver.cpp src/udpsyslogserver.h
+        src/utilfactory.cpp include/util/utilfactory.h
+        src/ipubsubclient.cpp include/util/ipubsubclient.h
+        src/itopic.cpp include/util/itopic.h src/mqttclient.cpp src/mqttclient.h src/mqtttopic.cpp src/mqtttopic.h src/listenconsole.cpp src/listenconsole.h)
+
+get_target_property(PAHO_C_INCLUDE_DIRS eclipse-paho-mqtt-c::paho-mqtt3as-static INTERFACE_INCLUDE_DIRECTORIES)
 
 target_include_directories(util PUBLIC
         $<INSTALL_INTERFACE:include>
@@ -94,6 +103,9 @@ target_include_directories(util PRIVATE ${EXPAT_INCLUDE_DIRS})
 target_include_directories(util PRIVATE ${ZLIB_INCLUDE_DIRS})
 target_include_directories(util PRIVATE ${OPENSSL_INCLUDE_DIR})
 target_include_directories(util PRIVATE ${FLEX_INCLUDE_DIRS})
+target_include_directories(util PRIVATE ${PAHO_C_INCLUDE_DIRS})
+
+cmake_print_properties(TARGETS util PROPERTIES INCLUDE_DIRECTORIES)
 
 target_compile_definitions(util PRIVATE XML_STATIC)
 

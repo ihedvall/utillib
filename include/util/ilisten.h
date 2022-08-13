@@ -28,21 +28,6 @@ namespace util::log {
  */
 class IListen {
  public:
-  /** \brief Creates a listen object.
-   *
-   * Creates a listen object. It only exist 2 basic object to create.
-   *
-   * The 'ListenProxy' object sends messages through a shared memory to a common server object. This
-   * type of listen object is normal when several executable should share a listen 'channel'. Typically
-   * is when debugging database calls.
-   *
-   * The 'ListenServer' shall be used when the application want its own listen 'channel'. This is
-   * typically used for protocol drivers.
-   * @param type Select between 'ListenProxy' or 'ListenServer'
-   * @param share_name Unique share name or empty string.
-   * @return A smart pointer to a listen object.
-   */
-  static std::unique_ptr<IListen> CreateListen(const std::string& type, const std::string& share_name);
 
   virtual ~IListen() = default; ///< Default destructor
 
@@ -52,14 +37,18 @@ class IListen {
    * object.
    * @return Display name.
    */
-  [[nodiscard]] std::string Name() const;
+  [[nodiscard]] const std::string& Name() const {
+    return name_;
+  }
 
   /** \brief Sets the display name.
    *
    * Sets the display name. The name should be short.
    * @param name Short display name.
    */
-  void Name(const std::string& name);
+  void Name(const std::string& name) {
+    name_ = name;
+  }
 
   /** \brief Description of the listen object.
    *
@@ -67,14 +56,18 @@ class IListen {
    * displaying purpose.
    * @return Description of the listen object.
    */
-  [[nodiscard]] std::string Description() const;
+  [[nodiscard]] const std::string& Description() const {
+    return description_;
+  }
 
   /** \brief Sets the description for the listen object.
    *
    * Sets the description of the listen object.
    * @param description
    */
-  void Description(const std::string& description);
+  void Description(const std::string& description) {
+    description_ = description;
+  }
 
   /** \brief Text that always starts a text line.
    *
@@ -82,7 +75,9 @@ class IListen {
    * text lines. This property defines the default text.
    * @return The default pre-text.
    */
-  [[nodiscard]] std::string PreText() const;
+  [[nodiscard]] const std::string& PreText() const {
+    return pre_text_;
+  }
 
   /** \brief Sets the default pre-text that starts each line.
    *
@@ -91,13 +86,17 @@ class IListen {
    * sets the default text.
    * @param pre_text Short pre-text before each text line.
    */
-  void PreText(const std::string& pre_text);
+  void PreText(const std::string& pre_text) {
+    pre_text_ = pre_text;
+  }
 
   /** \brief Host name for the object.
    *
    * Host name for the listen object. Only valid for listen servers.
    */
-  [[nodiscard]] std::string HostName() const;
+  [[nodiscard]] const std::string& HostName() const {
+    return host_name_;
+  }
 
   /** \brief Sets the host name for the listen object.
    *
@@ -107,21 +106,27 @@ class IListen {
    * Default is localhost (127.0.0.1).
    * @param host_name Host name or IP port.
    */
-  void HostName(const std::string& host_name);
+  void HostName(const std::string& host_name) {
+    host_name_ = host_name;
+  }
 
   /** \brief TCP/IP port
    *
    * Returns the TCP/IP port. Only servers.
    * @return TCP/IP port
    */
-  [[nodiscard]] uint16_t Port() const;
+  [[nodiscard]] uint16_t Port() const {
+    return port_;
+  }
 
   /** \brief Sets the TCP/IP port.
    *
    * Sets the TCP/IP port for listen servers.
    * @param port TCP/IP port
    */
-  void Port(uint16_t port);
+  void Port(uint16_t port) {
+    port_ = port;
+  }
 
    /** \brief Sets the log level menu texts.
     *
@@ -179,12 +184,16 @@ class IListen {
    */
   virtual void ListenReceive(uint64_t ns1970, const std::string& pre_text, const std::vector<uint8_t>& buffer, void* hint);
 
+  virtual void SetActive(bool active); ///< Activate or deactivate the listen object
+
   /** \brief Indicate if any listen window is open.
    *
    * Is true if any listen window is connected to this listen object.
    * @return True if the listen object should generate text lines.
    */
   [[nodiscard]] virtual bool IsActive() const = 0;
+
+  virtual void SetLogLevel(size_t log_level); ///< Sets the log level
 
   /** \brief Returns the current log level.
    *
@@ -203,7 +212,7 @@ class IListen {
   /** \brief Stops the listen object.
    *
    * Stops the listen object.
-   * @return
+   * @return True if stop was successful.
    */
   virtual bool Stop();
 

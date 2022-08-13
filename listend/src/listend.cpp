@@ -15,7 +15,7 @@
 #include <util/logstream.h>
 #include <util/listenconfig.h>
 #include <util/ixmlfile.h>
-#include <util/ilisten.h>
+#include <util/utilfactory.h>
 
 using namespace util::log;
 using namespace util::xml;
@@ -37,7 +37,7 @@ namespace {
 
     // Add System Logger
     {
-      auto system_log = IListen::CreateListen("ListenServer", "LISLOG");
+      auto system_log = util::UtilFactory::CreateListen("ListenServer", "LISLOG");
       system_log->Name("System Messages");
       system_log->Description("Logs all system messages");
       system_log->HostName("127.0.0.1");
@@ -51,13 +51,27 @@ namespace {
 
     // Add SQLite Logger
     {
-      auto sqlite_log = IListen::CreateListen("ListenServer", "LISSQLITE");
+      auto sqlite_log = util::UtilFactory::CreateListen("ListenServer", "LISSQLITE");
       sqlite_log->Name("SQLite messages");
       sqlite_log->Description("Logs all SQL calls");
       sqlite_log->HostName("127.0.0.1");
       sqlite_log->Port(kFreePort++);
       sqlite_log->SetLogLevelText(0, "Show all SQL calls");
       kServerList.push_back(std::move(sqlite_log));
+    }
+
+    // Add MQTT Logger
+    {
+      auto mqtt_log = util::UtilFactory::CreateListen("ListenServer", "LISMQTT");
+      mqtt_log->Name("MQTT messages");
+      mqtt_log->Description("Logs all MQTT calls");
+      mqtt_log->HostName("127.0.0.1");
+      mqtt_log->Port(kFreePort++);
+      mqtt_log->SetLogLevelText(0, "Show basic MQTT messages");
+      mqtt_log->SetLogLevelText(1, "Show MQTT publish messages");
+      mqtt_log->SetLogLevelText(2, "Show MQTT subscribe messages");
+      mqtt_log->SetLogLevelText(3, "Trace MQTT messages");
+      kServerList.push_back(std::move(mqtt_log));
     }
   }
 }
@@ -147,7 +161,7 @@ int main(int nof_arg, char *arg_list[]) {
           const auto host_name = node->Property<std::string>("HostName", "127.0.0.1");
           const auto port = node->Property<uint16_t>("Port", 0);
 
-          auto listen = IListen::CreateListen("ListenServer", share_name);
+          auto listen = util::UtilFactory::CreateListen("ListenServer", share_name);
           if (!listen) {
             continue;
           }

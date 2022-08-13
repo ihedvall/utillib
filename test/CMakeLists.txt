@@ -18,7 +18,10 @@ add_executable(test_util
         testlisten.cpp testlisten.h
         test_tempdir.cpp
         testsyslogmessage.cpp
-        test_syslog.cpp test_syslogflexer.cpp)
+        test_syslog.cpp
+        test_syslogflexer.cpp
+        test_base64.cpp
+        test_mqtt.cpp)
 
 target_include_directories(test_util PRIVATE ../include)
 target_include_directories(test_util PRIVATE ../src)
@@ -32,7 +35,8 @@ target_link_libraries(test_util PRIVATE ${Boost_LIBRARIES})
 target_link_libraries(test_util PRIVATE ${EXPAT_LIBRARIES})
 target_link_libraries(test_util PRIVATE ${ZLIB_LIBRARIES})
 target_link_libraries(test_util PRIVATE ${GTEST_BOTH_LIBRARIES})
-target_link_libraries(test_util PRIVATE ${OPENSSL_CRYPTO_LIBRARY})
+target_link_libraries(test_util PRIVATE ${OPENSSL_LIBRARIES})
+target_link_libraries(test_util PRIVATE eclipse-paho-mqtt-c::paho-mqtt3as-static)
 
 if (WIN32)
 target_link_libraries(test_util PRIVATE ws2_32)

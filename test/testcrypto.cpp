@@ -6,7 +6,7 @@
 #include <gtest/gtest.h>
 #include <util/cryptoutil.h>
 namespace {
-constexpr std::string_view kTestFile = "k:/test/mdf/ct/cyclelow.mf4";
+constexpr std::string_view kTestFile = "k:/test/mdf/mdf4_1/ct/cyclelow.mf4";
 }
 
 namespace util::test {
@@ -27,6 +27,7 @@ TEST(CryptoUtil, CreateMd5FileChecksum)// NOLINT
   const auto md5_normal = crypto::CreateMd5FileString(kTestFile.data());
   EXPECT_TRUE(!md5_normal.empty());
   EXPECT_EQ(md5_normal.size(), 32U) << md5_normal;
+  std::cout << "MD5: " << md5_normal << std::endl;
 
   // Check that it handles files missing
   const auto md5_abnormal = crypto::CreateMd5FileString("testXXX.exe");

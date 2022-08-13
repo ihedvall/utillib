@@ -4,14 +4,20 @@
  */
 
 #include "util/utilfactory.h"
+#include "util/stringutil.h"
 #include "udpsyslogserver.h"
 #include "logconsole.h"
 #include "logfile.h"
 #include "listenlogger.h"
 #include "syslog.h"
-
+#include "mqttclient.h"
+#include "listenproxy.h"
+#include "listenserver.h"
+#include "listenconsole.h"
 using namespace util::syslog;
 using namespace util::log;
+using namespace util::string;
+
 namespace util {
 
 std::unique_ptr<ISyslogServer> UtilFactory::CreateSyslogServer(SyslogServerType type) {
@@ -62,4 +68,31 @@ std::unique_ptr<log::ILogger> UtilFactory::CreateLogger(log::LogType type, std::
   return logger;
 }
 
+std::unique_ptr<mqtt::IPubSubClient> UtilFactory::CreatePubSubClient(PubSubType type) {
+  std::unique_ptr<mqtt::IPubSubClient> client;
+
+  switch (type) {
+    case PubSubType::Mqtt3Client: {
+      auto mqtt_client = std::make_unique<mqtt::MqttClient>();
+      mqtt_client->Version(util::mqtt::ProtocolVersion::Mqtt311);
+      client = std::move(mqtt_client);
+      break;
+    }
+
+    default:
+      break;
+  }
+  return client;
+}
+
+std::unique_ptr<IListen> UtilFactory::CreateListen(const std::string &type, const std::string &share_name) {
+  std::unique_ptr<IListen> listen;
+  if (IEquals(type, "ListenProxy") && !share_name.empty()) {
+    listen = std::make_unique<detail::ListenProxy>(share_name);
+  } else if (IEquals(type, "ListenServer")) {
+    listen = std::make_unique<detail::ListenServer>(share_name);
+  } else if (IEquals(type, "ListenConsole")) {
+    listen = std::make_unique<detail::ListenConsole>(share_name);  }
+  return listen;
+}
 } // util
