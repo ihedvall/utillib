@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['nodelist_0',['NodeList',['../classutil_1_1xml_1_1_i_xml_node.html#ad7b5ac3d1177c4ea2c45dffe61779962',1,'util::xml::IXmlNode']]]
+  ['parameterlist_0',['ParameterList',['../classutil_1_1syslog_1_1_structured_data.html#a09f059423ee767c3ad4beef54a425a58',1,'util::syslog::StructuredData']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['bytearray_0',['ByteArray',['../zlibutil_8h.html#a78f33ae0b22e5b745b00e56d14c62875',1,'util::zlib']]]
+  ['childlist_0',['ChildList',['../classutil_1_1xml_1_1_i_xml_node.html#aeecbc4589d04bfb972f1d4a505e1331b',1,'util::xml::IXmlNode']]]
 ];

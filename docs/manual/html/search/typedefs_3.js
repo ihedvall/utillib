@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['loc_0',['Loc',['../namespaceutil_1_1log.html#af89872d2f3b06b8f5e5c00932b7d7279',1,'util::log']]]
+  ['nodelist_0',['NodeList',['../classutil_1_1xml_1_1_i_xml_node.html#ad7b5ac3d1177c4ea2c45dffe61779962',1,'util::xml::IXmlNode']]]
 ];

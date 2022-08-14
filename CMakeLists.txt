@@ -18,16 +18,17 @@ set(CMAKE_DEBUG_POSTFIX d)
 
 include(CMakePrintHelpers)
 include(script/boost.cmake)
-include(script/zlib.cmake)
-include(script/openssl.cmake)
+#include(script/zlib.cmake)
+#include(script/openssl.cmake)
 include(script/expat.cmake)
 include(script/wxwidgets.cmake)
 include(script/googletest.cmake)
 include(script/doxygen.cmake)
 include(script/flex.cmake)
 include(script/bison.cmake)
-include(script/mqtt.cmake)
+#include(script/mqtt.cmake)
 #include(script/mqtt_cpp.cmake)
+
 if (BISON_FOUND)
     BISON_TARGET(SYSLOG_PARSER src/syslogparser.y ${CMAKE_CURRENT_SOURCE_DIR}/src/syslogparser.cpp)
     cmake_print_variables(BISON_SYSLOG_PARSER_DEFINED
@@ -62,8 +63,6 @@ add_library(util STATIC
         include/util/ixmlfile.h src/ixmlfile.cpp
         include/util/stringutil.h src/stringutil.cpp
         include/util/ilogger.h
-        include/util/zlibutil.h src/zlibutil.cpp
-        include/util/cryptoutil.h src/cryptoutil.cpp
         include/util/csvwriter.h src/csvwriter.cpp
         src/messagequeue.cpp src/messagequeue.h
         src/listenmessage.h src/listenmessage.cpp
@@ -88,10 +87,9 @@ add_library(util STATIC
         src/isyslogserver.cpp include/util/isyslogserver.h
         src/udpsyslogserver.cpp src/udpsyslogserver.h
         src/utilfactory.cpp include/util/utilfactory.h
-        src/ipubsubclient.cpp include/util/ipubsubclient.h
-        src/itopic.cpp include/util/itopic.h src/mqttclient.cpp src/mqttclient.h src/mqtttopic.cpp src/mqtttopic.h src/listenconsole.cpp src/listenconsole.h)
+        src/listenconsole.cpp src/listenconsole.h)
 
-get_target_property(PAHO_C_INCLUDE_DIRS eclipse-paho-mqtt-c::paho-mqtt3as-static INTERFACE_INCLUDE_DIRECTORIES)
+#get_target_property(PAHO_C_INCLUDE_DIRS eclipse-paho-mqtt-c::paho-mqtt3as-static INTERFACE_INCLUDE_DIRECTORIES)
 
 target_include_directories(util PUBLIC
         $<INSTALL_INTERFACE:include>
@@ -100,10 +98,10 @@ target_include_directories(util PUBLIC
 
 target_include_directories(util PRIVATE ${Boost_INCLUDE_DIRS})
 target_include_directories(util PRIVATE ${EXPAT_INCLUDE_DIRS})
-target_include_directories(util PRIVATE ${ZLIB_INCLUDE_DIRS})
-target_include_directories(util PRIVATE ${OPENSSL_INCLUDE_DIR})
+#target_include_directories(util PRIVATE ${ZLIB_INCLUDE_DIRS})
+#target_include_directories(util PRIVATE ${OPENSSL_INCLUDE_DIR})
 target_include_directories(util PRIVATE ${FLEX_INCLUDE_DIRS})
-target_include_directories(util PRIVATE ${PAHO_C_INCLUDE_DIRS})
+#target_include_directories(util PRIVATE ${PAHO_C_INCLUDE_DIRS})
 
 cmake_print_properties(TARGETS util PROPERTIES INCLUDE_DIRECTORIES)
 
@@ -114,7 +112,6 @@ if (MSVC)
 endif()
 
 set(UTIL_PUBLIC_HEADERS
-    include/util/cryptoutil.h
     include/util/csvwriter.h
     include/util/ilogger.h
     include/util/ixmlnode.h
@@ -123,7 +120,6 @@ set(UTIL_PUBLIC_HEADERS
     include/util/logmessage.h
     include/util/stringutil.h
     include/util/timestamp.h
-    include/util/zlibutil.h
 )
 
 set_target_properties(util PROPERTIES PUBLIC_HEADER "${UTIL_PUBLIC_HEADERS}")

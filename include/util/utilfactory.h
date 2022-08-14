@@ -13,17 +13,11 @@
 #include <vector>
 #include "util/isyslogserver.h"
 #include "util/ilogger.h"
-#include "util/ipubsubclient.h"
 #include "util/ilisten.h"
 
 namespace util {
 
-enum class PubSubType : int {
-  Mqtt3Client = 0, ///< MQTT 3.11 client interface.
-  Mqtt5Client = 1, ///< MQTT 5 client interface.
-  SparkPlugClient = 2, ///< MQTT version 3.11 with SparkPlug interface.
-  KafkaClient = 3, ///< Kafka client.
-};
+
 
 /** \class UtilFactory utilfactory.h "util/utilfactory.h"
  * \brief Implements creators for most interface classes.
@@ -50,14 +44,7 @@ class UtilFactory {
    */
   static std::unique_ptr<log::ILogger> CreateLogger(log::LogType type, std::vector<std::string>& arg_list);
 
-  /** \brief Creates a publisher client interface.
-   *
-   *  Creates a pre-defined publisher source. Currently on MQTT is available.
-   *
-   * @param type Type of publisher.
-   * @return Smart pointer to a Pub/Sub client source.
-   */
-  static std::unique_ptr<mqtt::IPubSubClient> CreatePubSubClient(PubSubType type);
+
 
   /** \brief Creates a listen object.
    *

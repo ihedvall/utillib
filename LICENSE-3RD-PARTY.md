@@ -19,31 +19,13 @@ SPDX-License-Identifier: MIT
 
 https://github.com/libexpat/libexpat/blob/master/expat/COPYING
 
-### Iconv
+### WinFlexBison
 
-Unicode converter (inherited boost dependency)
+Flex and Bison for Windows.
 
-SPDX-License-Identifier: LGPL-3.0-or-later
+License: BSD AND GPLv3+
 
-https://www.gnu.org/licenses/lgpl-3.0-standalone.html
-
-### OpenSSL
-
-Cryptography and SSL/TLS toolkit.
-
-SPDX-License-Identifier: OpenSSL
-
-https://www.openssl.org/source/license.html
-
-### ZLIB
-
-Compression library.
-
-SPDX-License-Identifier: Zlib
-
-https://www.zlib.net/zlib_license.html
-
-https://opensource.org/licenses/Zlib
+https://github.com/lexxmark/winflexbison
 
 ### WxWidgets
 

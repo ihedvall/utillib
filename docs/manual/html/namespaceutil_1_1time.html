@@ -112,36 +112,12 @@ Functions</h2></td></tr>
 <tr class="memitem:aabb8c33716f5f7e81d3a01fad6b87b6a"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceutil_1_1time.html#aabb8c33716f5f7e81d3a01fad6b87b6a">TimeStampToNs</a> (<a class="el" href="namespaceutil_1_1time.html#add88f1e959ce6e01881a521c3ef1e4d2">TimeStamp</a> timestamp=SystemClock::now())</td></tr>
 <tr class="memdesc:aabb8c33716f5f7e81d3a01fad6b87b6a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts system clock to ns since midnight 1970.  <a href="namespaceutil_1_1time.html#aabb8c33716f5f7e81d3a01fad6b87b6a">More...</a><br /></td></tr>
 <tr class="separator:aabb8c33716f5f7e81d3a01fad6b87b6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad36892d73753ce73587a90f685c7de8a"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceutil_1_1time.html#ad36892d73753ce73587a90f685c7de8a">NanoSecToDDMMYYYY</a> (uint64_t ns_since_1970)</td></tr>
-<tr class="memdesc:ad36892d73753ce73587a90f685c7de8a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts ns since 1970 UTC to local date DD:MM:YYYY string.  <a href="namespaceutil_1_1time.html#ad36892d73753ce73587a90f685c7de8a">More...</a><br /></td></tr>
-<tr class="separator:ad36892d73753ce73587a90f685c7de8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1ea0e819e59db587db51c0c1bdb8c522"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceutil_1_1time.html#a1ea0e819e59db587db51c0c1bdb8c522">NanoSecToHHMMSS</a> (uint64_t ns_since_1970)</td></tr>
-<tr class="memdesc:a1ea0e819e59db587db51c0c1bdb8c522"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts ns since 1970 UTC to local time HH:MM:SS string.  <a href="namespaceutil_1_1time.html#a1ea0e819e59db587db51c0c1bdb8c522">More...</a><br /></td></tr>
-<tr class="separator:a1ea0e819e59db587db51c0c1bdb8c522"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab7abf98a2e5ff0c5e567b5aca1ca3e88"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceutil_1_1time.html#ab7abf98a2e5ff0c5e567b5aca1ca3e88">NanoSecToLocal</a> (uint64_t ns_since_1970)</td></tr>
-<tr class="memdesc:ab7abf98a2e5ff0c5e567b5aca1ca3e88"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds the time zone offset to the time stamp.  <a href="namespaceutil_1_1time.html#ab7abf98a2e5ff0c5e567b5aca1ca3e88">More...</a><br /></td></tr>
-<tr class="separator:ab7abf98a2e5ff0c5e567b5aca1ca3e88"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9daea46ccfa911635fbfa3e77b9de1ef"><td class="memItemLeft" align="right" valign="top">std::vector&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceutil_1_1time.html#a9daea46ccfa911635fbfa3e77b9de1ef">NsToCanOpenDateArray</a> (uint64_t ns_since_1970)</td></tr>
-<tr class="memdesc:a9daea46ccfa911635fbfa3e77b9de1ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts from nanoseconds to CANopen 7 byte Date array.  <a href="namespaceutil_1_1time.html#a9daea46ccfa911635fbfa3e77b9de1ef">More...</a><br /></td></tr>
-<tr class="separator:a9daea46ccfa911635fbfa3e77b9de1ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a791722fda5f3fd6dfb3835062b81fe50"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceutil_1_1time.html#a791722fda5f3fd6dfb3835062b81fe50">CanOpenDateArrayToNs</a> (const std::vector&lt; uint8_t &gt; &amp;buffer)</td></tr>
-<tr class="memdesc:a791722fda5f3fd6dfb3835062b81fe50"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts from a CANopen 7 byte Date array to nanoseconds since 1970.  <a href="namespaceutil_1_1time.html#a791722fda5f3fd6dfb3835062b81fe50">More...</a><br /></td></tr>
-<tr class="separator:a791722fda5f3fd6dfb3835062b81fe50"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a31440851ef51159c5b59918781e37d36"><td class="memItemLeft" align="right" valign="top">std::vector&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceutil_1_1time.html#a31440851ef51159c5b59918781e37d36">NsToCanOpenTimeArray</a> (uint64_t ns_since_1970)</td></tr>
-<tr class="memdesc:a31440851ef51159c5b59918781e37d36"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts from nanoseconds to CANopen 6 byte Time array.  <a href="namespaceutil_1_1time.html#a31440851ef51159c5b59918781e37d36">More...</a><br /></td></tr>
-<tr class="separator:a31440851ef51159c5b59918781e37d36"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0907f422b6c1bbf3932f81006329bac3"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceutil_1_1time.html#a0907f422b6c1bbf3932f81006329bac3">NsToLocalDate</a> (uint64_t ns_since_1970)</td></tr>
 <tr class="memdesc:a0907f422b6c1bbf3932f81006329bac3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Formats a date string according to the local date format.  <a href="namespaceutil_1_1time.html#a0907f422b6c1bbf3932f81006329bac3">More...</a><br /></td></tr>
 <tr class="separator:a0907f422b6c1bbf3932f81006329bac3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adfa3648dae16c4d5bdb24f565bf7e625"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceutil_1_1time.html#adfa3648dae16c4d5bdb24f565bf7e625">NsToLocalTime</a> (uint64_t ns_since_1970, int format=0)</td></tr>
 <tr class="memdesc:adfa3648dae16c4d5bdb24f565bf7e625"><td class="mdescLeft">&#160;</td><td class="mdescRight">Formats a time string according to the local time format.  <a href="namespaceutil_1_1time.html#adfa3648dae16c4d5bdb24f565bf7e625">More...</a><br /></td></tr>
 <tr class="separator:adfa3648dae16c4d5bdb24f565bf7e625"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0cf1f03adde4a1938b0636a0120ada1a"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceutil_1_1time.html#a0cf1f03adde4a1938b0636a0120ada1a">CanOpenTimeArrayToNs</a> (const std::vector&lt; uint8_t &gt; &amp;buffer)</td></tr>
-<tr class="memdesc:a0cf1f03adde4a1938b0636a0120ada1a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts from a CANopen 6 byte Time array to nanoseconds since 1970.  <a href="namespaceutil_1_1time.html#a0cf1f03adde4a1938b0636a0120ada1a">More...</a><br /></td></tr>
-<tr class="separator:a0cf1f03adde4a1938b0636a0120ada1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a921235430a58a652142ffeb8e8244a7f"><td class="memItemLeft" align="right" valign="top">int64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceutil_1_1time.html#a921235430a58a652142ffeb8e8244a7f">TimeZoneOffset</a> ()</td></tr>
-<tr class="memdesc:a921235430a58a652142ffeb8e8244a7f"><td class="mdescLeft">&#160;</td><td class="mdescRight">return the time zone offset in seconds.  <a href="namespaceutil_1_1time.html#a921235430a58a652142ffeb8e8244a7f">More...</a><br /></td></tr>
-<tr class="separator:a921235430a58a652142ffeb8e8244a7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a989af8a5ae2ab09ec652f3d8960fb480"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceutil_1_1time.html#a989af8a5ae2ab09ec652f3d8960fb480">OdsDateToNs</a> (const std::string &amp;ods_date)</td></tr>
 <tr class="memdesc:a989af8a5ae2ab09ec652f3d8960fb480"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts an ODS date and time string to nanoseconds since 1970.  <a href="namespaceutil_1_1time.html#a989af8a5ae2ab09ec652f3d8960fb480">More...</a><br /></td></tr>
 <tr class="separator:a989af8a5ae2ab09ec652f3d8960fb480"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -152,70 +128,6 @@ Functions</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >The time namespace is used for time and date functions. </p>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a id="a791722fda5f3fd6dfb3835062b81fe50" name="a791722fda5f3fd6dfb3835062b81fe50"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a791722fda5f3fd6dfb3835062b81fe50">&#9670;&nbsp;</a></span>CanOpenDateArrayToNs()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">uint64_t util::time::CanOpenDateArrayToNs </td>
-          <td>(</td>
-          <td class="paramtype">const std::vector&lt; uint8_t &gt; &amp;&#160;</td>
-          <td class="paramname"><em>buffer</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p >Converts from 7 byte CANopen date array to a uint64_t nanoseconds since 1970. This format is used in CANopen protocol and in ASAM MDF files.</p>
-<p >7-byte CANopen date format: </p><ul>
-<li>uint16_t Milliseconds since last minute </li>
-<li>uint8_t Minute (0..59) </li>
-<li>uint8_t Hour (0..23) </li>
-<li>uint8_t Day in month (1..31) + Day in week (1 = Monday..7 = Sunday) </li>
-<li>uint8_t Month (1..12) </li>
-<li>uint8_t Year (0..99) <dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">buffer</td><td>7-byte CANopen date array </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Nanoseconds since 1970-01-01 </dd></dl>
-</li>
-</ul>
-
-</div>
-</div>
-<a id="a0cf1f03adde4a1938b0636a0120ada1a" name="a0cf1f03adde4a1938b0636a0120ada1a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0cf1f03adde4a1938b0636a0120ada1a">&#9670;&nbsp;</a></span>CanOpenTimeArrayToNs()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">uint64_t util::time::CanOpenTimeArrayToNs </td>
-          <td>(</td>
-          <td class="paramtype">const std::vector&lt; uint8_t &gt; &amp;&#160;</td>
-          <td class="paramname"><em>buffer</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p >Converts from nanoseconds since 1970-01-01 to a 6-byte CANopen time array This format is used in CANopen protocol and in ASAM MDF files.</p>
-<p >6-byte CANopen time format: </p><ul>
-<li>uint32_t Milliseconds since midnight </li>
-<li>uint16_t Days since 1984</li>
-</ul>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">buffer</td><td>6-byte CANopen time array </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Nanoseconds since 1970-01-01 </dd></dl>
-
-</div>
-</div>
 <a id="ae7ea9bd084684c2705823304a936d902" name="ae7ea9bd084684c2705823304a936d902"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae7ea9bd084684c2705823304a936d902">&#9670;&nbsp;</a></span>FileTimeToNs()</h2>
 
@@ -353,147 +265,6 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Returns nanoseconds since 1970 </dd></dl>
-
-</div>
-</div>
-<a id="ad36892d73753ce73587a90f685c7de8a" name="ad36892d73753ce73587a90f685c7de8a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad36892d73753ce73587a90f685c7de8a">&#9670;&nbsp;</a></span>NanoSecToDDMMYYYY()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::string util::time::NanoSecToDDMMYYYY </td>
-          <td>(</td>
-          <td class="paramtype">uint64_t&#160;</td>
-          <td class="paramname"><em>ns_since_1970</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p >Generates a local date string with the 'DD:MM:YYYY' format, from an UTC time stamp nanoseconds since 1970-01-01 (midnight). The nanosecond timestamp is commonly used when transfer a timestamp. Note that this may not be used as epoch in different internal clocks.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">ns_since_1970</td><td>Nanoseconds since 1970 UTC </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Local date format 'DD:MM:YYYY' </dd></dl>
-
-</div>
-</div>
-<a id="a1ea0e819e59db587db51c0c1bdb8c522" name="a1ea0e819e59db587db51c0c1bdb8c522"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1ea0e819e59db587db51c0c1bdb8c522">&#9670;&nbsp;</a></span>NanoSecToHHMMSS()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::string util::time::NanoSecToHHMMSS </td>
-          <td>(</td>
-          <td class="paramtype">uint64_t&#160;</td>
-          <td class="paramname"><em>ns_since_1970</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p >Generates a local time string with the 'HH:MM:ss' format, from an UTC time stamp nanoseconds since 1970-01-01 (midnight). The nanosecond timestamp is commonly used when transfer a timestamp. Note that this may not be used as epoch in different internal clocks.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">ns_since_1970</td><td>Nanoseconds since 1970 UTC </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Local date format 'HH:MM:SS' </dd></dl>
-
-</div>
-</div>
-<a id="ab7abf98a2e5ff0c5e567b5aca1ca3e88" name="ab7abf98a2e5ff0c5e567b5aca1ca3e88"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab7abf98a2e5ff0c5e567b5aca1ca3e88">&#9670;&nbsp;</a></span>NanoSecToLocal()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">uint64_t util::time::NanoSecToLocal </td>
-          <td>(</td>
-          <td class="paramtype">uint64_t&#160;</td>
-          <td class="paramname"><em>ns_since_1970</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p >Adds the time zone offset to the UTC nanoseconds since 1970. </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">ns_since_1970</td><td></td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>local time = system time + time zone offset </dd></dl>
-
-</div>
-</div>
-<a id="a9daea46ccfa911635fbfa3e77b9de1ef" name="a9daea46ccfa911635fbfa3e77b9de1ef"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9daea46ccfa911635fbfa3e77b9de1ef">&#9670;&nbsp;</a></span>NsToCanOpenDateArray()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::vector&lt; uint8_t &gt; util::time::NsToCanOpenDateArray </td>
-          <td>(</td>
-          <td class="paramtype">uint64_t&#160;</td>
-          <td class="paramname"><em>ns_since_1970</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p >Converts from nanoseconds since 1970-01-01 to a 7 byte CANopen date array This format is used in CANopen protocol and in ASAM MDF files.</p>
-<p >7-byte CANopen date format: </p><ul>
-<li>uint16_t Milliseconds since last minute </li>
-<li>uint8_t Minute (0..59) </li>
-<li>uint8_t Hour (0..23) </li>
-<li>uint8_t Day in month (1..31) + Day in week (1 = Monday..7 = Sunday) </li>
-<li>uint8_t Month (1..12) </li>
-<li>uint8_t Year (0..99) <dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">ns_since_1970</td><td>Nanoseconds since 1970-01-01 </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>7-byte CANopen date array </dd></dl>
-</li>
-</ul>
-
-</div>
-</div>
-<a id="a31440851ef51159c5b59918781e37d36" name="a31440851ef51159c5b59918781e37d36"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a31440851ef51159c5b59918781e37d36">&#9670;&nbsp;</a></span>NsToCanOpenTimeArray()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::vector&lt; uint8_t &gt; util::time::NsToCanOpenTimeArray </td>
-          <td>(</td>
-          <td class="paramtype">uint64_t&#160;</td>
-          <td class="paramname"><em>ns_since_1970</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p >Converts from nanoseconds since 1970-01-01 to a 6-byte CANopen time array This format is used in CANopen protocol and in ASAM MDF files.</p>
-<p >6-byte CANopen time format: </p><ul>
-<li>uint32_t Milliseconds since midnight </li>
-<li>uint16_t Days since 1984</li>
-</ul>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">ns_since_1970</td><td>Nanoseconds since 1970-01-01 </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>6-byte CANopen date array </dd></dl>
 
 </div>
 </div>
@@ -666,24 +437,6 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Nanoseconds since midnight 1970 </dd></dl>
-
-</div>
-</div>
-<a id="a921235430a58a652142ffeb8e8244a7f" name="a921235430a58a652142ffeb8e8244a7f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a921235430a58a652142ffeb8e8244a7f">&#9670;&nbsp;</a></span>TimeZoneOffset()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int64_t util::time::TimeZoneOffset </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p >Returns the current used time zone offset in seconds </p><dl class="section return"><dt>Returns</dt><dd></dd></dl>
 
 </div>
 </div>

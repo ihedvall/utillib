@@ -9,8 +9,6 @@ the following components.
 
 - [Log functions.](log.html)
 - [Listen functions.](listen.html)
-- Crypto utilities. Simple wrapper around hash checksums.
-- Compress utilities. Simple wrapper around the ZLIB library.
 - Plot utilities. Wrapper around the GnuPlot application.
 - String manipulation functions. 
 - [Time and date conversion functions.](time.html)

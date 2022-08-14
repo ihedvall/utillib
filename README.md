@@ -6,7 +6,6 @@ The Util Library is used as a base for applications and libraries.
 
 The C++ library consists of the following components.
 
-- **Crypto** Functions. Mainly MD5 hash checksum function.
 - **CSV** Writer. Simplifies the usage of creating comma separated data files.
 - **Gnuplot**. Implements a wrapper around the third-party gnuplot application.
 - **Listen** Functions. User interface against the Listen functionality. 
@@ -36,7 +35,7 @@ needs to be downloaded and built.
 
 - Boost Library. Set the 'Boost_ROOT' variable to the Boost root path.
 - Expat Library. Set the 'EXPAT_ROOT' variable to the expat root path.
-- OpenSSL Library. Set the 'OPENSSL_ROOT' variable to the OpenSSL root path.
+- WinFlexBison Library. Required if flex or bison files are modified.
 - ZLIB Library. Set the 'ZLIB_ROOT' variable to the ZLIB root path.
 - WxWidgets Library. Is required if the GUI applications should be built.
 - Doxygen's application. Is required if the documentation should be built.

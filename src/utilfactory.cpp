@@ -10,7 +10,6 @@
 #include "logfile.h"
 #include "listenlogger.h"
 #include "syslog.h"
-#include "mqttclient.h"
 #include "listenproxy.h"
 #include "listenserver.h"
 #include "listenconsole.h"
@@ -66,23 +65,6 @@ std::unique_ptr<log::ILogger> UtilFactory::CreateLogger(log::LogType type, std::
       break;
   }
   return logger;
-}
-
-std::unique_ptr<mqtt::IPubSubClient> UtilFactory::CreatePubSubClient(PubSubType type) {
-  std::unique_ptr<mqtt::IPubSubClient> client;
-
-  switch (type) {
-    case PubSubType::Mqtt3Client: {
-      auto mqtt_client = std::make_unique<mqtt::MqttClient>();
-      mqtt_client->Version(util::mqtt::ProtocolVersion::Mqtt311);
-      client = std::move(mqtt_client);
-      break;
-    }
-
-    default:
-      break;
-  }
-  return client;
 }
 
 std::unique_ptr<IListen> UtilFactory::CreateListen(const std::string &type, const std::string &share_name) {

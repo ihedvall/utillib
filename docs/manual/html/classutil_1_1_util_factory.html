@@ -88,8 +88,59 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memitem:af021e17f77a8fea6528cc79885394a2e"><td class="memItemLeft" align="right" valign="top">static std::unique_ptr&lt; <a class="el" href="classutil_1_1log_1_1_i_logger.html">log::ILogger</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classutil_1_1_util_factory.html#af021e17f77a8fea6528cc79885394a2e">CreateLogger</a> (<a class="el" href="namespaceutil_1_1log.html#acce1c2a148c64f8bfbed195ac8c333e4">log::LogType</a> type, std::vector&lt; std::string &gt; &amp;arg_list)</td></tr>
 <tr class="memdesc:af021e17f77a8fea6528cc79885394a2e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a pre-defined log source.  <a href="classutil_1_1_util_factory.html#af021e17f77a8fea6528cc79885394a2e">More...</a><br /></td></tr>
 <tr class="separator:af021e17f77a8fea6528cc79885394a2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a532d50c03ae67369c21cec21b132b527"><td class="memItemLeft" align="right" valign="top">static std::unique_ptr&lt; <a class="el" href="classutil_1_1log_1_1_i_listen.html">log::IListen</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classutil_1_1_util_factory.html#a532d50c03ae67369c21cec21b132b527">CreateListen</a> (const std::string &amp;type, const std::string &amp;share_name)</td></tr>
+<tr class="memdesc:a532d50c03ae67369c21cec21b132b527"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a listen object.  <a href="classutil_1_1_util_factory.html#a532d50c03ae67369c21cec21b132b527">More...</a><br /></td></tr>
+<tr class="separator:a532d50c03ae67369c21cec21b132b527"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a532d50c03ae67369c21cec21b132b527" name="a532d50c03ae67369c21cec21b132b527"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a532d50c03ae67369c21cec21b132b527">&#9670;&nbsp;</a></span>CreateListen()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static std::unique_ptr&lt; <a class="el" href="classutil_1_1log_1_1_i_listen.html">log::IListen</a> &gt; util::UtilFactory::CreateListen </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>share_name</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p >Creates a listen object. It only exist 3 basic objects to create.</p>
+<p >The 'ListenProxy' object sends messages through a shared memory to a common server object. This type of listen object is normal when several executable should share a listen 'channel'. Typically is when debugging database calls.</p>
+<p >The 'ListenServer' shall be used when the application want its own listen 'channel'. This is typically used for protocol drivers.</p>
+<p >The 'ListenConsole' logs the message onto a console window (std::cout). It shallbe used when putting messages from a proxy onto a console window. This object is mainly used for testing.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">type</td><td>Select between 'ListenProxy' or 'ListenServer' </td></tr>
+    <tr><td class="paramname">share_name</td><td>Unique share name or empty string. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A smart pointer to a listen object. </dd></dl>
+
+</div>
+</div>
 <a id="af021e17f77a8fea6528cc79885394a2e" name="af021e17f77a8fea6528cc79885394a2e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af021e17f77a8fea6528cc79885394a2e">&#9670;&nbsp;</a></span>CreateLogger()</h2>
 
