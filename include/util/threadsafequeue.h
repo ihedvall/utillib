@@ -64,6 +64,10 @@ class ThreadSafeQueue
    * @return Number of items in the queue.
    */
   [[nodiscard]] size_t Size() const;
+
+  void Clear(); ///< Clears the queue.
+  void Stop(); ///< Stops all blocking Get() calls.
+
  private:
   mutable std::mutex lock_; ///< Mutex lock for the queue:
   std::queue<std::unique_ptr<T>> queue_; ///< The queue.
@@ -128,6 +132,19 @@ template<typename T>
 size_t ThreadSafeQueue<T>::Size() const {
   std::lock_guard lock(lock_);
   return queue_.size();
+}
+template<typename T>
+void ThreadSafeQueue<T>::Clear() {
+  std::unique_ptr<T> temp;
+  while (Get(temp, false)) {
+    temp.reset();
+  }
+}
+
+template<typename T>
+void ThreadSafeQueue<T>::Stop() {
+  stop_ = true;
+  queue_event_.notify_one(); // Release any blocking Get()
 }
 
 }

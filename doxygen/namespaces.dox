@@ -9,11 +9,6 @@
  */
 namespace util {
 
-/** \brief The crypto namespace is used for hash functions.
- *
- * The crypto namespace is used by the hash functions.
- */
-namespace crypto {}
 
 /** \brief The log namespace is used for log related classes and functions.
  *
