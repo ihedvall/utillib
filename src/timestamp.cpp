@@ -13,21 +13,19 @@ namespace util::time {
 
 std::string GetLocalDateTime(std::chrono::time_point<std::chrono::system_clock> timestamp) {
   const auto utc = std::chrono::system_clock::to_time_t(timestamp);
-  struct tm bt{};
-  localtime_s(&bt, &utc);
+  const struct tm* bt = localtime(&utc);
   std::ostringstream date_time;
-  date_time << std::put_time(&bt, "%Y-%m-%d %H:%M:%S");
+  date_time << std::put_time(bt, "%Y-%m-%d %H:%M:%S");
   return date_time.str();
 }
 
 std::string GetLocalTimestampWithMs(std::chrono::time_point<std::chrono::system_clock> timestamp) {
   const auto ms = std::chrono::duration_cast<std::chrono::milliseconds>(timestamp.time_since_epoch()) % 1000;
   const auto timer = std::chrono::system_clock::to_time_t(timestamp);
-  struct tm bt{};
-  localtime_s(&bt, &timer);
+  const struct tm* bt = localtime(&timer);
 
   std::ostringstream text;
-  text << std::put_time(&bt, "%Y-%m-%d %H:%M:%S")
+  text << std::put_time(bt, "%Y-%m-%d %H:%M:%S")
        << '.' << std::setfill('0') << std::setw(3) << ms.count();
   return text.str();
 }
@@ -35,11 +33,10 @@ std::string GetLocalTimestampWithMs(std::chrono::time_point<std::chrono::system_
 std::string GetLocalTimestampWithUs(std::chrono::time_point<std::chrono::system_clock> timestamp) {
   const auto us = std::chrono::duration_cast<std::chrono::microseconds>(timestamp.time_since_epoch()) % 1000'000;
   const auto timer = std::chrono::system_clock::to_time_t(timestamp);
-  struct tm bt{};
-  localtime_s(&bt, &timer);
+  const struct tm* bt = localtime(&timer);
 
   std::ostringstream text;
-  text << std::put_time(&bt, "%Y-%m-%d %H:%M:%S")
+  text << std::put_time(bt, "%Y-%m-%d %H:%M:%S")
        << '.' << std::setfill('0') << std::setw(6) << us.count();
   return text.str();
 }
@@ -59,10 +56,9 @@ uint64_t TimeStampToNs(TimeStamp timestamp) {
 std::string NsToLocalIsoTime(uint64_t ns_since_1970) {
   const auto ms_sec = (ns_since_1970 / 1'000'000) % 1'000;
   const auto system_time = static_cast<std::time_t>(ns_since_1970 / 1'000'000'000);
-  struct tm bt{};
-  localtime_s(&bt, &system_time);
+  const struct tm* bt = localtime(&system_time);
   std::ostringstream text;
-  text << std::put_time(&bt, "%Y-%m-%d %H:%M:%S");
+  text << std::put_time(bt, "%Y-%m-%d %H:%M:%S");
   if (ms_sec > 0) {
     text << '.' << std::setfill('0') << std::setw(3) << ms_sec;
   }
@@ -71,11 +67,10 @@ std::string NsToLocalIsoTime(uint64_t ns_since_1970) {
 
 std::string NsToIsoTime(uint64_t ns_since_1970, int format) {
   const auto system_time = static_cast<std::time_t>(ns_since_1970 / 1'000'000'000);
-  struct tm bt{};
-  gmtime_s(&bt, &system_time);
+  const struct tm* bt = gmtime(&system_time);
 
   std::ostringstream text;
-  text << std::put_time(&bt, "%Y-%m-%dT%H:%M:%S");
+  text << std::put_time(bt, "%Y-%m-%dT%H:%M:%S");
   switch (format) {
     case 3: {
       const auto ns_sec = ns_since_1970 % 1'000'000'000;
@@ -182,7 +177,16 @@ uint64_t IsoTimeToNs(const std::string& iso_time, bool local_time) {
         break;
     }
   }
-  auto ns_1970 = static_cast<uint64_t>(local_time ? mktime(&bt) : _mkgmtime(&bt));
+  uint64_t ns_1970;
+  if (local_time)
+      mktime(&bt);
+  else {
+#if (_MS_VC)
+      ns_1970 = _mkgmtime(&bt);
+#else
+      ns_1970 = timegm(&bt);
+#endif
+  }
   ns_1970 *= 1'000'000'000;
   ns_1970 += nano_sec;
   return ns_1970;
@@ -190,19 +194,17 @@ uint64_t IsoTimeToNs(const std::string& iso_time, bool local_time) {
 
 std::string NsToLocalDate(uint64_t ns_since_1970) {
   const auto system_time = static_cast<std::time_t>(ns_since_1970 / 1'000'000'000);
-  struct tm bt{};
-  localtime_s(&bt, &system_time);
+  const struct tm* bt = localtime(&system_time);
   std::ostringstream text;
-  text << std::put_time(&bt, "%x");
+  text << std::put_time(bt, "%x");
   return text.str();
 }
 
 std::string NsToLocalTime(uint64_t ns_since_1970, int format) {
   const auto system_time = static_cast<std::time_t>(ns_since_1970 / 1'000'000'000);
-  struct tm bt{};
-  localtime_s(&bt, &system_time);
+  const struct tm* bt = localtime(&system_time);
   std::ostringstream text;
-  text << std::put_time(&bt, "%X");
+  text << std::put_time(bt, "%X");
 
   std::ostringstream extra;
   switch (format) {
@@ -363,7 +365,11 @@ uint64_t OdsDateToNs(const std::string &ods_date) {
         break;
     }
   }
-  auto ns_1970 = static_cast<uint64_t>(_mkgmtime(&bt));
+#if (_MS_VC)
+      auto ns_1970 = _mkgmtime(&bt);
+#else
+      auto ns_1970 = timegm(&bt);
+#endif
   ns_1970 *= 1'000'000'000;
   ns_1970 += nano_sec;
   return ns_1970;
