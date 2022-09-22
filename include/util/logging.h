@@ -10,7 +10,11 @@
 #include <cstdarg>
 #include <cstdio>
 #include <string>
+#if (_MSC_VER)
 #include <source_location>
+#else
+#include <experimental/source_location>
+#endif
 
 
 namespace util::log {
@@ -30,7 +34,12 @@ enum class LogSeverity : uint8_t {
 /** \typedef Loc
  * The Loc is a wrapper around the std::location library. This library is new in C++20.
  */
+#if (_MSC_VER)
 using Loc = std::source_location;
+#else
+using Loc = std::experimental::source_location;
+#endif
+
 
 void LogDebug(const Loc &loc, const char *fmt, ...); ///< Creates a debug message message
 void LogInfo(const Loc &loc, const char *fmt, ...); ///< Creates an information message
