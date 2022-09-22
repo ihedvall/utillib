@@ -9,7 +9,9 @@
 #include <filesystem>
 #include <boost/filesystem.hpp>
 #include <boost/process.hpp>
+#if (_MSC_VER)
 #include <boost/process/windows.hpp>
+#endif
 #include "util/gnuplot.h"
 #include "util/logstream.h"
 

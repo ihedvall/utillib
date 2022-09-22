@@ -7,6 +7,7 @@
 #include <string_view>
 #include <array>
 #include <algorithm>
+#include <mutex>
 #include <boost/interprocess/mapped_region.hpp>
 #include <boost/interprocess/shared_memory_object.hpp>
 #include <boost/interprocess/sync/interprocess_recursive_mutex.hpp>

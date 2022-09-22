@@ -12,6 +12,7 @@
 #include <mutex>
 #include <queue>
 #include <memory>
+#include <condition_variable>
 
 namespace util::log {
 
