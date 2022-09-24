@@ -34,9 +34,9 @@ namespace {
 
 } // end namespace
 
-namespace util::log::gui  {
+wxIMPLEMENT_APP(util::log::gui::ListenViewer); // NOLINT
 
-wxIMPLEMENT_APP(ListenViewer); // NOLINT
+namespace util::log::gui  {
 
 wxBEGIN_EVENT_TABLE(ListenViewer, wxApp) // NOLINT
   EVT_UPDATE_UI(kIdOpenLogFile,ListenViewer::OnUpdateOpenLogFile)
