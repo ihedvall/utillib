@@ -8,7 +8,9 @@
 
 #include <boost/locale.hpp>
 
+#if (_MSC_VER)
 #include <shellapi.h>
+#endif
 #include <wx/wx.h>
 #include <wx/docview.h>
 

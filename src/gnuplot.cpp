@@ -175,7 +175,11 @@ void GnuPlot::Show() {
     const auto script_dir = temp.parent_path();
     const auto curr_dir = std::filesystem::current_path();
     std::filesystem::current_path(script_dir);
+    #if (_MSC_VER)
     boost::process::spawn(exe_path_, "--persist", FileName(), boost::process::windows::hide);
+#else
+    boost::process::spawn(exe_path_, "--persist", FileName());
+#endif
     std::filesystem::current_path(curr_dir);
   } catch (const std::exception& err) {
     LOG_ERROR() << "Failed to run gnuplot directory. Error: " << err.what();
