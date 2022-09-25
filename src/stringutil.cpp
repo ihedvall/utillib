@@ -12,13 +12,23 @@
 
 namespace util::string {
 bool IEquals(const std::string &s1, const std::string &s2, size_t nChar) {
+#if (_MSC_VER)
   return nChar == 0 ? stricmp(s1.c_str(), s2.c_str()) == 0 :
          strnicmp(s1.c_str(), s2.c_str(), nChar) == 0;
+#else
+    return nChar == 0 ? strcasecmp(s1.c_str(), s2.c_str()) == 0 :
+           strncasecmp(s1.c_str(), s2.c_str(), nChar) == 0;
+#endif
 }
 
 bool IEquals(const std::wstring &s1, const std::wstring &s2, size_t nChar) {
+#if (_MSC_VER)
   return nChar == 0 ? wcsicmp(s1.c_str(), s2.c_str()) == 0 :
          wcsnicmp(s1.c_str(), s2.c_str(), nChar) == 0;
+#else
+    return nChar == 0 ? wcscasecmp(s1.c_str(), s2.c_str()) == 0 :
+           wcsncasecmp(s1.c_str(), s2.c_str(), nChar) == 0;
+#endif
 }
 
 bool IgnoreCase::operator()(const std::string &s1, const std::string &s2) const {

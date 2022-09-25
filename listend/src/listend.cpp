@@ -79,8 +79,10 @@ namespace {
 int main(int nof_arg, char *arg_list[]) {
   signal(SIGTERM, StopMainHandler);
   signal(SIGABRT, StopMainHandler);
+#if (_MSC_VER)
   signal(SIGABRT_COMPAT, StopMainHandler);
   signal(SIGBREAK, StopMainHandler);
+#endif
 
   // Set log file name to the service name
   auto &log_config = LogConfig::Instance();
