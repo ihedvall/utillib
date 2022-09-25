@@ -26,10 +26,9 @@ namespace util::test  {
 TEST(Timestamp, TestEpoch) { // NOLINT
   {
     time_t time_t_epoch = 0;
-    struct tm bt{};
-    gmtime_s(&bt, &time_t_epoch);
+    struct tm* bt = gmtime(&time_t_epoch);
     std::ostringstream date_time;
-    date_time << std::put_time(&bt, "%Y-%m-%d %H:%M:%S");
+    date_time << std::put_time(bt, "%Y-%m-%d %H:%M:%S");
     std::cout << "Time_t Epoch: " << date_time.str() << std::endl;
   }
 
@@ -41,20 +40,18 @@ TEST(Timestamp, TestEpoch) { // NOLINT
 
   {
     const time_t max_time = std::numeric_limits<time_t>::max() / 300'000'000;
-    struct tm bt{};
-    gmtime_s(&bt, &max_time);
+    struct tm* bt = gmtime(&max_time);
     std::ostringstream date_time;
-    date_time << std::put_time(&bt, "%Y-%m-%d %H:%M:%S") ;
+    date_time << std::put_time(bt, "%Y-%m-%d %H:%M:%S") ;
     std::cout << "Max Time_t: " << date_time.str() << std::endl;
   }
 
   {
     const uint64_t max = std::numeric_limits<uint64_t>::max();
     const auto max_time = static_cast<time_t>(max / 1'000'000'000);
-    struct tm bt{};
-    gmtime_s(&bt, &max_time);
+    struct tm* bt = gmtime(&max_time);
     std::ostringstream date_time;
-    date_time << std::put_time(&bt, "%Y-%m-%d %H:%M:%S");
+    date_time << std::put_time(bt, "%Y-%m-%d %H:%M:%S");
     std::cout << "Max (ns) Time: " << date_time.str() << std::endl;
   }
 }
