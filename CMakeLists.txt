@@ -8,7 +8,7 @@ project(utilLib
 
 option(BUILD_SHARED_LIBS "Static libraries are preferred" OFF)
 option(BUILD_STATIC_LIBS "Static libraries are normally used" ON)
-option(BUILD_DOC "If doxygen is installed, then build documentation in Release mode" ON)
+option(BUILD_DOC "If doxygen is installed, then build documentation in Release mode" OFF)
 if (NOT COMP_DIR)
     set(COMP_DIR "k:")
 endif()

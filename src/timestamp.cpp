@@ -6,7 +6,6 @@
 #include <chrono>
 #include <sstream>
 #include <iomanip>
-#include <boost/endian/buffers.hpp>
 #include "util/timestamp.h"
 
 namespace util::time {
@@ -181,7 +180,7 @@ uint64_t IsoTimeToNs(const std::string& iso_time, bool local_time) {
   if (local_time)
       mktime(&bt);
   else {
-#if (_MS_VC)
+#if (_MSC_VER)
       ns_1970 = _mkgmtime(&bt);
 #else
       ns_1970 = timegm(&bt);
@@ -365,7 +364,7 @@ uint64_t OdsDateToNs(const std::string &ods_date) {
         break;
     }
   }
-#if (_MS_VC)
+#if (_MSC_VER)
       auto ns_1970 = _mkgmtime(&bt);
 #else
       auto ns_1970 = timegm(&bt);

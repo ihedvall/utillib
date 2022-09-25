@@ -33,7 +33,6 @@ ListenClient::~ListenClient() {
 
 void ListenClient::WorkerTask() {
   try {
-
     DoLookup();
     const auto& count = context_.run();
     LOG_INFO() << "Stopped main worker thread" ;
