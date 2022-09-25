@@ -14,7 +14,7 @@ env:
   IS_RELEASE: ${{ github.event_name == 'push' && github.ref_type == 'tag' && startswith(github.ref_name, 'v') }}
   # choose boost version carefully, because it might be that the version is not supported
   # by the windows version (https://stackoverflow.com/questions/12484894/what-do-i-do-about-batch-recursion-exceeds-stack-limits-when-running-boost-bui)
-  boost_version: 1.80.0
+  BOOST_VERSION: 1.80.0
 
 
 jobs:
@@ -50,19 +50,6 @@ jobs:
               CMAKE_RC_FLAGS: "/C 1252"
               CC: clang
               CXX: clang++
-              BOOST_ROOT: D:/a/boost
-            pack: 1
-
-          - name: win64-msvc
-            os: windows-latest
-            ninja_platform: win
-            boost_toolset: msvc
-            boost_install_path: D:/a/boost
-            msvc_arch: x64
-            cmake_env:
-              CMAKE_RC_FLAGS: "/C 1252"
-              CC: cl
-              CXX: cl
               BOOST_ROOT: D:/a/boost
             pack: 1
 
@@ -120,7 +107,6 @@ jobs:
           key: 'boost-${{env.BOOST_VERSION}}'
 
       - name: Build Boost
-        id: boost
         if: matrix.env.ninja_platform != 'linux'
         # This won't re-download the archive unnecessarily:
         uses: egor-tensin/build-boost@v1
@@ -129,7 +115,6 @@ jobs:
           libraries: program_options filesystem system locale
           toolset: ${{ matrix.env.boost_toolset}}
           directory: ${{ matrix.env.boost_install_path }}
-          static: 1
 
       - name: Setup MSVC environment
         if: matrix.env.ninja_platform == 'win'
@@ -170,7 +155,7 @@ jobs:
         run: |
           mkdir -p build/release
           cd build/release
-          cmake -G Ninja -DCMAKE_BUILD_TYPE=Release -DBOOST_ROOT=D:/a/boost -DBOOST_LIBRARYDIR=D:/a/boost/stage/x64/release/lib  ${{ env.CMAKE_FLAGS }} ${{ matrix.env.cmake_flags }} ../.. 
+          cmake -G Ninja -DCMAKE_BUILD_TYPE=Release ${{ env.CMAKE_FLAGS }} ${{ matrix.env.cmake_flags }} ../..
 
 
       - name: Build
