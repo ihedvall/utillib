@@ -170,9 +170,7 @@ jobs:
         run: |
           mkdir -p build/release
           cd build/release
-          cmake -G Ninja -DCMAKE_BUILD_TYPE=Release -DBOOST_ROOT=${{ matrix.steps.boost.outputs.root }} \
-                -DBOOST_LIBRARYDIR=${{ matrix.steps.outputs.librarydir }} \
-                 ${{ env.CMAKE_FLAGS }} ${{ matrix.env.cmake_flags }} ../.. 
+          cmake -G Ninja -DCMAKE_BUILD_TYPE=Release -DBOOST_ROOT=D:/a/boost -DBOOST_LIBRARYDIR=D:/a/boost/stage/x64/release/lib  ${{ env.CMAKE_FLAGS }} ${{ matrix.env.cmake_flags }} ../.. 
 
 
       - name: Build
