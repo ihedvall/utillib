@@ -63,7 +63,7 @@ jobs:
               CMAKE_RC_FLAGS: "/C 1252"
               CC: cl
               CXX: cl
-              BOOST_ROOT: ${{ steps.boost.outputs.root }}
+              BOOST_ROOT: D:/msvc/boost
             pack: 1
 
           - name: win32
