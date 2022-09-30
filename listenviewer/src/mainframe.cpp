@@ -19,12 +19,12 @@
 #include "listenviewer.h"
 #include "settingdialog.h"
 #include "listendialog.h"
-#
 
 
 using namespace util::log::detail;
 namespace {
-
+#include "img/list.xpm"
+#include "img/app.xpm"
 // Bitmap indexes
 [[maybe_unused]] constexpr int kBluePlay = 0;
 [[maybe_unused]] constexpr int kBlueStandby = 1;
@@ -61,7 +61,7 @@ MainFrame::MainFrame(const wxString &title, const wxPoint &start_pos, const wxSi
       image_list_(16, 16, false, 9),
       message_buffer_(10),
       main_timer_(this, kIdMainTimer) {
-  SetIcon(wxIcon("APP_ICON", wxBITMAP_TYPE_ICO_RESOURCE));
+  SetIcon(wxICON(app));
   wxWindow::SetName("ListenTopWindow");
 #if (_MSC_VER)
   wxTopLevelWindowMSW::Maximize(maximized);
@@ -153,8 +153,13 @@ MainFrame::MainFrame(const wxString &title, const wxPoint &start_pos, const wxSi
   main_sizer->Add(filter_sizer, 0, wxALIGN_LEFT | wxALL | wxEXPAND , 0);
 
   SetSizerAndFit(main_sizer);
+#ifdef _MSC_VER
+  wxBitmap list_bmp("LIST", wxBITMAP_TYPE_BMP_RESOURCE);
+#else
+   wxBitmap list_bmp { wxBITMAP(list) };
+#endif
 
-  image_list_.Add(wxBitmap("LIST", wxBITMAP_TYPE_BMP_RESOURCE));
+  image_list_.Add(list_bmp);
   active_list_->SetImageList(&image_list_, wxIMAGE_LIST_SMALL);
 
   if (client_list_.empty()) {

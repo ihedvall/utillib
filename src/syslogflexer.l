@@ -46,6 +46,7 @@ octet [\x01-\xFF]*
                    return token::NUMBER;}
 
 <VERSION>" " { BEGIN TIMESTAMP;
+               yylval->build<std::string>(" ");
                return token::SP;}
 
 <TIMESTAMP>{timestamp} { const std::string time = yytext;
@@ -53,6 +54,7 @@ octet [\x01-\xFF]*
                          return token::ISOTIME;}
 
 <TIMESTAMP>" "  { BEGIN HOSTNAME;
+                  yylval->build<std::string>(" ");
                   return token::SP;}
 
 <HOSTNAME>{name} { const std::string name = yytext;
@@ -60,6 +62,7 @@ octet [\x01-\xFF]*
                 return token::NAME;}
 
 <HOSTNAME>" "  { BEGIN APPNAME;
+                 yylval->build<std::string>(" ");
                  return token::SP;}
 
 <APPNAME>{name} { const std::string name = yytext;
@@ -67,6 +70,7 @@ octet [\x01-\xFF]*
                    return token::NAME;}
 
 <APPNAME>" "  { BEGIN PROCID;
+                 yylval->build<std::string>(" ");
                  return token::SP;}
 
 <PROCID>{name} { const std::string name = yytext;
@@ -74,6 +78,7 @@ octet [\x01-\xFF]*
                    return token::NAME;}
 
 <PROCID>" "  { BEGIN MSGID;
+               yylval->build<std::string>(" ");
                return token::SP;}
 
 <MSGID>{name} { const std::string name = yytext;
@@ -81,11 +86,13 @@ octet [\x01-\xFF]*
                 return token::NAME;}
 
 <MSGID>" "  { BEGIN SD;
+              yylval->build<std::string>(" ");
               return token::SP;}
 
 <SD>{nil}  { return token::NIL;}
 
 <SD>" "    { BEGIN MSG;
+             yylval->build<std::string>(" ");
              return token::SP;}
 
 <SD>"["  { BEGIN SDELEMENT;
@@ -95,6 +102,7 @@ octet [\x01-\xFF]*
                   return ']';}
 
 <SDELEMENT>" "  { BEGIN SDPAR;
+                  yylval->build<std::string>(" ");
                   return token::SP; }
 
 <SDELEMENT>{value}  { const std::string name = yytext;
@@ -110,7 +118,8 @@ octet [\x01-\xFF]*
 <SDPAR>"]"  { BEGIN SD;
               return ']';}
 
-<SDPAR>" "  { return token::SP;}
+<SDPAR>" "  {   yylval->build<std::string>(" ");
+                return token::SP;}
 
 <SDPAR>{id}  { const std::string name = yytext;
                yylval->build<std::string>(name);

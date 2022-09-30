@@ -18,16 +18,12 @@ set(CMAKE_DEBUG_POSTFIX d)
 
 include(CMakePrintHelpers)
 include(script/boost.cmake)
-#include(script/zlib.cmake)
-#include(script/openssl.cmake)
 include(script/expat.cmake)
 include(script/wxwidgets.cmake)
 include(script/googletest.cmake)
 include(script/doxygen.cmake)
 include(script/flex.cmake)
 include(script/bison.cmake)
-#include(script/mqtt.cmake)
-#include(script/mqtt_cpp.cmake)
 
 if (BISON_FOUND)
     BISON_TARGET(SYSLOG_PARSER src/syslogparser.y ${CMAKE_CURRENT_SOURCE_DIR}/src/syslogparser.cpp)
@@ -98,10 +94,7 @@ target_include_directories(util PUBLIC
 
 target_include_directories(util PRIVATE ${Boost_INCLUDE_DIRS})
 target_include_directories(util PRIVATE ${EXPAT_INCLUDE_DIRS})
-#target_include_directories(util PRIVATE ${ZLIB_INCLUDE_DIRS})
-#target_include_directories(util PRIVATE ${OPENSSL_INCLUDE_DIR})
 target_include_directories(util PRIVATE ${FLEX_INCLUDE_DIRS})
-#target_include_directories(util PRIVATE ${PAHO_C_INCLUDE_DIRS})
 
 cmake_print_properties(TARGETS util PROPERTIES INCLUDE_DIRECTORIES)
 

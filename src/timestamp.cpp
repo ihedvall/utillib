@@ -6,6 +6,7 @@
 #include <chrono>
 #include <sstream>
 #include <iomanip>
+#include <cstring>
 #include "util/timestamp.h"
 
 namespace util::time {
@@ -32,13 +33,8 @@ std::string GetLocalTimestampWithMs(std::chrono::time_point<std::chrono::system_
 std::string GetLocalTimestampWithUs(std::chrono::time_point<std::chrono::system_clock> timestamp) {
   const auto us = std::chrono::duration_cast<std::chrono::microseconds>(timestamp.time_since_epoch()) % 1000'000;
   const auto timer = std::chrono::system_clock::to_time_t(timestamp);
-  const struct tm* bt = localtime(&timer);
+  const auto* bt = localtime(&timer);
 
-#ifdef _MSC_VER
-    localtime_s(&bt, &timer);
-#else
-    localtime_r(&timer, &bt );
-#endif
   std::ostringstream text;
   text << std::put_time(bt, "%Y-%m-%d %H:%M:%S")
        << '.' << std::setfill('0') << std::setw(6) << us.count();

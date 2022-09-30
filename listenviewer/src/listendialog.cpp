@@ -9,6 +9,7 @@
 #include "listendialog.h"
 #include "listenviewerid.h"
 namespace {
+#include "img/list.xpm"
 constexpr int kActiveBmp = 5;
 constexpr int kNotActiveBmp = 6;
 }
@@ -33,8 +34,12 @@ ListenDialog::ListenDialog(wxWindow *parent)
   list_->AppendColumn(L"Host", wxLIST_FORMAT_LEFT, 100);
   list_->AppendColumn(L"Description", wxLIST_FORMAT_LEFT, 500);
 
-
-  image_list_.Add(wxBitmap("LIST", wxBITMAP_TYPE_BMP_RESOURCE));
+#ifdef _MSC_VER
+    wxBitmap list_bmp("LIST", wxBITMAP_TYPE_BMP_RESOURCE);
+#else
+    wxBitmap list_bmp { wxBITMAP(list) };
+#endif
+  image_list_.Add(list_bmp);
   list_->SetImageList(&image_list_, wxIMAGE_LIST_SMALL);
 
 
