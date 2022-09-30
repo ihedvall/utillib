@@ -7,7 +7,6 @@
 #include <iostream>
 #include "messagequeue.h"
 #include <boost/interprocess/sync/scoped_lock.hpp>
-
 using namespace boost::interprocess;
 using namespace std::chrono_literals;
 

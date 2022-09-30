@@ -6,7 +6,7 @@
 #include <mutex>
 #include <locale>
 #include <codecvt>
-
+#include <vector>
 #ifdef WIN32
 #include <shlobj.h>
 #pragma comment(lib,"shell32")

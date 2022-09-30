@@ -34,6 +34,11 @@ std::string GetLocalTimestampWithUs(std::chrono::time_point<std::chrono::system_
   const auto timer = std::chrono::system_clock::to_time_t(timestamp);
   const struct tm* bt = localtime(&timer);
 
+#ifdef _MSC_VER
+    localtime_s(&bt, &timer);
+#else
+    localtime_r(&timer, &bt );
+#endif
   std::ostringstream text;
   text << std::put_time(bt, "%Y-%m-%d %H:%M:%S")
        << '.' << std::setfill('0') << std::setw(6) << us.count();
