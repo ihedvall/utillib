@@ -10,6 +10,7 @@
 #include <boost/circular_buffer.hpp>
 #include <wx/wx.h>
 #include <wx/listctrl.h>
+#include <wx/imaglist.h>
 #include "listenclient.h"
 #include "listenmessage.h"
 #include "listenlistview.h"

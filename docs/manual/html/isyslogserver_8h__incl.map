@@ -1,20 +1,21 @@
 <map id="include/util/isyslogserver.h" name="include/util/isyslogserver.h">
-<area shape="rect" id="node1" title="Defines an interface against a syslog server." alt="" coords="234,5,409,32"/>
-<area shape="rect" id="node2" title=" " alt="" coords="400,155,461,181"/>
-<area shape="rect" id="node3" title=" " alt="" coords="5,155,75,181"/>
-<area shape="rect" id="node4" title=" " alt="" coords="244,80,311,107"/>
-<area shape="rect" id="node5" title=" " alt="" coords="335,80,396,107"/>
-<area shape="rect" id="node6" href="$threadsafequeue_8h.html" title="Implements a thread&#45;safe queue." alt="" coords="71,80,220,107"/>
-<area shape="rect" id="node9" href="$syslogmessage_8h.html" title="Implements an interface against a syslog message." alt="" coords="475,80,621,107"/>
-<area shape="rect" id="node7" title=" " alt="" coords="104,155,163,181"/>
-<area shape="rect" id="node8" title=" " alt="" coords="187,155,245,181"/>
-<area shape="rect" id="node10" title=" " alt="" coords="629,304,683,331"/>
-<area shape="rect" id="node11" title=" " alt="" coords="544,229,600,256"/>
-<area shape="rect" id="node12" href="$logmessage_8h.html" title=" " alt="" coords="727,155,830,181"/>
-<area shape="rect" id="node18" href="$structureddata_8h.html" title="Syslog structured data interface." alt="" coords="587,155,703,181"/>
-<area shape="rect" id="node13" title=" " alt="" coords="733,229,795,256"/>
-<area shape="rect" id="node14" href="$logging_8h.html" title="Standard log interfaces." alt="" coords="819,229,893,256"/>
-<area shape="rect" id="node15" title=" " alt="" coords="937,304,1002,331"/>
-<area shape="rect" id="node16" title=" " alt="" coords="718,304,775,331"/>
-<area shape="rect" id="node17" title=" " alt="" coords="799,304,913,331"/>
+<area shape="rect" id="node1" title="Defines an interface against a syslog server." alt="" coords="531,5,705,32"/>
+<area shape="rect" id="node2" title=" " alt="" coords="97,155,158,181"/>
+<area shape="rect" id="node3" title=" " alt="" coords="551,155,621,181"/>
+<area shape="rect" id="node4" title=" " alt="" coords="773,80,839,107"/>
+<area shape="rect" id="node5" title=" " alt="" coords="863,80,925,107"/>
+<area shape="rect" id="node6" href="$threadsafequeue_8h.html" title="Implements a thread&#45;safe queue." alt="" coords="599,80,749,107"/>
+<area shape="rect" id="node10" href="$syslogmessage_8h.html" title="Implements an interface against a syslog message." alt="" coords="336,80,481,107"/>
+<area shape="rect" id="node7" title=" " alt="" coords="645,155,703,181"/>
+<area shape="rect" id="node8" title=" " alt="" coords="728,155,785,181"/>
+<area shape="rect" id="node9" title=" " alt="" coords="809,155,933,181"/>
+<area shape="rect" id="node11" title=" " alt="" coords="340,311,395,338"/>
+<area shape="rect" id="node12" title=" " alt="" coords="413,229,469,256"/>
+<area shape="rect" id="node13" href="$logmessage_8h.html" title=" " alt="" coords="183,155,285,181"/>
+<area shape="rect" id="node19" href="$structureddata_8h.html" title="Syslog structured data interface." alt="" coords="309,155,425,181"/>
+<area shape="rect" id="node14" title=" " alt="" coords="207,229,269,256"/>
+<area shape="rect" id="node15" href="$logging_8h.html" title="Standard log interfaces." alt="" coords="109,229,183,256"/>
+<area shape="rect" id="node16" title=" " alt="" coords="5,311,71,338"/>
+<area shape="rect" id="node17" title=" " alt="" coords="95,311,152,338"/>
+<area shape="rect" id="node18" title=" " alt="" coords="177,304,315,345"/>
 </map>

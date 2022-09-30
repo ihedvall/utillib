@@ -12,7 +12,7 @@
 #include <wx/srchctrl.h>
 #include <wx/choice.h>
 #include "util/stringutil.h"
-#include "util/listenconfig.h."
+#include "util/listenconfig.h"
 #include "listenclient.h"
 #include "mainframe.h"
 #include "listenviewerid.h"
@@ -63,7 +63,11 @@ MainFrame::MainFrame(const wxString &title, const wxPoint &start_pos, const wxSi
       main_timer_(this, kIdMainTimer) {
   SetIcon(wxIcon("APP_ICON", wxBITMAP_TYPE_ICO_RESOURCE));
   wxWindow::SetName("ListenTopWindow");
+#if (_MSC_VER)
   wxTopLevelWindowMSW::Maximize(maximized);
+#else
+  wxTopLevelWindowNative::Maximize(maximized);
+#endif
 
   auto *app_config = wxConfig::Get();
   app_config->Read("/Setting/MaxLines", &max_lines_);

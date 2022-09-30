@@ -36,7 +36,11 @@ SyslogMessage::SyslogMessage() {
   application_name_ = LogConfig::Instance().ApplicationName();
 
   // PID
+#if (_MSC_VER)
   const auto pid = _getpid();
+#else
+  const auto pid = getpid();
+#endif
 
   process_id_ = std::to_string(pid);
 }

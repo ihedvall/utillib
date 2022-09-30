@@ -1,12 +1,12 @@
 <map id="include/util/ilogger.h" name="include/util/ilogger.h">
 <area shape="rect" id="node1" title="Defines an interface against a generic logger." alt="" coords="18,5,155,32"/>
-<area shape="rect" id="node2" title=" " alt="" coords="84,229,139,256"/>
+<area shape="rect" id="node2" title=" " alt="" coords="84,237,139,263"/>
 <area shape="rect" id="node3" title=" " alt="" coords="21,80,72,107"/>
 <area shape="rect" id="node4" title=" " alt="" coords="96,80,157,107"/>
 <area shape="rect" id="node5" href="$logmessage_8h.html" title=" " alt="" coords="182,80,284,107"/>
 <area shape="rect" id="node6" title=" " alt="" coords="156,155,217,181"/>
 <area shape="rect" id="node7" href="$logging_8h.html" title="Standard log interfaces." alt="" coords="241,155,316,181"/>
-<area shape="rect" id="node8" title=" " alt="" coords="163,229,228,256"/>
-<area shape="rect" id="node9" title=" " alt="" coords="252,229,310,256"/>
-<area shape="rect" id="node10" title=" " alt="" coords="334,229,447,256"/>
+<area shape="rect" id="node8" title=" " alt="" coords="163,237,228,263"/>
+<area shape="rect" id="node9" title=" " alt="" coords="252,237,310,263"/>
+<area shape="rect" id="node10" title=" " alt="" coords="334,229,473,271"/>
 </map>
