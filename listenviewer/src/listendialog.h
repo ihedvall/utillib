@@ -8,6 +8,7 @@
 #include <vector>
 #include <wx/wx.h>
 #include <wx/listctrl.h>
+#include <wx/imaglist.h>
 
 namespace util::log::gui {
 

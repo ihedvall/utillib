@@ -11,6 +11,8 @@
 #include <wx/wx.h>
 #include <wx/listctrl.h>
 #include <wx/imaglist.h>
+#include <wx/choice.h>
+#include <wx/timer.h>
 #include "listenclient.h"
 #include "listenmessage.h"
 #include "listenlistview.h"
