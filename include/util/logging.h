@@ -35,13 +35,7 @@ enum class LogSeverity : uint8_t {
  * The Loc is a wrapper around the std::location library. This library is new in C++20.
  */
 #if __has_include(<source_location>)
-
-#if __clang__
-using Loc = std::experimental::source_location;
-#else
 using Loc = std::source_location;
-#endif
-
 #else
 using Loc = std::experimental::source_location;
 #endif
