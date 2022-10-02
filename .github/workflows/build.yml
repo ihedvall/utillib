@@ -35,6 +35,7 @@ jobs:
             os: macos-12
             ninja_platform: mac
             boost_toolset: clang
+            msvc_arch:
             boost_install_path: /Users/runner/work
             cmake_env:
               BOOST_ROOT /Users/runner/work/boost
@@ -44,7 +45,7 @@ jobs:
             os: windows-latest
             ninja_platform: win
             boost_toolset: mingw
-            boost_install_path: D:/a
+            boost_install_path: D:/a/boost
             msvc_arch: x64
             cmake_env:
               CMAKE_RC_FLAGS: "/C 1252"
@@ -58,7 +59,7 @@ jobs:
             ninja_platform: win
             msvc_arch: x86
             boost_toolset: mingw
-            boost_install_path: D:/a
+            boost_install_path: D:/a/boost
             cmake_env:
               CMAKE_RC_FLAGS: "/C 1252"
               CC: clang
@@ -115,6 +116,9 @@ jobs:
           libraries: program_options filesystem system locale
           toolset: ${{ matrix.env.boost_toolset}}
           directory: ${{ matrix.env.boost_install_path }}
+          configuration: Release
+          platform: ${{ matrix.env.msvc_arch }}
+          static: 1
 
       - name: Setup MSVC environment
         if: matrix.env.ninja_platform == 'win'
