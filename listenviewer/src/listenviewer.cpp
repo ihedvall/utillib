@@ -3,9 +3,8 @@
  * SPDX-License-Identifier: MIT
  */
 #include <filesystem>
-
+#define BOOST_LOCALE_HIDE_AUTO_PTR
 #include <boost/process.hpp>
-
 #include <boost/locale.hpp>
 
 #if (_MSC_VER)
@@ -17,7 +16,6 @@
 #include <wx/config.h>
 #include <wx/utils.h>
 #include <wx/splash.h>
-#include <wx/stdpaths.h>
 #include <wx/cmdline.h>
 
 #include "util/logconfig.h"

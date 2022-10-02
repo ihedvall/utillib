@@ -10,7 +10,7 @@
 #include <cstdarg>
 #include <cstdio>
 #include <string>
-#if (_MSC_VER)
+#if __has_include(<source_location>)
 #include <source_location>
 #else
 #include <experimental/source_location>
@@ -34,7 +34,7 @@ enum class LogSeverity : uint8_t {
 /** \typedef Loc
  * The Loc is a wrapper around the std::location library. This library is new in C++20.
  */
-#if (_MSC_VER)
+#if __has_include(<source_location>)
 using Loc = std::source_location;
 #else
 using Loc = std::experimental::source_location;
