@@ -17,7 +17,7 @@ add_executable(listenviewer
 target_include_directories(listenviewer PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/../src")
 target_include_directories(listenviewer PRIVATE ${wxWidgets_INCLUDE_DIRS})
 target_include_directories(listenviewer PRIVATE ${Boost_INCLUDE_DIRS})
-#target_include_directories(listenviewer PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/include")
+
 
 target_compile_definitions(listenviewer PRIVATE XML_STATIC)
 
@@ -34,6 +34,9 @@ target_link_libraries(listenviewer PRIVATE util)
 target_link_libraries(listenviewer PRIVATE ${EXPAT_LIBRARIES})
 target_link_libraries(listenviewer PRIVATE ${wxWidgets_LIBRARIES})
 target_link_libraries(listenviewer PRIVATE ${Boost_LIBRARIES})
+if (MINGW)
+    target_link_libraries(listenviewer PRIVATE iconv)
+endif()
 
 if (WIN32)
 target_link_libraries(listenviewer PRIVATE bcrypt)

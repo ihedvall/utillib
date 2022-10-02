@@ -22,7 +22,7 @@ bool IEquals(const std::string &s1, const std::string &s2, size_t nChar) {
 }
 
 bool IEquals(const std::wstring &s1, const std::wstring &s2, size_t nChar) {
-#if (_MSC_VER)
+#if (_WIN32)
   return nChar == 0 ? wcsicmp(s1.c_str(), s2.c_str()) == 0 :
          wcsnicmp(s1.c_str(), s2.c_str(), nChar) == 0;
 #else

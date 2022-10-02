@@ -34,7 +34,7 @@ ListenDialog::ListenDialog(wxWindow *parent)
   list_->AppendColumn(L"Host", wxLIST_FORMAT_LEFT, 100);
   list_->AppendColumn(L"Description", wxLIST_FORMAT_LEFT, 500);
 
-#ifdef _MSC_VER
+#ifdef _WIN32
     wxBitmap list_bmp("LIST", wxBITMAP_TYPE_BMP_RESOURCE);
 #else
     wxBitmap list_bmp { wxBITMAP(list) };

@@ -61,9 +61,15 @@ MainFrame::MainFrame(const wxString &title, const wxPoint &start_pos, const wxSi
       image_list_(16, 16, false, 9),
       message_buffer_(10),
       main_timer_(this, kIdMainTimer) {
-  SetIcon(wxICON(app));
+#ifdef _WIN32
+  wxIcon app("APP_ICON", wxBITMAP_TYPE_ICO_RESOURCE);
+#else
+  wxIcon app { wxICON(app) };
+#endif
+
+  SetIcon(app);
   wxWindow::SetName("ListenTopWindow");
-#if (_MSC_VER)
+#if (_WIN32)
   wxTopLevelWindowMSW::Maximize(maximized);
 #else
   wxTopLevelWindowNative::Maximize(maximized);

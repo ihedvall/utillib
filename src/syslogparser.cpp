@@ -42,7 +42,7 @@
 
 
 // Unqualified %code blocks.
-#line 14 "/home/ihedvall/CLionProjects/utillib/src/syslogparser.y"
+#line 14 "D:/projects/utillib/src/syslogparser.y"
 
     #include <sstream>
     #include "syslogscanner.h"
@@ -51,7 +51,7 @@
 
 
 
-#line 55 "/home/ihedvall/CLionProjects/utillib/src/syslogparser.cpp"
+#line 55 "D:/projects/utillib/src/syslogparser.cpp"
 
 
 #ifndef YY_
@@ -123,9 +123,9 @@
 #define YYERROR         goto yyerrorlab
 #define YYRECOVERING()  (!!yyerrstatus_)
 
-#line 5 "/home/ihedvall/CLionProjects/utillib/src/syslogparser.y"
+#line 5 "D:/projects/utillib/src/syslogparser.y"
 namespace util { namespace syslog {
-#line 129 "/home/ihedvall/CLionProjects/utillib/src/syslogparser.cpp"
+#line 129 "D:/projects/utillib/src/syslogparser.cpp"
 
   /// Build a parser object.
   SyslogParser::SyslogParser (util::syslog::SyslogScanner &scanner_yyarg)
@@ -675,14 +675,14 @@ namespace util { namespace syslog {
           switch (yyn)
             {
   case 2: // syslog_message: pri version "space" isotime "space" hostname "space" appname "space" procid "space" msgid "space" sd msg
-#line 36 "/home/ihedvall/CLionProjects/utillib/src/syslogparser.y"
+#line 36 "D:/projects/utillib/src/syslogparser.y"
                                                                                {
     }
-#line 682 "/home/ihedvall/CLionProjects/utillib/src/syslogparser.cpp"
+#line 682 "D:/projects/utillib/src/syslogparser.cpp"
     break;
 
   case 3: // pri: '<' "int" '>'
-#line 39 "/home/ihedvall/CLionProjects/utillib/src/syslogparser.y"
+#line 39 "D:/projects/utillib/src/syslogparser.y"
                      { if (scanner.debug()) std::cout << "PRI: " << yystack_[1].value.as < int > () << std::endl;
         const auto pri = static_cast<uint8_t>(yystack_[1].value.as < int > ());
         const auto severity = static_cast<util::syslog::SyslogSeverity>(pri % 8);
@@ -690,92 +690,92 @@ namespace util { namespace syslog {
         scanner.Severity(severity);
         scanner.Facility(facility);
     }
-#line 694 "/home/ihedvall/CLionProjects/utillib/src/syslogparser.cpp"
+#line 694 "D:/projects/utillib/src/syslogparser.cpp"
     break;
 
   case 4: // version: %empty
-#line 47 "/home/ihedvall/CLionProjects/utillib/src/syslogparser.y"
+#line 47 "D:/projects/utillib/src/syslogparser.y"
                 { if (scanner.debug()) std::cout << "VERSION: 0" << std::endl;
         scanner.Version(0);
     }
-#line 702 "/home/ihedvall/CLionProjects/utillib/src/syslogparser.cpp"
+#line 702 "D:/projects/utillib/src/syslogparser.cpp"
     break;
 
   case 5: // version: "int"
-#line 50 "/home/ihedvall/CLionProjects/utillib/src/syslogparser.y"
+#line 50 "D:/projects/utillib/src/syslogparser.y"
              { if (scanner.debug()) std::cout << "VERSION: " << yystack_[0].value.as < int > () << std::endl;
         scanner.Version(static_cast<uint8_t>(yystack_[0].value.as < int > ()));
     }
-#line 710 "/home/ihedvall/CLionProjects/utillib/src/syslogparser.cpp"
+#line 710 "D:/projects/utillib/src/syslogparser.cpp"
     break;
 
   case 6: // isotime: "isotime"
-#line 54 "/home/ihedvall/CLionProjects/utillib/src/syslogparser.y"
+#line 54 "D:/projects/utillib/src/syslogparser.y"
                  { if (scanner.debug()) std::cout << "ISOTIME: " << yystack_[0].value.as < std::string > () << std::endl;
         scanner.IsoTime(yystack_[0].value.as < std::string > ());
     }
-#line 718 "/home/ihedvall/CLionProjects/utillib/src/syslogparser.cpp"
+#line 718 "D:/projects/utillib/src/syslogparser.cpp"
     break;
 
   case 7: // hostname: NAME
-#line 58 "/home/ihedvall/CLionProjects/utillib/src/syslogparser.y"
+#line 58 "D:/projects/utillib/src/syslogparser.y"
                { if (scanner.debug()) std::cout << "HOSTNAME: " << yystack_[0].value.as < std::string > () << std::endl;
         scanner.Hostname(yystack_[0].value.as < std::string > ());
     }
-#line 726 "/home/ihedvall/CLionProjects/utillib/src/syslogparser.cpp"
+#line 726 "D:/projects/utillib/src/syslogparser.cpp"
     break;
 
   case 8: // appname: NAME
-#line 62 "/home/ihedvall/CLionProjects/utillib/src/syslogparser.y"
+#line 62 "D:/projects/utillib/src/syslogparser.y"
               { if (scanner.debug()) std::cout << "APPNAME: " << yystack_[0].value.as < std::string > () << std::endl;
         scanner.ApplicationName(yystack_[0].value.as < std::string > ());
      }
-#line 734 "/home/ihedvall/CLionProjects/utillib/src/syslogparser.cpp"
+#line 734 "D:/projects/utillib/src/syslogparser.cpp"
     break;
 
   case 9: // procid: NAME
-#line 66 "/home/ihedvall/CLionProjects/utillib/src/syslogparser.y"
+#line 66 "D:/projects/utillib/src/syslogparser.y"
              { if (scanner.debug()) std::cout << "PID: " << yystack_[0].value.as < std::string > () << std::endl;
         scanner.ProcessId(yystack_[0].value.as < std::string > ());
      }
-#line 742 "/home/ihedvall/CLionProjects/utillib/src/syslogparser.cpp"
+#line 742 "D:/projects/utillib/src/syslogparser.cpp"
     break;
 
   case 10: // msgid: NAME
-#line 70 "/home/ihedvall/CLionProjects/utillib/src/syslogparser.y"
+#line 70 "D:/projects/utillib/src/syslogparser.y"
             { if (scanner.debug()) std::cout << "MSG-ID: " << yystack_[0].value.as < std::string > () << std::endl;
         scanner.MessageId(yystack_[0].value.as < std::string > ());
      }
-#line 750 "/home/ihedvall/CLionProjects/utillib/src/syslogparser.cpp"
+#line 750 "D:/projects/utillib/src/syslogparser.cpp"
     break;
 
   case 16: // sd_id: NAME
-#line 82 "/home/ihedvall/CLionProjects/utillib/src/syslogparser.y"
+#line 82 "D:/projects/utillib/src/syslogparser.y"
             { if (scanner.debug()) std::cout << "ID: " << yystack_[0].value.as < std::string > () << std::endl;
     scanner.AddStructuredData(yystack_[0].value.as < std::string > ());
 }
-#line 758 "/home/ihedvall/CLionProjects/utillib/src/syslogparser.cpp"
+#line 758 "D:/projects/utillib/src/syslogparser.cpp"
     break;
 
   case 20: // sd_param: NAME '=' '"' NAME '"'
-#line 90 "/home/ihedvall/CLionProjects/utillib/src/syslogparser.y"
+#line 90 "D:/projects/utillib/src/syslogparser.y"
                                   {
      if (scanner.debug()) std::cout << "PAR: " << yystack_[4].value.as < std::string > () << ", VALUE: " << yystack_[1].value.as < std::string > () << std::endl;
      scanner.AppendParameter(yystack_[4].value.as < std::string > (),yystack_[1].value.as < std::string > ());
      }
-#line 767 "/home/ihedvall/CLionProjects/utillib/src/syslogparser.cpp"
+#line 767 "D:/projects/utillib/src/syslogparser.cpp"
     break;
 
   case 23: // msg_any: NAME
-#line 98 "/home/ihedvall/CLionProjects/utillib/src/syslogparser.y"
+#line 98 "D:/projects/utillib/src/syslogparser.y"
               { if (scanner.debug()) std::cout << "MSG: " << yystack_[0].value.as < std::string > () << std::endl;
     scanner.Message(yystack_[0].value.as < std::string > ());
     }
-#line 775 "/home/ihedvall/CLionProjects/utillib/src/syslogparser.cpp"
+#line 775 "D:/projects/utillib/src/syslogparser.cpp"
     break;
 
 
-#line 779 "/home/ihedvall/CLionProjects/utillib/src/syslogparser.cpp"
+#line 779 "D:/projects/utillib/src/syslogparser.cpp"
 
             default:
               break;
@@ -1147,11 +1147,11 @@ namespace util { namespace syslog {
       return symbol_kind::S_YYUNDEF;
   }
 
-#line 5 "/home/ihedvall/CLionProjects/utillib/src/syslogparser.y"
+#line 5 "D:/projects/utillib/src/syslogparser.y"
 } } // util::syslog
-#line 1153 "/home/ihedvall/CLionProjects/utillib/src/syslogparser.cpp"
+#line 1153 "D:/projects/utillib/src/syslogparser.cpp"
 
-#line 101 "/home/ihedvall/CLionProjects/utillib/src/syslogparser.y"
+#line 101 "D:/projects/utillib/src/syslogparser.y"
 
 
 

@@ -179,9 +179,9 @@ uint64_t IsoTimeToNs(const std::string& iso_time, bool local_time) {
   }
   uint64_t ns_1970;
   if (local_time)
-      mktime(&bt);
+      ns_1970 = mktime(&bt);
   else {
-#if (_MSC_VER)
+#ifdef _WIN32
       ns_1970 = _mkgmtime(&bt);
 #else
       ns_1970 = timegm(&bt);
@@ -365,7 +365,7 @@ uint64_t OdsDateToNs(const std::string &ods_date) {
         break;
     }
   }
-#if (_MSC_VER)
+#if (_WIN32)
       auto ns_1970 = _mkgmtime(&bt);
 #else
       auto ns_1970 = timegm(&bt);

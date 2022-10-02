@@ -1,7 +1,7 @@
-#line 2 "/home/ihedvall/CLionProjects/utillib/src/syslogflexer.cpp"
+#line 1 "D:/projects/utillib/src/syslogflexer.cpp"
     #include <cstdint>
 
-#line 5 "/home/ihedvall/CLionProjects/utillib/src/syslogflexer.cpp"
+#line 4 "D:/projects/utillib/src/syslogflexer.cpp"
 
 #define  YY_INT_ALIGNED short int
 
@@ -368,7 +368,7 @@ typedef flex_uint8_t YY_CHAR;
 
 #include <FlexLexer.h>
 
-int yyFlexLexer::yywrap() { return 1; }
+inline int yyFlexLexer::yywrap() { return 1; }
 int yyFlexLexer::yylex()
 	{
 	LexerError( "yyFlexLexer::yylex invoked but %option yyclass used" );
@@ -576,19 +576,19 @@ static const flex_int16_t yy_rule_linenum[31] =
 #define yymore() yymore_used_but_not_detected
 #define YY_MORE_ADJ 0
 #define YY_RESTORE_YY_MORE_OFFSET
-#line 1 "/home/ihedvall/CLionProjects/utillib/src/syslogflexer.l"
+#line 1 "D:/projects/utillib/src/syslogflexer.l"
 
-#line 5 "/home/ihedvall/CLionProjects/utillib/src/syslogflexer.l"
+#line 5 "D:/projects/utillib/src/syslogflexer.l"
 
     #include "syslogscanner.h"
     #undef  YY_DECL
     #define YY_DECL int util::syslog::SyslogScanner::yylex(syslog::SyslogParser::value_type* yy_value)
     using token = util::syslog::SyslogParser::token;
-#line 588 "/home/ihedvall/CLionProjects/utillib/src/syslogflexer.cpp"
+#line 587 "D:/projects/utillib/src/syslogflexer.cpp"
 #define YY_NO_UNISTD_H 1
 #define YY_NO_INPUT 1
 
-#line 592 "/home/ihedvall/CLionProjects/utillib/src/syslogflexer.cpp"
+#line 591 "D:/projects/utillib/src/syslogflexer.cpp"
 
 #define INITIAL 0
 #define PRI 1
@@ -615,7 +615,7 @@ static const flex_int16_t yy_rule_linenum[31] =
 #include <unistd.h>
 /* %endif */
 #endif
-
+    
 #ifndef YY_EXTRA_TYPE
 #define YY_EXTRA_TYPE void *
 #endif
@@ -792,13 +792,13 @@ YY_DECL
 
 	{
 /* %% [7.0] user's declarations go here */
-#line 30 "/home/ihedvall/CLionProjects/utillib/src/syslogflexer.l"
+#line 30 "D:/projects/utillib/src/syslogflexer.l"
 
 
-#line 33 "/home/ihedvall/CLionProjects/utillib/src/syslogflexer.l"
+#line 33 "D:/projects/utillib/src/syslogflexer.l"
             yylval = yy_value;
 
-#line 802 "/home/ihedvall/CLionProjects/utillib/src/syslogflexer.cpp"
+#line 801 "D:/projects/utillib/src/syslogflexer.cpp"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -875,184 +875,184 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 35 "/home/ihedvall/CLionProjects/utillib/src/syslogflexer.l"
+#line 35 "D:/projects/utillib/src/syslogflexer.l"
 { BEGIN(PRI);
                return '<';}
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 38 "/home/ihedvall/CLionProjects/utillib/src/syslogflexer.l"
+#line 38 "D:/projects/utillib/src/syslogflexer.l"
 { const auto num = std::stoi(yytext);
                  yylval->build<int>(num);
                  return token::NUMBER;}
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 42 "/home/ihedvall/CLionProjects/utillib/src/syslogflexer.l"
+#line 42 "D:/projects/utillib/src/syslogflexer.l"
 { BEGIN(VERSION);
            return '>';}
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 45 "/home/ihedvall/CLionProjects/utillib/src/syslogflexer.l"
+#line 45 "D:/projects/utillib/src/syslogflexer.l"
 {const auto num = std::stoi(yytext);
                    yylval->build<int>(num);
                    return token::NUMBER;}
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 49 "/home/ihedvall/CLionProjects/utillib/src/syslogflexer.l"
+#line 49 "D:/projects/utillib/src/syslogflexer.l"
 { BEGIN TIMESTAMP;
                yylval->build<std::string>(" ");
                return token::SP;}
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 53 "/home/ihedvall/CLionProjects/utillib/src/syslogflexer.l"
+#line 53 "D:/projects/utillib/src/syslogflexer.l"
 { const std::string time = yytext;
                          yylval->build<std::string>(time);
                          return token::ISOTIME;}
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 57 "/home/ihedvall/CLionProjects/utillib/src/syslogflexer.l"
+#line 57 "D:/projects/utillib/src/syslogflexer.l"
 { BEGIN HOSTNAME;
                   yylval->build<std::string>(" ");
                   return token::SP;}
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 61 "/home/ihedvall/CLionProjects/utillib/src/syslogflexer.l"
+#line 61 "D:/projects/utillib/src/syslogflexer.l"
 { const std::string name = yytext;
                 yylval->build<std::string>(name);
                 return token::NAME;}
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 65 "/home/ihedvall/CLionProjects/utillib/src/syslogflexer.l"
+#line 65 "D:/projects/utillib/src/syslogflexer.l"
 { BEGIN APPNAME;
                  yylval->build<std::string>(" ");
                  return token::SP;}
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 69 "/home/ihedvall/CLionProjects/utillib/src/syslogflexer.l"
+#line 69 "D:/projects/utillib/src/syslogflexer.l"
 { const std::string name = yytext;
                    yylval->build<std::string>(name);
                    return token::NAME;}
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 73 "/home/ihedvall/CLionProjects/utillib/src/syslogflexer.l"
+#line 73 "D:/projects/utillib/src/syslogflexer.l"
 { BEGIN PROCID;
                  yylval->build<std::string>(" ");
                  return token::SP;}
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 77 "/home/ihedvall/CLionProjects/utillib/src/syslogflexer.l"
+#line 77 "D:/projects/utillib/src/syslogflexer.l"
 { const std::string name = yytext;
                    yylval->build<std::string>(name);
                    return token::NAME;}
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 81 "/home/ihedvall/CLionProjects/utillib/src/syslogflexer.l"
+#line 81 "D:/projects/utillib/src/syslogflexer.l"
 { BEGIN MSGID;
                yylval->build<std::string>(" ");
                return token::SP;}
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 85 "/home/ihedvall/CLionProjects/utillib/src/syslogflexer.l"
+#line 85 "D:/projects/utillib/src/syslogflexer.l"
 { const std::string name = yytext;
                 yylval->build<std::string>(name);
                 return token::NAME;}
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 89 "/home/ihedvall/CLionProjects/utillib/src/syslogflexer.l"
+#line 89 "D:/projects/utillib/src/syslogflexer.l"
 { BEGIN SD;
               yylval->build<std::string>(" ");
               return token::SP;}
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 93 "/home/ihedvall/CLionProjects/utillib/src/syslogflexer.l"
+#line 93 "D:/projects/utillib/src/syslogflexer.l"
 { return token::NIL;}
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 95 "/home/ihedvall/CLionProjects/utillib/src/syslogflexer.l"
+#line 95 "D:/projects/utillib/src/syslogflexer.l"
 { BEGIN MSG;
              yylval->build<std::string>(" ");
              return token::SP;}
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 99 "/home/ihedvall/CLionProjects/utillib/src/syslogflexer.l"
+#line 99 "D:/projects/utillib/src/syslogflexer.l"
 { BEGIN SDELEMENT;
            return '['; }
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 102 "/home/ihedvall/CLionProjects/utillib/src/syslogflexer.l"
+#line 102 "D:/projects/utillib/src/syslogflexer.l"
 { BEGIN SD;
                   return ']';}
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 105 "/home/ihedvall/CLionProjects/utillib/src/syslogflexer.l"
+#line 105 "D:/projects/utillib/src/syslogflexer.l"
 { BEGIN SDPAR;
                   yylval->build<std::string>(" ");
                   return token::SP; }
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 109 "/home/ihedvall/CLionProjects/utillib/src/syslogflexer.l"
+#line 109 "D:/projects/utillib/src/syslogflexer.l"
 { const std::string name = yytext;
                      yylval->build<std::string>(name);
                      return token::NAME; }
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 114 "/home/ihedvall/CLionProjects/utillib/src/syslogflexer.l"
+#line 114 "D:/projects/utillib/src/syslogflexer.l"
 { return '='; }
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 116 "/home/ihedvall/CLionProjects/utillib/src/syslogflexer.l"
+#line 116 "D:/projects/utillib/src/syslogflexer.l"
 { BEGIN SDVALUE;
               return '\"'; }
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 119 "/home/ihedvall/CLionProjects/utillib/src/syslogflexer.l"
+#line 119 "D:/projects/utillib/src/syslogflexer.l"
 { BEGIN SD;
               return ']';}
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 122 "/home/ihedvall/CLionProjects/utillib/src/syslogflexer.l"
+#line 122 "D:/projects/utillib/src/syslogflexer.l"
 {   yylval->build<std::string>(" ");
                 return token::SP;}
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 125 "/home/ihedvall/CLionProjects/utillib/src/syslogflexer.l"
+#line 125 "D:/projects/utillib/src/syslogflexer.l"
 { const std::string name = yytext;
                yylval->build<std::string>(name);
                return token::NAME; }
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 129 "/home/ihedvall/CLionProjects/utillib/src/syslogflexer.l"
+#line 129 "D:/projects/utillib/src/syslogflexer.l"
 { BEGIN SDPAR;
                  return '\"'; }
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 132 "/home/ihedvall/CLionProjects/utillib/src/syslogflexer.l"
+#line 132 "D:/projects/utillib/src/syslogflexer.l"
 { const std::string name = yytext;
                    yylval->build<std::string>(name);
                    return token::NAME;}
@@ -1060,22 +1060,22 @@ YY_RULE_SETUP
 case 29:
 /* rule 29 can match eol */
 YY_RULE_SETUP
-#line 136 "/home/ihedvall/CLionProjects/utillib/src/syslogflexer.l"
+#line 136 "D:/projects/utillib/src/syslogflexer.l"
 { const std::string name = yytext;
                 yylval->build<std::string>(name);
                 return token::NAME;}
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 140 "/home/ihedvall/CLionProjects/utillib/src/syslogflexer.l"
+#line 140 "D:/projects/utillib/src/syslogflexer.l"
 {}
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 141 "/home/ihedvall/CLionProjects/utillib/src/syslogflexer.l"
+#line 141 "D:/projects/utillib/src/syslogflexer.l"
 ECHO;
 	YY_BREAK
-#line 1079 "/home/ihedvall/CLionProjects/utillib/src/syslogflexer.cpp"
+#line 1078 "D:/projects/utillib/src/syslogflexer.cpp"
 case YY_STATE_EOF(INITIAL):
 case YY_STATE_EOF(PRI):
 case YY_STATE_EOF(VERSION):
@@ -2206,7 +2206,7 @@ void yyfree (void * ptr )
 
 /* %ok-for-header */
 
-#line 141 "/home/ihedvall/CLionProjects/utillib/src/syslogflexer.l"
+#line 141 "D:/projects/utillib/src/syslogflexer.l"
 
 
 

@@ -23,7 +23,7 @@ endif()
 target_link_libraries(listend PRIVATE util)
 target_link_libraries(listend PRIVATE ${EXPAT_LIBRARIES})
 target_link_libraries(listend PRIVATE ${Boost_LIBRARIES})
-#target_link_libraries(listend PRIVATE eclipse-paho-mqtt-c::paho-mqtt3as-static)
+
 
 if (WIN32)
 target_link_libraries(listend PRIVATE bcrypt)
