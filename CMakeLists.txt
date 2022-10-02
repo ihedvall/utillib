@@ -6,9 +6,12 @@ project(utilLib
         DESCRIPTION "Common C++ library with utilities."
         LANGUAGES CXX)
 
-option(BUILD_SHARED_LIBS "Static libraries are preferred" OFF)
-option(BUILD_STATIC_LIBS "Static libraries are normally used" ON)
-option(BUILD_DOC "If doxygen is installed, then build documentation in Release mode" OFF)
+option(UTIL_SHARED_LIBS "Static libraries are preferred" OFF)
+option(UTIL_STATIC_LIBS "Static libraries are normally used" ON)
+option(UTIL_DOC "If doxygen is installed, then build documentation in Release mode" OFF)
+option(UTIL_TOOLS "Building applications" ON)
+option(UTIL_TEST "Building unit test" ON)
+
 if (NOT COMP_DIR)
     set(COMP_DIR "k:")
 endif()
@@ -118,25 +121,28 @@ set(UTIL_PUBLIC_HEADERS
 set_target_properties(util PROPERTIES PUBLIC_HEADER "${UTIL_PUBLIC_HEADERS}")
 get_target_property(PH util PUBLIC_HEADER)
 message( STATUS "UTIL Target Includes: " "${PH}")
+if (UTIL_TOOLS)
+    add_subdirectory(listend)
+endif()
 
-add_subdirectory(listend)
-if (WIN32)
+if (WIN32 AND UTIL_TOOLS)
     add_subdirectory(serviced)
 endif()
 
-if (wxWidgets_FOUND )
+if (wxWidgets_FOUND AND UTIL_TOOLS)
     add_subdirectory(listenviewer)
 endif()
-if (wxWidgets_FOUND AND WIN32)
+
+if (wxWidgets_FOUND AND WIN32 AND UTIL_TOOLS)
     add_subdirectory(serviceexplorer)
 endif()
 
-if (GTEST_FOUND)
+if (GTEST_FOUND AND UTIL_TEST)
     enable_testing()
     add_subdirectory(test)
 endif()
 
-if (DOXYGEN_FOUND AND (CMAKE_BUILD_TYPE MATCHES "^[Rr]elease") )
+if (DOXYGEN_FOUND AND (CMAKE_BUILD_TYPE MATCHES "^[Rr]elease") AND UTIL_DOC)
     set(DOXYGEN_RECURSIVE NO)
     set(DOXYGEN_REPEAT_BRIEF NO)
     set(DOXYGEN_PROJECT_NAME "UTILLib")
