@@ -66,8 +66,6 @@ bool ListenViewer::OnInit() {
   bool maximized = false;
   app_config->Read("/MainWin/Max",&maximized, maximized);
 
-
-
   wxInitAllImageHandlers();
 
   // Set up the log file.
@@ -79,8 +77,7 @@ bool ListenViewer::OnInit() {
   log_config.CreateDefaultLogger();
   LOG_INFO() << "Log File created. Path: " << log_config.GetLogFile();
 
-  FindNotepad();
-
+  notepad_ = util::log::FindNotepad();
 
   auto* frame = new MainFrame(GetAppDisplayName(), start_pos, start_size, maximized);
   frame->Show(true);
@@ -125,39 +122,6 @@ void ListenViewer::OnUpdateOpenLogFile(wxUpdateUIEvent &event) {
 void ListenViewer::OpenFile(const std::string& filename) const {
   if (!notepad_.empty()) {
     boost::process::spawn(notepad_, filename);
-  }
-}
-
-void ListenViewer::FindNotepad() {
-
-  // 1. Find the path to the 'notepad++.exe'
-  try {
-    std::vector< boost::filesystem::path > path_list = ::boost::this_process::path();
-    path_list.emplace_back("c:/program files/notepad++");
-
-    auto notepad = boost::process::search_path("notepad++", path_list);
-    if (!notepad.string().empty()) {
-      notepad_ = notepad.string();
-      LOG_INFO() << "Found NotePad++. Path: " << notepad_;
-    }
-  } catch(const std::exception& ) {
-    notepad_.clear();
-  }
-
-  // 2. Find the path to the 'notepad.exe'
-  if (!notepad_.empty()) {
-    return;
-  }
-
-  try {
-    auto notepad = boost::process::search_path("notepad");
-    if (!notepad.string().empty()) {
-      notepad_ = notepad.string();
-      LOG_INFO() << "Found NotePad. Path: " << notepad_;
-    }
-  } catch(const std::exception& ) {
-    notepad_.clear();
-    LOG_INFO() << "NotePad was not found.";
   }
 }
 

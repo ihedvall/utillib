@@ -107,6 +107,20 @@ std::string FindNotepad() {
   } catch(const std::exception& ) {
     note.clear();
   }
+
+  if (!note.empty()) {
+    return note;
+  }
+
+   // 2. Find the path to the 'gedit' GNOME editor
+   try {
+      auto notepad = boost::process::search_path("gedit");
+      if (!notepad.string().empty()) {
+          note = notepad.string();
+      }
+   } catch(const std::exception& ) {
+      note.clear();
+   }
   return note;
 }
 

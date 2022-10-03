@@ -12,10 +12,6 @@ option(UTIL_DOC "If doxygen is installed, then build documentation in Release mo
 option(UTIL_TOOLS "Building applications" ON)
 option(UTIL_TEST "Building unit test" ON)
 
-if (NOT COMP_DIR)
-    set(COMP_DIR "k:")
-endif()
-
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_DEBUG_POSTFIX d)
 

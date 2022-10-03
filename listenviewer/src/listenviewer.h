@@ -19,16 +19,8 @@ class ListenViewer : public wxApp {
 
  private:
   std::string notepad_; ///< Path to notepad.exe
-
-
-
   void OnOpenLogFile(wxCommandEvent& event);
   void OnUpdateOpenLogFile(wxUpdateUIEvent& event);
-
-  void FindNotepad();
-
-
-  bool CheckCmdLine();
 
   wxDECLARE_EVENT_TABLE();
 };

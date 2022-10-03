@@ -22,21 +22,20 @@ if (NOT wxWidgets_FOUND)
         set(CMAKE_FIND_ROOT_PATH ${COMP_DIR}/wxwidgets/master)
         set(wxWidgets_USE_STATIC ON)
         set(wxWidgets_USE_UNICODE ON)
-        if (CMAKE_BUILD_TYPE MATCHES DEBUG)
+        if (CMAKE_BUILD_TYPE MATCHES "^[Dd]ebug")
             set(wxWidgets_USE_DEBUG ON)
         else()
             set(wxWidgets_USE_DEBUG OFF)
         endif()
         set(wxWidgets_USE_UNIVERSAL OFF)
     endif()
-
-
-
     find_package(wxWidgets COMPONENTS adv core base )
     include(${wxWidgets_USE_FILE})
 
 endif()
 
+message(STATUS "wxWidgets Build Type: " ${CMAKE_BUILD_TYPE})
+message(STATUS "wxWidgets Use Debug: " ${wxWidgets_USE_DEBUG})
 message(STATUS "wxWidgets Find Style: " ${wxWidgets_FIND_STYLE})
 message(STATUS "wxWidgets Lib Dir: " ${wxWidgets_LIB_DIR})
 message(STATUS "wxWidgets Config Exe : " ${wxWidgets_CONFIG_EXECUTABLE})
