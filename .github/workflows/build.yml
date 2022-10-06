@@ -138,7 +138,7 @@ jobs:
       - name: Install Windows Static Expat
         if: matrix.env.platform == 'win'
         run: |
-          vcpkg install expat
+          vcpkg install expat:x64-windows-static
 
       - name: Install llvm
         if: matrix.env.platform == 'mac'
