@@ -9,18 +9,17 @@ project(serviced
 add_executable(serviced src/serviced.cpp src/servicehelper.cpp src/servicehelper.h)
 
 
-
 target_include_directories(serviced PRIVATE ${Boost_INCLUDE_DIRS})
 target_include_directories(serviced PRIVATE "../../utillib/include")
 target_compile_definitions(serviced PRIVATE XML_STATIC)
 
 if (MINGW)
-target_link_options(serviced PRIVATE -static)
-endif()
+    target_link_options(serviced PRIVATE -static)
+endif ()
 
 if (MSVC)
-target_compile_definitions(serviced PRIVATE _WIN32_WINNT=0x0A00)
-endif()
+    target_compile_definitions(serviced PRIVATE _WIN32_WINNT=0x0A00)
+endif ()
 
 target_link_libraries(serviced PRIVATE util)
 target_link_libraries(serviced PRIVATE ${EXPAT_LIBRARIES})
@@ -28,8 +27,8 @@ target_link_libraries(serviced PRIVATE ${Boost_LIBRARIES})
 #target_link_libraries(serviced PRIVATE ${ZLIB_LIBRARIES})
 #target_link_libraries(serviced PRIVATE ${OPENSSL_CRYPTO_LIBRARY})
 if (WIN32)
-#target_link_libraries(serviced PRIVATE iconv)
-target_link_libraries(serviced PRIVATE bcrypt)
-target_link_libraries(serviced PRIVATE ws2_32)
-target_link_libraries(serviced PRIVATE mswsock)
-endif()
+    #target_link_libraries(serviced PRIVATE iconv)
+    target_link_libraries(serviced PRIVATE bcrypt)
+    target_link_libraries(serviced PRIVATE ws2_32)
+    target_link_libraries(serviced PRIVATE mswsock)
+endif ()

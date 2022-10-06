@@ -6,9 +6,10 @@
  * \brief Defines an interface against a generic logger.
  */
 #pragma once
-#include <string>
 #include <array>
 #include <atomic>
+#include <string>
+
 #include "logmessage.h"
 
 namespace util::log {
@@ -18,30 +19,32 @@ namespace util::log {
  *
  */
 enum class LogType {
-  LogNothing = 0, ///< No logger.
-  LogToConsole,   ///< Log to the cout stream.
-  LogToFile,      ///< Log to file.
-  LogToListen,    ///< Log to listen window (system messages).
-  LogToSyslog     ///< Logs to a syslog server.
+  LogNothing = 0,  ///< No logger.
+  LogToConsole,    ///< Log to the cout stream.
+  LogToFile,       ///< Log to file.
+  LogToListen,     ///< Log to listen window (system messages).
+  LogToSyslog      ///< Logs to a syslog server.
 };
 
 /** \class ILogger ilogger.h "util/ilogger.h"
  * \brief Interface against a generic logger.
  *
- * The class is an interface class for implementing a logger. Its main interface is the AddLogMessage()
- * function that handles incoming log messages.
+ * The class is an interface class for implementing a logger. Its main interface
+ * is the AddLogMessage() function that handles incoming log messages.
  */
 class ILogger {
  public:
-  virtual ~ILogger() = default; ///< Destructor
-  virtual void AddLogMessage(const LogMessage &message) = 0; ///< Handle a log message
-  virtual void Stop(); ///< Stops any worker thread
+  virtual ~ILogger() = default;  ///< Destructor
+  virtual void AddLogMessage(
+      const LogMessage &message) = 0;  ///< Handle a log message
+  virtual void Stop();                 ///< Stops any worker thread
 
   /** \brief Enable or disable a severity
    *
-   * Enables or disable a log severity. By default all log messages are shown but some logger type
-   * may disable some severity messages. Typical is the trace level disabled. Disable
-   * a severity level means that it isn't saved or sent further by this logger.
+   * Enables or disable a log severity. By default all log messages are shown
+   * but some logger type may disable some severity messages. Typical is the
+   * trace level disabled. Disable a severity level means that it isn't saved or
+   * sent further by this logger.
    * @param severity Severity Level
    * @param enable True to enable, false to disable.
    */
@@ -63,9 +66,7 @@ class ILogger {
    * loggers, this information is not needed.
    * @param show True if the source location should be stored.
    */
-  void ShowLocation(bool show) {
-    show_location_ = show;
-  }
+  void ShowLocation(bool show) { show_location_ = show; }
 
   /** \brief Returns true if the source location should be shown.
    *
@@ -73,22 +74,18 @@ class ILogger {
    * logger.
    * @return True if source location should be included.
    */
-  [[nodiscard]] bool ShowLocation() const {
-    return show_location_;
-  }
+  [[nodiscard]] bool ShowLocation() const { return show_location_; }
 
-  [[nodiscard]] virtual bool HasLogFile() const ; ///< Returns true if the logger has  file.
-  [[nodiscard]] virtual std::string Filename() const; ///< Return full path to the log file.
+  [[nodiscard]] virtual bool HasLogFile()
+      const;  ///< Returns true if the logger has  file.
+  [[nodiscard]] virtual std::string Filename()
+      const;  ///< Return full path to the log file.
  protected:
-  ILogger() = default; ///< Constructor
+  ILogger() = default;  ///< Constructor
  private:
-  std::array<std::atomic<bool>,9> severity_filter_ = {true,true,true,
-                                                      true,true,true,
-                                                      true,true,true};
+  std::array<std::atomic<bool>, 9> severity_filter_ = {
+      true, true, true, true, true, true, true, true, true};
   std::atomic<bool> show_location_ = true;
-
-
-
 };
 
-}
+}  // namespace util::log

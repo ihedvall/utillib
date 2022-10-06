@@ -2,27 +2,27 @@
  * Copyright 2022 Ingemar Hedvall
  * SPDX-License-Identifier: MIT
  */
+#include <gtest/gtest.h>
+
+#include <filesystem>
 #include <string>
 #include <string_view>
-#include <filesystem>
-#include <gtest/gtest.h>
-#include "util/tempdir.h"
+
 #include "util/stringutil.h"
+#include "util/tempdir.h"
 
 using namespace util::log;
 using namespace util::string;
 
 namespace {
-  constexpr std::string_view kDonaldDir = "donald";
-  constexpr std::string_view kDuckFile = "duck";
+constexpr std::string_view kDonaldDir = "donald";
+constexpr std::string_view kDuckFile = "duck";
 
-}
-
-
+}  // namespace
 
 namespace util::test {
 
-TEST(TempDir, NormalFunction ) {
+TEST(TempDir, NormalFunction) {
   std::string path;
   {
     TempDir test_dir(kDonaldDir.data(), false);
@@ -34,7 +34,7 @@ TEST(TempDir, NormalFunction ) {
   EXPECT_FALSE(std::filesystem::exists(path));
 }
 
-TEST(TempDir, UniqueFunction ) {
+TEST(TempDir, UniqueFunction) {
   std::string path;
   for (size_t count = 0; count < 100; ++count) {
     {
@@ -48,7 +48,7 @@ TEST(TempDir, UniqueFunction ) {
   }
 }
 
-TEST(TempDir, DefaultFunction ) {
+TEST(TempDir, DefaultFunction) {
   std::string path;
   {
     TempDir test_dir("", false);
@@ -60,14 +60,14 @@ TEST(TempDir, DefaultFunction ) {
   EXPECT_FALSE(std::filesystem::exists(path));
 }
 
-TEST(TempDir, NormalTempFile ) {
+TEST(TempDir, NormalTempFile) {
   TempDir test_dir(kDonaldDir.data(), false);
   const auto file = test_dir.TempFile(kDuckFile.data(), ".xxx", false);
   std::cout << file << std::endl;
   EXPECT_FALSE(file.empty());
 }
 
-TEST(TempDir, UniqueTempFile ) {
+TEST(TempDir, UniqueTempFile) {
   TempDir test_dir(kDonaldDir.data(), false);
   const auto file = test_dir.TempFile(kDuckFile.data(), ".xxx", true);
   std::cout << file << std::endl;
@@ -80,4 +80,4 @@ TEST(TempDir, BadFileExtension) {
   std::cout << file << std::endl;
   EXPECT_FALSE(file.empty());
 }
-}
+}  // namespace util::test

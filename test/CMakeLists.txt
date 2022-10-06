@@ -36,16 +36,16 @@ target_link_libraries(test_util PRIVATE ${GTEST_BOTH_LIBRARIES})
 #target_link_libraries(test_util PRIVATE eclipse-paho-mqtt-c::paho-mqtt3as-static)
 
 if (WIN32)
-target_link_libraries(test_util PRIVATE ws2_32)
-target_link_libraries(test_util PRIVATE mswsock)
-target_link_libraries(test_util PRIVATE bcrypt)
-endif()
+    target_link_libraries(test_util PRIVATE ws2_32)
+    target_link_libraries(test_util PRIVATE mswsock)
+    target_link_libraries(test_util PRIVATE bcrypt)
+endif ()
 
 if (MINGW)
-    target_link_options(test_util PRIVATE -static -fstack-protector )
+    target_link_options(test_util PRIVATE -static -fstack-protector)
 elseif (MSVC)
     target_compile_options(test_util PRIVATE -D_WIN32_WINNT=0x0A00)
-endif()
+endif ()
 
 
 include(GoogleTest)

@@ -2,26 +2,27 @@
  * Copyright 2021 Ingemar Hedvall
  * SPDX-License-Identifier: MIT
  */
-#include <string>
-#include <algorithm>
-#include <fstream>
-#include <filesystem>
-#include <boost/algorithm//string/replace.hpp>
-
 #include "util/csvwriter.h"
+
+#include <algorithm>
+#include <boost/algorithm/string/replace.hpp>
+#include <filesystem>
+#include <fstream>
+#include <string>
+
 #include "util/logstream.h"
 #include "util/stringutil.h"
 
 using namespace util::log;
 
 namespace {
-  static std::string kEmptyString;
+std::string kEmptyString;
 
 /**
  * Scan through the text and replace '"' with '""'.
  * @param [in,out] text Text string to check and maybe modify.
  */
-void ConvertDittoMark(std::string& text) {
+void ConvertDittoMark(std::string &text) {
   boost::algorithm::replace_all(text, "\"", "\"\"");
 }
 
@@ -30,8 +31,8 @@ void ConvertDittoMark(std::string& text) {
  * the text needs to be inside ditto marks ("text").
  * @param text
  */
-void CheckIfDittoMarkNeeded(std::string& text) {
-  auto need_ditto_mark = std::ranges::any_of(text, [] (const char in) {
+void CheckIfDittoMarkNeeded(std::string &text) {
+  auto need_ditto_mark = std::ranges::any_of(text, [](const char in) {
     const auto byte = static_cast<unsigned char>(in);
     if (std::isspace(byte) || !std::isprint(byte) || in == ',') {
       return true;
@@ -46,12 +47,11 @@ void CheckIfDittoMarkNeeded(std::string& text) {
   }
 }
 
-}
+}  // namespace
 
 namespace util::plot {
 
-CsvWriter::CsvWriter(const std::string &filename)
-: filename_(filename) {
+CsvWriter::CsvWriter(const std::string &filename) : filename_(filename) {
   output_ = &text_;
   try {
     file_.open(filename_.c_str(), std::ofstream::out | std::ofstream::trunc);
@@ -60,13 +60,11 @@ CsvWriter::CsvWriter(const std::string &filename)
     } else {
       LOG_ERROR() << "Failed to open the CSV file. File: " << filename_;
     }
-  } catch (const std::exception& err) {
+  } catch (const std::exception &err) {
     LOG_ERROR() << "Failed to open the CSV file. File: " << filename_;
   }
 }
-CsvWriter::CsvWriter() {
-  output_ = &text_;
-}
+CsvWriter::CsvWriter() { output_ = &text_; }
 
 CsvWriter::~CsvWriter() {
   if (file_.is_open()) {
@@ -79,21 +77,21 @@ std::string CsvWriter::FileName() const {
   try {
     std::filesystem::path temp(filename_);
     name = temp.filename().string();
-  } catch (const std::exception& err) {
-    LOG_ERROR() << "Failed to retrieve the filename out of the full path. Error: " << err.what()
-      << ", File Name: " << filename_;
+  } catch (const std::exception &err) {
+    LOG_ERROR()
+        << "Failed to retrieve the filename out of the full path. Error: "
+        << err.what() << ", File Name: " << filename_;
   }
   return name;
 }
 
-bool CsvWriter::IsOk() const {
-  return file_.is_open();
-}
+bool CsvWriter::IsOk() const { return file_.is_open(); }
 
-
-void CsvWriter::AddColumnHeader(const std::string &name, const std::string& unit, bool valid) {
+void CsvWriter::AddColumnHeader(const std::string &name,
+                                const std::string &unit, bool valid) {
   if (row_count_ != 0) {
-    LOG_ERROR() << "Column headers shall be added to first row. File: " << filename_;
+    LOG_ERROR() << "Column headers shall be added to first row. File: "
+                << filename_;
     return;
   }
   header_list_.emplace_back(Header{name, unit, valid});
@@ -103,17 +101,19 @@ void CsvWriter::AddColumnHeader(const std::string &name, const std::string& unit
     header << " [" << unit << "]";
   }
   SaveText(header.str());
-  max_columns_ = std::max(column_count_,max_columns_);
+  max_columns_ = std::max(column_count_, max_columns_);
 }
 
-void CsvWriter::SaveText(const std::string& text) {
+void CsvWriter::SaveText(const std::string &text) {
   if (output_ == nullptr) {
     LOG_ERROR() << "File is not open. File: " << filename_;
     return;
   }
   std::string temp = text;
-  ConvertDittoMark(temp); // If temp includes a '"' it needs to be replaced by a '""'
-  CheckIfDittoMarkNeeded(temp); // Check if the text needs '"' at start and end.
+  ConvertDittoMark(
+      temp);  // If temp includes a '"' it needs to be replaced by a '""'
+  CheckIfDittoMarkNeeded(
+      temp);  // Check if the text needs '"' at start and end.
   if (column_count_ > 0) {
     *output_ << ",";
   }
@@ -121,9 +121,8 @@ void CsvWriter::SaveText(const std::string& text) {
   ++column_count_;
 }
 
-
-template<>
-void CsvWriter::AddColumnValue(const std::string& value) {
+template <>
+void CsvWriter::AddColumnValue(const std::string &value) {
   if (row_count_ > 0 && column_count_ >= max_columns_) {
     AddRow();
   }
@@ -133,31 +132,31 @@ void CsvWriter::AddColumnValue(const std::string& value) {
   }
 }
 
-template<>
-void CsvWriter::AddColumnValue(const float& value) {
+template <>
+void CsvWriter::AddColumnValue(const float &value) {
   const auto temp = util::string::FloatToString(value);
   AddColumnValue(temp);
 }
 
-template<>
-void CsvWriter::AddColumnValue(const double& value) {
+template <>
+void CsvWriter::AddColumnValue(const double &value) {
   const auto temp = util::string::DoubleToString(value);
   AddColumnValue(temp);
 }
 
-template<>
-void CsvWriter::AddColumnValue(const bool& value) {
+template <>
+void CsvWriter::AddColumnValue(const bool &value) {
   const std::string temp = value ? "1" : "0";
   AddColumnValue(temp);
 }
 
 void CsvWriter::AddRow() {
   if (column_count_ == 0 && row_count_ == 0) {
-    return; // No empty lines allowed
+    return;  // No empty lines allowed
   }
   if (output_ != nullptr) {
     if (column_count_ < max_columns_) {
-      for (auto ii = column_count_; ii < max_columns_; ++ii ) {
+      for (auto ii = column_count_; ii < max_columns_; ++ii) {
         if (ii > 0) {
           *output_ << ",";
         }
@@ -168,7 +167,6 @@ void CsvWriter::AddRow() {
   ++row_count_;
   column_count_ = 0;
 }
-
 
 void CsvWriter::CloseFile() {
   if (file_.is_open()) {
@@ -187,7 +185,7 @@ void CsvWriter::OpenFile(const std::string &filename) {
     } else {
       LOG_ERROR() << "Failed to open the CSV file. File: " << filename_;
     }
-  } catch (const std::exception& err) {
+  } catch (const std::exception &err) {
     LOG_ERROR() << "Failed to open the CSV file. File: " << filename_;
   }
 }
@@ -230,8 +228,7 @@ void CsvWriter::SetColumnValid(size_t column, bool valid) {
 }
 
 bool CsvWriter::IsColumnValid(size_t column) const {
-   return column < header_list_.size() ? header_list_[column].valid : false;
+  return column < header_list_.size() ? header_list_[column].valid : false;
 }
 
-}
-
+}  // namespace util::plot

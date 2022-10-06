@@ -9,10 +9,6 @@ namespace util::xml::detail {
 class WriteXml final : public IXmlFile {
  public:
  protected:
-
 };
 
-}
-
-
-
+}  // namespace util::xml::detail

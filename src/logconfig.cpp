@@ -2,31 +2,30 @@
  * Copyright 2021 Ingemar Hedvall
  * SPDX-License-Identifier: MIT
  */
-#include <string>
-#include <mutex>
-#include <locale>
 #include <codecvt>
+#include <locale>
+#include <mutex>
+#include <string>
 #include <vector>
 #ifdef WIN32
 #include <shlobj.h>
-#pragma comment(lib,"shell32")
+#pragma comment(lib, "shell32")
 #endif
 
-#include "util/logconfig.h"
-#include "logfile.h"
+#include "listenlogger.h"
 #include "logconsole.h"
 #include "logfile.h"
-#include "listenlogger.h"
 #include "syslog.h"
+#include "util/logconfig.h"
 
 namespace util::log {
 
 std::string ProgramDataPath() {
   std::string app_data_path;
 #ifdef WIN32
-  KNOWNFOLDERID folder_id = {};
-  WCHAR* path = nullptr;
-  const auto ret = ::SHGetKnownFolderPath(FOLDERID_ProgramData, 0, nullptr, &path);
+  WCHAR *path = nullptr;
+  const auto ret =
+      ::SHGetKnownFolderPath(FOLDERID_ProgramData, 0, nullptr, &path);
   if (ret == S_OK) {
     const std::wstring temp(path);
     std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> conv;
@@ -44,12 +43,10 @@ LogConfig &LogConfig::Instance() {
   return log_config;
 }
 
-
 void LogConfig::BaseName(const std::string &base_name) {
   std::lock_guard<std::mutex> lock(locker_);
   base_name_ = base_name;
 }
-
 
 const std::string &LogConfig::BaseName() const {
   std::lock_guard<std::mutex> lock(locker_);
@@ -76,20 +73,19 @@ void LogConfig::SubDir(const std::string &sub_dir) {
   return sub_dir_;
 }
 
-
 bool LogConfig::CreateDefaultLogger() {
   bool create = false;
 
   switch (log_type_) {
     case LogType::LogToFile: {
-      std::unique_ptr<detail::LogFile> log_file = std::make_unique<detail::LogFile>();
+      std::unique_ptr<detail::LogFile> log_file =
+          std::make_unique<detail::LogFile>();
       create = !log_file->Filename().empty();
       if (create) {
         std::lock_guard<std::mutex> lock(locker_);
         log_chain_.emplace("Default", std::move(log_file));
       }
-    }
-      break;
+    } break;
 
     case LogType::LogToSyslog: {
       auto syslog = std::make_unique<detail::Syslog>("localhost", 514);
@@ -98,29 +94,30 @@ bool LogConfig::CreateDefaultLogger() {
       break;
     }
 
-    case LogType::LogToConsole:create = true;
+    case LogType::LogToConsole:
+      create = true;
       {
-        std::unique_ptr<detail::LogConsole> log_console = std::make_unique<detail::LogConsole>();
+        std::unique_ptr<detail::LogConsole> log_console =
+            std::make_unique<detail::LogConsole>();
         std::lock_guard<std::mutex> lock(locker_);
         log_chain_.emplace("Default", std::move(log_console));
       }
       break;
 
-    case LogType::LogNothing:create = true;
+    case LogType::LogNothing:
+      create = true;
       break;
 
-    default:break;
+    default:
+      break;
   }
   return create;
 }
 
-LogConfig::~LogConfig() {
-  DeleteLogChain();
-}
-
+LogConfig::~LogConfig() { DeleteLogChain(); }
 
 void LogConfig::DeleteLogChain() {
-  for (auto &itr: log_chain_) {
+  for (auto &itr : log_chain_) {
     itr.second->Stop();
   }
   log_chain_.clear();
@@ -131,13 +128,13 @@ void LogConfig::AddLogMessage(const LogMessage &message) const {
     return;
   }
   std::lock_guard<std::mutex> lock(locker_);
-  for (auto &itr: log_chain_) {
+  for (auto &itr : log_chain_) {
     itr.second->AddLogMessage(message);
   }
 }
 
 void LogConfig::AddLogger(const std::string &logger_name, const LogType type,
-                          const std::vector<std::string>& arg_list) {
+                          const std::vector<std::string> &arg_list) {
   std::unique_ptr<ILogger> logger;
   switch (type) {
     case LogType::LogToConsole:
@@ -156,18 +153,21 @@ void LogConfig::AddLogger(const std::string &logger_name, const LogType type,
 
     case LogType::LogToSyslog: {
       const auto remote_host = arg_list.empty() ? "localhost" : arg_list[0];
-      const auto port = std::stoul(arg_list.size() < 2 ?  std::string("514") : arg_list[1]);
-      logger = std::make_unique<detail::Syslog>(remote_host, static_cast<uint16_t>(port));
+      const auto port =
+          std::stoul(arg_list.size() < 2 ? std::string("514") : arg_list[1]);
+      logger = std::make_unique<detail::Syslog>(remote_host,
+                                                static_cast<uint16_t>(port));
       break;
     }
 
     default:
       return;
   }
-  AddLogger(logger_name,std::move(logger));
+  AddLogger(logger_name, std::move(logger));
 }
 
-void LogConfig::AddLogger(const std::string &logger_name, std::unique_ptr<ILogger> logger) {
+void LogConfig::AddLogger(const std::string &logger_name,
+                          std::unique_ptr<ILogger> logger) {
   std::lock_guard<std::mutex> lock(locker_);
   auto itr = log_chain_.find(logger_name);
   if (itr == log_chain_.end()) {
@@ -176,7 +176,6 @@ void LogConfig::AddLogger(const std::string &logger_name, std::unique_ptr<ILogge
     itr->second = std::move(logger);
   }
 }
-
 
 void LogConfig::DeleteLogger(const std::string &logger_name) {
   std::lock_guard<std::mutex> lock(locker_);
@@ -192,14 +191,13 @@ ILogger *LogConfig::GetLogger(const std::string &logger_name) const {
   return itr == log_chain_.cend() ? nullptr : itr->second.get();
 }
 
-
 std::string LogConfig::GetLogFile(const std::string &logger_name) const {
   const auto itr1 = log_chain_.find(logger_name);
   if (itr1 != log_chain_.cend()) {
     return itr1->second->Filename();
   }
-    // No default logger found. Do recover user mistake.
-  for (const auto& itr2 : log_chain_) {
+  // No default logger found. Do recover user mistake.
+  for (const auto &itr2 : log_chain_) {
     if (itr2.second->HasLogFile()) {
       return itr2.second->Filename();
     }
@@ -207,18 +205,9 @@ std::string LogConfig::GetLogFile(const std::string &logger_name) const {
   return {};
 }
 
-void LogConfig::Type(LogType log_type) {
-  log_type_ = log_type;
-}
-LogType LogConfig::Type() const {
-  return log_type_;
-}
-void LogConfig::Enabled(bool enabled) {
-  enabled_ = enabled;
-}
-bool LogConfig::Enabled() const {
-  return enabled_;
-}
+void LogConfig::Type(LogType log_type) { log_type_ = log_type; }
+LogType LogConfig::Type() const { return log_type_; }
+void LogConfig::Enabled(bool enabled) { enabled_ = enabled; }
+bool LogConfig::Enabled() const { return enabled_; }
 
-}
-
+}  // namespace util::log

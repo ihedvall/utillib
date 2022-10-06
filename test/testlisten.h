@@ -6,29 +6,27 @@
 #pragma once
 
 #include <gtest/gtest.h>
+
 #include "util/ilisten.h"
 
 namespace util::test {
 
- class ListenMock : public util::log::IListen {
+class ListenMock : public util::log::IListen {
  public:
   ListenMock() = default;
   ~ListenMock() override = default;
   [[nodiscard]] bool IsActive() const override;
-   [[nodiscard]] size_t LogLevel() override;
+  [[nodiscard]] size_t LogLevel() override;
 
-  protected:
-  void AddMessage(uint64_t nano_sec_1970, const std::string &pre_text, const std::string &text) override;
+ protected:
+  void AddMessage(uint64_t nano_sec_1970, const std::string &pre_text,
+                  const std::string &text) override;
 };
 
-class TestListen: public ::testing::Test {
+class TestListen : public ::testing::Test {
  protected:
   static void SetUpTestCase();
   static void TearDownTestCase();
 };
 
-} // end namespace util::test
-
-
-
-
+}  // end namespace util::test

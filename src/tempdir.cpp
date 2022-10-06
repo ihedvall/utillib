@@ -3,14 +3,16 @@
  * SPDX-License-Identifier: MIT
  */
 
-#include <filesystem>
-#include <boost/filesystem.hpp>
 #include "util/tempdir.h"
+
+#include <boost/filesystem.hpp>
+#include <filesystem>
+
 #include "util/logstream.h"
 
 namespace util::log {
 
-TempDir::TempDir(const std::string &sub_dir, bool unique_dir) {
+TempDir::TempDir(const std::string& sub_dir, bool unique_dir) {
   // Create a temporary directory for this application
   try {
     auto temp_dir = std::filesystem::temp_directory_path();
@@ -35,7 +37,8 @@ TempDir::TempDir(const std::string &sub_dir, bool unique_dir) {
     temp_dir_ = temp_dir.string();
     LOG_DEBUG() << "Created a temporary directory. Path: " << temp_dir_;
   } catch (const std::exception& error) {
-    LOG_ERROR() << "Error when creating temporary directory. Error:" << error.what();
+    LOG_ERROR() << "Error when creating temporary directory. Error:"
+                << error.what();
   }
 }
 
@@ -44,12 +47,14 @@ TempDir::~TempDir() {
     std::filesystem::remove_all(temp_dir_);
     LOG_DEBUG() << "Removed temporary directory. Path: " << temp_dir_;
   } catch (const std::exception& error) {
-    LOG_ERROR() << "Failed to remove temporary directory. Error: " << error.what()
-                << ", Path: " << temp_dir_;
+    LOG_ERROR() << "Failed to remove temporary directory. Error: "
+                << error.what() << ", Path: " << temp_dir_;
   }
 }
 
-std::string TempDir::TempFile(const std::string &stem, const std::string &extension, bool unique_file) const {
+std::string TempDir::TempFile(const std::string& stem,
+                              const std::string& extension,
+                              bool unique_file) const {
   // Create a temporary file in my temporary directory
   try {
     auto temp_file = std::filesystem::path(temp_dir_);
@@ -82,4 +87,4 @@ std::string TempDir::TempFile(const std::string &stem, const std::string &extens
   return {};
 }
 
-} // end namespace
+}  // namespace util::log

@@ -2,12 +2,14 @@
  * Copyright 2021 Ingemar Hedvall
  * SPDX-License-Identifier: MIT
  */
-#include <string_view>
-#include <atomic>
-#include <thread>
-#include <array>
-#include <chrono>
 #include <gtest/gtest.h>
+
+#include <array>
+#include <atomic>
+#include <chrono>
+#include <string_view>
+#include <thread>
+
 #include "messagequeue.h"
 using namespace boost::interprocess;
 using namespace std::chrono_literals;
@@ -22,15 +24,14 @@ std::atomic<bool> kStopTask = false;
 void SendTask() {
   MessageQueue queue(false, kQueueName.data());
   for (size_t index = 0; index < 10; ++index) {
-      SharedListenMessage msg;
-      msg.ns1970 = index;
-      strcpy(msg.text, "Text");
+    SharedListenMessage msg;
+    msg.ns1970 = index;
+    strcpy(msg.text, "Text");
     queue.Add(msg);
-    }
+  }
 }
 
 void ReceiveTask(MessageQueue* queue) {
-
   kTaskCount = 0;
   do {
     SharedListenMessage msg;
@@ -46,14 +47,14 @@ void ReceiveTask(MessageQueue* queue) {
       }
       ++kTaskCount;
     } else {
-      std::cout <<  "Fail" << std::endl;
+      std::cout << "Fail" << std::endl;
       break;
     }
   } while (!kStopTask);
-  std::cout <<  "Stop task" << std::endl;
+  std::cout << "Stop task" << std::endl;
 }
 
-} // end namespace
+}  // end namespace
 
 namespace util::test {
 
@@ -66,7 +67,6 @@ TEST(MessageQueue, TestBasic) {
 }
 
 TEST(MessageQueue, TestMultipleSender) {
-
   MessageQueue master(true, kQueueName.data());
   kStopTask = false;
   auto server_task = std::thread(&ReceiveTask, &master);
@@ -76,7 +76,8 @@ TEST(MessageQueue, TestMultipleSender) {
     task1 = std::thread(&SendTask);
   }
 
-  for (size_t count = 0; count < 3000 && kTaskCount < task_list.size() * 10; ++count) {
+  for (size_t count = 0; count < 3000 && kTaskCount < task_list.size() * 10;
+       ++count) {
     std::this_thread::sleep_for(10ms);
   }
   for (auto& task2 : task_list) {
@@ -91,6 +92,6 @@ TEST(MessageQueue, TestMultipleSender) {
   server_task.join();
 
   std::cout << "Message Count: " << kTaskCount << std::endl;
-  EXPECT_EQ(kTaskCount,task_list.size() * 10);
+  EXPECT_EQ(kTaskCount, task_list.size() * 10);
 }
-} // end namespace util::test
+}  // end namespace util::test

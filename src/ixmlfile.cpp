@@ -2,13 +2,15 @@
  * Copyright 2021 Ingemar Hedvall
  * SPDX-License-Identifier: MIT
  */
+#include "util/ixmlfile.h"
+
 #include <filesystem>
 #include <fstream>
-#include "util/ixmlfile.h"
-#include "util/logstream.h"
+
 #include "expatxml.h"
-#include "xmlnode.h"
+#include "util/logstream.h"
 #include "writexml.h"
+#include "xmlnode.h"
 
 using namespace util::log;
 
@@ -20,18 +22,14 @@ std::string IXmlFile::FileNameWithoutPath() const {
     return p.filename().string();
   } catch (const std::exception &error) {
     LOG_ERROR() << "Invalid path. File: " << filename_
-        << ", Error: " << error.what();
+                << ", Error: " << error.what();
   }
   return filename_;
 }
 
-bool IXmlFile::ParseFile() {
-  return false;
-}
+bool IXmlFile::ParseFile() { return false; }
 
-bool IXmlFile::ParseString(const std::string &input) {
-  return false;
-}
+bool IXmlFile::ParseString(const std::string &input) { return false; }
 
 void IXmlFile::Reset() {
   root_node_.reset();
@@ -39,7 +37,6 @@ void IXmlFile::Reset() {
   encoding_ = "UTF-8";
   standalone_ = true;
 }
-
 
 void IXmlFile::GetChildList(IXmlNode::ChildList &child_list) const {
   if (root_node_) {
@@ -51,7 +48,7 @@ const IXmlNode *IXmlFile::GetNode(const std::string &tag) const {
   return root_node_ ? root_node_->GetNode(tag) : nullptr;
 }
 
-IXmlNode& IXmlFile::RootName(const std::string &name) {
+IXmlNode &IXmlFile::RootName(const std::string &name) {
   if (!root_node_) {
     root_node_ = CreateNode(name);
   } else {
@@ -60,7 +57,7 @@ IXmlNode& IXmlFile::RootName(const std::string &name) {
   return *root_node_;
 }
 
-std::unique_ptr<IXmlNode> IXmlFile::CreateNode(const std::string& name) {
+std::unique_ptr<IXmlNode> IXmlFile::CreateNode(const std::string &name) {
   return std::make_unique<detail::XmlNode>(name);
 }
 
@@ -70,7 +67,8 @@ bool IXmlFile::WriteFile() {
     return false;
   }
   try {
-    std::ofstream file(filename_.c_str(), std::ofstream::out | std::ofstream::trunc);
+    std::ofstream file(filename_.c_str(),
+                       std::ofstream::out | std::ofstream::trunc);
     if (!file.is_open()) {
       LOG_ERROR() << "Couldn't open file for writing. File: " << filename_;
       return false;
@@ -84,8 +82,9 @@ bool IXmlFile::WriteFile() {
 
     file.close();
 
-  } catch (const std::exception& err) {
-    LOG_ERROR() << "Failed to write the file. Error: " << err.what() << ", File: " << FileName();
+  } catch (const std::exception &err) {
+    LOG_ERROR() << "Failed to write the file. Error: " << err.what()
+                << ", File: " << FileName();
     return false;
   }
   return true;
@@ -99,14 +98,16 @@ std::string IXmlFile::WriteString(bool skip_header) {
 
 void IXmlFile::WriteRoot(std::ostream &dest, bool skip_header) {
   if (!skip_header) {
-    dest << "<?xml version='" << Version() << "' encoding='" << Encoding() << "'";
+    dest << "<?xml version='" << Version() << "' encoding='" << Encoding()
+         << "'";
     if (Standalone()) {
       dest << " standalone='yes'";
     }
     dest << "?>" << std::endl;
 
     if (!style_sheet_.empty()) {
-      dest << "<?xml-stylesheet type='text/xsl' href='" << StyleSheet() << "'?>" << std::endl;
+      dest << "<?xml-stylesheet type='text/xsl' href='" << StyleSheet() << "'?>"
+           << std::endl;
     }
   }
   if (root_node_) {
@@ -114,9 +115,7 @@ void IXmlFile::WriteRoot(std::ostream &dest, bool skip_header) {
   }
 }
 
-void IXmlFile::FileName(const std::string &filename) {
-  filename_ = filename;
-}
+void IXmlFile::FileName(const std::string &filename) { filename_ = filename; }
 
 std::unique_ptr<IXmlFile> CreateXmlFile(const std::string &type) {
   if (util::string::IEquals("FileWriter", type)) {
@@ -125,5 +124,4 @@ std::unique_ptr<IXmlFile> CreateXmlFile(const std::string &type) {
   return std::make_unique<detail::ExpatXml>();
 }
 
-} // end namespace util::xml
-
+}  // end namespace util::xml

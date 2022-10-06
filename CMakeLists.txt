@@ -32,15 +32,15 @@ if (BISON_FOUND)
             BISON_SYSLOG_PARSER_OUTPUT_HEADER
             BISON_SYSLOG_PARSER_OUTPUTS
             BISON_SYSLOG_PARSER_COMPILE_FLAGS)
-endif()
+endif ()
 
 if (FLEX_FOUND)
     FLEX_TARGET(SYSLOG_SCANNER src/syslogflexer.l ${CMAKE_CURRENT_SOURCE_DIR}/src/syslogflexer.cpp)
     cmake_print_variables(FLEX_SYSLOG_SCANNER_DEFINED
-                          FLEX_SYSLOG_SCANNER_OUTPUTS
-                          FLEX_SYSLOG_SCANNER_INPUT
-                          FLEX_SYSLOG_SCANNER_OUTPUT_HEADER )
-endif()
+            FLEX_SYSLOG_SCANNER_OUTPUTS
+            FLEX_SYSLOG_SCANNER_INPUT
+            FLEX_SYSLOG_SCANNER_OUTPUT_HEADER)
+endif ()
 
 ADD_FLEX_BISON_DEPENDENCY(SYSLOG_SCANNER SYSLOG_PARSER)
 
@@ -101,42 +101,42 @@ target_compile_definitions(util PRIVATE XML_STATIC)
 
 if (MSVC)
     target_compile_definitions(util PRIVATE _WIN32_WINNT=0x0A00)
-endif()
+endif ()
 
 set(UTIL_PUBLIC_HEADERS
-    include/util/csvwriter.h
-    include/util/ilogger.h
-    include/util/ixmlnode.h
-    include/util/logconfig.h
-    include/util/logging.h
-    include/util/logmessage.h
-    include/util/stringutil.h
-    include/util/timestamp.h
-)
+        include/util/csvwriter.h
+        include/util/ilogger.h
+        include/util/ixmlnode.h
+        include/util/logconfig.h
+        include/util/logging.h
+        include/util/logmessage.h
+        include/util/stringutil.h
+        include/util/timestamp.h
+        )
 
 set_target_properties(util PROPERTIES PUBLIC_HEADER "${UTIL_PUBLIC_HEADERS}")
 get_target_property(PH util PUBLIC_HEADER)
-message( STATUS "UTIL Target Includes: " "${PH}")
+message(STATUS "UTIL Target Includes: " "${PH}")
 if (UTIL_TOOLS)
     add_subdirectory(listend)
-endif()
+endif ()
 
 if (WIN32 AND UTIL_TOOLS)
     add_subdirectory(serviced)
-endif()
+endif ()
 
 if (wxWidgets_FOUND AND UTIL_TOOLS)
     add_subdirectory(listenviewer)
-endif()
+endif ()
 
 if (wxWidgets_FOUND AND WIN32 AND UTIL_TOOLS)
     add_subdirectory(serviceexplorer)
-endif()
+endif ()
 
 if (GTEST_FOUND AND UTIL_TEST)
     enable_testing()
     add_subdirectory(test)
-endif()
+endif ()
 
 if (DOXYGEN_FOUND AND (CMAKE_BUILD_TYPE MATCHES "^[Rr]elease") AND UTIL_DOC)
     set(DOXYGEN_RECURSIVE NO)
@@ -144,17 +144,17 @@ if (DOXYGEN_FOUND AND (CMAKE_BUILD_TYPE MATCHES "^[Rr]elease") AND UTIL_DOC)
     set(DOXYGEN_PROJECT_NAME "UTILLib")
     set(DOXYGEN_HTML_EXTRA_STYLESHEET doxygen/utillib.css)
     set(DOXYGEN_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/docs/manual)
-    doxygen_add_docs( doc_libutil ALL
+    doxygen_add_docs(doc_libutil ALL
             include/util doxygen
             COMMENT "Util Library generating API documentation with Doxygen")
-endif()
+endif ()
 
 install(TARGETS util
         EXPORT UtilLibTargets
         LIBRARY DESTINATION util/lib
         ARCHIVE DESTINATION util/lib
         RUNTIME DESTINATION util/bin
-        PUBLIC_HEADER DESTINATION util/include/util )
+        PUBLIC_HEADER DESTINATION util/include/util)
 
 #include(CMakePackageConfigHelpers)
 #write_basic_package_version_file(

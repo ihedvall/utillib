@@ -4,9 +4,10 @@
  */
 
 #pragma once
-#include <thread>
-#include <memory>
 #include <boost/asio.hpp>
+#include <memory>
+#include <thread>
+
 #include "util/isyslogserver.h"
 
 namespace util::syslog {
@@ -15,6 +16,7 @@ class UdpSyslogServer : public ISyslogServer {
  public:
   void Start() override;
   void Stop() override;
+
  private:
   std::thread server_thread_;
   std::atomic<bool> stop_thread_ = false;
@@ -24,4 +26,4 @@ class UdpSyslogServer : public ISyslogServer {
   void ServerThread();
 };
 
-} // end namespace
+}  // namespace util::syslog

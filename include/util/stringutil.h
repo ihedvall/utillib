@@ -5,66 +5,66 @@
 #pragma once
 #include <string>
 
-namespace util::string
-{
-  /** \brief Compare strings by ignoring case.
-   *
-   * Compare two strings by ignoring case characters.
-   * @param s1 String 1
-   * @param s2 String 2
-   * @param nChar 0 = Compare all whole string otherwise compare nChar characters.
-   * @return True if the string matches.
-   */
-  bool IEquals(const std::string &s1, const std::string &s2, size_t nChar = 0);
-  /** \brief Compare wide strings by ignoring case.
-   *
-   * Compare two strings by ignoring case characters.
-   * @param s1 String 1
-   * @param s2 String 2
-   * @param nChar 0 = Compare all whole string otherwise compare nChar characters.
-   * @return True if the string matches.
-   */
-  bool IEquals(const std::wstring &s1, const std::wstring &s2, size_t nChar = 0);
+namespace util::string {
+/** \brief Compare strings by ignoring case.
+ *
+ * Compare two strings by ignoring case characters.
+ * @param s1 String 1
+ * @param s2 String 2
+ * @param nChar 0 = Compare all whole string otherwise compare nChar characters.
+ * @return True if the string matches.
+ */
+bool IEquals(const std::string &s1, const std::string &s2, size_t nChar = 0);
+/** \brief Compare wide strings by ignoring case.
+ *
+ * Compare two strings by ignoring case characters.
+ * @param s1 String 1
+ * @param s2 String 2
+ * @param nChar 0 = Compare all whole string otherwise compare nChar characters.
+ * @return True if the string matches.
+ */
+bool IEquals(const std::wstring &s1, const std::wstring &s2, size_t nChar = 0);
 
-  /// This class is used when get a sorted list of string to ignoring case characters.\n
-  /// Example of declaring a map:
-  /// \code
-  /// std::map<std::string, FooClass, util::string::IgnoreCase> foo_list;
-  /// \endcode
-  class IgnoreCase final
-  {
-  public:
-    bool operator()(const std::string &s1, const std::string &s2) const; ///< Compare the strings by ignoring case.
-    bool operator()(const std::wstring &s1, const std::wstring &s2) const; ///< Compare the strings by ignoring case.
-  };
+/// This class is used when get a sorted list of string to ignoring case
+/// characters.\n Example of declaring a map: \code std::map<std::string,
+/// FooClass, util::string::IgnoreCase> foo_list; \endcode
+class IgnoreCase final {
+ public:
+  bool operator()(const std::string &s1, const std::string &s2)
+      const;  ///< Compare the strings by ignoring case.
+  bool operator()(const std::wstring &s1, const std::wstring &s2)
+      const;  ///< Compare the strings by ignoring case.
+};
 
-  /** \brief Remove white space from string.
-   *
-   * Removes white spaces from the begin and end of the string
-   * @param text String to trim
-   */
-  void Trim(std::string &text);
+/** \brief Remove white space from string.
+ *
+ * Removes white spaces from the begin and end of the string
+ * @param text String to trim
+ */
+void Trim(std::string &text);
 
-  /** \brief Remove white space from string.
-   *
-   * Remove white space from the begin and end of the string but keep original string.
-   * @param text Input string
-   * @return Output trimmed string.
-   */
-  [[nodiscard]] std::string Trim(const std::string &text);
+/** \brief Remove white space from string.
+ *
+ * Remove white space from the begin and end of the string but keep original
+ * string.
+ * @param text Input string
+ * @return Output trimmed string.
+ */
+[[nodiscard]] std::string Trim(const std::string &text);
 
 /// Converts a floating point value to a string using number of decimals.\n
 /// It also fix rounding and returning a fixed decimals.
-/// Presenting fixed number of decimals means that it fills up the string with '0' characters.\n
-/// Example: Value: 1.23 and decimals 3,String: (Fixed = false) "1.23" (Fixed = true) "1.230"\n
-/// Optional it can append a unit to the string (Example: "1.23 m/s").\n
-/// \param[in] value  The floating point value.
+/// Presenting fixed number of decimals means that it fills up the string with
+/// '0' characters.\n Example: Value: 1.23 and decimals 3,String: (Fixed =
+/// false) "1.23" (Fixed = true) "1.230"\n Optional it can append a unit to the
+/// string (Example: "1.23 m/s").\n \param[in] value  The floating point value.
 /// \param[in] decimals Max number of decimals.
 /// \param[in] fixed If it should show fixed number of decimals.
 /// \param[in] unit Appends a unit string to the output.
 /// \return The formatted string.
-  std::string FormatDouble(double value, uint8_t decimals, bool fixed = false,
-                           const std::string &unit = {}); ///< Converts a float to a string.
+std::string FormatDouble(
+    double value, uint8_t decimals, bool fixed = false,
+    const std::string &unit = {});  ///< Converts a float to a string.
 
 /**
  * Compare a string against a simple * or ? wildcard string
@@ -73,7 +73,8 @@ namespace util::string
  * @param ignore_case True if the algorithm should ignore case
  * @return Returns True if the text string match the wildcard pattern
  */
-bool WildcardMatch(const std::string& text, const std::string& wildcard, bool ignore_case );
+bool WildcardMatch(const std::string &text, const std::string &wildcard,
+                   bool ignore_case);
 
 /** \brief Converts a float to string without loosing precision.
  *
@@ -90,4 +91,4 @@ bool WildcardMatch(const std::string& text, const std::string& wildcard, bool ig
  * @return The double value as text
  */
 [[nodiscard]] std::string DoubleToString(double value);
-} //namespace util::string
+}  // namespace util::string

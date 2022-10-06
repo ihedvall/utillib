@@ -2,81 +2,81 @@
  * Copyright 2022 Ingemar Hedvall
  * SPDX-License-Identifier: MIT
  */
-#include <string>
-#include <vector>
-#include <filesystem>
-#include <atomic>
-#include <csignal>
-#include <thread>
-#include <chrono>
-#include <memory>
-
+#include <util/ixmlfile.h>
+#include <util/listenconfig.h>
 #include <util/logconfig.h>
 #include <util/logstream.h>
-#include <util/listenconfig.h>
-#include <util/ixmlfile.h>
 #include <util/utilfactory.h>
+
+#include <atomic>
+#include <chrono>
+#include <csignal>
+#include <filesystem>
+#include <memory>
+#include <string>
+#include <thread>
+#include <vector>
 
 using namespace util::log;
 using namespace util::xml;
 using namespace std::chrono_literals;
 namespace {
-  std::atomic<bool> kStopMain = false;
-  std::vector<std::unique_ptr<IListen>> kServerList;
-  uint16_t kFreePort = 49152;
+std::atomic<bool> kStopMain = false;
+std::vector<std::unique_ptr<IListen>> kServerList;
+uint16_t kFreePort = 49152;
 
-  void StopMainHandler(int signal) {
-    kStopMain = true;
-    LOG_DEBUG() << "Stopping. Signal: " << signal;
-    for (size_t count = 0; count < 100 && kStopMain; ++count) {
-      std::this_thread::sleep_for(100ms);
-    }
-  }
-
-  void AddAllKnownServers() {
-
-    // Add System Logger
-    {
-      auto system_log = util::UtilFactory::CreateListen("ListenServer", "LISLOG");
-      system_log->Name("System Messages");
-      system_log->Description("Logs all system messages");
-      system_log->HostName("127.0.0.1");
-      system_log->Port(kFreePort++);
-      system_log->SetLogLevelText(0, "Show all log messages");
-      system_log->SetLogLevelText(1, "Hide trace messages");
-      system_log->SetLogLevelText(2, "Hide trace/debug messages");
-      system_log->SetLogLevelText(3, "Hide trace/debug/info messages");
-      kServerList.push_back(std::move(system_log));
-    }
-
-    // Add SQLite Logger
-    {
-      auto sqlite_log = util::UtilFactory::CreateListen("ListenServer", "LISSQLITE");
-      sqlite_log->Name("SQLite messages");
-      sqlite_log->Description("Logs all SQL calls");
-      sqlite_log->HostName("127.0.0.1");
-      sqlite_log->Port(kFreePort++);
-      sqlite_log->SetLogLevelText(0, "Show all SQL calls");
-      kServerList.push_back(std::move(sqlite_log));
-    }
-
-    // Add MQTT Logger
-    {
-      auto mqtt_log = util::UtilFactory::CreateListen("ListenServer", "LISMQTT");
-      mqtt_log->Name("MQTT messages");
-      mqtt_log->Description("Logs all MQTT calls");
-      mqtt_log->HostName("127.0.0.1");
-      mqtt_log->Port(kFreePort++);
-      mqtt_log->SetLogLevelText(0, "Show basic MQTT messages");
-      mqtt_log->SetLogLevelText(1, "Show MQTT publish messages");
-      mqtt_log->SetLogLevelText(2, "Show MQTT subscribe messages");
-      mqtt_log->SetLogLevelText(3, "Trace MQTT messages");
-      kServerList.push_back(std::move(mqtt_log));
-    }
+void StopMainHandler(int signal) {
+  kStopMain = true;
+  LOG_DEBUG() << "Stopping. Signal: " << signal;
+  for (size_t count = 0; count < 100 && kStopMain; ++count) {
+    std::this_thread::sleep_for(100ms);
   }
 }
 
-int main(int nof_arg, char *arg_list[]) {
+void AddAllKnownServers() {
+  // Add System Logger
+  {
+    auto system_log = util::UtilFactory::CreateListen("ListenServer", "LISLOG");
+    system_log->Name("System Messages");
+    system_log->Description("Logs all system messages");
+    system_log->HostName("127.0.0.1");
+    system_log->Port(kFreePort++);
+    system_log->SetLogLevelText(0, "Show all log messages");
+    system_log->SetLogLevelText(1, "Hide trace messages");
+    system_log->SetLogLevelText(2, "Hide trace/debug messages");
+    system_log->SetLogLevelText(3, "Hide trace/debug/info messages");
+    kServerList.push_back(std::move(system_log));
+  }
+
+  // Add SQLite Logger
+  {
+    auto sqlite_log =
+        util::UtilFactory::CreateListen("ListenServer", "LISSQLITE");
+    sqlite_log->Name("SQLite messages");
+    sqlite_log->Description("Logs all SQL calls");
+    sqlite_log->HostName("127.0.0.1");
+    sqlite_log->Port(kFreePort++);
+    sqlite_log->SetLogLevelText(0, "Show all SQL calls");
+    kServerList.push_back(std::move(sqlite_log));
+  }
+
+  // Add MQTT Logger
+  {
+    auto mqtt_log = util::UtilFactory::CreateListen("ListenServer", "LISMQTT");
+    mqtt_log->Name("MQTT messages");
+    mqtt_log->Description("Logs all MQTT calls");
+    mqtt_log->HostName("127.0.0.1");
+    mqtt_log->Port(kFreePort++);
+    mqtt_log->SetLogLevelText(0, "Show basic MQTT messages");
+    mqtt_log->SetLogLevelText(1, "Show MQTT publish messages");
+    mqtt_log->SetLogLevelText(2, "Show MQTT subscribe messages");
+    mqtt_log->SetLogLevelText(3, "Trace MQTT messages");
+    kServerList.push_back(std::move(mqtt_log));
+  }
+}
+}  // namespace
+
+int main(int nof_arg, char* arg_list[]) {
   signal(SIGTERM, StopMainHandler);
   signal(SIGABRT, StopMainHandler);
 #if (_MSC_VER)
@@ -85,7 +85,7 @@ int main(int nof_arg, char *arg_list[]) {
 #endif
 
   // Set log file name to the service name
-  auto &log_config = LogConfig::Instance();
+  auto& log_config = LogConfig::Instance();
   log_config.Type(LogType::LogToFile);
   log_config.SubDir("utillib/log");
   log_config.BaseName("listend");
@@ -107,18 +107,18 @@ int main(int nof_arg, char *arg_list[]) {
         full_name = temp_name;
       }
       if (!std::filesystem::exists(full_name)) {
-        LOG_ERROR() << "Config file doesn't exist- File: " << full_name.string();
+        LOG_ERROR() << "Config file doesn't exist- File: "
+                    << full_name.string();
         continue;
       }
       config_files.emplace_back(full_name.string());
-    } catch (const std::exception &error) {
-      LOG_ERROR() << "Failed to find the configuration file. File: " << config_file
-                  << ", Error: " << error.what();
+    } catch (const std::exception& error) {
+      LOG_ERROR() << "Failed to find the configuration file. File: "
+                  << config_file << ", Error: " << error.what();
     }
   }
   // First check if the 'listend.xml' exist in default program path
   if (config_files.empty()) {
-
     try {
       std::filesystem::path temp_name = program_data_path;
       temp_name.append("utillib");
@@ -129,8 +129,9 @@ int main(int nof_arg, char *arg_list[]) {
       } else {
         LOG_INFO() << "There is no configuration files for this application";
       }
-    } catch (const std::exception &error) {
-      LOG_ERROR() << "Failed to find the default configuration file. Error: " << error.what();
+    } catch (const std::exception& error) {
+      LOG_ERROR() << "Failed to find the default configuration file. Error: "
+                  << error.what();
     }
   }
 
@@ -144,7 +145,7 @@ int main(int nof_arg, char *arg_list[]) {
     ListenConfig master;
 
     // Read all configuration files and
-    for (const auto &config_file: config_files) {
+    for (const auto& config_file : config_files) {
       auto xml_file = util::xml::CreateXmlFile();
       xml_file->FileName(config_file);
       const auto parse = xml_file->ParseFile();
@@ -158,12 +159,15 @@ int main(int nof_arg, char *arg_list[]) {
         if (node->IsTagName("ListenServer")) {
           const auto share_name = node->Property<std::string>("ShareName", "");
           const auto name = node->Property<std::string>("Name", "");
-          const auto description = node->Property<std::string>("Description", "");
+          const auto description =
+              node->Property<std::string>("Description", "");
           const auto pre_text = node->Property<std::string>("PreText", "");
-          const auto host_name = node->Property<std::string>("HostName", "127.0.0.1");
+          const auto host_name =
+              node->Property<std::string>("HostName", "127.0.0.1");
           const auto port = node->Property<uint16_t>("Port", 0);
 
-          auto listen = util::UtilFactory::CreateListen("ListenServer", share_name);
+          auto listen =
+              util::UtilFactory::CreateListen("ListenServer", share_name);
           if (!listen) {
             continue;
           }
@@ -187,7 +191,7 @@ int main(int nof_arg, char *arg_list[]) {
             listen->SetLogLevelText(number, menu_text);
           }
           kServerList.push_back(std::move(listen));
-         }
+        }
       }
     }
     const std::vector<std::string> no_arg;

@@ -6,41 +6,45 @@
 /** \file timestamp.h
  * \brief Contains various conversion between different time formats.
  *
- * The central time is an uint64_t UTC nanoseconds since 1970-01-01. This is an extension of the ols time_t
- * that is seconds since 1970-01-01. In general the std::chrono::system_clock is used as reference.
+ * The central time is an uint64_t UTC nanoseconds since 1970-01-01. This is an
+ * extension of the ols time_t that is seconds since 1970-01-01. In general the
+ * std::chrono::system_clock is used as reference.
  *
- * The nanosecond timestamp is used in communications and a general timestamp. This due to the fact that
- * different system used different epoch for system clock. Note most system uses 1970-01-01 as epoch and
- * is called POSIX time or UNIX time.
+ * The nanosecond timestamp is used in communications and a general timestamp.
+ * This due to the fact that different system used different epoch for system
+ * clock. Note most system uses 1970-01-01 as epoch and is called POSIX time or
+ * UNIX time.
  *
  * \note
- * The std::chrono library have many new functions in C++20. Unfortunately not many compiler have implemented
- * these function so most most of the implementation uses C++17 functionality.
+ * The std::chrono library have many new functions in C++20. Unfortunately not
+ * many compiler have implemented these function so most most of the
+ * implementation uses C++17 functionality.
  */
 #pragma once
-#include <string>
 #include <chrono>
-#include <vector>
 #include <filesystem>
+#include <string>
+#include <vector>
 
 namespace util::time {
 /** \typedef SystemClock
  * \brief Convenience type definition for std::chrono::system_clock;
  */
- using SystemClock = std::chrono::system_clock;
+using SystemClock = std::chrono::system_clock;
 
 /** \typedef TimeStamp
- * \brief Convenience type definition for std::chrono::time_point<std::chrono::system_time>;
+ * \brief Convenience type definition for
+ * std::chrono::time_point<std::chrono::system_time>;
  */
- using TimeStamp = std::chrono::time_point<SystemClock>;
+using TimeStamp = std::chrono::time_point<SystemClock>;
 
- /** \brief returns a ISO date and time string.
-  *
-  * The function is intended to be used for time stamp in log files.
-  *
-  * @param [in] timestamp System clock timestamp
-  * @return Returns a date and time string.
-  */
+/** \brief returns a ISO date and time string.
+ *
+ * The function is intended to be used for time stamp in log files.
+ *
+ * @param [in] timestamp System clock timestamp
+ * @return Returns a date and time string.
+ */
 std::string GetLocalDateTime(TimeStamp timestamp = SystemClock::now());
 
 /** \brief returns a ISO date and time string.
@@ -71,8 +75,10 @@ std::string NsToLocalIsoTime(uint64_t ns_since_1970);
 /** \brief Converts a nanosecond since 1970 to a UTC ISO date and time string.
  *
  * @param [in] ns_since_1970 Nanosecond since 1970
- * @param [in] format 0: Include seconds, 1: Include ms, 2: include micro-seconds, 3: Include ns
- * @return Return a date and time string in format YYYY-MM-DDThh:mm:ss.sssssssssZ
+ * @param [in] format 0: Include seconds, 1: Include ms, 2: include
+ * micro-seconds, 3: Include ns
+ * @return Return a date and time string in format
+ * YYYY-MM-DDThh:mm:ss.sssssssssZ
  */
 std::string NsToIsoTime(uint64_t ns_since_1970, int format = 0);
 
@@ -94,7 +100,6 @@ uint64_t IsoTimeToNs(const std::string& iso_time, bool local_time = false);
  */
 uint64_t TimeStampToNs(TimeStamp timestamp = SystemClock::now());
 
-
 /** \brief Formats a date string according to the local date format.
  *
  * Formats a date string according to the local date format.
@@ -105,10 +110,11 @@ std::string NsToLocalDate(uint64_t ns_since_1970);
 
 /** \brief Formats a time string according to the local time format.
  *
- * Formats a time string with optional ms..ns. The output format is according to the
- * local time format.
+ * Formats a time string with optional ms..ns. The output format is according to
+ * the local time format.
  * @param ns_since_1970 Number of nanoseconds since 1970
- * @param format 0 = Show only seconds, 1 = Show ms, 2 = Show microseconds, 3 = Show ns
+ * @param format 0 = Show only seconds, 1 = Show ms, 2 = Show microseconds, 3 =
+ * Show ns
  * @return Localized time string
  */
 std::string NsToLocalTime(uint64_t ns_since_1970, int format = 0);
@@ -131,6 +137,6 @@ uint64_t OdsDateToNs(const std::string& ods_date);
  * @param time Time point of a file clock
  * @return Nano-seconds since 1970
  */
-uint64_t FileTimeToNs( std::filesystem::file_time_type time);
+uint64_t FileTimeToNs(std::filesystem::file_time_type time);
 
-}
+}  // namespace util::time

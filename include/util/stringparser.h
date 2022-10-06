@@ -20,11 +20,13 @@ namespace util::string {
  */
 class StringParser {
  public:
-  explicit StringParser(const std::string &expression); ///< Constructor
-  bool Parse(const std::string& text); ///< Parses the string
+  explicit StringParser(const std::string& expression);  ///< Constructor
+  bool Parse(const std::string& text);                   ///< Parses the string
 
-  [[nodiscard]] bool ExistTag(const std::string& tag) const; ///< Test if a tag exist
-  [[nodiscard]] std::string GetTagValue(const std::string& tag) const; ///< Returns the tag value
+  [[nodiscard]] bool ExistTag(
+      const std::string& tag) const;  ///< Test if a tag exist
+  [[nodiscard]] std::string GetTagValue(
+      const std::string& tag) const;  ///< Returns the tag value
 
  private:
   struct ParserElement {
@@ -35,8 +37,4 @@ class StringParser {
   std::vector<ParserElement> element_list_;
 };
 
-} // end namespace
-
-
-
-
+}  // namespace util::string

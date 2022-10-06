@@ -2,15 +2,17 @@
  * Copyright 2021 Ingemar Hedvall
  * SPDX-License-Identifier: MIT
  */
+#include "logfile.h"
+
+#include <chrono>
+#include <exception>
 #include <filesystem>
 #include <iostream>
-#include <exception>
-#include <chrono>
-#include "logfile.h"
+
 #include "util/logconfig.h"
-#include "util/timestamp.h"
-#include "util/logstream.h"
 #include "util/logging.h"
+#include "util/logstream.h"
+#include "util/timestamp.h"
 
 using namespace std::filesystem;
 using namespace std::chrono_literals;
@@ -22,18 +24,17 @@ std::string GetStem(const std::string &file) {
     std::filesystem::path p(file);
     return p.stem().string();
   } catch (const std::exception &) {
-
   }
   return file;
 }
 
 /**
- * Returns the preferred program data root dir. In windows this is 'c:\programdata'.
+ * Returns the preferred program data root dir. In windows this is
+ * 'c:\programdata'.
  * @return empty string or the preferred application data directory.
  */
 
-
-std::string FindLogPath(const std::string& base_name) {
+std::string FindLogPath(const std::string &base_name) {
   try {
     auto &log_config = util::log::LogConfig::Instance();
 
@@ -68,24 +69,24 @@ std::string FindLogPath(const std::string& base_name) {
     return root_dir.string();
   } catch (const std::exception &error) {
     std::cerr << "FindLogPath(). Error: " << error.what() << std::endl;
-    throw error; // No meaning to log the error to file
+    throw error;  // No meaning to log the error to file
   }
 }
-}
+}  // namespace
 
 namespace util::log::detail {
 
-std::string LogFile::Filename() const {
-  return filename_;
-}
+std::string LogFile::Filename() const { return filename_; }
 
 LogFile::LogFile() noexcept {
-  EnableSeverityLevel(LogSeverity::kTrace, false); // Turn of trace level by default
+  EnableSeverityLevel(LogSeverity::kTrace,
+                      false);  // Turn of trace level by default
   InitLogFile("");
 }
 
 LogFile::LogFile(const std::string &base_name) {
-  EnableSeverityLevel(LogSeverity::kTrace, false); // Turn of trace level by default
+  EnableSeverityLevel(LogSeverity::kTrace,
+                      false);  // Turn of trace level by default
   InitLogFile(base_name);
 }
 
@@ -110,14 +111,13 @@ void LogFile::WorkerThread() {
   try {
     BackupFiles(filename_);
   } catch (const std::exception &error) {
-    LOG_ERROR() << "Failed to backup log files at start. Error: " << error.what();
+    LOG_ERROR() << "Failed to backup log files at start. Error: "
+                << error.what();
   }
 
   do {
     std::unique_lock<std::mutex> lock(locker_);
-    condition_.wait_for(lock, 1000ms, [&] {
-      return stop_thread_.load();
-    });
+    condition_.wait_for(lock, 1000ms, [&] { return stop_thread_.load(); });
 
     int message_count = 0;
     for (; !message_list_.empty() && message_count <= 10000; ++message_count) {
@@ -143,7 +143,7 @@ void LogFile::WorkerThread() {
     }
   } while (!stop_thread_);
 
-  while(!message_list_.empty()) {
+  while (!message_list_.empty()) {
     LogMessage m = message_list_.front();
     message_list_.pop();
     HandleMessage(m);
@@ -181,15 +181,15 @@ void LogFile::HandleMessage(const LogMessage &m) {
   }
   if (ShowLocation()) {
     temp << "    [" << GetStem(m.location.file_name()) << ":"
-         << m.location.function_name()
-         << ":" << m.location.line() << "]";
+         << m.location.function_name() << ":" << m.location.line() << "]";
   }
   temp << std::endl;
   std::fwrite(temp.str().data(), 1, temp.str().size(), file_);
 }
 
 /**
- * Adds a log message to the internal message queue. The queue is saved to a file by a worker thread.
+ * Adds a log message to the internal message queue. The queue is saved to a
+ * file by a worker thread.
  * @param [in] message Message to handle.
  */
 void LogFile::AddLogMessage(const LogMessage &message) {
@@ -208,7 +208,8 @@ void LogFile::AddLogMessage(const LogMessage &message) {
 }
 
 /**
- * Stops the working thread. This means that all messages in the queue is saved to the file.
+ * Stops the working thread. This means that all messages in the queue is saved
+ * to the file.
  */
 void LogFile::Stop() {
   stop_thread_ = true;
@@ -222,7 +223,7 @@ void LogFile::Stop() {
   }
 }
 
-void LogFile::InitLogFile(const std::string& base_name) {
+void LogFile::InitLogFile(const std::string &base_name) {
   try {
     stop_thread_ = true;
     if (worker_thread_.joinable()) {
@@ -237,22 +238,21 @@ void LogFile::InitLogFile(const std::string& base_name) {
     filename_ = {};
     path p = FindLogPath(base_name);
     if (p.empty()) {
-      throw std::ios_base::failure(std::string("Path is empty. Path: ") + p.string());
+      throw std::ios_base::failure(std::string("Path is empty. Path: ") +
+                                   p.string());
     }
     if (!exists(p.parent_path())) {
-      throw std::ios_base::failure(std::string("Path does not exist Path: ") + p.string());
+      throw std::ios_base::failure(std::string("Path does not exist Path: ") +
+                                   p.string());
     }
     filename_ = p.string();
     StartWorkerThread();
   } catch (const std::exception &error) {
-    std::cerr << "Couldn't initiate a log file. Error: " << error.what() << std::endl;
+    std::cerr << "Couldn't initiate a log file. Error: " << error.what()
+              << std::endl;
   }
-
 }
 
-bool LogFile::HasLogFile() const {
-  return !filename_.empty();
-}
+bool LogFile::HasLogFile() const { return !filename_.empty(); }
 
-
-}
+}  // namespace util::log::detail

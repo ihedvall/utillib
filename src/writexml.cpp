@@ -4,6 +4,4 @@
  */
 // #include "writexml.h"
 
-namespace util::xml::detail {
-
-} // end namespace
+namespace util::xml::detail {}  // namespace util::xml::detail

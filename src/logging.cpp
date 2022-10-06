@@ -2,8 +2,8 @@
  * Copyright 2021 Ingemar Hedvall
  * SPDX-License-Identifier: MIT
  */
-#include <vector>
 #include <filesystem>
+#include <vector>
 
 #ifdef __GNUC__
 #pragma GCC diagnostic push
@@ -14,8 +14,8 @@
 #include <boost/process.hpp>
 #endif
 
-#include "util/logging.h"
 #include "util/logconfig.h"
+#include "util/logging.h"
 #include "util/logstream.h"
 
 namespace {
@@ -25,7 +25,7 @@ void SendLogMessage(const util::log::LogMessage &m) {
   log_config.AddLogMessage(m);
 }
 
-}
+}  // namespace
 namespace util::log {
 
 void LogDebug(const Loc &loc, const char *fmt, ...) {
@@ -70,7 +70,8 @@ void LogError(const Loc &loc, const char *fmt, ...) {
   LogString(loc, LogSeverity::kError, buffer);
 }
 
-void LogString(const Loc &loc, LogSeverity severity, const std::string &message) {
+void LogString(const Loc &loc, LogSeverity severity,
+               const std::string &message) {
   LogMessage m;
   m.message = message;
   m.location = loc;
@@ -83,14 +84,15 @@ std::string FindNotepad() {
   std::string note;
   // 1. Find the path to the 'notepad++.exe'
   try {
-    std::vector< boost::filesystem::path > path_list = ::boost::this_process::path();
+    std::vector<boost::filesystem::path> path_list =
+        ::boost::this_process::path();
     path_list.emplace_back("c:/program files/notepad++");
 
     auto notepad = boost::process::search_path("notepad++", path_list);
     if (!notepad.string().empty()) {
       note = notepad.string();
     }
-  } catch(const std::exception& ) {
+  } catch (const std::exception &) {
     note.clear();
   }
 
@@ -104,7 +106,7 @@ std::string FindNotepad() {
     if (!notepad.string().empty()) {
       note = notepad.string();
     }
-  } catch(const std::exception& ) {
+  } catch (const std::exception &) {
     note.clear();
   }
 
@@ -112,19 +114,19 @@ std::string FindNotepad() {
     return note;
   }
 
-   // 2. Find the path to the 'gedit' GNOME editor
-   try {
-      auto notepad = boost::process::search_path("gedit");
-      if (!notepad.string().empty()) {
-          note = notepad.string();
-      }
-   } catch(const std::exception& ) {
-      note.clear();
-   }
+  // 2. Find the path to the 'gedit' GNOME editor
+  try {
+    auto notepad = boost::process::search_path("gedit");
+    if (!notepad.string().empty()) {
+      note = notepad.string();
+    }
+  } catch (const std::exception &) {
+    note.clear();
+  }
   return note;
 }
 
-bool BackupFiles(const std::string &filename, bool remove_file ) {
+bool BackupFiles(const std::string &filename, bool remove_file) {
   if (filename.empty()) {
     LOG_ERROR() << "File name is empty. Illegal use of function";
     return false;
@@ -136,7 +138,7 @@ bool BackupFiles(const std::string &filename, bool remove_file ) {
     const std::filesystem::path stem(full.stem());
     const std::filesystem::path ext(full.extension());
     if (!std::filesystem::exists(full)) {
-      return true; // No meaning to back up if original doesn't exist.
+      return true;  // No meaning to back up if original doesn't exist.
     }
     // shift all file xxx_N -> xxx_N-1 and last xxx -> xxx_0
     for (int ii = 9; ii >= 0; --ii) {
@@ -164,14 +166,12 @@ bool BackupFiles(const std::string &filename, bool remove_file ) {
         }
       }
     }
-  } catch (const std::exception& error) {
-    LOG_ERROR() << "Backup of file failed. Error: " << error.what() << ", File: " << filename;
+  } catch (const std::exception &error) {
+    LOG_ERROR() << "Backup of file failed. Error: " << error.what()
+                << ", File: " << filename;
     return false;
   }
   return true;
 }
 
-
-}
-
-
+}  // namespace util::log

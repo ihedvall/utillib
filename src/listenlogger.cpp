@@ -3,14 +3,12 @@
  * SPDX-License-Identifier: MIT
  */
 #include "listenlogger.h"
-#include "util/timestamp.h"
+
 #include "util/logstream.h"
+#include "util/timestamp.h"
 namespace util::log::detail {
 
-ListenLogger::ListenLogger() :
-    listen_proxy_("LISLOG") {
-  ShowLocation(false);
-}
+ListenLogger::ListenLogger() : listen_proxy_("LISLOG") { ShowLocation(false); }
 
 void ListenLogger::AddLogMessage(const LogMessage &message) {
   if (!listen_proxy_.IsActive() || !IsSeverityLevelEnabled(message.severity)) {
@@ -32,7 +30,4 @@ void ListenLogger::AddLogMessage(const LogMessage &message) {
   listen_proxy_.AddMessage(time, pre_text, temp.str());
 }
 
-
-
-}
-
+}  // namespace util::log::detail

@@ -4,8 +4,8 @@
  */
 #pragma once
 
-#include <string>
 #include <sstream>
+#include <string>
 #include <variant>
 
 #ifndef yyFlexLexerOnce
@@ -16,17 +16,14 @@
 #include "util/syslogmessage.h"
 namespace util::syslog {
 
- class SyslogScanner : public yyFlexLexer, public util::syslog::SyslogMessage {
+class SyslogScanner : public yyFlexLexer, public util::syslog::SyslogMessage {
  public:
   explicit SyslogScanner(std::istringstream& in);
   int yylex(SyslogParser::value_type* yylval);
 
  private:
   std::ostringstream utf8_stream_;
-  SyslogParser::semantic_type *yylval = nullptr;
+  SyslogParser::semantic_type* yylval = nullptr;
 };
 
-
-
-
-} // end namespace
+}  // namespace util::syslog

@@ -19,16 +19,19 @@ class TempDir {
  public:
   /** \brief Creates a temporary directory.
    *
-   * Creates a temporary directory in the default temporary directory. Normally the new directory name
-   * would be the application name. If multiple application using this function, are running on this
-   * computer, it is recommended that the unique_dir flag is set.
+   * Creates a temporary directory in the default temporary directory. Normally
+   * the new directory name would be the application name. If multiple
+   * application using this function, are running on this computer, it is
+   * recommended that the unique_dir flag is set.
    *
-   * A unique directory is named 'sub_dir_XXXX' where X is a random hexadecimal digit.
-   * If the unique_dir flag is false, the director is named 'sub_dir'
+   * A unique directory is named 'sub_dir_XXXX' where X is a random hexadecimal
+   * digit. If the unique_dir flag is false, the director is named 'sub_dir'
    *
-   * The temporary directory and its files are removed when the destructor is called.
+   * The temporary directory and its files are removed when the destructor is
+   * called.
    *
-   * @param sub_dir Recommended sub-directory base name. If empt a directory 'utillib' is created.
+   * @param sub_dir Recommended sub-directory base name. If empt a directory
+   * 'utillib' is created.
    * @param unique_dir If set to true, a unique directory name is created.
    */
   TempDir(const std::string& sub_dir, bool unique_dir);
@@ -46,9 +49,7 @@ class TempDir {
    * Returns full path to the temporary directory.
    * @return Path to temporary directory.
    */
-  [[nodiscard]] const std::string& Path() const {
-    return temp_dir_;
-  }
+  [[nodiscard]] const std::string& Path() const { return temp_dir_; }
 
   /** \brief Generates a temporary and optional unique file name.
    *
@@ -58,10 +59,12 @@ class TempDir {
    * @param unique_file Set to true if a unique file name should be generated.
    * @return File name with path and extension.
    */
-  [[nodiscard]] std::string TempFile(const std::string& stem, const std::string& extension, bool unique_file) const;
+  [[nodiscard]] std::string TempFile(const std::string& stem,
+                                     const std::string& extension,
+                                     bool unique_file) const;
+
  private:
   std::string temp_dir_;
 };
 
-
-} // end namespace util::log
+}  // end namespace util::log

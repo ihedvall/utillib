@@ -4,19 +4,20 @@
  */
 
 #pragma once
-#include <memory>
+#include <atomic>
 #include <condition_variable>
+#include <memory>
 #include <mutex>
 #include <thread>
-#include <atomic>
-#include "util/ilisten.h"
+
 #include "messagequeue.h"
+#include "util/ilisten.h"
 
 namespace util::log::detail {
 
 class ListenConsole : public IListen {
  public:
-  explicit ListenConsole(const std::string& share_name);
+  explicit ListenConsole(const std::string &share_name);
   ~ListenConsole() override;
 
   ListenConsole() = delete;
@@ -28,8 +29,10 @@ class ListenConsole : public IListen {
 
   void SetLogLevel(size_t log_level) override;
   size_t LogLevel() override;
+
  protected:
-  void AddMessage(uint64_t nano_sec_1970, const std::string &pre_text, const std::string &text) override;
+  void AddMessage(uint64_t nano_sec_1970, const std::string &pre_text,
+                  const std::string &text) override;
 
  private:
   std::unique_ptr<MessageQueue> share_mem_queue_;
@@ -39,4 +42,4 @@ class ListenConsole : public IListen {
   void WorkerTask();
 };
 
-}
+}  // namespace util::log::detail

@@ -3,12 +3,13 @@
  * SPDX-License-Identifier: MIT
  */
 
-#include <sstream>
 #include "util/structureddata.h"
+
+#include <sstream>
 
 namespace util::syslog {
 
-void StructuredData::Identity(const std::string &identity) {
+void StructuredData::Identity(const std::string& identity) {
   // Parse out the enterprise number <stem>@<enterprise number>
   bool use_stem = true;
   std::ostringstream stem;
@@ -50,8 +51,8 @@ void StructuredData::Identity(const std::string &identity) {
   enterprise_id_ = number.str();
 }
 
-void StructuredData::AddParameter(const std::string &name, const std::string &value) {
-
+void StructuredData::AddParameter(const std::string& name,
+                                  const std::string& value) {
   // Remove '=',' ',']','\\' and '\"' form the input.
   auto temp_name = name;
   for (char& input : temp_name) {
@@ -102,4 +103,4 @@ void StructuredData::AddParameter(const std::string &name, const std::string &va
   }
 }
 
-} // end namespace
+}  // namespace util::syslog

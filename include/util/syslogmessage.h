@@ -12,6 +12,7 @@
 #include <cstdint>
 #include <string>
 #include <vector>
+
 #include "logmessage.h"
 #include "structureddata.h"
 namespace util::syslog {
@@ -21,14 +22,14 @@ namespace util::syslog {
  *
  */
 enum class SyslogSeverity : uint8_t {
-  Emergency = 0,     ///< System is unusable.
-  Alert = 1,         ///< Action must be taken immediately.
-  Critical = 2,      ///< Critical condition.
-  Error = 3,         ///< Error condition.
-  Warning = 4,       ///< Warning condition.
-  Notice = 5,        ///< Normal but significant condition.
-  Informational = 6, ///< Informational message.
-  Debug = 7          ///< Debug message.
+  Emergency = 0,      ///< System is unusable.
+  Alert = 1,          ///< Action must be taken immediately.
+  Critical = 2,       ///< Critical condition.
+  Error = 3,          ///< Error condition.
+  Warning = 4,        ///< Warning condition.
+  Notice = 5,         ///< Normal but significant condition.
+  Informational = 6,  ///< Informational message.
+  Debug = 7           ///< Debug message.
 };
 
 /** \enum SyslogFacility
@@ -86,52 +87,56 @@ class SyslogMessage {
    */
   SyslogMessage(const util::log::LogMessage& log, bool show_location);
 
-  void Severity(SyslogSeverity severity) { ///< Sets the severity level
+  void Severity(SyslogSeverity severity) {  ///< Sets the severity level
     severity_ = severity;
   }
-  [[nodiscard]] SyslogSeverity Severity() const { ///< Returns the severity level
+  [[nodiscard]] SyslogSeverity Severity()
+      const {  ///< Returns the severity level
     return severity_;
   }
 
-  void Facility(SyslogFacility facility) { ///< Sets the facility code
+  void Facility(SyslogFacility facility) {  ///< Sets the facility code
     facility_ = facility;
   }
 
-  [[nodiscard]] SyslogFacility Facility() const { ///< Returns the facility code.
+  [[nodiscard]] SyslogFacility Facility()
+      const {  ///< Returns the facility code.
     return facility_;
   }
 
-
-
-  [[nodiscard]] uint8_t Version() const { ///< Returns the version.
+  [[nodiscard]] uint8_t Version() const {  ///< Returns the version.
     return version_;
   }
 
-  void Timestamp(uint64_t ns1970) { ///< Sets the timestamp (ns since 1970).
+  void Timestamp(uint64_t ns1970) {  ///< Sets the timestamp (ns since 1970).
     timestamp_ = ns1970;
   }
 
-  [[nodiscard]] uint64_t Timestamp() const { ///< Returns the timestamp (ns since 1970).
+  [[nodiscard]] uint64_t Timestamp()
+      const {  ///< Returns the timestamp (ns since 1970).
     return timestamp_;
   }
 
-  void Hostname(const std::string& name); ///< Sets the host name
-  [[nodiscard]] const std::string& Hostname() const { ///< Returns the host name
+  void Hostname(const std::string& name);  ///< Sets the host name
+  [[nodiscard]] const std::string& Hostname()
+      const {  ///< Returns the host name
     return hostname_;
   }
 
-  void ApplicationName(const std::string& name); ///< Sets the application name
-  [[nodiscard]] const std::string& ApplicationName() const { ///< Returns the application name
+  void ApplicationName(const std::string& name);  ///< Sets the application name
+  [[nodiscard]] const std::string& ApplicationName()
+      const {  ///< Returns the application name
     return application_name_;
   }
 
-  void ProcessId(const std::string& pid); ///< Sets the PID
-  [[nodiscard]] const std::string& ProcessId() const { ///< Returns the PID
+  void ProcessId(const std::string& pid);               ///< Sets the PID
+  [[nodiscard]] const std::string& ProcessId() const {  ///< Returns the PID
     return process_id_;
   }
 
-  void MessageId(const std::string& msg_id); ///< Sets the message ID
-  [[nodiscard]] const std::string& MessageId() const { ///< Returns the message ID
+  void MessageId(const std::string& msg_id);  ///< Sets the message ID
+  [[nodiscard]] const std::string& MessageId()
+      const {  ///< Returns the message ID
     return message_id_;
   }
 
@@ -147,37 +152,41 @@ class SyslogMessage {
    * Returns the message text. Note that the string is UTF8 decoded.
    * @return Messag text.
    */
-  [[nodiscard]] const std::string& Message() const {
-    return message_;
-  }
+  [[nodiscard]] const std::string& Message() const { return message_; }
 
-  void AddData(const StructuredData& data) { ///< Adds structured data to the message.
+  void AddData(
+      const StructuredData& data) {  ///< Adds structured data to the message.
     sd_list_.push_back(data);
   }
 
-  [[nodiscard]] const std::vector<StructuredData>& DataList() const { ///< Returns a list of structured data items.
+  [[nodiscard]] const std::vector<StructuredData>& DataList()
+      const {  ///< Returns a list of structured data items.
     return sd_list_;
   }
 
-  [[nodiscard]] std::string GenerateMessage() const; ///< Generates a syslog message.
-  bool ParseMessage(const std::string& msg); ///< Parses a syslog message.
+  [[nodiscard]] std::string GenerateMessage()
+      const;                                  ///< Generates a syslog message.
+  bool ParseMessage(const std::string& msg);  ///< Parses a syslog message.
 
-  void AddStructuredData(const std::string& identity); ///< Adds a structured data item without any parameters.
-  void AppendParameter(const std::string& name, const std::string& value); ///< Append parameter item to the last data item.
-  void Version(uint8_t version) { ///< Sets the version number. Default is 1.
+  void AddStructuredData(
+      const std::string&
+          identity);  ///< Adds a structured data item without any parameters.
+  void AppendParameter(const std::string& name,
+                       const std::string& value);  ///< Append parameter item to
+                                                   ///< the last data item.
+  void Version(uint8_t version) {  ///< Sets the version number. Default is 1.
     version_ = version;
   }
 
   /** \brief Sets the timestamp by converting a ISO time string.
-  *
-  * Function that is used when parsing syslog messages and converts
-  * the incoming ISO time string into a timestamp.
-  * @param iso_time ISO time formatted string.
-  */
+   *
+   * Function that is used when parsing syslog messages and converts
+   * the incoming ISO time string into a timestamp.
+   * @param iso_time ISO time formatted string.
+   */
   void IsoTime(const std::string& iso_time);
 
  protected:
-
  private:
   SyslogSeverity severity_ = SyslogSeverity::Informational;
   SyslogFacility facility_ = SyslogFacility::Local0;
@@ -193,4 +202,4 @@ class SyslogMessage {
   std::vector<StructuredData> sd_list_;
 };
 
-} // end namespace util::log
+}  // namespace util::syslog

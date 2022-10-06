@@ -2,8 +2,10 @@
  * Copyright 2021 Ingemar Hedvall
  * SPDX-License-Identifier: MIT
  */
-#include <string>
 #include <gtest/gtest.h>
+
+#include <string>
+
 #include "util/ixmlfile.h"
 
 using namespace util::xml;
@@ -38,11 +40,11 @@ constexpr std::string_view kMdComment =
     "    </ChildList>\n"
     "</Root>";
 
-}
+}  // namespace
 
 namespace util::test {
 
-TEST(IXmlFile, ParseString) //NOLINT
+TEST(IXmlFile, ParseString)  // NOLINT
 {
   std::unique_ptr<IXmlFile> f = CreateXmlFile();
 
@@ -53,7 +55,7 @@ TEST(IXmlFile, ParseString) //NOLINT
   EXPECT_TRUE(f->Property<bool>("Tag4"));
   EXPECT_FALSE(f->Property<bool>("Tag5"));
 
-  const auto *list = f->GetNode("ChildList");
+  const auto* list = f->GetNode("ChildList");
   ASSERT_TRUE(list != nullptr);
   IXmlNode::ChildList node_list;
   list->GetChildList(node_list);
@@ -67,10 +69,9 @@ TEST(IXmlFile, ParseString) //NOLINT
   EXPECT_TRUE(condition);
 
   EXPECT_EQ(f->RootName(), std::string("Root"));
-
 }
 
-TEST(IXmlFile, ParseMdComment) //NOLINT
+TEST(IXmlFile, ParseMdComment)  // NOLINT
 {
   std::unique_ptr<IXmlFile> f(std::move(CreateXmlFile()));
   EXPECT_TRUE(f->ParseString(kMdComment.data()));
@@ -80,7 +81,7 @@ TEST(IXmlFile, ParseMdComment) //NOLINT
   EXPECT_TRUE(f->Property<bool>("Tag4"));
   EXPECT_FALSE(f->Property<bool>("Tag5"));
 
-  const auto *list = f->GetNode("ChildList");
+  const auto* list = f->GetNode("ChildList");
   ASSERT_TRUE(list != nullptr);
   IXmlNode::ChildList node_list;
   list->GetChildList(node_list);
@@ -94,7 +95,6 @@ TEST(IXmlFile, ParseMdComment) //NOLINT
   EXPECT_TRUE(condition);
 
   EXPECT_EQ(f->RootName(), std::string("Root"));
-
 }
 
 TEST(IXmlFile, TestProperty) {
@@ -145,4 +145,4 @@ TEST(IXmlNode, TestAttribute) {
   EXPECT_EQ(temp_node->Attribute<int>("IntAttr"), 55);
   EXPECT_EQ(temp_node->Attribute<double>("FloatAttr"), 1.5);
 }
-} // namespace util::test
+}  // namespace util::test

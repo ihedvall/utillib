@@ -3,8 +3,9 @@
  * SPDX-License-Identifier: MIT
  */
 
-#include <iostream>
 #include "listenconsole.h"
+
+#include <iostream>
 
 namespace util::log::detail {
 
@@ -19,9 +20,7 @@ ListenConsole::ListenConsole(const std::string &share_name) {
   }
 }
 
-ListenConsole::~ListenConsole() {
-  ListenConsole::Stop();
-}
+ListenConsole::~ListenConsole() { ListenConsole::Stop(); }
 
 bool ListenConsole::Start() {
   if (share_mem_queue_) {
@@ -35,7 +34,8 @@ bool ListenConsole::Start() {
 bool ListenConsole::Stop() {
   stop_thread_ = true;
   if (share_mem_queue_) {
-    share_mem_queue_->Stop(); // This returns the blocking get in worker thread.
+    share_mem_queue_
+        ->Stop();  // This returns the blocking get in worker thread.
   }
   if (worker_thread_.joinable()) {
     worker_thread_.join();
@@ -48,7 +48,7 @@ void ListenConsole::WorkerTask() {
     SharedListenMessage msg;
     const auto get = share_mem_queue_->Get(msg, true);
     if (get) {
-      AddMessage(msg.ns1970, msg.pre_text,msg.text);
+      AddMessage(msg.ns1970, msg.pre_text, msg.text);
     }
   }
 }
@@ -61,8 +61,10 @@ size_t ListenConsole::LogLevel() {
   return share_mem_queue_ ? share_mem_queue_->LogLevel() : 0;
 }
 
-void ListenConsole::AddMessage(uint64_t nano_sec_1970, const std::string &pre_text, const std::string &text) {
-  const auto time = time::NsToLocalTime(nano_sec_1970,1);
+void ListenConsole::AddMessage(uint64_t nano_sec_1970,
+                               const std::string &pre_text,
+                               const std::string &text) {
+  const auto time = time::NsToLocalTime(nano_sec_1970, 1);
   std::cout << time << " " << pre_text << " " << text << "" << std::endl;
 }
 
@@ -78,5 +80,4 @@ void ListenConsole::SetLogLevel(size_t log_level) {
   }
 }
 
-
-} // end namespace
+}  // namespace util::log::detail

@@ -11,9 +11,7 @@ void ISyslogServer::Start() {
   msg_queue_ = std::make_unique<log::ThreadSafeQueue<SyslogMessage>>();
 }
 
-void ISyslogServer::Stop() {
-  msg_queue_.reset();
-}
+void ISyslogServer::Stop() { msg_queue_.reset(); }
 
 void ISyslogServer::AddMsg(const SyslogMessage &msg) {
   if (msg_queue_) {
@@ -24,8 +22,8 @@ void ISyslogServer::AddMsg(const SyslogMessage &msg) {
 
 std::optional<SyslogMessage> ISyslogServer::GetMsg(bool block) {
   std::unique_ptr<SyslogMessage> msg;
-  const auto get = msg_queue_ ? msg_queue_->Get(msg,block) : false;
+  const auto get = msg_queue_ ? msg_queue_->Get(msg, block) : false;
   return get && msg ? *msg : std::optional<SyslogMessage>();
 }
 
-} // end namespace
+}  // namespace util::syslog

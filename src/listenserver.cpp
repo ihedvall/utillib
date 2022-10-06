@@ -2,12 +2,14 @@
  * Copyright 2021 Ingemar Hedvall
  * SPDX-License-Identifier: MIT
  */
-#include <chrono>
-#include <boost/asio.hpp>
-#include "util/logstream.h"
 #include "listenserver.h"
+
+#include <boost/asio.hpp>
+#include <chrono>
+
 #include "listenserverconnection.h"
 #include "util/listenconfig.h"
+#include "util/logstream.h"
 
 using namespace util::log;
 using namespace boost::asio;
@@ -16,32 +18,28 @@ using namespace std::chrono_literals;
 namespace util::log::detail {
 
 ListenServer::ListenServer()
-: cleanup_timer_(context_),
-  queue_timer_(context_) {
+    : cleanup_timer_(context_), queue_timer_(context_) {
   Name("Listen");
 }
 
-ListenServer::ListenServer(const std::string &share_name)
-: ListenServer() {
+ListenServer::ListenServer(const std::string& share_name) : ListenServer() {
   ShareName(share_name);
 }
 
-ListenServer::~ListenServer() {
-  Stop();
-}
+ListenServer::~ListenServer() { Stop(); }
 
 void ListenServer::WorkerTask() {
   try {
     const auto& count = context_.run();
-    LOG_DEBUG() << "Stopped main worker thread. Name: " << Name() << ", Count: " << count;
+    LOG_DEBUG() << "Stopped main worker thread. Name: " << Name()
+                << ", Count: " << count;
   } catch (const std::exception& error) {
-    LOG_ERROR() << "Context error. Name: " << Name() << ", Error: " << error.what();
+    LOG_ERROR() << "Context error. Name: " << Name()
+                << ", Error: " << error.what();
   }
 }
 
-bool ListenServer::IsActive() const {
-  return active_;
-}
+bool ListenServer::IsActive() const { return active_; }
 
 bool ListenServer::Start() {
   bool start = false;
@@ -60,14 +58,15 @@ bool ListenServer::Start() {
   try {
     const auto address = ip::make_address(HostName());
     ip::tcp::endpoint endpoint(address, Port());
-    acceptor_ = std::make_unique<ip::tcp::acceptor>(context_,endpoint);
+    acceptor_ = std::make_unique<ip::tcp::acceptor>(context_, endpoint);
     DoAccept();
     DoCleanup();
     DoMessageQueue();
     worker_thread_ = std::thread(&ListenServer::WorkerTask, this);
     start = true;
   } catch (const std::exception& error) {
-    LOG_ERROR() << "Failed to start the server. Name: " << Name() << ", Error: " << error.what();
+    LOG_ERROR() << "Failed to start the server. Name: " << Name()
+                << ", Error: " << error.what();
   }
   return start;
 }
@@ -84,20 +83,23 @@ bool ListenServer::Stop() {
     if (!context_.stopped()) {
       context_.stop();
     }
-    if (worker_thread_.joinable() ) {
+    if (worker_thread_.joinable()) {
       worker_thread_.join();
     }
     std::lock_guard lock(connection_list_lock_);
     connection_list_.clear();
     stop = true;
   } catch (const std::exception& error) {
-    LOG_ERROR() << "Failed to stop the server. Name: " << Name() << ", Error: " << error.what();
+    LOG_ERROR() << "Failed to stop the server. Name: " << Name()
+                << ", Error: " << error.what();
   }
 
   return stop;
 }
 
-void ListenServer::AddMessage(uint64_t nano_sec_1970, const std::string &pre_text, const std::string &text) {
+void ListenServer::AddMessage(uint64_t nano_sec_1970,
+                              const std::string& pre_text,
+                              const std::string& text) {
   auto msg = std::make_unique<ListenTextMessage>();
   msg->ns1970_ = nano_sec_1970;
   msg->pre_text_ = pre_text;
@@ -107,34 +109,39 @@ void ListenServer::AddMessage(uint64_t nano_sec_1970, const std::string &pre_tex
 
 void ListenServer::DoAccept() {
   connection_socket_ = std::make_unique<ip::tcp::socket>(context_);
-  acceptor_->async_accept(*connection_socket_, [&] (const boost::system::error_code& error) {
-    if (error) {
-      connection_socket_.reset();
-      LOG_ERROR() << "Accept error. Name: " << Name() << ", Error: " << error.message();
-    } else {
-      auto connection = std::make_unique<ListenServerConnection>(*this, connection_socket_);
-      {
-        std::lock_guard lock(connection_list_lock_);
-        connection_list_.push_back(std::move(connection));
-      }
-      active_ = true;
-      if (share_mem_queue_) {
-        share_mem_queue_->SetActive(active_);
-      }
-      LOG_INFO() << "Added a connection";
-      DoAccept();
-    }
-  });
+  acceptor_->async_accept(
+      *connection_socket_, [&](const boost::system::error_code& error) {
+        if (error) {
+          connection_socket_.reset();
+          LOG_ERROR() << "Accept error. Name: " << Name()
+                      << ", Error: " << error.message();
+        } else {
+          auto connection = std::make_unique<ListenServerConnection>(
+              *this, connection_socket_);
+          {
+            std::lock_guard lock(connection_list_lock_);
+            connection_list_.push_back(std::move(connection));
+          }
+          active_ = true;
+          if (share_mem_queue_) {
+            share_mem_queue_->SetActive(active_);
+          }
+          LOG_INFO() << "Added a connection";
+          DoAccept();
+        }
+      });
 }
 
 void ListenServer::DoCleanup() {
   cleanup_timer_.expires_after(10s);
-  cleanup_timer_.async_wait([&] (const boost::system::error_code error) {
+  cleanup_timer_.async_wait([&](const boost::system::error_code error) {
     if (error) {
-      LOG_ERROR() << "Cleanup timer error. Name: " << Name() << ", Error: " << error.message();
+      LOG_ERROR() << "Cleanup timer error. Name: " << Name()
+                  << ", Error: " << error.message();
     } else {
       std::lock_guard lock(connection_list_lock_);
-      for (auto itr = connection_list_.begin(); itr != connection_list_.end(); /* No ++itr here */ ) {
+      for (auto itr = connection_list_.begin(); itr != connection_list_.end();
+           /* No ++itr here */) {
         auto& connection = *itr;
         if (!connection || connection->Cleanup()) {
           LOG_INFO() << "Deleted a connection";
@@ -150,51 +157,43 @@ void ListenServer::DoCleanup() {
       DoCleanup();
     }
   });
-
 }
 
 void ListenServer::DoMessageQueue() {
   queue_timer_.expires_after(50ms);
-  queue_timer_.async_wait([&] (const boost::system::error_code error) {
+  queue_timer_.async_wait([&](const boost::system::error_code error) {
     if (error) {
-      LOG_ERROR() << "Message queue timer error. Name: " << Name() << ", Error: " << error.message();
+      LOG_ERROR() << "Message queue timer error. Name: " << Name()
+                  << ", Error: " << error.message();
     } else {
       if (share_mem_queue_) {
         SharedListenMessage share_msg;
         for (bool share = share_mem_queue_->Get(share_msg, false); share;
-                  share = share_mem_queue_->Get(share_msg, false)) {
+             share = share_mem_queue_->Get(share_msg, false)) {
           auto text = std::make_unique<ListenTextMessage>(share_msg);
           InMessage(std::move(text));
         }
       }
       std::unique_ptr<ListenMessage> msg;
-      for (bool message = msg_queue_.Get(msg, false);
-          message;
-          message = msg_queue_.Get(msg, false)) {
+      for (bool message = msg_queue_.Get(msg, false); message;
+           message = msg_queue_.Get(msg, false)) {
         HandleMessage(msg.get());
         msg.reset();
       }
       DoMessageQueue();
     }
   });
-
 }
 
-boost::asio::io_context &ListenServer::Context() {
-  return context_;
-}
+boost::asio::io_context& ListenServer::Context() { return context_; }
 
 void ListenServer::InMessage(std::unique_ptr<ListenMessage> msg) {
   msg_queue_.Put(msg);
 }
 
+size_t ListenServer::LogLevel() { return log_level_; }
 
-
-size_t ListenServer::LogLevel() {
-  return log_level_;
-}
-
-void ListenServer::ShareName(const std::string &share_name) {
+void ListenServer::ShareName(const std::string& share_name) {
   share_name_ = share_name;
   if (share_name_.empty()) {
     share_mem_queue_.reset();
@@ -203,9 +202,7 @@ void ListenServer::ShareName(const std::string &share_name) {
   }
 }
 
-std::string ListenServer::ShareName() const {
-  return share_name_;
-}
+std::string ListenServer::ShareName() const { return share_name_; }
 
 void ListenServer::HandleMessage(const ListenMessage* msg) {
   if (msg == nullptr) {
@@ -246,9 +243,7 @@ void ListenServer::HandleMessage(const ListenMessage* msg) {
     case ListenMessageType::LogLevelText:
     default:
       break;
-
   }
 }
 
-
-} // end namespace
+}  // namespace util::log::detail

@@ -2,15 +2,16 @@
  * Copyright 2022 Ingemar Hedvall
  * SPDX-License-Identifier: MIT
  */
-#include <filesystem>
 #include <util/logconfig.h>
 #include <util/logstream.h>
+
+#include <filesystem>
+
 #include "servicehelper.h"
 
 using namespace detail::services;
 using namespace util::log;
-int main(int nof_arg, char *arg_list[]) {
-
+int main(int nof_arg, char* arg_list[]) {
   auto& service = ServiceHelper::Instance();
 
   for (int arg = 0; arg < nof_arg; ++arg) {
@@ -42,7 +43,9 @@ int main(int nof_arg, char *arg_list[]) {
 
   const auto read = service.ReadRegistryInfo();
   if (!read) {
-    LOG_ERROR() << "Failed to read service daemon information from registry. Service: " << service.Name();
+    LOG_ERROR()
+        << "Failed to read service daemon information from registry. Service: "
+        << service.Name();
     return 0;
   }
 

@@ -4,10 +4,11 @@
  */
 
 #pragma once
-#include <mutex>
-#include <thread>
 #include <condition_variable>
+#include <mutex>
 #include <queue>
+#include <thread>
+
 #include "util/ilogger.h"
 #include "util/logmessage.h"
 namespace util::log::detail {
@@ -17,8 +18,9 @@ class Syslog : public ILogger {
   Syslog() = default;
   Syslog(const std::string& remote_host, uint16_t port);
 
-  void AddLogMessage(const LogMessage &message) override; ///< Handle a log message
-  void Stop() override; ///< Stops the working thread.
+  void AddLogMessage(
+      const LogMessage& message) override;  ///< Handle a log message
+  void Stop() override;                     ///< Stops the working thread.
  private:
   std::mutex locker_;
   std::queue<LogMessage> message_list_;
@@ -31,7 +33,6 @@ class Syslog : public ILogger {
 
   void StartWorkerThread();
   void WorkerThread();
-
 };
 
-} // end namespace
+}  // namespace util::log::detail

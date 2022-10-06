@@ -4,13 +4,14 @@
  */
 
 #pragma once
-#include <string>
-#include <memory>
 #include <atomic>
-#include <thread>
-#include <condition_variable>
 #include <boost/interprocess/mapped_region.hpp>
 #include <boost/interprocess/shared_memory_object.hpp>
+#include <condition_variable>
+#include <memory>
+#include <string>
+#include <thread>
+
 #include "listenmessage.h"
 
 namespace util::log::detail {
@@ -21,16 +22,12 @@ class MessageQueue {
   virtual ~MessageQueue();
 
   MessageQueue() = delete;
-  MessageQueue(const MessageQueue& ) = delete;
-  MessageQueue& operator = (const MessageQueue&) = delete;
+  MessageQueue(const MessageQueue&) = delete;
+  MessageQueue& operator=(const MessageQueue&) = delete;
 
-  [[nodiscard]] bool IsActive() const {
-    return active_;
-  }
+  [[nodiscard]] bool IsActive() const { return active_; }
 
-  [[nodiscard]] uint8_t LogLevel() const {
-    return log_level_;
-  }
+  [[nodiscard]] uint8_t LogLevel() const { return log_level_; }
 
   void SetActive(bool active);
   void SetLogLevel(uint8_t log_level);
@@ -39,6 +36,7 @@ class MessageQueue {
   bool Get(SharedListenMessage& msg, bool block);
   [[nodiscard]] size_t NofMessages() const;
   void Stop();
+
  private:
   std::unique_ptr<boost::interprocess::shared_memory_object> shared_mem_;
   std::unique_ptr<boost::interprocess::mapped_region> region_;
@@ -55,9 +53,6 @@ class MessageQueue {
   std::atomic<uint8_t> log_level_ = 0;
 
   void ClientTask();
-
 };
 
-} // end namespace util::detail
-
-
+}  // namespace util::log::detail

@@ -3,14 +3,16 @@
  * SPDX-License-Identifier: MIT
  */
 
-#include <sstream>
-#include <algorithm>
 #include "util/stringparser.h"
+
+#include <algorithm>
+#include <sstream>
+
 #include "util/stringutil.h"
 
 namespace util::string {
 
-StringParser::StringParser(const std::string &expression) {
+StringParser::StringParser(const std::string& expression) {
   bool tag = false;
   std::ostringstream temp;
   for (const char cin : expression) {
@@ -58,9 +60,9 @@ StringParser::StringParser(const std::string &expression) {
   }
 }
 
-bool StringParser::Parse(const std::string &text) {
+bool StringParser::Parse(const std::string& text) {
   if (element_list_.empty()) {
-     return true;
+    return true;
   }
   for (auto& val : element_list_) {
     val.value.clear();
@@ -76,7 +78,7 @@ bool StringParser::Parse(const std::string &text) {
       if (state + 1 < element_list_.size()) {
         const auto& next = element_list_[state + 1];
         if (!next.name.empty() && next.name[0] == cin) {
-         element_list_[state].value = temp.str();
+          element_list_[state].value = temp.str();
           ++state;
 
           temp.str("");
@@ -102,27 +104,26 @@ bool StringParser::Parse(const std::string &text) {
       }
       temp << cin;
     }
-
   }
   if (state < element_list_.size() && !temp.str().empty()) {
-   element_list_[state].value = temp.str();
-   ++state;
+    element_list_[state].value = temp.str();
+    ++state;
   }
   return state >= element_list_.size();
 }
 
-bool StringParser::ExistTag(const std::string &tag) const {
-  return std::ranges::any_of(element_list_, [&] (const auto& element) {
+bool StringParser::ExistTag(const std::string& tag) const {
+  return std::ranges::any_of(element_list_, [&](const auto& element) {
     return element.is_tag && IEquals(tag, element.name);
   });
 }
 
-std::string StringParser::GetTagValue(const std::string &tag) const {
-  const auto itr = std::ranges::find_if(element_list_, [&] (const auto& element) {
-    return element.is_tag && IEquals(tag, element.name);
-  });
+std::string StringParser::GetTagValue(const std::string& tag) const {
+  const auto itr =
+      std::ranges::find_if(element_list_, [&](const auto& element) {
+        return element.is_tag && IEquals(tag, element.name);
+      });
   return itr == element_list_.cend() ? "" : itr->value;
 }
 
-
-}
+}  // namespace util::string

@@ -17,6 +17,7 @@
  */
 #pragma once
 #include <string>
+
 #include "util/csvwriter.h"
 
 namespace util::plot {
@@ -26,7 +27,7 @@ namespace util::plot {
  *
  */
 enum class GnuTerminal {
-  wxt = 0 ///< wxWidgets window
+  wxt = 0  ///< wxWidgets window
 };
 
 /** \class GnuPlot gnuplot.h "util/gnuplot.h
@@ -45,25 +46,21 @@ class GnuPlot {
    * path environment. There is a checkbox for this when installing gnuplot.
    */
   GnuPlot();
-  virtual ~GnuPlot(); ///< Destructor
+  virtual ~GnuPlot();  ///< Destructor
 
   /** \brief Returns the full path to the gnuplot application.
    *
    * Full path to the gnuplot application.
    * @return Full path to the gnuplot application.
    */
-  [[nodiscard]] const std::string& ExePath() const {
-    return exe_path_;
-  }
+  [[nodiscard]] const std::string& ExePath() const { return exe_path_; }
 
   /** \brief Name of the gnuplot report
    *
    * This name is used to name the gnuplot and CSV files if they are saved.
    * @return Name of the report.
    */
-  [[nodiscard]] const std::string& Name() const {
-    return name_;
-  }
+  [[nodiscard]] const std::string& Name() const { return name_; }
 
   /** \brief Name of the gnuplot report
    * If the plot report shall be saved, this defines the name of the gnuplot
@@ -71,27 +68,21 @@ class GnuPlot {
    * The Path property defines where these reports are saved.
    * @param name Name of report without path or extension.
    */
-  void Name(const std::string& name) {
-    name_ = name;
-  }
+  void Name(const std::string& name) { name_ = name; }
 
   /** \brief Path where reports are saved
    *
    * Directory path where reports are saved.
    * @return
    */
-  [[nodiscard]] const std::string& Path() const {
-    return path_;
-  }
+  [[nodiscard]] const std::string& Path() const { return path_; }
 
   /** \brief Path where report are saved
    *
    * Directory path where reports are saved.
    * @param path
    */
-  void Path(const std::string& path) {
-    path_ = path;
-  }
+  void Path(const std::string& path) { path_ = path; }
 
   /** \brief Returns the full path to the gnuplot script file.
    *
@@ -131,14 +122,13 @@ class GnuPlot {
    * Returns a reference to a CSV writer object.
    * @return
    */
-  CsvWriter& CsvFile() {
-    return data_file_;
-  }
+  CsvWriter& CsvFile() { return data_file_; }
 
  private:
-  std::string exe_path_; ///< Full path to the gnuplot executable.
-  std::string name_; ///< Name on CSV and gnuplot files, No path or extension.
-  std::string path_; ///< Directory where the gnuplot and its data files are stored.
+  std::string exe_path_;  ///< Full path to the gnuplot executable.
+  std::string name_;  ///< Name on CSV and gnuplot files, No path or extension.
+  std::string
+      path_;  ///< Directory where the gnuplot and its data files are stored.
 
   GnuTerminal terminal_ = GnuTerminal::wxt;
 
@@ -156,4 +146,4 @@ class GnuPlot {
   void MakeScript(std::ostream& script) const;
 };
 
-}
+}  // namespace util::plot

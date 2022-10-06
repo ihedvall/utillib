@@ -7,13 +7,9 @@
 
 namespace util::log {
 
-bool ILogger::HasLogFile() const {
-  return false;
-}
+bool ILogger::HasLogFile() const { return false; }
 
-std::string ILogger::Filename() const {
-  return {};
-}
+std::string ILogger::Filename() const { return {}; }
 
 void ILogger::EnableSeverityLevel(LogSeverity severity, bool enable) {
   const auto level = static_cast<uint8_t>(severity);
@@ -24,10 +20,10 @@ void ILogger::EnableSeverityLevel(LogSeverity severity, bool enable) {
 
 bool ILogger::IsSeverityLevelEnabled(LogSeverity severity) const {
   const auto level = static_cast<uint8_t>(severity);
-  return level < severity_filter_.size() ? severity_filter_[level].load() : false;
+  return level < severity_filter_.size() ? severity_filter_[level].load()
+                                         : false;
 }
 
-void ILogger::Stop() {
-}
+void ILogger::Stop() {}
 
-} // end namespace
+}  // namespace util::log

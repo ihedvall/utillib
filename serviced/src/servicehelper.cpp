@@ -3,16 +3,19 @@
  * SPDX-License-Identifier: MIT
  */
 
+#include "servicehelper.h"
+
+#include <windows.h>
+
+#include <boost/program_options.hpp>
+#include <chrono>
+#include <sstream>
 #include <string>
 #include <string_view>
-#include <sstream>
-#include <vector>
-#include <chrono>
 #include <thread>
-#include <windows.h>
-#include <boost/program_options.hpp>
+#include <vector>
+
 #include "util/logstream.h"
-#include "servicehelper.h"
 
 using namespace util::log;
 using namespace std::chrono_literals;
@@ -21,15 +24,16 @@ namespace {
 
 std::string GetLastErrorAsString() {
   auto errorMessageID = ::GetLastError();
-  if(errorMessageID == 0) {
+  if (errorMessageID == 0) {
     return {};
   }
 
   LPSTR messageBuffer = nullptr;
-  size_t size = ::FormatMessageA(FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS,
-                               nullptr, errorMessageID,
-                               MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
-                               (LPSTR) &messageBuffer, 0, nullptr);
+  size_t size = ::FormatMessageA(
+      FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM |
+          FORMAT_MESSAGE_IGNORE_INSERTS,
+      nullptr, errorMessageID, MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
+      (LPSTR)&messageBuffer, 0, nullptr);
   std::string message(messageBuffer, size);
   LocalFree(messageBuffer);
   return message;
@@ -37,49 +41,51 @@ std::string GetLastErrorAsString() {
 
 std::string GetLastErrorAsString(const LSTATUS& error) {
   LPSTR messageBuffer = nullptr;
-  size_t size = ::FormatMessageA(FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS,
-                                 nullptr, error,
-                                 MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
-                                 (LPSTR) &messageBuffer, 0, nullptr);
+  size_t size = ::FormatMessageA(
+      FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM |
+          FORMAT_MESSAGE_IGNORE_INSERTS,
+      nullptr, error, MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
+      (LPSTR)&messageBuffer, 0, nullptr);
   std::string message(messageBuffer, size);
   LocalFree(messageBuffer);
   return message;
 }
 
-DWORD WINAPI SvcCtrlHandler(DWORD control, DWORD event_type, void* event_data, void* context) {
+DWORD WINAPI SvcCtrlHandler(DWORD control, DWORD event_type, void* event_data,
+                            void* context) {
   // Handle the requested control code.
-  auto &service = detail::services::ServiceHelper::Instance();
+  auto& service = detail::services::ServiceHelper::Instance();
   return service.SvcCtrlHandler(control, event_type, event_data, context);
 }
 
-
 void WINAPI ServiceMain(DWORD nof_arg, char* arg_list[]) {
-  auto &service = detail::services::ServiceHelper::Instance();
+  auto& service = detail::services::ServiceHelper::Instance();
   service.ServiceMain(nof_arg, arg_list);
 }
 
-BOOL CALLBACK EnumWindowsProc( HWND hwnd, LPARAM lParam ) {
-  const auto* service = reinterpret_cast< detail::services::ServiceHelper* > ( lParam );
-  if ( service == nullptr ) {
+BOOL CALLBACK EnumWindowsProc(HWND hwnd, LPARAM lParam) {
+  const auto* service =
+      reinterpret_cast<detail::services::ServiceHelper*>(lParam);
+  if (service == nullptr) {
     return FALSE;
   }
 
   DWORD dProcessId = 0;
-  ::GetWindowThreadProcessId( hwnd, &dProcessId );
-  if ( dProcessId == service->ProcessId() ) {
-    ::PostMessage( hwnd, WM_CLOSE, 0, 0 );
-    ::PostMessage( hwnd, WM_CLOSE, 0, 0 );
-    ::PostMessage( hwnd, WM_QUIT, 0, 0 );
-    ::PostMessage( hwnd, WM_QUIT, 0, 0 );
+  ::GetWindowThreadProcessId(hwnd, &dProcessId);
+  if (dProcessId == service->ProcessId()) {
+    ::PostMessage(hwnd, WM_CLOSE, 0, 0);
+    ::PostMessage(hwnd, WM_CLOSE, 0, 0);
+    ::PostMessage(hwnd, WM_QUIT, 0, 0);
+    ::PostMessage(hwnd, WM_QUIT, 0, 0);
   }
   return TRUE;
 }
 
-} // end namespace
+}  // end namespace
 
 namespace detail::services {
 
-ServiceHelper &ServiceHelper::Instance() {
+ServiceHelper& ServiceHelper::Instance() {
   static ServiceHelper instance;
   return instance;
 }
@@ -93,35 +99,42 @@ bool ServiceHelper::ReadRegistryInfo() {
   HKEY reg_key = nullptr;
   std::ostringstream temp;
   temp << R"(Software\UtilLib\Services\)" << name_;
-  const auto open = ::RegOpenKeyExA(HKEY_LOCAL_MACHINE,temp.str().c_str(), 0, KEY_READ, &reg_key);
+  const auto open = ::RegOpenKeyExA(HKEY_LOCAL_MACHINE, temp.str().c_str(), 0,
+                                    KEY_READ, &reg_key);
   if (open != ERROR_SUCCESS) {
     LOG_ERROR() << "Failure to open registry key. Key (HKLM): " << temp.str()
-      << ". Error: " << GetLastErrorAsString(open);
+                << ". Error: " << GetLastErrorAsString(open);
     return false;
   }
   {
     DWORD size = 0;
     DWORD type = REG_SZ;
-    const auto get_size = ::RegQueryValueExA(reg_key, "ExePath", nullptr, &type, nullptr, &size);
+    const auto get_size =
+        ::RegQueryValueExA(reg_key, "ExePath", nullptr, &type, nullptr, &size);
     if (get_size == ERROR_SUCCESS && size > 0) {
       std::vector<uint8_t> buffer(size, 0);
-      const auto get = ::RegQueryValueExA(reg_key, "ExePath", nullptr, &type, buffer.data(), &size);
+      const auto get = ::RegQueryValueExA(reg_key, "ExePath", nullptr, &type,
+                                          buffer.data(), &size);
       if (get == ERROR_SUCCESS) {
-        const std::string exe_path = reinterpret_cast<const char *>(buffer.data());
+        const std::string exe_path =
+            reinterpret_cast<const char*>(buffer.data());
         FromExePath(exe_path);
       }
     } else {
-      LOG_ERROR() << "Failure to get registry value (size). Value: " << "ExePath"
+      LOG_ERROR() << "Failure to get registry value (size). Value: "
+                  << "ExePath"
                   << ". Error: " << GetLastErrorAsString(get_size);
     }
   }
   {
     DWORD size = sizeof(priority_);
     DWORD type = REG_DWORD;
-    const auto get = ::RegQueryValueExA(reg_key, "Priority", nullptr, &type,
-                                        reinterpret_cast<LPBYTE>(&priority_), &size);
+    const auto get =
+        ::RegQueryValueExA(reg_key, "Priority", nullptr, &type,
+                           reinterpret_cast<LPBYTE>(&priority_), &size);
     if (get != ERROR_SUCCESS) {
-      LOG_ERROR() << "Failure to get registry value (size). Value: " << "Priority"
+      LOG_ERROR() << "Failure to get registry value (size). Value: "
+                  << "Priority"
                   << ". Error: " << GetLastErrorAsString(get);
     }
   }
@@ -129,10 +142,12 @@ bool ServiceHelper::ReadRegistryInfo() {
     DWORD size = sizeof(DWORD);
     DWORD type = REG_DWORD;
     DWORD value = 0;
-    const auto get = ::RegQueryValueExA(reg_key, "Startup", nullptr, &type,
-                                        reinterpret_cast<LPBYTE>(&value), &size);
+    const auto get =
+        ::RegQueryValueExA(reg_key, "Startup", nullptr, &type,
+                           reinterpret_cast<LPBYTE>(&value), &size);
     if (get != ERROR_SUCCESS) {
-      LOG_ERROR() << "Failure to get registry value (size). Value: " << "Startup"
+      LOG_ERROR() << "Failure to get registry value (size). Value: "
+                  << "Startup"
                   << ". Error: " << GetLastErrorAsString(get);
     } else {
       startup_ = static_cast<StartupType>(value);
@@ -159,10 +174,8 @@ void ServiceHelper::FromExePath(const std::string& exe_path) {
 }
 
 bool ServiceHelper::RunService() {
-  const SERVICE_TABLE_ENTRYA dispatch_list[] = {
-    { name_.data(), ::ServiceMain },
-    { nullptr, nullptr }
-  };
+  const SERVICE_TABLE_ENTRYA dispatch_list[] = {{name_.data(), ::ServiceMain},
+                                                {nullptr, nullptr}};
 
   const auto run = StartServiceCtrlDispatcherA(dispatch_list);
   if (!run) {
@@ -173,9 +186,14 @@ bool ServiceHelper::RunService() {
   return true;
 }
 
-
 void ServiceHelper::ReportStatus() {
-  SERVICE_STATUS status = {SERVICE_WIN32_OWN_PROCESS,state_,0,NO_ERROR,NO_ERROR,check_point_,0};
+  SERVICE_STATUS status = {SERVICE_WIN32_OWN_PROCESS,
+                           state_,
+                           0,
+                           NO_ERROR,
+                           NO_ERROR,
+                           check_point_,
+                           0};
   switch (state_) {
     case SERVICE_START_PENDING:
     case SERVICE_STOP_PENDING:
@@ -200,11 +218,12 @@ void ServiceHelper::ReportStatus() {
   }
   status.dwCheckPoint = check_point_;
   // Report the status of the service to the SCM.
-  ::SetServiceStatus( status_handle_, &status );
+  ::SetServiceStatus(status_handle_, &status);
 }
 
 bool ServiceHelper::RegisterService() {
-  status_handle_ = ::RegisterServiceCtrlHandlerExA(name_.c_str(),::SvcCtrlHandler,nullptr);
+  status_handle_ =
+      ::RegisterServiceCtrlHandlerExA(name_.c_str(), ::SvcCtrlHandler, nullptr);
   if (status_handle_ == nullptr) {
     LOG_ERROR() << "Failure to register the control handler. Service: " << name_
                 << ". Error: " << GetLastErrorAsString();
@@ -213,10 +232,10 @@ bool ServiceHelper::RegisterService() {
   return true;
 }
 
-DWORD ServiceHelper::SvcCtrlHandler(DWORD control, DWORD , void *, void *) {
-  switch(control) {
-      case SERVICE_CONTROL_SHUTDOWN:
-      case SERVICE_CONTROL_STOP:
+DWORD ServiceHelper::SvcCtrlHandler(DWORD control, DWORD, void*, void*) {
+  switch (control) {
+    case SERVICE_CONTROL_SHUTDOWN:
+    case SERVICE_CONTROL_STOP:
       stop_ = true;
       ReportStatus();
       break;
@@ -234,7 +253,7 @@ DWORD ServiceHelper::SvcCtrlHandler(DWORD control, DWORD , void *, void *) {
   return NO_ERROR;
 }
 
-void ServiceHelper::ServiceMain(DWORD nof_arg , char* arg_list[]) {
+void ServiceHelper::ServiceMain(DWORD nof_arg, char* arg_list[]) {
   for (DWORD arg = 0; arg < nof_arg; ++arg) {
     LOG_DEBUG() << "Command line argument. Arg" << arg << ": " << arg_list[arg];
   }
@@ -245,9 +264,9 @@ void ServiceHelper::ServiceMain(DWORD nof_arg , char* arg_list[]) {
   }
   restarts_ = 0;
   stop_ = false;
-  state_ = SERVICE_START_PENDING; // Initial
+  state_ = SERVICE_START_PENDING;  // Initial
   ReportStatus();
-  while (!stop_)  {
+  while (!stop_) {
     const DWORD old_state = state_;
     DoSuperviseApp();
     std::this_thread::sleep_for(state_ == SERVICE_RUNNING ? 1000ms : 100ms);
@@ -274,7 +293,8 @@ void ServiceHelper::DoSuperviseApp() {
       } else {
         ++restarts_;
         if (restarts_ > 10) {
-          LOG_ERROR() << "Service stopped due to many restarts (10x). Service: " << Name();
+          LOG_ERROR() << "Service stopped due to many restarts (10x). Service: "
+                      << Name();
           stop_ = true;
         }
       }
@@ -321,22 +341,25 @@ bool ServiceHelper::StartApp() {
   }
   std::string command_line = cli.str();
 
-  STARTUPINFOA startup_info {};
+  STARTUPINFOA startup_info{};
   startup_info.cb = sizeof(startup_info);
   startup_info.dwFlags = STARTF_USESHOWWINDOW;
   startup_info.wShowWindow = SW_HIDE;
 
   process_info_ = {};
 
-  const auto create = ::CreateProcessA(application_name.c_str(),command_line.data(), nullptr, nullptr,
-                                       FALSE,priority_, nullptr, nullptr, &startup_info, &process_info_ );
+  const auto create = ::CreateProcessA(
+      application_name.c_str(), command_line.data(), nullptr, nullptr, FALSE,
+      priority_, nullptr, nullptr, &startup_info, &process_info_);
   if (create) {
-    CloseHandle(process_info_.hThread); // Don't close the process handle. It is used to supervise the process
-    LOG_DEBUG() << "The application was started. Command Line: " << command_line;
+    CloseHandle(process_info_.hThread);  // Don't close the process handle. It
+                                         // is used to supervise the process
+    LOG_DEBUG() << "The application was started. Command Line: "
+                << command_line;
     LOG_INFO() << "The service was started. Service: " << Name();
   } else {
-    LOG_ERROR() << "The application failed to start. Command Line: " << command_line
-                << ", Error: " << GetLastErrorAsString();
+    LOG_ERROR() << "The application failed to start. Command Line: "
+                << command_line << ", Error: " << GetLastErrorAsString();
     return false;
   }
   return true;
@@ -348,16 +371,19 @@ void ServiceHelper::StopApp() {
   }
 
   ::PostThreadMessage(process_info_.dwThreadId, WM_QUIT, 0, 0);
-  ::EnumWindows( EnumWindowsProc, reinterpret_cast<LPARAM>(this) );
+  ::EnumWindows(EnumWindowsProc, reinterpret_cast<LPARAM>(this));
 
-  const DWORD nResult = ::WaitForSingleObject( process_info_.hProcess, 10000 ); // Wait 10 seconds on close/exit
-  if ( nResult != WAIT_TIMEOUT ) { // Normal exit
+  const DWORD nResult = ::WaitForSingleObject(
+      process_info_.hProcess, 10000);  // Wait 10 seconds on close/exit
+  if (nResult != WAIT_TIMEOUT) {       // Normal exit
     LOG_DEBUG() << "Stopped service. Name: " << Name();
   } else {
-    LOG_ERROR() << "Failed to stop the application normally. Killing the process. Name: " << Name();
-    ::TerminateProcess( process_info_.hProcess, 100 );
+    LOG_ERROR() << "Failed to stop the application normally. Killing the "
+                   "process. Name: "
+                << Name();
+    ::TerminateProcess(process_info_.hProcess, 100);
   }
-  ::CloseHandle( process_info_.hProcess );
+  ::CloseHandle(process_info_.hProcess);
   process_info_.hProcess = nullptr;
 }
 
@@ -369,7 +395,8 @@ void ServiceHelper::SuperviseApp() {
       if (wait != WAIT_TIMEOUT) {
         StopApp();
         if (restarts_ > 10) {
-          LOG_ERROR() << "Stopped service due to many restarts (10x). Service: " << Name();
+          LOG_ERROR() << "Stopped service due to many restarts (10x). Service: "
+                      << Name();
           stop_ = true;
         } else {
           std::this_thread::sleep_for(2000ms);
@@ -391,7 +418,7 @@ void ServiceHelper::SuperviseApp() {
     }
 
     default: {
-        // Always stop
+      // Always stop
       StopApp();
       stop_ = true;
       break;
@@ -399,5 +426,4 @@ void ServiceHelper::SuperviseApp() {
   }
 }
 
-
-}
+}  // namespace detail::services

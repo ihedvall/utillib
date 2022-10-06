@@ -4,15 +4,16 @@
  */
 
 #include <gtest/gtest.h>
-#include "util/syslogmessage.h"
+
 #include "util/logconfig.h"
+#include "util/syslogmessage.h"
 
 using namespace util::syslog;
 using namespace util::log;
 
 namespace util::test {
 
-TEST(SyslogMessage, BasicUse) { // NOLINT
+TEST(SyslogMessage, BasicUse) {  // NOLINT
   auto& log_config = LogConfig::Instance();
   log_config.ApplicationName("SysLogMessage::BasicUse");
 
@@ -21,7 +22,7 @@ TEST(SyslogMessage, BasicUse) { // NOLINT
   msg.MessageId("OLLE23");
 
   StructuredData data;
-  data.Identity( "loginfo");
+  data.Identity("loginfo");
   data.AddParameter("olle", "189");
   msg.AddData(data);
 
@@ -39,7 +40,7 @@ TEST(SyslogMessage, BasicUse) { // NOLINT
   EXPECT_EQ(data1.Parameters().size(), 1);
 }
 
-TEST(SyslogMessage, LogUse) { // NOLINT
+TEST(SyslogMessage, LogUse) {  // NOLINT
   auto& log_config = LogConfig::Instance();
   log_config.ApplicationName("SysLogMessage::LogUse");
 
@@ -54,4 +55,4 @@ TEST(SyslogMessage, LogUse) { // NOLINT
   std::cout << out << std::endl;
   EXPECT_FALSE(out.empty());
 }
-} // end namespace
+}  // namespace util::test

@@ -4,22 +4,24 @@
  */
 
 #include "util/utilfactory.h"
-#include "util/stringutil.h"
-#include "udpsyslogserver.h"
-#include "logconsole.h"
-#include "logfile.h"
+
+#include "listenconsole.h"
 #include "listenlogger.h"
-#include "syslog.h"
 #include "listenproxy.h"
 #include "listenserver.h"
-#include "listenconsole.h"
+#include "logconsole.h"
+#include "logfile.h"
+#include "syslog.h"
+#include "udpsyslogserver.h"
+#include "util/stringutil.h"
 using namespace util::syslog;
 using namespace util::log;
 using namespace util::string;
 
 namespace util {
 
-std::unique_ptr<ISyslogServer> UtilFactory::CreateSyslogServer(SyslogServerType type) {
+std::unique_ptr<ISyslogServer> UtilFactory::CreateSyslogServer(
+    SyslogServerType type) {
   std::unique_ptr<ISyslogServer> server;
 
   switch (type) {
@@ -36,7 +38,8 @@ std::unique_ptr<ISyslogServer> UtilFactory::CreateSyslogServer(SyslogServerType 
   return server;
 }
 
-std::unique_ptr<log::ILogger> UtilFactory::CreateLogger(log::LogType type, std::vector<std::string> &arg_list) {
+std::unique_ptr<log::ILogger> UtilFactory::CreateLogger(
+    log::LogType type, std::vector<std::string> &arg_list) {
   std::unique_ptr<ILogger> logger;
 
   switch (type) {
@@ -56,8 +59,10 @@ std::unique_ptr<log::ILogger> UtilFactory::CreateLogger(log::LogType type, std::
 
     case LogType::LogToSyslog: {
       const auto remote_host = arg_list.empty() ? "localhost" : arg_list[0];
-      const auto port = std::stoul(arg_list.size() < 2 ?  std::string("514") : arg_list[1]);
-      logger = std::make_unique<detail::Syslog>(remote_host, static_cast<uint16_t>(port));
+      const auto port =
+          std::stoul(arg_list.size() < 2 ? std::string("514") : arg_list[1]);
+      logger = std::make_unique<detail::Syslog>(remote_host,
+                                                static_cast<uint16_t>(port));
       break;
     }
 
@@ -67,14 +72,16 @@ std::unique_ptr<log::ILogger> UtilFactory::CreateLogger(log::LogType type, std::
   return logger;
 }
 
-std::unique_ptr<IListen> UtilFactory::CreateListen(const std::string &type, const std::string &share_name) {
+std::unique_ptr<IListen> UtilFactory::CreateListen(
+    const std::string &type, const std::string &share_name) {
   std::unique_ptr<IListen> listen;
   if (IEquals(type, "ListenProxy") && !share_name.empty()) {
     listen = std::make_unique<detail::ListenProxy>(share_name);
   } else if (IEquals(type, "ListenServer")) {
     listen = std::make_unique<detail::ListenServer>(share_name);
   } else if (IEquals(type, "ListenConsole")) {
-    listen = std::make_unique<detail::ListenConsole>(share_name);  }
+    listen = std::make_unique<detail::ListenConsole>(share_name);
+  }
   return listen;
 }
-} // util
+}  // namespace util

@@ -24,9 +24,9 @@ namespace util::syslog {
  */
 class StructuredData {
  public:
- /** \typedef ParameterList
- * The list holds name value pairs. The name and values are always strings.
- */
+  /** \typedef ParameterList
+   * The list holds name value pairs. The name and values are always strings.
+   */
   using ParameterList = std::vector<std::pair<std::string, std::string>>;
 
   /** \brief Sets the identifier for the data item;
@@ -40,9 +40,7 @@ class StructuredData {
    *
    * @return Raw message structured data name.
    */
-  [[nodiscard]] const std::string& Identity() const {
-    return identity_;
-  }
+  [[nodiscard]] const std::string& Identity() const { return identity_; }
 
   /** \brief Return the main (stem) part of the identifier.
    *
@@ -50,9 +48,7 @@ class StructuredData {
    * token that divide the stem and the enterprise ID.
    * @return The stem part  of the identifier.
    */
-  [[nodiscard]] const std::string& IdentityStem() const {
-    return stem_;
-  }
+  [[nodiscard]] const std::string& IdentityStem() const { return stem_; }
 
   /** \brief Returns the enterprise ID.
    *
@@ -83,10 +79,10 @@ class StructuredData {
   void AddParameter(const std::string& name, const std::string& value);
 
  private:
-  std::string identity_; ///< Identity As in message.
-  std::string stem_;     ///< Identity without any '@'.
-  std::string enterprise_id_; ///< Is actually an IANA enterprise ID (number).
-  ParameterList parameter_list_; ///< List of name value pairs.
+  std::string identity_;       ///< Identity As in message.
+  std::string stem_;           ///< Identity without any '@'.
+  std::string enterprise_id_;  ///< Is actually an IANA enterprise ID (number).
+  ParameterList parameter_list_;  ///< List of name value pairs.
 };
 
-} // end namespace
+}  // namespace util::syslog

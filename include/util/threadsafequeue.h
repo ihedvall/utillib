@@ -9,10 +9,10 @@
  * Simple thread-safe queue.
  */
 #pragma once
+#include <condition_variable>
+#include <memory>
 #include <mutex>
 #include <queue>
-#include <memory>
-#include <condition_variable>
 
 namespace util::log {
 
@@ -25,14 +25,13 @@ namespace util::log {
  * @tparam T Type of object to store.
  */
 template <typename T>
-class ThreadSafeQueue
-{
+class ThreadSafeQueue {
  public:
   ThreadSafeQueue() = default;
   virtual ~ThreadSafeQueue();
 
   ThreadSafeQueue(const ThreadSafeQueue&) = delete;
-  ThreadSafeQueue& operator = (const ThreadSafeQueue&) = delete;
+  ThreadSafeQueue& operator=(const ThreadSafeQueue&) = delete;
 
   /** \brief Adds a value at the end of the queue.
    *
@@ -43,8 +42,8 @@ class ThreadSafeQueue
 
   /** \brief Fetch the first object from the queue.
    *
-   * Gets the first object in the queue. The function may block until a value is available.
-   * Deleting the queue will unblock the call and returning false.
+   * Gets the first object in the queue. The function may block until a value is
+   * available. Deleting the queue will unblock the call and returning false.
    *
    * @param dest Returning object
    * @param block True if the function should block until a value is available.
@@ -66,27 +65,29 @@ class ThreadSafeQueue
    */
   [[nodiscard]] size_t Size() const;
 
-  void Clear(); ///< Clears the queue.
-  void Stop(); ///< Stops all blocking Get() calls.
+  void Clear();  ///< Clears the queue.
+  void Stop();   ///< Stops all blocking Get() calls.
 
  private:
-  mutable std::mutex lock_; ///< Mutex lock for the queue:
-  std::queue<std::unique_ptr<T>> queue_; ///< The queue.
-  std::atomic<bool> stop_ = false; ///< Set to true to indicate that any blocking call shall end.
-  std::condition_variable queue_event_; ///< Condition to speed up waiting calls.
+  mutable std::mutex lock_;               ///< Mutex lock for the queue:
+  std::queue<std::unique_ptr<T>> queue_;  ///< The queue.
+  std::atomic<bool> stop_ =
+      false;  ///< Set to true to indicate that any blocking call shall end.
+  std::condition_variable
+      queue_event_;  ///< Condition to speed up waiting calls.
 };
 
-template<typename T>
+template <typename T>
 ThreadSafeQueue<T>::~ThreadSafeQueue() {
   stop_ = true;
-  queue_event_.notify_one(); // Release any blocking Get()
-  std::lock_guard lock(lock_); // Waiting for Get() to release
-  while (!queue_.empty() ) {
-   queue_.pop();
+  queue_event_.notify_one();    // Release any blocking Get()
+  std::lock_guard lock(lock_);  // Waiting for Get() to release
+  while (!queue_.empty()) {
+    queue_.pop();
   }
 }
 
-template<typename T>
+template <typename T>
 void ThreadSafeQueue<T>::Put(std::unique_ptr<T>& value) {
   if (stop_) {
     return;
@@ -96,17 +97,15 @@ void ThreadSafeQueue<T>::Put(std::unique_ptr<T>& value) {
   queue_event_.notify_one();
 }
 
-template<typename T>
-bool ThreadSafeQueue<T>::Get(std::unique_ptr<T> &dest, bool block) {
+template <typename T>
+bool ThreadSafeQueue<T>::Get(std::unique_ptr<T>& dest, bool block) {
   if (stop_) {
     return false;
   }
 
   if (block) {
     std::unique_lock lock(lock_);
-    queue_event_.wait(lock,[&] {
-      return !queue_.empty() || stop_.load();
-    });
+    queue_event_.wait(lock, [&] { return !queue_.empty() || stop_.load(); });
     if (queue_.empty() || stop_) {
       return false;
     }
@@ -123,18 +122,18 @@ bool ThreadSafeQueue<T>::Get(std::unique_ptr<T> &dest, bool block) {
   return true;
 }
 
-template<typename T>
+template <typename T>
 bool ThreadSafeQueue<T>::Empty() const {
   std::lock_guard lock(lock_);
   return queue_.empty();
 }
 
-template<typename T>
+template <typename T>
 size_t ThreadSafeQueue<T>::Size() const {
   std::lock_guard lock(lock_);
   return queue_.size();
 }
-template<typename T>
+template <typename T>
 void ThreadSafeQueue<T>::Clear() {
   std::unique_ptr<T> temp;
   while (Get(temp, false)) {
@@ -142,10 +141,10 @@ void ThreadSafeQueue<T>::Clear() {
   }
 }
 
-template<typename T>
+template <typename T>
 void ThreadSafeQueue<T>::Stop() {
   stop_ = true;
-  queue_event_.notify_one(); // Release any blocking Get()
+  queue_event_.notify_one();  // Release any blocking Get()
 }
 
-}
+}  // namespace util::log

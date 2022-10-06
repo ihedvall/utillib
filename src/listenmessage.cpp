@@ -2,20 +2,19 @@
  * Copyright 2021 Ingemar Hedvall
  * SPDX-License-Identifier: MIT
  */
-#include <boost/endian/buffers.hpp>
 #include "listenmessage.h"
+
+#include <boost/endian/buffers.hpp>
 
 using namespace boost::endian;
 
 namespace util::log::detail {
 
-SharedListenQueue::SharedListenQueue()
-    : message_semaphore(0) {
-}
+SharedListenQueue::SharedListenQueue() : message_semaphore(0) {}
 
 void ListenMessage::ToBuffer(std::vector<uint8_t> &dest) {
   if (dest.size() < 8 + body_size_) {
-    dest.resize(8 + body_size_,0);
+    dest.resize(8 + body_size_, 0);
   }
   little_uint16_buf_at type(static_cast<uint16_t>(type_));
   little_uint16_buf_at version(version_);
@@ -26,7 +25,7 @@ void ListenMessage::ToBuffer(std::vector<uint8_t> &dest) {
   memcpy(dest.data() + 4, body_size.data(), 4);
 }
 
-void ListenMessage::FromHeaderBuffer(const std::array<uint8_t,8> &source) {
+void ListenMessage::FromHeaderBuffer(const std::array<uint8_t, 8> &source) {
   little_uint16_buf_at type;
   little_uint16_buf_at version;
   little_uint32_buf_at body_size;
@@ -46,7 +45,7 @@ LogLevelTextMessage::LogLevelTextMessage() {
 
 void LogLevelTextMessage::ToBuffer(std::vector<uint8_t> &dest) {
   uint32_t index = 8 + 8;
-  for (const auto& itr : log_level_text_list_) {
+  for (const auto &itr : log_level_text_list_) {
     index += sizeof(uint64_t);
     index += 8 + itr.second.size();
   }
@@ -57,16 +56,16 @@ void LogLevelTextMessage::ToBuffer(std::vector<uint8_t> &dest) {
 
   index = 8;
   little_uint64_buf_at vector_size(log_level_text_list_.size());
-  memcpy(dest.data() + index, vector_size.data(),8);
+  memcpy(dest.data() + index, vector_size.data(), 8);
   index += 8;
 
-  for (const auto& itr1 : log_level_text_list_) {
+  for (const auto &itr1 : log_level_text_list_) {
     little_uint64_buf_at level(itr1.first);
-    memcpy(dest.data() + index, level.data(),8);
+    memcpy(dest.data() + index, level.data(), 8);
     index += 8;
 
     little_uint64_buf_at text_size(itr1.second.size());
-    memcpy(dest.data() + index, text_size.data(),8);
+    memcpy(dest.data() + index, text_size.data(), 8);
     index += 8;
 
     if (!itr1.second.empty()) {
@@ -77,17 +76,16 @@ void LogLevelTextMessage::ToBuffer(std::vector<uint8_t> &dest) {
 }
 
 void LogLevelTextMessage::FromBodyBuffer(const std::vector<uint8_t> &source) {
-   if (source.size() < body_size_) {
+  if (source.size() < body_size_) {
     return;
   }
   uint32_t index = 0;
   little_uint64_buf_at vector_size;
-  memcpy(vector_size.data(),source.data() + index, 8);
+  memcpy(vector_size.data(), source.data() + index, 8);
   index += 8;
 
   log_level_text_list_.clear();
   for (size_t ind = 0; ind < vector_size.value(); ++ind) {
-
     little_uint64_buf_at level;
     memcpy(level.data(), source.data() + index, 8);
     index += 8;
@@ -102,7 +100,7 @@ void LogLevelTextMessage::FromBodyBuffer(const std::vector<uint8_t> &source) {
       std::string text(text_size.value(), '\0');
       memcpy(text.data(), source.data() + index, text_size.value());
       index += text_size.value();
-      log_level_text_list_.insert({level.value(),text});
+      log_level_text_list_.insert({level.value(), text});
     }
   }
 }
@@ -112,9 +110,7 @@ ListenTextMessage::ListenTextMessage() {
 }
 
 ListenTextMessage::ListenTextMessage(const SharedListenMessage &msg)
-    : ns1970_(msg.ns1970),
-      pre_text_(msg.pre_text),
-      text_(msg.text) {
+    : ns1970_(msg.ns1970), pre_text_(msg.pre_text), text_(msg.text) {
   type_ = ListenMessageType::TextMessage;
 }
 
@@ -146,13 +142,11 @@ void ListenTextMessage::ToBuffer(std::vector<uint8_t> &dest) {
 
   if (!text_.empty()) {
     memcpy(dest.data() + index, text_.data(), text_.size());
-    //index += text_.size();
+    // index += text_.size();
   }
 }
 
-
 void ListenTextMessage::FromBodyBuffer(const std::vector<uint8_t> &source) {
-
   if (source.size() < body_size_) {
     return;
   }
@@ -160,7 +154,7 @@ void ListenTextMessage::FromBodyBuffer(const std::vector<uint8_t> &source) {
   uint32_t index = 0;
 
   little_uint64_buf_at ns1970;
-  memcpy(ns1970.data(),source.data() + index, 8);
+  memcpy(ns1970.data(), source.data() + index, 8);
   ns1970_ = ns1970.value();
   index += 8;
 
@@ -192,11 +186,7 @@ void ListenTextMessage::FromBodyBuffer(const std::vector<uint8_t> &source) {
   }
 }
 
-
-
-LogLevelMessage::LogLevelMessage() {
-  type_ = ListenMessageType::LogLevel;
-}
+LogLevelMessage::LogLevelMessage() { type_ = ListenMessageType::LogLevel; }
 
 void LogLevelMessage::ToBuffer(std::vector<uint8_t> &dest) {
   body_size_ = 8;
@@ -209,15 +199,13 @@ void LogLevelMessage::ToBuffer(std::vector<uint8_t> &dest) {
 }
 
 void LogLevelMessage::FromBodyBuffer(const std::vector<uint8_t> &source) {
-
   if (source.size() < body_size_) {
     return;
   }
 
   little_uint64_buf_at level;
-  memcpy(level.data(),source.data(), 8);
+  memcpy(level.data(), source.data(), 8);
   log_level_ = level.value();
 }
 
-}
-
+}  // namespace util::log::detail

@@ -2,12 +2,14 @@
  * Copyright 2022 Ingemar Hedvall
  * SPDX-License-Identifier: MIT
  */
-#include <chrono>
-#include <boost/asio.hpp>
-#include "util/timestamp.h"
-#include "util/logstream.h"
 #include "syslog.h"
+
+#include <boost/asio.hpp>
+#include <chrono>
+
+#include "util/logstream.h"
 #include "util/syslogmessage.h"
+#include "util/timestamp.h"
 
 using namespace std::chrono_literals;
 using namespace boost::asio;
@@ -15,8 +17,7 @@ using namespace util::syslog;
 namespace util::log::detail {
 
 Syslog::Syslog(const std::string &remote_host, uint16_t port)
-    : remote_host_(remote_host),
-      port_(port) {
+    : remote_host_(remote_host), port_(port) {
   // Turn of debug and trace messages. Info level is questionable.
   EnableSeverityLevel(LogSeverity::kTrace, false);
   EnableSeverityLevel(LogSeverity::kDebug, false);
@@ -31,19 +32,18 @@ void Syslog::StartWorkerThread() {
 void Syslog::WorkerThread() {
   io_context context;
   ip::udp::resolver resolver(context);
-  bool in_service = true; // Suppresses event and alarms
+  bool in_service = true;  // Suppresses event and alarms
 
   // We have the messages in a queue, so there is no hurry to transfer them
   // to the syslog server.
   do {
     std::unique_lock<std::mutex> lock(locker_);
     const auto list_empty = message_list_.empty();
-    condition_.wait_for(lock, 2s, [&] {
-      return stop_thread_.load() || !list_empty;
-    });
+    condition_.wait_for(lock, 2s,
+                        [&] { return stop_thread_.load() || !list_empty; });
 
-    while(!message_list_.empty()) {
-        // Connect to the syslog server
+    while (!message_list_.empty()) {
+      // Connect to the syslog server
       LogMessage m = message_list_.front();
       message_list_.pop();
       lock.unlock();
@@ -52,9 +52,9 @@ void Syslog::WorkerThread() {
       const auto data = msg.GenerateMessage();
       const auto buffer = boost::asio::buffer(data);
 
-
       try {
-        auto end_points = resolver.resolve(ip::udp::v4(), remote_host_, std::to_string(port_));
+        auto end_points = resolver.resolve(ip::udp::v4(), remote_host_,
+                                           std::to_string(port_));
         ip::udp::socket socket(context);
         socket.open(ip::udp::v4());
         const auto points = end_points.size();
@@ -63,13 +63,13 @@ void Syslog::WorkerThread() {
           LOG_INFO() << "Syslog client is in service.";
         }
         in_service = true;
-      } catch (const std::exception& err) {
-         // If something wrong clear the message buffer
-         if (in_service) {
-           LOG_ERROR() << "Syslog is out-of-service. Error: " << err.what()
-                       << ", Remote: " << remote_host_ << ":" << port_;
-         }
-         in_service = false;
+      } catch (const std::exception &err) {
+        // If something wrong clear the message buffer
+        if (in_service) {
+          LOG_ERROR() << "Syslog is out-of-service. Error: " << err.what()
+                      << ", Remote: " << remote_host_ << ":" << port_;
+        }
+        in_service = false;
       }
 
       lock.lock();
@@ -77,10 +77,9 @@ void Syslog::WorkerThread() {
   } while (!stop_thread_);
 }
 
-
-
 /**
- * Adds a log message to the internal message queue. The queue is saved to a file by a worker thread.
+ * Adds a log message to the internal message queue. The queue is saved to a
+ * file by a worker thread.
  * @param [in] message Message to handle.
  */
 void Syslog::AddLogMessage(const LogMessage &message) {
@@ -98,7 +97,8 @@ void Syslog::AddLogMessage(const LogMessage &message) {
 }
 
 /**
- * Stops the working thread. This means that all messages in the queue is saved to the file.
+ * Stops the working thread. This means that all messages in the queue is saved
+ * to the file.
  */
 void Syslog::Stop() {
   stop_thread_ = true;
@@ -109,6 +109,4 @@ void Syslog::Stop() {
   stop_thread_ = false;
 }
 
-
-
-}
+}  // namespace util::log::detail

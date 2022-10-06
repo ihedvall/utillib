@@ -5,18 +5,19 @@
 
 #pragma once
 
-#include <memory>
-#include <thread>
-#include <vector>
+#include <boost/asio.hpp>
 #include <map>
+#include <memory>
 #include <mutex>
 #include <string>
-#include <boost/asio.hpp>
-#include "util/ilisten.h"
-#include "util/threadsafequeue.h"
+#include <thread>
+#include <vector>
+
 #include "listenmessage.h"
 #include "listenserverconnection.h"
 #include "messagequeue.h"
+#include "util/ilisten.h"
+#include "util/threadsafequeue.h"
 
 namespace util::log::detail {
 
@@ -36,8 +37,11 @@ class ListenServer : public IListen {
   [[nodiscard]] std::string ShareName() const;
 
   [[nodiscard]] size_t LogLevel() override;
+
  protected:
-  void AddMessage(uint64_t nano_sec_1970, const std::string &pre_text, const std::string &text) override;
+  void AddMessage(uint64_t nano_sec_1970, const std::string& pre_text,
+                  const std::string& text) override;
+
  private:
   boost::asio::io_context context_;
   boost::asio::steady_timer cleanup_timer_;
@@ -63,8 +67,4 @@ class ListenServer : public IListen {
   void HandleMessage(const ListenMessage* msg);
 };
 
-} // end namespace
-
-
-
-
+}  // namespace util::log::detail

@@ -2,39 +2,39 @@
  * Copyright 2021 Ingemar Hedvall
  * SPDX-License-Identifier: MIT
  */
-#include <chrono>
-#include <thread>
-#include <iostream>
 #include "messagequeue.h"
+
 #include <boost/interprocess/sync/scoped_lock.hpp>
+#include <chrono>
+#include <iostream>
+#include <thread>
 using namespace boost::interprocess;
 using namespace std::chrono_literals;
 
 namespace util::log::detail {
 
 MessageQueue::MessageQueue(bool master, const std::string &shared_mem_name)
-  : master_(master),
-    name_(shared_mem_name) {
+    : master_(master), name_(shared_mem_name) {
   try {
     if (master_) {
       shared_memory_object::remove(shared_mem_name.c_str());
-      shared_mem_ = std::make_unique<shared_memory_object>(create_only, shared_mem_name.c_str(), read_write);
+      shared_mem_ = std::make_unique<shared_memory_object>(
+          create_only, shared_mem_name.c_str(), read_write);
       shared_mem_->truncate(sizeof(SharedListenQueue));
       region_ = std::make_unique<mapped_region>(*shared_mem_, read_write);
       queue_ = new (region_->get_address()) SharedListenQueue;
       queue_->active = false;
     } else {
       active_ = false;
-      task_ = std::thread(&MessageQueue::ClientTask,this);
+      task_ = std::thread(&MessageQueue::ClientTask, this);
     }
 
-  } catch (const std::exception& error) {
+  } catch (const std::exception &error) {
     queue_ = nullptr;
     region_.reset();
     shared_mem_.reset();
   }
 }
-
 
 MessageQueue::~MessageQueue() {
   task_stop_ = true;
@@ -42,7 +42,8 @@ MessageQueue::~MessageQueue() {
     // Just in case any client is holding the area, the remove will fail
     queue_->active = false;
     queue_->log_level = 0;
-    queue_->message_semaphore.post(); // Generate a fake message to wake-up GetMessage() waits
+    queue_->message_semaphore
+        .post();  // Generate a fake message to wake-up GetMessage() waits
   }
   if (task_.joinable()) {
     task_event_.notify_one();
@@ -63,7 +64,7 @@ void MessageQueue::Add(const SharedListenMessage &msg) {
     do {
       shared_memory_object shared_mem(open_only, name_.c_str(), read_write);
       mapped_region region(shared_mem, read_write);
-      auto* queue = static_cast<SharedListenQueue *> (region.get_address());
+      auto *queue = static_cast<SharedListenQueue *>(region.get_address());
       if (queue == nullptr) {
         return;
       }
@@ -92,7 +93,6 @@ void MessageQueue::Add(const SharedListenMessage &msg) {
 }
 
 bool MessageQueue::Get(SharedListenMessage &msg, bool block) {
-
   if (task_stop_ || !master_ || queue_ == nullptr) {
     return false;
   }
@@ -104,9 +104,9 @@ bool MessageQueue::Get(SharedListenMessage &msg, bool block) {
       const auto &out_msg = mem.queue[mem.queue_out];
       msg = out_msg;
       ++mem.queue_out;
-     --mem.nof_messages;
+      --mem.nof_messages;
       return true;
-   }
+    }
 
   } else {
     const bool message = mem.message_semaphore.try_wait();
@@ -126,11 +126,11 @@ size_t MessageQueue::NofMessages() const {
   try {
     shared_memory_object shared_mem(open_only, name_.c_str(), read_write);
     mapped_region region(shared_mem, read_write);
-    auto *queue = static_cast<SharedListenQueue *> (region.get_address());
+    auto *queue = static_cast<SharedListenQueue *>(region.get_address());
     if (queue != nullptr) {
       return queue->nof_messages;
     }
-  } catch (const std::exception& ) {
+  } catch (const std::exception &) {
   }
   return 0;
 }
@@ -140,7 +140,8 @@ void MessageQueue::ClientTask() {
     try {
       shared_memory_object shared_mem(open_only, name_.c_str(), read_write);
       mapped_region region(shared_mem, read_write);
-      const auto* queue = static_cast<SharedListenQueue *> (region.get_address());
+      const auto *queue =
+          static_cast<SharedListenQueue *>(region.get_address());
       if (queue == nullptr) {
         active_ = false;
         log_level_ = 0;
@@ -148,13 +149,13 @@ void MessageQueue::ClientTask() {
         active_ = queue->active.load();
         log_level_ = queue->log_level.load();
       }
-    } catch (const std::exception&) {
+    } catch (const std::exception &) {
       active_ = false;
       log_level_ = 0;
     }
     std::unique_lock<std::mutex> lock(task_mutex_);
     task_event_.wait_for(lock, 1s, [&] { return task_stop_.load(); });
-   }
+  }
 }
 
 void MessageQueue::Stop() {
@@ -163,11 +164,10 @@ void MessageQueue::Stop() {
   if (task_.joinable()) {
     task_.join();
   } else {
-
     try {
       shared_memory_object shared_mem(open_only, name_.c_str(), read_write);
       mapped_region region(shared_mem, read_write);
-      auto *queue = static_cast<SharedListenQueue *> (region.get_address());
+      auto *queue = static_cast<SharedListenQueue *>(region.get_address());
       if (queue != nullptr) {
         queue->active = false;
         queue->message_semaphore.post();
@@ -175,7 +175,6 @@ void MessageQueue::Stop() {
     } catch (const std::exception &) {
     }
   }
-
 }
 
 void MessageQueue::SetActive(bool active) {
@@ -192,4 +191,4 @@ void MessageQueue::SetLogLevel(uint8_t log_level) {
   }
 }
 
-} // end namespace util::detail
+}  // namespace util::log::detail

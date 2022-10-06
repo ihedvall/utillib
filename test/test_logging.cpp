@@ -2,13 +2,15 @@
  * Copyright 2021 Ingemar Hedvall
  * SPDX-License-Identifier: MIT
  */
+#include <gtest/gtest.h>
+
+#include <array>
 #include <atomic>
 #include <thread>
-#include <array>
-#include <gtest/gtest.h>
+
+#include "util/logconfig.h"
 #include "util/logging.h"
 #include "util/logstream.h"
-#include "util/logconfig.h"
 
 using namespace util::log;
 
@@ -31,60 +33,58 @@ void TestThreadFunction() {
   }
 }
 
-}
+}  // namespace
 
 namespace util::test {
-TEST(Logging, Console) //NOLINT
+TEST(Logging, Console)  // NOLINT
 {
   auto &log_config = LogConfig::Instance();
   log_config.Type(LogType::LogToConsole);
   log_config.CreateDefaultLogger();
-  for (int ii = 0; ii < 10; ++ii)
-    TestLogInfo(ii);
+  for (int ii = 0; ii < 10; ++ii) TestLogInfo(ii);
   log_config.DeleteLogChain();
 }
 
-TEST(Logging, ConsoleMutiThread) //NOLINT
+TEST(Logging, ConsoleMutiThread)  // NOLINT
 {
   jj = 0;
   auto &log_config = LogConfig::Instance();
   log_config.Type(LogType::LogToConsole);
   log_config.CreateDefaultLogger();
   std::array<std::thread, 100> thread_list;
-  for (auto &t: thread_list) {
+  for (auto &t : thread_list) {
     t = std::thread(TestThreadFunction);
   }
-  for (auto &t: thread_list) {
+  for (auto &t : thread_list) {
     t.join();
   }
   log_config.DeleteLogChain();
 }
 
-TEST(Logging, ConsolePerformance) //NOLINT
+TEST(Logging, ConsolePerformance)  // NOLINT
 {
   jj = 0;
   auto &log_config = LogConfig::Instance();
   log_config.Type(LogType::LogToConsole);
   log_config.CreateDefaultLogger();
 
-  TestThreadFunction(); // Reuse of the threading function
+  TestThreadFunction();  // Reuse of the threading function
 
   log_config.DeleteLogChain();
 }
 
-TEST(Logging, LogToFile) //NOLINT
+TEST(Logging, LogToFile)  // NOLINT
 {
   auto &log_config = LogConfig::Instance();
   log_config.Type(LogType::LogToFile);
   log_config.BaseName("test.log");
   log_config.SubDir("Testing/log");
   log_config.CreateDefaultLogger();
-  for (int ii = 0; ii < 10; ++ii)
-    TestLogInfo(ii);
+  for (int ii = 0; ii < 10; ++ii) TestLogInfo(ii);
   log_config.DeleteLogChain();
 }
 
-TEST(Logging, LogToFileMutiThread) //NOLINT
+TEST(Logging, LogToFileMutiThread)  // NOLINT
 {
   jj = 0;
   auto &log_config = LogConfig::Instance();
@@ -93,16 +93,16 @@ TEST(Logging, LogToFileMutiThread) //NOLINT
   log_config.SubDir("Testing/log");
   log_config.CreateDefaultLogger();
   std::array<std::thread, 100> thread_list;
-  for (auto &t: thread_list) {
+  for (auto &t : thread_list) {
     t = std::thread(TestThreadFunction);
   }
-  for (auto &t: thread_list) {
+  for (auto &t : thread_list) {
     t.join();
   }
   log_config.DeleteLogChain();
 }
 
-TEST(Logging, DISABLED_LogToFilePerformance) //NOLINT
+TEST(Logging, DISABLED_LogToFilePerformance)  // NOLINT
 {
   jj = 0;
   auto &log_config = LogConfig::Instance();
@@ -111,21 +111,20 @@ TEST(Logging, DISABLED_LogToFilePerformance) //NOLINT
   log_config.SubDir("Testing/log");
   log_config.CreateDefaultLogger();
 
-  TestThreadFunction(); // Reuse of the threading function
+  TestThreadFunction();  // Reuse of the threading function
 
   log_config.DeleteLogChain();
 }
 
-TEST(Logging, DISABLED_LogToFileBackup) //NOLINT
+TEST(Logging, DISABLED_LogToFileBackup)  // NOLINT
 {
   auto &log_config = LogConfig::Instance();
   log_config.Type(LogType::LogToFile);
   log_config.BaseName("test.log");
   log_config.SubDir("Testing/log");
   log_config.CreateDefaultLogger();
-  for (int ii = 0; ii < 1000'000; ++ii)
-    TestLogInfo(ii);
+  for (int ii = 0; ii < 1000'000; ++ii) TestLogInfo(ii);
 
   log_config.DeleteLogChain();
 }
-}
+}  // namespace util::test

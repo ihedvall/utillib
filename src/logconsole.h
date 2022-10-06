@@ -7,8 +7,9 @@
  * \brief Sends all log messages onto the console.
  */
 #pragma once
-#include <string>
 #include <mutex>
+#include <string>
+
 #include "util/ilogger.h"
 
 namespace util::log::detail {
@@ -31,11 +32,10 @@ class LogConsole final : public ILogger {
   LogConsole &operator=(const LogConsole &) = delete;
   LogConsole &operator=(const LogConsole &&) = delete;
 
-  void AddLogMessage(const LogMessage &message) override; ///< Mandatory message interface
+  void AddLogMessage(
+      const LogMessage &message) override;  ///< Mandatory message interface
 
  private:
   std::mutex locker_;
 };
-}
-
-
+}  // namespace util::log::detail

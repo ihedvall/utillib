@@ -4,10 +4,11 @@
  */
 
 #pragma once
+#include <windows.h>
+
+#include <atomic>
 #include <string>
 #include <vector>
-#include <atomic>
-#include <windows.h>
 
 namespace detail::services {
 
@@ -19,7 +20,6 @@ enum class StartupType : uint8_t {
 
 class ServiceHelper final {
  public:
-
   ServiceHelper() = default;
   ~ServiceHelper() = default;
 
@@ -27,22 +27,17 @@ class ServiceHelper final {
     parent_path_ = parent_path;
   }
 
-  void Name(const std::string& service_name) {
-    name_ = service_name;
-  }
+  void Name(const std::string& service_name) { name_ = service_name; }
 
-  [[nodiscard]] const std::string& Name() const {
-    return name_;
-  }
+  [[nodiscard]] const std::string& Name() const { return name_; }
 
-  [[nodiscard]] DWORD ProcessId() const {
-    return process_info_.dwProcessId;
-  }
+  [[nodiscard]] DWORD ProcessId() const { return process_info_.dwProcessId; }
 
   static ServiceHelper& Instance();
   bool ReadRegistryInfo();
   bool RunService();
-  DWORD SvcCtrlHandler(DWORD control, DWORD event_type, void* event_data, void* context);
+  DWORD SvcCtrlHandler(DWORD control, DWORD event_type, void* event_data,
+                       void* context);
   void ServiceMain(DWORD nof_arg, char* arg_list[]);
 
  private:
@@ -56,7 +51,7 @@ class ServiceHelper final {
   std::atomic<DWORD> state_ = SERVICE_STOPPED;
   std::atomic<DWORD> check_point_ = 0;
   std::atomic<bool> stop_ = false;
-  PROCESS_INFORMATION process_info_ {};
+  PROCESS_INFORMATION process_info_{};
   size_t restarts_ = 0;
 
   void DoSuperviseApp();
@@ -66,10 +61,5 @@ class ServiceHelper final {
   bool StartApp();
   void StopApp();
   void SuperviseApp();
-
 };
-} // end namespace
-
-
-
-
+}  // namespace detail::services

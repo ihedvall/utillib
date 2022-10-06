@@ -3,27 +3,29 @@
  * SPDX-License-Identifier: MIT
  */
 
-#include <string>
-#include <chrono>
-#include <limits>
-#include <ctime>
 #include <gtest/gtest.h>
+
+#include <chrono>
+#include <ctime>
+#include <limits>
+#include <string>
+
 #include "util/timestamp.h"
 using namespace util::time;
 using namespace std::chrono;
 using namespace std::chrono_literals;
 namespace {
 
-const std::string kDateTime = "YYYY-MM-DD hh:mm:ss"; //NOLINT
-const std::string kTimestampMs("YYYY-MM-DD hh:mm:ss.xxx"); //NOLINT
-const std::string kTimestampUs("YYYY-MM-DD hh:mm:ss.xxxyyy"); // NOLINT
-const std::string kMdf3Date("DD:MM:YYYY"); // NOLINT
-const std::string kMdf3Time("HH:MM:SS"); // NOLINT
+const std::string kDateTime = "YYYY-MM-DD hh:mm:ss";           // NOLINT
+const std::string kTimestampMs("YYYY-MM-DD hh:mm:ss.xxx");     // NOLINT
+const std::string kTimestampUs("YYYY-MM-DD hh:mm:ss.xxxyyy");  // NOLINT
+const std::string kMdf3Date("DD:MM:YYYY");                     // NOLINT
+const std::string kMdf3Time("HH:MM:SS");                       // NOLINT
 
-}
-namespace util::test  {
+}  // namespace
+namespace util::test {
 
-TEST(Timestamp, TestEpoch) { // NOLINT
+TEST(Timestamp, TestEpoch) {  // NOLINT
   {
     time_t time_t_epoch = 0;
     struct tm* bt = gmtime(&time_t_epoch);
@@ -35,14 +37,15 @@ TEST(Timestamp, TestEpoch) { // NOLINT
   {
     const auto timestamp_1970 = SystemClock::from_time_t(0);
     const auto offset_epoch = timestamp_1970.time_since_epoch();
-    std::cout << "System Clock Epoch [ns]: " << offset_epoch.count() << std::endl;
+    std::cout << "System Clock Epoch [ns]: " << offset_epoch.count()
+              << std::endl;
   }
 
   {
     const time_t max_time = std::numeric_limits<time_t>::max() / 300'000'000;
     struct tm* bt = gmtime(&max_time);
     std::ostringstream date_time;
-    date_time << std::put_time(bt, "%Y-%m-%d %H:%M:%S") ;
+    date_time << std::put_time(bt, "%Y-%m-%d %H:%M:%S");
     std::cout << "Max Time_t: " << date_time.str() << std::endl;
   }
 
@@ -56,25 +59,25 @@ TEST(Timestamp, TestEpoch) { // NOLINT
   }
 }
 
-TEST(Timestamp, GetCurrentDateTime) //NOLINT
+TEST(Timestamp, GetCurrentDateTime)  // NOLINT
 {
   const auto date_time = GetLocalDateTime();
   EXPECT_EQ(date_time.size(), kDateTime.size()) << date_time;
 }
 
-TEST(Timestamp, GetCurrentTimestampWithMs) //NOLINT
+TEST(Timestamp, GetCurrentTimestampWithMs)  // NOLINT
 {
   const auto timestamp = GetLocalTimestampWithMs();
   EXPECT_EQ(timestamp.size(), kTimestampMs.size()) << timestamp;
 }
 
-TEST(Timestamp, GetCurrentTimestampWithUs) // NOLINT
+TEST(Timestamp, GetCurrentTimestampWithUs)  // NOLINT
 {
   const auto timestamp = GetLocalTimestampWithUs();
   EXPECT_EQ(timestamp.size(), kTimestampUs.size()) << timestamp;
 }
 
-TEST(Timestamp, NsToLocalIsoTime) // NOLINT
+TEST(Timestamp, NsToLocalIsoTime)  // NOLINT
 {
   const auto iso_time1 = NsToLocalIsoTime(0);
   EXPECT_FALSE(iso_time1.empty()) << iso_time1;
@@ -84,7 +87,7 @@ TEST(Timestamp, NsToLocalIsoTime) // NOLINT
   std::cout << "Local ISO Time: " << iso_time2 << std::endl;
 }
 
-TEST(Timestamp, NsToIsoTime) // NOLINT
+TEST(Timestamp, NsToIsoTime)  // NOLINT
 {
   const auto iso_time1 = NsToIsoTime(0);
   EXPECT_FALSE(iso_time1.empty()) << iso_time1;
@@ -107,7 +110,7 @@ TEST(Timestamp, NsToIsoTime) // NOLINT
   std::cout << "ISO Time: " << iso_time5 << std::endl;
 }
 
-TEST(Timestamp, IsoTimeToNs) // NOLINT
+TEST(Timestamp, IsoTimeToNs)  // NOLINT
 {
   const uint64_t time1 = 0;
   const auto iso_time1 = NsToIsoTime(time1);
@@ -126,7 +129,7 @@ TEST(Timestamp, IsoTimeToNs) // NOLINT
   EXPECT_EQ(time4, IsoTimeToNs(iso_time4));
 }
 
-TEST(Timestamp, TimeStampToNs) // NOLINT
+TEST(Timestamp, TimeStampToNs)  // NOLINT
 {
   {
     const auto timestamp = SystemClock::now();
@@ -142,16 +145,6 @@ TEST(Timestamp, TimeStampToNs) // NOLINT
     std::cout << "TimeStampToNs (epoch): " << ns_1970 << std::endl;
     EXPECT_EQ(system_time, static_cast<time_t>(ns_1970 / 1'000'000'000));
   }
-
-
 }
 
-
-
-
-
-
-
-
-
-} // namespace util::test
+}  // namespace util::test

@@ -3,33 +3,33 @@
  * SPDX-License-Identifier: MIT
  */
 
-#include <sstream>
-#include <boost/asio.hpp>
-#include <util/timestamp.h>
-#include <util/logconfig.h>
 #include "util/syslogmessage.h"
+
+#include <util/logconfig.h>
+#include <util/timestamp.h>
+
+#include <boost/asio.hpp>
+#include <sstream>
+
 #include "syslogscanner.h"
 
 using namespace util::log;
 
 namespace {
- bool IsUtf8(const std::string& text) {
-   return std::ranges::any_of(text , [] (const auto& cin) {
-    return cin < 0;
-   });
- }
+bool IsUtf8(const std::string &text) {
+  return std::ranges::any_of(text, [](const auto &cin) { return cin < 0; });
 }
+}  // namespace
 namespace util::syslog {
 
 SyslogMessage::SyslogMessage() {
   // TIMESTAMP
-  timestamp_ = util::time::TimeStampToNs(); // Set it to now
+  timestamp_ = util::time::TimeStampToNs();  // Set it to now
 
   // HOSTNAME
   try {
     hostname_ = boost::asio::ip::host_name();
-  } catch (const std::exception&) {
-
+  } catch (const std::exception &) {
   }
 
   // APP-NAME
@@ -46,14 +46,14 @@ SyslogMessage::SyslogMessage() {
 }
 
 SyslogMessage::SyslogMessage(const LogMessage &log, bool show_location)
-: SyslogMessage() {
+    : SyslogMessage() {
   Message(log.message);
 
   Facility(SyslogFacility::Local0);
 
   if (show_location) {
     StructuredData location;
-    location.Identity( "source_location@37916"); // Volvo Car
+    location.Identity("source_location@37916");  // Volvo Car
     location.AddParameter("Function", log.location.function_name());
     location.AddParameter("File", log.location.file_name());
     location.AddParameter("Column", std::to_string(log.location.column()));
@@ -94,9 +94,7 @@ SyslogMessage::SyslogMessage(const LogMessage &log, bool show_location)
     default:
       Severity(SyslogSeverity::Debug);
       break;
-
   }
-
 }
 std::string SyslogMessage::GenerateMessage() const {
   std::ostringstream msg;
@@ -104,21 +102,22 @@ std::string SyslogMessage::GenerateMessage() const {
   //  HEADER
 
   // PRI
-  int pri = (static_cast<uint8_t>(facility_) * 8) + static_cast<uint8_t>(severity_);
+  int pri =
+      (static_cast<uint8_t>(facility_) * 8) + static_cast<uint8_t>(severity_);
   msg << "<" << pri << ">";
 
   // VERSION
-  msg <<  static_cast<int>(version_);
+  msg << static_cast<int>(version_);
 
   // TIMESTAMP
-  int resolution = 0; // Second resolution
+  int resolution = 0;  // Second resolution
   if (timestamp_ % 1'000'000 != 0) {
     resolution = 2;
   } else if (timestamp_ % 1'000'000'000 != 0) {
     resolution = 1;
   }
 
-  msg << " " << util::time::NsToIsoTime(timestamp_, resolution); 
+  msg << " " << util::time::NsToIsoTime(timestamp_, resolution);
 
   // HOSTNAME
   if (hostname_.empty()) {
@@ -152,7 +151,7 @@ std::string SyslogMessage::GenerateMessage() const {
   if (sd_list_.empty()) {
     msg << " -";
   } else {
-    for (const auto &data: sd_list_) {
+    for (const auto &data : sd_list_) {
       msg << " [" << data.Identity();
       for (const auto &pair : data.Parameters()) {
         msg << " " << pair.first << "=\"" << pair.second << "\"";
@@ -162,7 +161,7 @@ std::string SyslogMessage::GenerateMessage() const {
   }
   if (!message_.empty()) {
     if (IsUtf8(message_)) {
-      msg << " " << '\xEF' << '\xBB' << '\xBF'  << message_;
+      msg << " " << '\xEF' << '\xBB' << '\xBF' << message_;
     } else {
       msg << " " << message_;
     }
@@ -171,10 +170,11 @@ std::string SyslogMessage::GenerateMessage() const {
 }
 
 void SyslogMessage::IsoTime(const std::string &iso_time) {
-  // Check if it is a correct time. Note that syslog protocol may return a "-" indicating
-  // that the sender doesn't have time. In this case, use the computer time.
-  if (iso_time.empty() || iso_time == "-" ) { //
-    timestamp_ = util::time::TimeStampToNs(); // Use now as
+  // Check if it is a correct time. Note that syslog protocol may return a "-"
+  // indicating that the sender doesn't have time. In this case, use the
+  // computer time.
+  if (iso_time.empty() || iso_time == "-") {   //
+    timestamp_ = util::time::TimeStampToNs();  // Use now as
   } else {
     timestamp_ = util::time::IsoTimeToNs(iso_time, false);
   }
@@ -213,7 +213,6 @@ void SyslogMessage::MessageId(const std::string &msg_id) {
 }
 
 void SyslogMessage::AddStructuredData(const std::string &identity) {
-
   StructuredData data;
   data.Identity(identity);
 
@@ -222,11 +221,12 @@ void SyslogMessage::AddStructuredData(const std::string &identity) {
   }
 }
 
-void SyslogMessage::AppendParameter(const std::string &name, const std::string &value) {
+void SyslogMessage::AppendParameter(const std::string &name,
+                                    const std::string &value) {
   if (sd_list_.empty()) {
     return;
   }
-  auto& last = sd_list_.back();
+  auto &last = sd_list_.back();
   last.AddParameter(name, value);
 }
 
@@ -242,18 +242,14 @@ void SyslogMessage::Message(const std::string &msg) {
   message_ = bom ? msg.substr(3) : msg;
 }
 
-bool SyslogMessage::ParseMessage(const std::string& msg) {
+bool SyslogMessage::ParseMessage(const std::string &msg) {
   std::istringstream temp(msg);
   syslog::SyslogScanner scanner(temp);
   syslog::SyslogParser parser(scanner);
   const auto ret = parser.parse();
-  const SyslogMessage* slicing_fix = &scanner;
+  const SyslogMessage *slicing_fix = &scanner;
   *this = *slicing_fix;
   return ret == 0;
 }
 
-
-
-} // end namespace
-
-
+}  // namespace util::syslog
