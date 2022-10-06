@@ -127,13 +127,20 @@ jobs:
         with:
           arch: ${{ matrix.env.msvc_arch }}
 
-      - name: Build expat
+      - name: Build Mac expat
         if: matrix.env.platform == 'mac'
         run: |
           # https://macappstore.org/expat/
           curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh
           echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile
           brew install expat
+
+      - name: Install Windows Static Expat
+        if: matrix.env.platform == 'win'
+        uses: johnwason/vcpkg-action@v3
+        with:
+          pkgs: expat
+          triplet: ${{ env.msvc.arch }}-windows-static
 
       - name: Install llvm
         if: matrix.env.platform == 'mac'
