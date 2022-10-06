@@ -5,7 +5,7 @@ name: utillib
 on:
   push:
     branches:
-    - master
+      - master
   pull_request:
   page_build:
   workflow_dispatch:
@@ -28,46 +28,46 @@ jobs:
         env:
           - name: linux
             os: ubuntu-22.04
-            ninja_platform: linux
-            cmake_env: {}
+            platform: linux
+            cmake_env: { }
 
-          - name: macos
-            os: macos-12
-            ninja_platform: mac
-            boost_toolset: clang
-            msvc_arch:
-            boost_install_path: /Users/runner/work
-            cmake_env:
-              BOOST_ROOT /Users/runner/work/boost
-            pack: 1
+          #          - name: macos
+          #            os: macos-12
+          #            platform: mac
+          #            boost_toolset: clang
+          #            msvc_arch:
+          #            boost_install_path: /Users/runner/work
+          #            cmake_env:
+          #              BOOST_ROOT /Users/runner/work/boost
+          #            pack: 1
 
           - name: win64
             os: windows-latest
-            ninja_platform: win
-            boost_toolset: mingw
+            platform: win
+            boost_toolset: msvc
             boost_install_path: D:/a/boost
             msvc_arch: x64
             cmake_env:
-              CMAKE_RC_FLAGS: "/C 1252"
-              CC: clang
-              CXX: clang++
+              #              CMAKE_RC_FLAGS: "/C 1252"
+              CC: cl
+              CXX: cl
               BOOST_ROOT: D:/a/boost
             pack: 1
 
-          - name: win32
-            os: windows-latest
-            ninja_platform: win
-            msvc_arch: x86
-            boost_toolset: mingw
-            boost_install_path: D:/a/boost
-            cmake_env:
-              CMAKE_RC_FLAGS: "/C 1252"
-              CC: clang
-              CXX: clang++
-              CMAKE_C_FLAGS: -m32
-              CMAKE_CXX_FLAGS: -m32
-              BOOST_ROOT: D:/a/boost
-            pack: 1
+    #          - name: win32
+    #            os: windows-latest
+    #            platform: win
+    #            msvc_arch: x86
+    #            boost_toolset: mingw
+    #            boost_install_path: D:/a/boost
+    #            cmake_env:
+    #              CMAKE_RC_FLAGS: "/C 1252"
+    #              CC: clang
+    #              CXX: clang++
+    #              CMAKE_C_FLAGS: -m32
+    #              CMAKE_CXX_FLAGS: -m32
+    #              BOOST_ROOT: D:/a/boost
+    #            pack: 1
 
     steps:
       - name: Checkout repository
@@ -81,7 +81,7 @@ jobs:
           destination: ninja
 
       - name: Setup linux environment
-        if: matrix.env.ninja_platform == 'linux'
+        if: matrix.env.platform == 'linux'
         run: |
           sudo apt update
           # flex-old contains FlexLexer.h which is needed by util
@@ -89,7 +89,7 @@ jobs:
           sudo apt install --yes git cmake libboost-all-dev expat zlib1g libboost-all-dev autotools-dev autopoint autoconf help2man libwxgtk3.0-gtk3-dev
 
       - name: Install flex
-        if: matrix.env.ninja_platform == 'linux'
+        if: matrix.env.platform == 'linux'
         run: |
           # The new flex version in ubuntu does not have the needed FlexLexer.h
           # but the older version has problems to create files
@@ -101,14 +101,15 @@ jobs:
           sudo make install
 
       - name: Cache Boost
-        if: matrix.env.ninja_platform != 'linux'
+        if: matrix.env.platform != 'linux'
         uses: actions/cache@v2
         with:
           path: '${{ runner.workspace }}/boost_*.tar.gz'
           key: 'boost-${{env.BOOST_VERSION}}'
 
       - name: Build Boost
-        if: matrix.env.ninja_platform != 'linux'
+        id: boost
+        if: matrix.env.platform != 'linux'
         # This won't re-download the archive unnecessarily:
         uses: egor-tensin/build-boost@v1
         with:
@@ -121,13 +122,13 @@ jobs:
           static: 1
 
       - name: Setup MSVC environment
-        if: matrix.env.ninja_platform == 'win'
+        if: matrix.env.platform == 'win'
         uses: seanmiddleditch/gha-setup-vsdevenv@v3
         with:
           arch: ${{ matrix.env.msvc_arch }}
 
       - name: Build expat
-        if: matrix.env.ninja_platform == 'mac'
+        if: matrix.env.platform == 'mac'
         run: |
           # https://macappstore.org/expat/
           curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh
@@ -135,12 +136,12 @@ jobs:
           brew install expat
 
       - name: Install llvm
-        if: matrix.env.ninja_platform == 'mac'
+        if: matrix.env.platform == 'mac'
         run: brew install llvm
 
       # https://stackoverflow.com/questions/23749530/brew-install-zlib-devel-on-mac-os-x-mavericks
       - name: zlib
-        if: matrix.env.ninja_platform == 'mac'
+        if: matrix.env.platform == 'mac'
         run: |
           wget https://www.zlib.net/zlib-1.2.12.tar.xz
           tar -xvf zlib-1.2.12.tar.xz
@@ -154,13 +155,25 @@ jobs:
           echo "ninja version: $(ninja --version)"
           cmake --version
 
-      - name: Configure Release
+      - name: Configure Linux Release
+        if: matrix.env.platform == 'linux'
         env: ${{ matrix.env.cmake_env }}
         run: |
           mkdir -p build/release
           cd build/release
-          cmake -G Ninja -DCMAKE_BUILD_TYPE=Release -DUTIL_TOOLS=OFF -DUTIL_TEST=OFF ${{ env.CMAKE_FLAGS }} ${{ matrix.env.cmake_flags }} ../..
+          cmake -G Ninja -DCMAKE_BUILD_TYPE=Release -D UTIL_TOOLS=OFF -D UTIL_TEST=OFF \ 
+                 ${{ env.CMAKE_FLAGS }} ${{ matrix.env.cmake_flags }} ../..
 
+      - name: Configure Windows Release
+        if: matrix.env.platform == 'win'
+        env: ${{ matrix.env.cmake_env }}
+        run: |
+          mkdir -p build/release
+          cd build/release
+          cmake -G "Visual Studio 17 2022" -A ${{ matrix.env.msvc_arch }} \ 
+                -DCMAKE_BUILD_TYPE=Release -D UTIL_TOOLS=OFF -D UTIL_TEST=OFF \
+                -D ${{ steps.boost.outputs.root }} -D ${{ steps.boost.outputs.librarydir }} \
+                ${{ env.CMAKE_FLAGS }} ${{ matrix.env.cmake_flags }} ../..
 
       - name: Build
         run: |
