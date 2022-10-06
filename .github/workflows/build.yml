@@ -137,10 +137,8 @@ jobs:
 
       - name: Install Windows Static Expat
         if: matrix.env.platform == 'win'
-        uses: johnwason/vcpkg-action@v3
-        with:
-          pkgs: expat
-          triplet: ${{ env.msvc.arch }}-windows-static
+        run: |
+          vcpkg install expat
 
       - name: Install llvm
         if: matrix.env.platform == 'mac'
