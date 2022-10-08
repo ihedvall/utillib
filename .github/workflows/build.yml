@@ -31,28 +31,28 @@ jobs:
             platform: linux
             cmake_env: { }
 
-          #          - name: macos
-          #            os: macos-12
-          #            platform: mac
-          #            boost_toolset: clang
-          #            msvc_arch:
-          #            boost_install_path: /Users/runner/work
-          #            cmake_env:
-          #              BOOST_ROOT /Users/runner/work/boost
-          #            pack: 1
+    #          - name: macos
+    #            os: macos-12
+    #            platform: mac
+    #            boost_toolset: clang
+    #            msvc_arch:
+    #            boost_install_path: /Users/runner/work
+    #            cmake_env:
+    #              BOOST_ROOT /Users/runner/work/boost
+    #            pack: 1
 
-          - name: win64
-            os: windows-latest
-            platform: win
-            boost_toolset: msvc
-            boost_install_path: D:/a/boost
-            msvc_arch: x64
-            cmake_env:
-              #              CMAKE_RC_FLAGS: "/C 1252"
-              CC: cl
-              CXX: cl
-              BOOST_ROOT: D:/a/boost
-            pack: 1
+    #          - name: win64
+    #            os: windows-latest
+    #            platform: win
+    #            boost_toolset: msvc
+    #            boost_install_path: D:/a/boost
+    #            msvc_arch: x64
+    #            cmake_env:
+    #              #              CMAKE_RC_FLAGS: "/C 1252"
+    #              CC: cl
+    #              CXX: cl
+    #              BOOST_ROOT: D:/a/boost
+    #            pack: 1
 
     #          - name: win32
     #            os: windows-latest

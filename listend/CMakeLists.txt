@@ -21,7 +21,7 @@ if (MSVC)
 endif ()
 
 target_link_libraries(listend PRIVATE util)
-target_link_libraries(listend PRIVATE ${EXPAT_LIBRARIES})
+target_link_libraries(listend PRIVATE expat)
 target_link_libraries(listend PRIVATE ${Boost_LIBRARIES})
 
 

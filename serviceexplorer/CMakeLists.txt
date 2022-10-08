@@ -31,7 +31,7 @@ if (MSVC)
 endif()
 
 target_link_libraries(serviceexplorer PRIVATE util)
-target_link_libraries(serviceexplorer PRIVATE ${EXPAT_LIBRARIES})
+target_link_libraries(serviceexplorer PRIVATE expat)
 target_link_libraries(serviceexplorer PRIVATE ${wxWidgets_LIBRARIES})
 target_link_libraries(serviceexplorer PRIVATE ${Boost_LIBRARIES})
 #target_link_libraries(serviceexplorer PRIVATE ${ZLIB_LIBRARIES})

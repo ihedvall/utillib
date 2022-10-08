@@ -31,7 +31,7 @@ if (MSVC)
 endif()
 
 target_link_libraries(listenviewer PRIVATE util)
-target_link_libraries(listenviewer PRIVATE ${EXPAT_LIBRARIES})
+target_link_libraries(listenviewer PRIVATE expat)
 target_link_libraries(listenviewer PRIVATE ${wxWidgets_LIBRARIES})
 target_link_libraries(listenviewer PRIVATE ${Boost_LIBRARIES})
 if (MINGW)

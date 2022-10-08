@@ -29,11 +29,8 @@ target_include_directories(test_util PRIVATE ${FLEX_INCLUDE_DIRS})
 
 target_link_libraries(test_util PRIVATE util)
 target_link_libraries(test_util PRIVATE ${Boost_LIBRARIES})
-target_link_libraries(test_util PRIVATE ${EXPAT_LIBRARIES})
-#target_link_libraries(test_util PRIVATE ${ZLIB_LIBRARIES})
+target_link_libraries(test_util PRIVATE expat)
 target_link_libraries(test_util PRIVATE ${GTEST_BOTH_LIBRARIES})
-#target_link_libraries(test_util PRIVATE ${OPENSSL_LIBRARIES})
-#target_link_libraries(test_util PRIVATE eclipse-paho-mqtt-c::paho-mqtt3as-static)
 
 if (WIN32)
     target_link_libraries(test_util PRIVATE ws2_32)
