@@ -19,9 +19,19 @@ include(CMakePrintHelpers)
 include(script/boost.cmake)
 #include(script/expat.cmake)
 include(script/fetch_expat.cmake)
-include(script/wxwidgets.cmake)
+
+if (UTIL_TOOLS)
+    include(script/wxwidgets.cmake)
+endif()
+
+if (UTIL_TEST)
 include(script/googletest.cmake)
+endif()
+
+if (UTIL_DOC)
 include(script/doxygen.cmake)
+endif()
+
 include(script/flex.cmake)
 include(script/bison.cmake)
 

@@ -66,6 +66,7 @@ class ThreadSafeQueue {
   [[nodiscard]] size_t Size() const;
 
   void Clear();  ///< Clears the queue.
+  void Start();  ///< Restarts the queue
   void Stop();   ///< Stops all blocking Get() calls.
 
  private:
@@ -141,6 +142,13 @@ void ThreadSafeQueue<T>::Clear() {
   }
 }
 
+template <typename T>
+void ThreadSafeQueue<T>::Start() {
+  stop_ = false;
+  if (!Empty()) {
+    queue_event_.notify_one();  // Release any blocking Get()
+  }
+}
 template <typename T>
 void ThreadSafeQueue<T>::Stop() {
   stop_ = true;

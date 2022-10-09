@@ -91,4 +91,7 @@ cmake-build-*
 
 # ODS models
 odsconfigurator/model/*_?.xml
+
+# Visual Studio
 /.vs/
+CMakeSettings.json
