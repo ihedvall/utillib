@@ -17,7 +17,10 @@
 #include <memory>
 #include <string>
 #include <vector>
+#include <sstream>
 namespace util::log {
+
+class ListenStream;
 
 /** \class IListen ilisten.h "util/ilisten.h"
  * \brief An interface class that hides the actual implementation of the object.
@@ -128,11 +131,20 @@ class IListen {
    *
    * Generates a listen text line with the default pre-text and now as time
    * stmp.
+   * @param text text as a string
+   */
+   void ListenString(const std::string& text);
+
+   ListenStream ListenOut();
+
+  /** \brief Generates a listen text line.
+   *
+   * Generates a listen text line with the default pre-text and now as time
+   * stmp.
    * @param format_text C-style text format
    * @param ... Ellipse function.
    */
-  virtual void ListenText(const char* format_text, ...);
-
+  void ListenText(const char* format_text, ...);
   /** \brief Generate a user defined text line.
    *
    * Generates a text line with user defined time stamp and pre-text.
@@ -141,7 +153,7 @@ class IListen {
    * @param format_text C-style text format.
    * @param ... Ellipse function.
    */
-  virtual void ListenTextEx(uint64_t ns1970, const std::string& pre_text,
+  void ListenTextEx(uint64_t ns1970, const std::string& pre_text,
                             const char* format_text, ...);
 
   /** \brief Generates a hex string text from a byte buffer
@@ -233,4 +245,20 @@ class IListen {
  private:
 };
 
+class ListenStream final : public std::ostringstream {
+ public:
+  ListenStream() = delete;
+  explicit ListenStream(IListen& listen)
+      : listen_(listen) {}
+
+  ~ListenStream() override {
+    if (listen_.IsActive()) {
+      listen_.ListenString(str());
+    }
+
+  }
+ private:
+  IListen& listen_;
+
+};
 }  // namespace util::log

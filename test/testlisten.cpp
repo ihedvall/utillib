@@ -48,6 +48,10 @@ TEST_F(TestListen, ListenBasic) {
   ListenMock listen;
   listen.PreText("TEST>");
 
+  listen.ListenOut() << "Test text " << 10;
+  std::ostringstream temp;
+  temp << "Test text " << 11;
+  listen.ListenString(temp.str());
   listen.ListenText("Test text %d", 12);
   listen.ListenTextEx(0, "NULL>", "Test text %d", 33);
   const std::vector<uint8_t> buffer = {0, 1, 2, 3, 4, 5, 6, 7};

@@ -35,6 +35,13 @@ const std::map<uint64_t, std::string> &IListen::LogLevelList() const {
   return log_level_list_;
 }
 
+void IListen::ListenString(const std::string &text) {
+  if (!IsActive()) {
+    return;
+  }
+  AddMessage(time::TimeStampToNs(), pre_text_, text);
+}
+
 void IListen::ListenText(const char *format_text, ...) {
   if (!IsActive()) {
     return;
@@ -91,5 +98,7 @@ bool IListen::Stop() { return true; }
 void IListen::SetActive(bool active) {}
 
 void IListen::SetLogLevel(size_t log_level) {}
+
+ListenStream IListen::ListenOut() { return ListenStream(*this); }
 
 }  // end namespace util::log
