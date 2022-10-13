@@ -29,7 +29,8 @@ void ListenProxy::AddMessage(uint64_t nano_sec_1970,
     temp.pop_back();
   }
 
-  if (text.size() < sizeof(SharedListenMessage::text)) {
+  // Check if the message fit into
+  if (text.size() < sizeof(SharedListenMessage::text) - 1) {
     SharedListenMessage msg;
     msg.ns1970 = nano_sec_1970;
     strcpy(msg.pre_text, temp.c_str());
@@ -39,12 +40,25 @@ void ListenProxy::AddMessage(uint64_t nano_sec_1970,
   }
 
   // Split into more messages
-  size_t msg_count;
+  size_t msg_count = 0;
   size_t count = 0;
   std::ostringstream out;
 
   for (const char in_char : text) {
-    if (count >= sizeof(SharedListenMessage::text)) {
+    bool good_line_break = false;
+    switch (in_char) {
+      case ' ':
+      case '\n':
+      case '\r':
+      case '\t':
+        good_line_break = true;
+        break;
+
+      default:
+        break;
+    }
+
+    if (count >= sizeof(SharedListenMessage::text) - 1) {
       // Send message with ugly line wrap
       SharedListenMessage msg;
       msg.ns1970 =
@@ -57,8 +71,7 @@ void ListenProxy::AddMessage(uint64_t nano_sec_1970,
       out.str("");
       out.clear();
       count = 0;
-    } else if (in_char == ' ' &&
-               count >= sizeof(SharedListenMessage::text) - 10) {
+    } else if (good_line_break && count >= 80) {
       // Send message with nice line wrap
       SharedListenMessage msg;
       msg.ns1970 =
@@ -71,7 +84,6 @@ void ListenProxy::AddMessage(uint64_t nano_sec_1970,
       out.str("");
       out.clear();
       count = 0;
-      continue;
     }
 
     out << in_char;

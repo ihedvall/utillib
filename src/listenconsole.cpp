@@ -65,7 +65,13 @@ void ListenConsole::AddMessage(uint64_t nano_sec_1970,
                                const std::string &pre_text,
                                const std::string &text) {
   const auto time = time::NsToLocalTime(nano_sec_1970, 1);
-  std::cout << time << " " << pre_text << " " << text << "" << std::endl;
+  if (nano_sec_1970 > 0) {
+    std::cout << time << " ";
+  }
+  if (!pre_text.empty() && nano_sec_1970 > 0) {
+    std::cout << pre_text << " ";
+  }
+  std::cout << text << std::endl;
 }
 
 void ListenConsole::SetActive(bool active) {
