@@ -18,7 +18,7 @@ add_executable(test_util
         testsyslogmessage.cpp
         test_syslog.cpp
         test_syslogflexer.cpp
-        test_base64.cpp)
+        test_base64.cpp test_unithelper.cpp)
 
 target_include_directories(test_util PRIVATE ../include)
 target_include_directories(test_util PRIVATE ../src)
