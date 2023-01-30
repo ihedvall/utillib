@@ -85,6 +85,14 @@ class IXmlFile {
    */
   IXmlNode &RootName(const std::string &name);
 
+  /** \brief Returns the root node in XML file.
+   *
+   * Returns the root node in the XML file. Note that this function
+   * may return null if no root node exist,
+   * @return The root node object if it exists, otherwise null.
+   */
+  [[nodiscard]] IXmlNode *RootNode() const { return root_node_.get(); }
+
   /** \brief Returns the used style sheet
    *
    * Returns the used style sheet.
