@@ -160,6 +160,26 @@ void IXmlNode::Write(std::ostream &dest, size_t level) {  // NOLINT
   }
 }
 
+void IXmlNode::DeleteNode(const std::string &name) {
+  for (auto itr = node_list_.begin(); itr != node_list_.end(); /* No ++itr */) {
+    const auto* node = itr->get();
+    if (node == nullptr || !node->IsTagName(name) ) {
+      ++itr;
+      continue;
+    }
+    itr = node_list_.erase(itr);
+  }
+}
+
+void IXmlNode::DeleteNode(const IXmlNode *node) {
+  auto itr = std::ranges::find_if(node_list_, [&] (auto& item) {
+    return item.get() != node;
+  });
+  if (itr != node_list_.end()) {
+    node_list_.erase(itr);
+  }
+}
+
 template <>
 void IXmlNode::Value(const bool &value) {
   value_ = value ? "true" : "false";
