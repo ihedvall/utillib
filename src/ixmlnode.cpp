@@ -173,7 +173,7 @@ void IXmlNode::DeleteNode(const std::string &name) {
 
 void IXmlNode::DeleteNode(const IXmlNode *node) {
   auto itr = std::ranges::find_if(node_list_, [&] (auto& item) {
-    return item.get() != node;
+    return item.get() == node;
   });
   if (itr != node_list_.end()) {
     node_list_.erase(itr);
