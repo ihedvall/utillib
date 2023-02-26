@@ -71,12 +71,11 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@master
 
       - name: Install Ninja
-        uses: seanmiddleditch/gha-setup-ninja@v3
+        uses: seanmiddleditch/gha-setup-ninja@master
         with:
-          version: 1.9.0
           platform: ${{ matrix.env.ninja_platform }}
           destination: ninja
 
