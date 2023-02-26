@@ -72,10 +72,8 @@ void IDirectory::ParentDir(const std::string& dir) {
   parent_dir_ = dir;
   try {
     path full_name(parent_dir_);
-    const auto time_file =
-        last_write_time(full_name);  // file::clock time point
-    const auto time_system = clock_cast<system_clock>(time_file);
-    modified_ = time::TimeStampToNs(time_system);
+    const auto time_file = last_write_time(full_name);
+    modified_ = time::FileTimeToNs(time_file);
   } catch (const std::exception& err) {
     std::ostringstream msg;
     msg << "Init error. Directory: " << parent_dir_

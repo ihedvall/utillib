@@ -20,9 +20,8 @@ void IFile::Filename(const std::string& filename) {
   filename_ = filename;
   try {
     const path file(filename_);
-    const auto time_file = last_write_time(file);  // file::clock time point
-    const auto time_system = clock_cast<system_clock>(time_file);
-    modified_ = time::TimeStampToNs(time_system);
+    const auto time_file = last_write_time(file);
+    modified_ = time::FileTimeToNs(time_file);
     file_size_ = file_size(file);
 
   } catch (const std::exception&) {}
