@@ -18,7 +18,7 @@ using namespace util::log::detail;
 using namespace std::chrono_literals;
 
 namespace {
-constexpr uint64_t kServerPort = 64999;
+constexpr uint64_t kServerPort = 64099;
 constexpr std::string_view kServerName = "TestServer";
 constexpr std::string_view kServerPreText = "TS>";
 }  // namespace
