@@ -14,7 +14,7 @@ class IFile {
   IFile() = default;
   explicit IFile(const std::string& filename);
   IFile(const IFile& source) = default;
-  virtual ~IFile() = default;
+  virtual ~IFile();
 
   [[nodiscard]] std::string Name()
       const;  ///< Name (stem) without path and extension.

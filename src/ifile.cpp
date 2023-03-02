@@ -16,6 +16,10 @@ IFile::IFile(const std::string& filename) {
   Filename(filename);
 }
 
+IFile::~IFile() {
+
+}
+
 void IFile::Filename(const std::string& filename) {
   filename_ = filename;
   try {

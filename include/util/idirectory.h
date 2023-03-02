@@ -20,8 +20,8 @@ using FilterList = std::vector<std::string>;
 class IDirectory {
  public:
   IDirectory() = default;
+  IDirectory(const IDirectory& source);
   explicit IDirectory(const std::string& filename);
-  IDirectory(const IDirectory& source) = default;
   virtual ~IDirectory() = default;
 
   [[nodiscard]] std::string Name() const;  ///< Name (stem) without path.

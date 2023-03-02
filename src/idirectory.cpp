@@ -66,6 +66,29 @@ void TextToFilterList(const std::string& text, util::log::FilterList& list) {
 
 namespace util::log {
 
+IDirectory::IDirectory(const IDirectory& source)
+    : level_(source.level_),
+      parent_dir_(source.parent_dir_),
+      exclude_list_(source.exclude_list_),
+      include_list_(source.include_list_),
+      modified_(source.modified_) {
+  for (const auto& itr_dir : dir_list_) {
+    const auto* dir = itr_dir.second.get();
+    if (dir != nullptr) {
+      auto temp = std::make_unique<IDirectory>(*dir);
+      dir_list_.emplace(temp->Name(), std::move(temp));
+    }
+  }
+
+  for (const auto& itr_file : file_list_) {
+    const auto* file = itr_file.second.get();
+    if (file != nullptr) {
+      auto temp = std::make_unique<IFile>(*file);
+      file_list_.emplace(temp->Name(), std::move(temp));
+    }
+  }
+}
+
 IDirectory::IDirectory(const std::string& dir_path) { ParentDir(dir_path); }
 
 void IDirectory::ParentDir(const std::string& dir) {

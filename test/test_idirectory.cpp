@@ -7,10 +7,13 @@
 #include <util/idirectory.h>
 #include <util/timestamp.h>
 
+#include <any>
 #include <filesystem>
 
 using namespace util::log;
+
 namespace {
+
 constexpr std::string_view kRootDir1 = "k:/test/dbc";
 constexpr std::string_view kRootDir2 = "x:/test/dbc";
 const auto kSkipTest = !std::filesystem::exists(kRootDir1.data());
@@ -151,6 +154,7 @@ TEST(IDirectory, DirectoryProperties) {
     std::cout << " Time: " << time::NsToLocalIsoTime(modified) << std::endl;
   }
 }
+
 TEST(IDirectory, InvalidRootDir) {
   IDirectory dir;
   dir.ParentDir(kRootDir2.data());
@@ -166,4 +170,14 @@ TEST(IDirectory, InvalidRootDir) {
   const auto& dir_list = dir.Directories();
   EXPECT_TRUE(dir_list.empty());
 }
+
+TEST(IDirectory, AnyTest) {
+  auto any_dir1 = std::make_any<IDirectory>();
+  auto* dir1 = std::any_cast<IDirectory>(&any_dir1);
+  EXPECT_TRUE(dir1 != nullptr);
+
+  IDirectory dir2;
+  auto any_dir2 = std::make_any<IDirectory>(dir2);
+}
+
 }  // end namespace util::test
