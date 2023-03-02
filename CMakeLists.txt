@@ -93,7 +93,10 @@ add_library(util STATIC
         src/isyslogserver.cpp include/util/isyslogserver.h
         src/udpsyslogserver.cpp src/udpsyslogserver.h
         src/utilfactory.cpp include/util/utilfactory.h
-        src/listenconsole.cpp src/listenconsole.h src/unithelper.cpp include/util/unithelper.h src/idirectory.cpp include/util/idirectory.h src/ifile.cpp include/util/ifile.h)
+        src/listenconsole.cpp src/listenconsole.h
+        src/unithelper.cpp include/util/unithelper.h
+        src/idirectory.cpp include/util/idirectory.h
+        src/ifile.cpp include/util/ifile.h)
 
 #get_target_property(PAHO_C_INCLUDE_DIRS eclipse-paho-mqtt-c::paho-mqtt3as-static INTERFACE_INCLUDE_DIRECTORIES)
 
