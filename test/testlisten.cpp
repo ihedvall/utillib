@@ -7,18 +7,20 @@
 #include <chrono>
 #include <string_view>
 
+#include "listenclient.h"
 #include "listenserver.h"
 #include "util/ilisten.h"
 #include "util/listenconfig.h"
 #include "util/logconfig.h"
 #include "util/timestamp.h"
+#include "util/utilfactory.h"
 
 using namespace util::log;
 using namespace util::log::detail;
 using namespace std::chrono_literals;
 
 namespace {
-constexpr uint64_t kServerPort = 64099;
+constexpr uint64_t kServerPort = 43099;
 constexpr std::string_view kServerName = "TestServer";
 constexpr std::string_view kServerPreText = "TS>";
 }  // namespace
@@ -60,19 +62,32 @@ TEST_F(TestListen, ListenBasic) {
 }
 
 TEST_F(TestListen, ListenServer) {
-  ListenServer server;
-  server.Name(kServerName.data());
-  server.Description("Test server");
-  server.HostName("127.0.0.1");
-  server.Port(kServerPort);
+  auto server = UtilFactory::CreateListen("ListenServer", "");
+  ASSERT_TRUE(server);
+  server->Name(kServerName.data());
+  server->Description("Test server");
+  server->HostName("127.0.0.1");
+  server->Port(kServerPort);
 
-  const bool start = server.Start();
+  const bool start = server->Start();
   EXPECT_TRUE(start);
 
-  std::this_thread::sleep_for(5s);
+  auto client = UtilFactory::CreateListenClient("localhost", kServerPort);
+  ASSERT_TRUE(client);
 
-  const bool stop = server.Stop();
+  for (size_t index1 = 0; index1 < 100; ++index1) {
+    if (server->NofConnections() == 1) {
+      break;
+    }
+    std::this_thread::sleep_for(100ms);
+  }
+  EXPECT_EQ(server->NofConnections(), 1);
+
+  client.reset();
+
+  const bool stop = server->Stop();
   EXPECT_TRUE(stop);
+  server.reset();
 }
 
 TEST_F(TestListen, ListenConfig) {
@@ -83,8 +98,6 @@ TEST_F(TestListen, ListenConfig) {
   devils_port.description = "Republican";
 
   {
-    ListenConfig master;
-
     auto list_empty = GetListenConfigList();
     EXPECT_TRUE(list_empty.empty());
 

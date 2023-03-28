@@ -8,6 +8,7 @@
 #include <gtest/gtest.h>
 
 #include "util/ilisten.h"
+#include "util/listenconfig.h"
 
 namespace util::test {
 
@@ -27,6 +28,9 @@ class TestListen : public ::testing::Test {
  protected:
   static void SetUpTestCase();
   static void TearDownTestCase();
+
+ private:
+  log::ListenConfig config;
 };
 
 }  // end namespace util::test

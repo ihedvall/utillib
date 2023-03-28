@@ -37,6 +37,7 @@ class ListenServer : public IListen {
   [[nodiscard]] std::string ShareName() const;
 
   [[nodiscard]] size_t LogLevel() override;
+  [[nodiscard]] size_t NofConnections() const;
 
  protected:
   void AddMessage(uint64_t nano_sec_1970, const std::string& pre_text,
@@ -49,7 +50,7 @@ class ListenServer : public IListen {
   std::unique_ptr<boost::asio::ip::tcp::socket> connection_socket_;
   std::thread worker_thread_;
 
-  std::mutex connection_list_lock_;
+  mutable std::mutex connection_list_lock_;
   std::deque<std::unique_ptr<ListenServerConnection>> connection_list_;
 
   ThreadSafeQueue<ListenMessage> msg_queue_;

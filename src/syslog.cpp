@@ -23,7 +23,7 @@ Syslog::Syslog(const std::string &remote_host, uint16_t port)
   EnableSeverityLevel(LogSeverity::kDebug, false);
   StartWorkerThread();
 }
-
+Syslog::~Syslog() { Stop(); }
 void Syslog::StartWorkerThread() {
   stop_thread_ = false;
   worker_thread_ = std::thread(&Syslog::WorkerThread, this);

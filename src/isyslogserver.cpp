@@ -7,6 +7,8 @@
 
 namespace util::syslog {
 
+void ISyslogServer::Address(const std::string &address) { address_ = address; }
+
 void ISyslogServer::Start() {
   msg_queue_ = std::make_unique<log::ThreadSafeQueue<SyslogMessage>>();
 }
@@ -25,5 +27,7 @@ std::optional<SyslogMessage> ISyslogServer::GetMsg(bool block) {
   const auto get = msg_queue_ ? msg_queue_->Get(msg, block) : false;
   return get && msg ? *msg : std::optional<SyslogMessage>();
 }
+
+size_t ISyslogServer::NofConnections() const { return 0; }
 
 }  // namespace util::syslog

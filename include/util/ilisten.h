@@ -15,9 +15,9 @@
 #pragma once
 #include <map>
 #include <memory>
+#include <sstream>
 #include <string>
 #include <vector>
-#include <sstream>
 namespace util::log {
 
 class ListenStream;
@@ -133,9 +133,9 @@ class IListen {
    * stmp.
    * @param text text as a string
    */
-   void ListenString(const std::string& text);
+  void ListenString(const std::string& text);
 
-   ListenStream ListenOut();
+  ListenStream ListenOut();
 
   /** \brief Generates a listen text line.
    *
@@ -154,7 +154,7 @@ class IListen {
    * @param ... Ellipse function.
    */
   void ListenTextEx(uint64_t ns1970, const std::string& pre_text,
-                            const char* format_text, ...);
+                    const char* format_text, ...);
 
   /** \brief Generates a hex string text from a byte buffer
    *
@@ -213,6 +213,8 @@ class IListen {
    */
   virtual bool Stop();
 
+  [[nodiscard]] virtual size_t NofConnections() const;
+
  protected:
   std::string share_name_;   ///< Share memory name
   std::string name_;         ///< Display name.
@@ -248,17 +250,15 @@ class IListen {
 class ListenStream final : public std::ostringstream {
  public:
   ListenStream() = delete;
-  explicit ListenStream(IListen& listen)
-      : listen_(listen) {}
+  explicit ListenStream(IListen& listen) : listen_(listen) {}
 
   ~ListenStream() override {
     if (listen_.IsActive()) {
       listen_.ListenString(str());
     }
-
   }
+
  private:
   IListen& listen_;
-
 };
 }  // namespace util::log

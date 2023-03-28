@@ -16,6 +16,10 @@ using namespace util::log;
 
 namespace util::syslog {
 
+UdpSyslogServer::UdpSyslogServer() { type_ = SyslogServerType::UdpServer; }
+
+UdpSyslogServer::~UdpSyslogServer() { Stop(); }
+
 void UdpSyslogServer::Start() {
   stop_thread_ = false;
   if (Name().empty()) {

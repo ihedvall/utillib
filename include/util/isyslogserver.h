@@ -29,9 +29,11 @@ namespace util::syslog {
  * messages.
  */
 enum class SyslogServerType : uint8_t {
-  UdpServer = 0,  ///< Uses UDP protocol (RFC5426).
-  TlsServer = 1,  ///< Uses TLS on top o TCP (RFC5425).
-  TcpServer = 2   ///< Uses plain TCP protocol (RFC6587).
+  UdpServer = 0,    ///< Uses UDP protocol (RFC5426).
+  TlsServer = 1,    ///< Uses TLS on top of TCP (RFC5425).
+  TcpServer = 2,    ///< Uses plain TCP protocol (RFC6587).
+  TcpPublisher = 3, ///< Server that sends syslog messages
+  TcpSubscriber = 4 ///< Client that subscribe on syslog messages
 };
 
 /** \class ISyslogServer isyslogserver.h "util/gnuplot.h"
@@ -42,6 +44,16 @@ enum class SyslogServerType : uint8_t {
  */
 class ISyslogServer {
  public:
+  ISyslogServer(const ISyslogServer&) = delete;
+  virtual ~ISyslogServer() = default;
+
+  /** \brief Return s the type of server
+   *
+   * Return type of server or client.
+   * @return Type of syslog server (or client)
+   */
+  [[nodiscard]] SyslogServerType Type() const { return type_; }
+
   /** \brief Bind address of the server.
    *
    * By default, the server binds to any incoming calls. By changing this value
@@ -49,7 +61,7 @@ class ISyslogServer {
    * recommended for UDP connections.
    * @param address
    */
-  void Address(const std::string& address) { address_ = address; }
+  void Address(const std::string& address);
 
   [[nodiscard]] const std::string& Address()
       const {  ///< Returns the bind address
@@ -73,8 +85,8 @@ class ISyslogServer {
     return port_;
   }
 
-  void AddMsg(const SyslogMessage& msg);  ///< Adds a syslog message to the
-                                          ///< internal message queue.
+  virtual void AddMsg(const SyslogMessage& msg);  ///< Adds a syslog message to the
+                                                  ///< internal message queue.
 
   /** \brief Returns the next message in the queue.
    *
@@ -102,10 +114,21 @@ class ISyslogServer {
    */
   [[nodiscard]] bool IsOperable() const { return operable_; }
 
+  /** \brief Returns number of connections to the server.
+   *
+   * Returns number of connections to the server. In reality it is only
+   * TCP/IP servers that return number of connections.
+   * @return Number of connected clients.
+   */
+  [[nodiscard]] virtual size_t NofConnections() const;
+
  protected:
+  ISyslogServer() = default;
   std::atomic<bool> operable_ = true;  ///< Operable flag.
+  SyslogServerType type_ = SyslogServerType::UdpServer;
+
  private:
-  std::string address_;  ///< Bind address. Default is empty i.e. 0.0.0.0
+  std::string address_ = "0.0.0.0";  ///< Bind address. Default is  0.0.0.0
   std::string name_;     ///< Display name of the server.
   uint16_t port_ = 0;    ///< Server port.
   std::unique_ptr<log::ThreadSafeQueue<SyslogMessage>>

@@ -14,6 +14,10 @@ namespace util::syslog {
 
 class UdpSyslogServer : public ISyslogServer {
  public:
+  UdpSyslogServer();
+  UdpSyslogServer(const UdpSyslogServer&) = delete;
+  ~UdpSyslogServer() override;
+
   void Start() override;
   void Stop() override;
 

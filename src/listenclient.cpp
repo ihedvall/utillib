@@ -5,17 +5,17 @@
 
 #include "listenclient.h"
 
+#include "listenmessage.h"
 #include "util/logstream.h"
-
 using namespace util::log;
 using namespace boost::asio;
+using namespace boost::system;
 using namespace std::chrono_literals;
 
 namespace util::log::detail {
 
 ListenClient::ListenClient(const std::string& host_name, uint16_t port)
-    : host_name_(host_name),
-      port_(port),
+    : IListenClient(host_name, port),
       retry_timer_(context_),
       lookup_(context_) {
   worker_thread_ = std::thread(&ListenClient::WorkerTask, this);
@@ -35,20 +35,19 @@ void ListenClient::WorkerTask() {
   try {
     DoLookup();
     const auto& count = context_.run();
-    LOG_INFO() << "Stopped main worker thread";
-  } catch (const std::exception& error) {
-    LOG_ERROR() << "Context error. Error: " << error.what();
+    LOG_TRACE() << "Stopped main worker thread";
+  } catch (const std::exception& err) {
+    LOG_ERROR() << "Context error. Error: " << err.what();
   }
 }
 
 void ListenClient::DoLookup() {
   connected_ = false;
   lookup_.async_resolve(
-      host_name_, std::to_string(port_),
-      [&](const boost::system::error_code& error,
-          ip::tcp::resolver::results_type result) {
+      ip::tcp::v4(), HostName(), std::to_string(Port()),
+      [&](const error_code& error, ip::tcp::resolver::results_type result) {
         if (error) {
-          LOG_DEBUG() << "Lookup error. Host: " << host_name_ << ":" << port_
+          LOG_DEBUG() << "Lookup error. Host: " << HostName() << ":" << Port()
                       << ",Error: (" << error << ") " << error.message();
           DoRetryWait();
         } else {
@@ -63,7 +62,7 @@ void ListenClient::DoRetryWait() {
   Close();
   connected_ = false;
   retry_timer_.expires_after(5s);
-  retry_timer_.async_wait([&](const boost::system::error_code error) {
+  retry_timer_.async_wait([&](const error_code error) {
     if (error) {
       LOG_ERROR() << "Retry timer error. Error: " << error.message();
     }
@@ -71,15 +70,14 @@ void ListenClient::DoRetryWait() {
   });
 }
 void ListenClient::DoConnect() {
-  socket_->async_connect(
-      *endpoints_, [&](const boost::system::error_code error) {
-        if (error) {
-          LOG_ERROR() << "Connect error. Error: " << error.message();
-          DoRetryWait();
-        } else {
-          DoReadHeader();
-        }
-      });
+  socket_->async_connect(*endpoints_, [&](const error_code error) {
+    if (error) {
+      LOG_ERROR() << "Connect error. Error: " << error.message();
+      DoRetryWait();
+    } else {
+      DoReadHeader();
+    }
+  });
 }
 
 void ListenClient::DoReadHeader() {  // NOLINT
@@ -88,31 +86,31 @@ void ListenClient::DoReadHeader() {  // NOLINT
     return;
   }
   connected_ = true;
-  async_read(
-      *socket_, boost::asio::buffer(header_data_),
-      [&](const boost::system::error_code& error, size_t bytes) {  // NOLINT
-        if (error && error == error::eof) {
-          LOG_INFO() << "Connection closed by remote";
-          DoRetryWait();
-        } else if (error) {
-          LOG_ERROR() << "Listen header error. Error: " << error.message();
-          DoRetryWait();
-        } else if (bytes != header_data_.size()) {
-          LOG_ERROR() << "Listen header length error. Error: "
-                      << error.message();
-          DoRetryWait();
-        } else {
-          ListenMessage header;
-          header.FromHeaderBuffer(header_data_);
-          if (header.body_size_ > 0) {
-            body_data_.clear();
-            body_data_.resize(header.body_size_, 0);
-            DoReadBody();
-          } else {
-            DoReadHeader();
-          }
-        }
-      });
+  async_read(*socket_, buffer(header_data_),
+             [&](const error_code& error, size_t bytes) {  // NOLINT
+               if (error && error == error::eof) {
+                 LOG_INFO() << "Connection closed by remote";
+                 DoRetryWait();
+               } else if (error) {
+                 LOG_ERROR()
+                     << "Listen header error. Error: " << error.message();
+                 DoRetryWait();
+               } else if (bytes != header_data_.size()) {
+                 LOG_ERROR() << "Listen header length error. Error: "
+                             << error.message();
+                 DoRetryWait();
+               } else {
+                 ListenMessage header;
+                 header.FromHeaderBuffer(header_data_);
+                 if (header.body_size_ > 0) {
+                   body_data_.clear();
+                   body_data_.resize(header.body_size_, 0);
+                   DoReadBody();
+                 } else {
+                   DoReadHeader();
+                 }
+               }
+             });
 }
 
 void ListenClient::DoReadBody() {  // NOLINT
@@ -120,20 +118,20 @@ void ListenClient::DoReadBody() {  // NOLINT
     DoRetryWait();
     return;
   }
-  async_read(
-      *socket_, boost::asio::buffer(body_data_),
-      [&](const boost::system::error_code& error, size_t bytes) {  // NOLINT
-        if (error) {
-          LOG_ERROR() << "Listen body error. Error: " << error.message();
-          DoRetryWait();
-        } else if (bytes != body_data_.size()) {
-          LOG_ERROR() << "Listen body length error. Error: " << error.message();
-          DoRetryWait();
-        } else {
-          HandleMessage();
-          DoReadHeader();
-        }
-      });
+  async_read(*socket_, buffer(body_data_),
+             [&](const error_code& error, size_t bytes) {  // NOLINT
+               if (error) {
+                 LOG_ERROR() << "Listen body error. Error: " << error.message();
+                 DoRetryWait();
+               } else if (bytes != body_data_.size()) {
+                 LOG_ERROR()
+                     << "Listen body length error. Error: " << error.message();
+                 DoRetryWait();
+               } else {
+                 HandleMessage();
+                 DoReadHeader();
+               }
+             });
 }
 
 void ListenClient::HandleMessage() {
@@ -194,6 +192,10 @@ void ListenClient::SendLogLevel(uint64_t level) {
   msg.ToBuffer(data);
   boost::system::error_code error;
   write(*socket_, boost::asio::buffer(data), error);
+}
+
+bool ListenClient::GetMsg(std::unique_ptr<ListenMessage>& message) {
+  return msg_queue_.Get(message, false);
 }
 
 }  // namespace util::log::detail

@@ -16,9 +16,9 @@ add_executable(test_util
         testlisten.cpp testlisten.h
         test_tempdir.cpp
         testsyslogmessage.cpp
-        test_syslog.cpp
+        testsyslog.cpp
         test_syslogflexer.cpp
-        test_base64.cpp test_unithelper.cpp test_idirectory.cpp)
+        test_base64.cpp test_unithelper.cpp test_idirectory.cpp testsyslog.h)
 
 target_include_directories(test_util PRIVATE ../include)
 target_include_directories(test_util PRIVATE ../src)

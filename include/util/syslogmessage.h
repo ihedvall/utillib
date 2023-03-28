@@ -78,6 +78,8 @@ class SyslogMessage {
    */
   SyslogMessage();
 
+  SyslogMessage(const SyslogMessage&) = default; ///< Default copy constructor
+
   /** \brief Constructor that converts a log message,
    *
    * Constructor used when converting a log message into a syslog message, The
@@ -86,6 +88,19 @@ class SyslogMessage {
    * @param show_location Set tor true if source location should be included.
    */
   SyslogMessage(const util::log::LogMessage& log, bool show_location);
+
+  virtual ~SyslogMessage() = default;  ///< Default destructor
+
+  /** \brief Index used to identify the message.
+   *
+   * Index that is used as an unique identifier of the message. The index is
+   * not received or transmitted.
+   *
+   * @param index 64-bit unique index. Optional use.
+   */
+  void Index(int64_t index) {index_ = index;}
+
+  [[nodiscard]] int64_t Index() const {return index_;} ///< Unique index.
 
   void Severity(SyslogSeverity severity) {  ///< Sets the severity level
     severity_ = severity;
@@ -188,6 +203,7 @@ class SyslogMessage {
 
  protected:
  private:
+  int64_t index_ = 0; ///< Used as unique index (database).
   SyslogSeverity severity_ = SyslogSeverity::Informational;
   SyslogFacility facility_ = SyslogFacility::Local0;
   uint8_t version_ = 1;

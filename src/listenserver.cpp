@@ -10,8 +10,10 @@
 #include "listenserverconnection.h"
 #include "util/listenconfig.h"
 #include "util/logstream.h"
+#include "util/stringutil.h"
 
 using namespace util::log;
+using namespace util::string;
 using namespace boost::asio;
 using namespace std::chrono_literals;
 
@@ -31,7 +33,7 @@ ListenServer::~ListenServer() { Stop(); }
 void ListenServer::WorkerTask() {
   try {
     const auto& count = context_.run();
-    LOG_DEBUG() << "Stopped main worker thread. Name: " << Name()
+    LOG_TRACE() << "Stopped main worker thread. Name: " << Name()
                 << ", Count: " << count;
   } catch (const std::exception& error) {
     LOG_ERROR() << "Context error. Name: " << Name()
@@ -56,9 +58,15 @@ bool ListenServer::Start() {
   AddListenConfig(config);
 
   try {
-    const auto address = ip::make_address(HostName());
-    ip::tcp::endpoint endpoint(address, Port());
-    acceptor_ = std::make_unique<ip::tcp::acceptor>(context_, endpoint);
+    if (HostName().empty() || IEquals(HostName(), "0.0.0.0")) {
+      const auto address = ip::address_v4::any();
+      const ip::tcp::endpoint endpoint(address, Port());
+      acceptor_ = std::make_unique<ip::tcp::acceptor>(context_, endpoint);
+    } else {
+      const auto address = ip::address::from_string("127.0.0.1");
+      const ip::tcp::endpoint endpoint(address, Port());
+      acceptor_ = std::make_unique<ip::tcp::acceptor>(context_, endpoint);
+    }
     DoAccept();
     DoCleanup();
     DoMessageQueue();
@@ -126,14 +134,13 @@ void ListenServer::DoAccept() {
           if (share_mem_queue_) {
             share_mem_queue_->SetActive(active_);
           }
-          LOG_INFO() << "Added a connection";
           DoAccept();
         }
       });
 }
 
 void ListenServer::DoCleanup() {
-  cleanup_timer_.expires_after(10s);
+  cleanup_timer_.expires_after(2s);
   cleanup_timer_.async_wait([&](const boost::system::error_code error) {
     if (error) {
       LOG_ERROR() << "Cleanup timer error. Name: " << Name()
@@ -144,7 +151,6 @@ void ListenServer::DoCleanup() {
            /* No ++itr here */) {
         auto& connection = *itr;
         if (!connection || connection->Cleanup()) {
-          LOG_INFO() << "Deleted a connection";
           itr = connection_list_.erase(itr);
         } else {
           ++itr;
@@ -215,7 +221,7 @@ void ListenServer::HandleMessage(const ListenMessage* msg) {
       if (log_level_msg != nullptr) {
         log_level_ = log_level_msg->log_level_;
         if (share_mem_queue_) {
-          LOG_ERROR() << "Setting Log level: " << log_level_;
+          LOG_TRACE() << "Setting Log level: " << log_level_;
           share_mem_queue_->SetLogLevel(log_level_);
         }
         std::lock_guard lock(connection_list_lock_);
@@ -244,6 +250,11 @@ void ListenServer::HandleMessage(const ListenMessage* msg) {
     default:
       break;
   }
+}
+
+size_t ListenServer::NofConnections() const {
+  std::lock_guard lock(connection_list_lock_);
+  return connection_list_.size();
 }
 
 }  // namespace util::log::detail

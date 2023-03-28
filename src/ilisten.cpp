@@ -101,4 +101,6 @@ void IListen::SetLogLevel(size_t log_level) {}
 
 ListenStream IListen::ListenOut() { return ListenStream(*this); }
 
+size_t IListen::NofConnections() const { return 0; }
+
 }  // end namespace util::log

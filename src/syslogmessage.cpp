@@ -96,6 +96,7 @@ SyslogMessage::SyslogMessage(const LogMessage &log, bool show_location)
       break;
   }
 }
+
 std::string SyslogMessage::GenerateMessage() const {
   std::ostringstream msg;
 

@@ -17,6 +17,7 @@ class Syslog : public ILogger {
  public:
   Syslog() = default;
   Syslog(const std::string& remote_host, uint16_t port);
+  ~Syslog() override;
 
   void AddLogMessage(
       const LogMessage& message) override;  ///< Handle a log message

@@ -13,6 +13,7 @@
 #include <vector>
 
 #include "util/ilisten.h"
+#include "util/ilistenclient.h"
 #include "util/ilogger.h"
 #include "util/isyslogserver.h"
 
@@ -68,6 +69,9 @@ class UtilFactory {
    */
   static std::unique_ptr<log::IListen> CreateListen(
       const std::string& type, const std::string& share_name);
+
+  static std::unique_ptr<log::IListenClient> CreateListenClient(
+      const std::string& host, uint16_t port);
 };
 
 }  // namespace util

@@ -5,6 +5,10 @@
 
 #include <gtest/gtest.h>
 
+#include <any>
+#include <memory>
+#include <vector>
+
 #include "util/logconfig.h"
 #include "util/syslogmessage.h"
 
@@ -40,7 +44,7 @@ TEST(SyslogMessage, BasicUse) {  // NOLINT
   EXPECT_EQ(data1.Parameters().size(), 1);
 }
 
-TEST(SyslogMessage, LogUse) {  // NOLINT
+TEST(SyslogMessage, LogUse) {
   auto& log_config = LogConfig::Instance();
   log_config.ApplicationName("SysLogMessage::LogUse");
 
@@ -55,4 +59,16 @@ TEST(SyslogMessage, LogUse) {  // NOLINT
   std::cout << out << std::endl;
   EXPECT_FALSE(out.empty());
 }
+
+TEST(SyslogMessage, AnyTest) {
+  SyslogMessage original;
+  SyslogMessage copy(original);
+
+  auto ptr = std::make_unique<SyslogMessage>();
+  using SyslogList = std::vector<SyslogMessage>;
+  SyslogList list;
+
+  auto holder = std::make_any<SyslogList>();
+}
+
 }  // namespace util::test

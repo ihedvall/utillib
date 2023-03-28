@@ -5,6 +5,7 @@
 
 #include "util/utilfactory.h"
 
+#include "listenclient.h"
 #include "listenconsole.h"
 #include "listenlogger.h"
 #include "listenproxy.h"
@@ -12,6 +13,9 @@
 #include "logconsole.h"
 #include "logfile.h"
 #include "syslog.h"
+#include "syslogpublisher.h"
+#include "syslogsubscriber.h"
+#include "tcpsyslogserver.h"
 #include "udpsyslogserver.h"
 #include "util/stringutil.h"
 using namespace util::syslog;
@@ -30,8 +34,22 @@ std::unique_ptr<ISyslogServer> UtilFactory::CreateSyslogServer(
       server = std::move(udp_server);
       break;
     }
+    case SyslogServerType::TcpServer: {
+      auto tcp_server = std::make_unique<TcpSyslogServer>();
+      server = std::move(tcp_server);
+      break;
+    }
+    case SyslogServerType::TcpPublisher: {
+      auto tcp_publisher = std::make_unique<SyslogPublisher>();
+      server = std::move(tcp_publisher);
+      break;
+    }
+    case SyslogServerType::TcpSubscriber: {
+      auto tcp_subscriber = std::make_unique<SyslogSubscriber>();
+      server = std::move(tcp_subscriber);
+      break;
+    }
     case SyslogServerType::TlsServer:
-    case SyslogServerType::TcpServer:
     default:
       break;
   }
@@ -84,4 +102,11 @@ std::unique_ptr<IListen> UtilFactory::CreateListen(
   }
   return listen;
 }
+
+std::unique_ptr<log::IListenClient> UtilFactory::CreateListenClient(
+    const std::string &host, uint16_t port) {
+  auto temp = std::make_unique<log::detail::ListenClient>(host, port);
+  return temp;
+}
+
 }  // namespace util
