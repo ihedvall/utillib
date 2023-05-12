@@ -9,7 +9,7 @@ var searchData=
   ['getlocaltimestampwithus_6',['GetLocalTimestampWithUs',['../namespaceutil_1_1time.html#a51bf36aba841364b5504f7b5aabfbc59',1,'util::time']]],
   ['getlogfile_7',['GetLogFile',['../classutil_1_1log_1_1_log_config.html#a881d2cdc0e68be09d1b40ecf26eae7ca',1,'util::log::LogConfig']]],
   ['getlogger_8',['GetLogger',['../classutil_1_1log_1_1_log_config.html#a49ef3b813e9bde90dff794bab609db51',1,'util::log::LogConfig']]],
-  ['getmsg_9',['GetMsg',['../classutil_1_1syslog_1_1_i_syslog_server.html#aad4001d1b93578a181a8faaa4d9c1910',1,'util::syslog::ISyslogServer']]],
+  ['getmsg_9',['GetMsg',['../classutil_1_1log_1_1_i_listen_client.html#ae9673fe395cdf462808631707c1fb3de',1,'util::log::IListenClient::GetMsg()'],['../classutil_1_1syslog_1_1_i_syslog_server.html#aad4001d1b93578a181a8faaa4d9c1910',1,'util::syslog::ISyslogServer::GetMsg()']]],
   ['getnode_10',['GetNode',['../classutil_1_1xml_1_1_i_xml_file.html#a2b05ea6545548206846f093276af9d54',1,'util::xml::IXmlFile::GetNode()'],['../classutil_1_1xml_1_1_i_xml_node.html#a12bf8ebf5eca3e963c6a05d34eb6253d',1,'util::xml::IXmlNode::GetNode(const std::string &amp;tag) const'],['../classutil_1_1xml_1_1_i_xml_node.html#a9e33e59fcd93a17f090a4ea7ae6b47e7',1,'util::xml::IXmlNode::GetNode(const std::string &amp;tag, const std::string &amp;key, const std::string &amp;attr) const']]],
   ['getseveritystring_11',['GetSeverityString',['../namespaceutil_1_1log.html#ae03f0cd0de808d68c350ab8aa2c0decf',1,'util::log']]],
   ['gettagvalue_12',['GetTagValue',['../classutil_1_1string_1_1_string_parser.html#a1b18370b9e4ddbe3a29804a260e5e4ca',1,'util::string::StringParser']]],

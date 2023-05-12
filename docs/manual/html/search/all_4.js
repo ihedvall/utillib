@@ -8,7 +8,10 @@ var searchData=
   ['encoding_5f_5',['encoding_',['../classutil_1_1xml_1_1_i_xml_file.html#a359d994f672f31ca72216c2006686fb1',1,'util::xml::IXmlFile']]],
   ['enterpriseid_6',['EnterpriseId',['../classutil_1_1syslog_1_1_structured_data.html#a6553b5e9c3c1efcd6295c16da0e7e802',1,'util::syslog::StructuredData']]],
   ['error_7',['Error',['../namespaceutil_1_1syslog.html#a4173932d17b5c5713372e13f197de0b0a902b0d55fddef6f8d651fe1035b7d4bd',1,'util::syslog']]],
-  ['exepath_8',['ExePath',['../classutil_1_1plot_1_1_gnu_plot.html#a0c98c2e33e62d791c4b06b1507ece6ee',1,'util::plot::GnuPlot']]],
-  ['existproperty_9',['ExistProperty',['../classutil_1_1xml_1_1_i_xml_node.html#a410350d93ab0a0701817248c1e7d747b',1,'util::xml::IXmlNode']]],
-  ['existtag_10',['ExistTag',['../classutil_1_1string_1_1_string_parser.html#aa711916823e440e034213bef7c7bcf2c',1,'util::string::StringParser']]]
+  ['excludefile_8',['ExcludeFile',['../classutil_1_1log_1_1_i_directory.html#a56a1971d5d01940ff72974c4a1035488',1,'util::log::IDirectory']]],
+  ['excludelist_9',['ExcludeList',['../classutil_1_1log_1_1_i_directory.html#ae6ba9389ca8816b5e6706b705faf6afc',1,'util::log::IDirectory::ExcludeList() const'],['../classutil_1_1log_1_1_i_directory.html#a39ff2e9f85334564dba66623e9442f0c',1,'util::log::IDirectory::ExcludeList()']]],
+  ['excludelisttostring_10',['ExcludeListToString',['../classutil_1_1log_1_1_i_directory.html#a2e0e2644e87f9fe54ced8ef9fd2f57c6',1,'util::log::IDirectory']]],
+  ['exepath_11',['ExePath',['../classutil_1_1plot_1_1_gnu_plot.html#a0c98c2e33e62d791c4b06b1507ece6ee',1,'util::plot::GnuPlot']]],
+  ['existproperty_12',['ExistProperty',['../classutil_1_1xml_1_1_i_xml_node.html#a410350d93ab0a0701817248c1e7d747b',1,'util::xml::IXmlNode']]],
+  ['existtag_13',['ExistTag',['../classutil_1_1string_1_1_string_parser.html#aa711916823e440e034213bef7c7bcf2c',1,'util::string::StringParser']]]
 ];

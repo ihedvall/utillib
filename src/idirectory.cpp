@@ -68,7 +68,7 @@ namespace util::log {
 
 IDirectory::IDirectory(const IDirectory& source)
     : level_(source.level_),
-      parent_dir_(source.parent_dir_),
+      directory_(source.directory_),
       exclude_list_(source.exclude_list_),
       include_list_(source.include_list_),
       modified_(source.modified_) {
@@ -89,23 +89,23 @@ IDirectory::IDirectory(const IDirectory& source)
   }
 }
 
-IDirectory::IDirectory(const std::string& dir_path) { ParentDir(dir_path); }
+IDirectory::IDirectory(const std::string& dir_path) { Directory(dir_path); }
 
-void IDirectory::ParentDir(const std::string& dir) {
-  parent_dir_ = dir;
+void IDirectory::Directory(const std::string& dir) {
+  directory_ = dir;
   try {
-    path full_name(parent_dir_);
+    path full_name(directory_);
     const auto time_file = last_write_time(full_name);
     modified_ = time::FileTimeToNs(time_file);
   } catch (const std::exception& err) {
     std::ostringstream msg;
-    msg << "Init error. Directory: " << parent_dir_
-        << ", Error: " << err.what();
+    msg << "Init error. Directory: " << directory_ << ", Error: " << err.what();
   }
 }
+
 std::string IDirectory::Name() const {
   try {
-    path parent_dir(parent_dir_);
+    path parent_dir(directory_);
     return parent_dir.stem().string();
   } catch (const std::exception&) {
   }
@@ -116,7 +116,7 @@ bool IDirectory::ScanDirectory() {  // NOLINT
   dir_list_.clear();
   file_list_.clear();
   try {
-    path parent_dir(parent_dir_);
+    path parent_dir(directory_);
 
     if (!exists(parent_dir)) {
       std::ostringstream err;
@@ -157,7 +157,7 @@ bool IDirectory::ScanDirectory() {  // NOLINT
     }
   } catch (const std::exception& err) {
     std::ostringstream msg;
-    msg << "File system error. Directory: " << parent_dir_
+    msg << "File system error. Directory: " << Name()
         << ", Error:  " << err.what();
     last_error_ = msg.str();
     return false;

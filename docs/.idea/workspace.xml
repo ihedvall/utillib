@@ -6,8 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="16d20870-fc5e-4071-bf70-fd913518e1e6" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../doxygen/mainpage.dox" beforeDir="false" afterPath="$PROJECT_DIR$/../doxygen/mainpage.dox" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../doxygen/namespaces.dox" beforeDir="false" afterPath="$PROJECT_DIR$/../doxygen/namespaces.dox" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,7 +31,7 @@
     "WebServerToolWindowFactoryState": "false",
     "last_opened_file_path": "D:/projects/utillib/docs",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "settings.webpack",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -52,6 +50,7 @@
       <workItem from="1652519971827" duration="323000" />
       <workItem from="1652520360561" duration="3837000" />
       <workItem from="1660759935993" duration="820000" />
+      <workItem from="1680773258845" duration="206000" />
     </task>
     <servers />
   </component>

@@ -1,7 +1,7 @@
 <map id="include/util/threadsafequeue.h" name="include/util/threadsafequeue.h">
-<area shape="rect" id="node1" title="Implements a thread&#45;safe queue." alt="" coords="64,5,259,32"/>
-<area shape="rect" id="node2" title=" " alt="" coords="5,80,64,107"/>
-<area shape="rect" id="node3" title=" " alt="" coords="89,80,146,107"/>
-<area shape="rect" id="node4" title=" " alt="" coords="171,80,240,107"/>
-<area shape="rect" id="node5" title=" " alt="" coords="265,80,389,107"/>
+<area shape="rect" id="node1" title="Implements a thread&#45;safe queue." alt="" coords="135,5,330,31"/>
+<area shape="rect" id="node2" title=" " alt="" coords="5,79,129,104"/>
+<area shape="rect" id="node3" title=" " alt="" coords="154,79,223,104"/>
+<area shape="rect" id="node4" title=" " alt="" coords="247,79,306,104"/>
+<area shape="rect" id="node5" title=" " alt="" coords="331,79,388,104"/>
 </map>

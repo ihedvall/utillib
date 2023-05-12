@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: MIT
 cmake_minimum_required(VERSION 3.20)
 project(utilLib
-        VERSION 1.0
+        VERSION 2.0
         DESCRIPTION "Common C++ library with utilities."
         LANGUAGES CXX)
 
@@ -120,13 +120,28 @@ endif ()
 
 set(UTIL_PUBLIC_HEADERS
         include/util/csvwriter.h
+        include/util/gnuplot.h
+        include/util/idirectory.h
+        include/util/ifile.h
+        include/utililisten.h
+        include/util/ilistenclient.h
         include/util/ilogger.h
+        include/util/isyslogserver.h
+        include/util/ixmlfile.h
         include/util/ixmlnode.h
         include/util/logconfig.h
         include/util/logging.h
         include/util/logmessage.h
+        include/util/logstream.h
+        include/util/stringparser.h
         include/util/stringutil.h
+        include/util/structureddata.h
+        include/util/syslogmessage.h
+        include/util/tempdir.h
+        include/util/threadsafequeue.h
         include/util/timestamp.h
+        include/util/unithelper.h
+        include/util/utilfactory.h
         )
 
 set_target_properties(util PROPERTIES PUBLIC_HEADER "${UTIL_PUBLIC_HEADERS}")

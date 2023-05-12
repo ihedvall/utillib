@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['parameterlist_0',['ParameterList',['../classutil_1_1syslog_1_1_structured_data.html#a09f059423ee767c3ad4beef54a425a58',1,'util::syslog::StructuredData']]]
+  ['loc_0',['Loc',['../namespaceutil_1_1log.html#af89872d2f3b06b8f5e5c00932b7d7279',1,'util::log']]]
 ];

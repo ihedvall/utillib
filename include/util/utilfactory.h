@@ -70,6 +70,13 @@ class UtilFactory {
   static std::unique_ptr<log::IListen> CreateListen(
       const std::string& type, const std::string& share_name);
 
+  /** \brief Creates a listen client.
+   *
+   * Creates a TCP/IP listen client object.
+   * @param host Host name
+   * @param port TCP/IP port to connect to.
+   * @return Smart pointer to a IListenClient.
+   */
   static std::unique_ptr<log::IListenClient> CreateListenClient(
       const std::string& host, uint16_t port);
 };

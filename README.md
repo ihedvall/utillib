@@ -1,18 +1,17 @@
-# Library Util
+# Util Library and Application
 
 ## Summary
 
-The Util Library is used as a base for applications and libraries. 
+The Util repository consist of a Util library, server and GUI applications. The C++ library is used as a base library
+for other libraries and applications. It consist of the following base components.
 
-The C++ library consists of the following components.
-
-- **CSV** Writer. Simplifies the usage of creating comma separated data files.
-- **Gnuplot**. Implements a wrapper around the third-party gnuplot application.
-- **Listen** Functions. User interface against the Listen functionality. 
-- **Logging** Functions. Basic log function to file or console.
-- **XML** Functions. Simple wrapper around the third-party EXPAT library.
-- **String** Functions. Various string manipulations that is missing in the standard C++.
-- **Time and Date** Functions. Various time and date functions
+- **CSV**. Simplifies the usage of creating comma separated data files.
+- **Gnuplot**. Implements a wrapper around the third-party gnuplot plotting application.
+- **Listen**. Client server and a user interface against the Listen functionality.
+- **Logging**. Basic log functions for syslog, file or console logging.
+- **XML**. Simple XML (DOM) wrapper around the third-party EXPAT library.
+- **String**. Various string manipulations function that is missing in the standard C++.
+- **Time and Date**. Various time and date functions.
 
 The following companion applications exist.
 
@@ -25,7 +24,8 @@ The following companion applications exist.
 
 Installation kit for [UtilLib v1.0.0](https://github.com/ihedvall/utillib/releases/download/v1.0.0/utillib.exe).
 
-## Documentation 
+## Documentation
+
 The documentation can be found on GitHub Pages: [UtilLib](https://ihedvall.github.io/utillib)
 
 ## Building the project

@@ -1,8 +1,8 @@
 <map id="include/util/logmessage.h" name="include/util/logmessage.h">
-<area shape="rect" id="node1" title=" " alt="" coords="75,5,244,32"/>
-<area shape="rect" id="node2" href="$ilogger_8h.html" title="Defines an interface against a generic logger." alt="" coords="91,80,228,107"/>
-<area shape="rect" id="node3" href="$logconfig_8h.html" title="Singleton that is used to configure default loggers." alt="" coords="5,155,156,181"/>
-<area shape="rect" id="node5" href="$syslogmessage_8h.html" title="Implements an interface against a syslog message." alt="" coords="252,80,443,107"/>
-<area shape="rect" id="node4" href="$utilfactory_8h.html" title=" " alt="" coords="193,229,347,256"/>
-<area shape="rect" id="node6" href="$isyslogserver_8h.html" title="Defines an interface against a syslog server." alt="" coords="252,155,427,181"/>
+<area shape="rect" id="node1" title=" " alt="" coords="75,5,244,31"/>
+<area shape="rect" id="node2" href="$ilogger_8h.html" title="Defines an interface against a generic logger." alt="" coords="91,79,228,104"/>
+<area shape="rect" id="node3" href="$logconfig_8h.html" title="Singleton that is used to configure default loggers." alt="" coords="5,152,156,177"/>
+<area shape="rect" id="node5" href="$syslogmessage_8h.html" title="Implements an interface against a syslog message." alt="" coords="252,79,443,104"/>
+<area shape="rect" id="node4" href="$utilfactory_8h.html" title=" " alt="" coords="193,225,347,251"/>
+<area shape="rect" id="node6" href="$isyslogserver_8h.html" title="Defines an interface against a syslog server." alt="" coords="252,152,427,177"/>
 </map>

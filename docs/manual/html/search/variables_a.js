@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['root_5fnode_5f_0',['root_node_',['../classutil_1_1xml_1_1_i_xml_file.html#a27e63a3c3a24dc7f786e77a8aaaaec90',1,'util::xml::IXmlFile']]]
+  ['offset_0',['Offset',['../structutil_1_1string_1_1_unit_quantity.html#a5b1e5f530ee3a2a264ed7577d0cee1cc',1,'util::string::UnitQuantity']]],
+  ['operable_5f_1',['operable_',['../classutil_1_1syslog_1_1_i_syslog_server.html#a28ecffb33855fd5fa149402d8a1b1c2b',1,'util::syslog::ISyslogServer']]]
 ];

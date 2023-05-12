@@ -1,13 +1,13 @@
 <map id="include/util/syslogmessage.h" name="include/util/syslogmessage.h">
-<area shape="rect" id="node1" title="Implements an interface against a syslog message." alt="" coords="59,5,250,32"/>
-<area shape="rect" id="node2" title=" " alt="" coords="5,80,67,107"/>
-<area shape="rect" id="node3" title=" " alt="" coords="245,237,299,263"/>
-<area shape="rect" id="node4" title=" " alt="" coords="149,155,205,181"/>
-<area shape="rect" id="node5" href="$logmessage_8h.html" title=" " alt="" coords="333,80,435,107"/>
-<area shape="rect" id="node11" href="$structureddata_8h.html" title="Syslog structured data interface." alt="" coords="193,80,309,107"/>
-<area shape="rect" id="node6" title=" " alt="" coords="339,155,400,181"/>
-<area shape="rect" id="node7" href="$logging_8h.html" title="Standard log interfaces." alt="" coords="424,155,499,181"/>
-<area shape="rect" id="node8" title=" " alt="" coords="343,237,409,263"/>
-<area shape="rect" id="node9" title=" " alt="" coords="433,237,490,263"/>
-<area shape="rect" id="node10" title=" " alt="" coords="515,229,653,271"/>
+<area shape="rect" id="node1" title="Implements an interface against a syslog message." alt="" coords="59,5,250,31"/>
+<area shape="rect" id="node2" title=" " alt="" coords="5,79,67,104"/>
+<area shape="rect" id="node3" title=" " alt="" coords="245,233,299,258"/>
+<area shape="rect" id="node4" title=" " alt="" coords="149,152,205,177"/>
+<area shape="rect" id="node5" href="$logmessage_8h.html" title=" " alt="" coords="333,79,435,104"/>
+<area shape="rect" id="node11" href="$structureddata_8h.html" title="Syslog structured data interface." alt="" coords="193,79,309,104"/>
+<area shape="rect" id="node6" title=" " alt="" coords="339,152,400,177"/>
+<area shape="rect" id="node7" href="$logging_8h.html" title="Standard log interfaces." alt="" coords="424,152,499,177"/>
+<area shape="rect" id="node8" title=" " alt="" coords="343,233,409,258"/>
+<area shape="rect" id="node9" title=" " alt="" coords="433,233,490,258"/>
+<area shape="rect" id="node10" title=" " alt="" coords="515,225,653,265"/>
 </map>

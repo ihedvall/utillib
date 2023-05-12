@@ -1,7 +1,5 @@
 var searchData=
 [
-  ['wildcardmatch_0',['WildcardMatch',['../namespaceutil_1_1string.html#a542c1325a5b3a1fcec540519a1590707',1,'util::string']]],
-  ['write_1',['Write',['../classutil_1_1xml_1_1_i_xml_node.html#a26c222311ba56a6c16f32f7f5de4a436',1,'util::xml::IXmlNode']]],
-  ['writefile_2',['WriteFile',['../classutil_1_1xml_1_1_i_xml_file.html#a869b18e65c6e389dd8fe129f795ac470',1,'util::xml::IXmlFile']]],
-  ['writestring_3',['WriteString',['../classutil_1_1xml_1_1_i_xml_file.html#a4aed1ff2bdf4d7764496e2db3cee7e16',1,'util::xml::IXmlFile']]]
+  ['value_0',['Value',['../classutil_1_1xml_1_1_i_xml_node.html#a846a11aa0ac7b475a2170d96f4f41a4b',1,'util::xml::IXmlNode::Value() const'],['../classutil_1_1xml_1_1_i_xml_node.html#a310ec84637dd0c5212b5f02588615873',1,'util::xml::IXmlNode::Value(const T &amp;value)'],['../classutil_1_1xml_1_1_i_xml_node.html#a214c095df30e720bf548df0331ca03fd',1,'util::xml::IXmlNode::Value(const bool &amp;value)'],['../classutil_1_1xml_1_1_i_xml_node.html#a5d12d3ce3a03df839ca88be9bfb32069',1,'util::xml::IXmlNode::Value(const std::string &amp;value)']]],
+  ['version_1',['Version',['../classutil_1_1xml_1_1_i_xml_file.html#ab121bb5a7d62f3414514cd18bf45900a',1,'util::xml::IXmlFile::Version() const'],['../classutil_1_1xml_1_1_i_xml_file.html#a5274d510cc120b894904d5ffa11ce1b5',1,'util::xml::IXmlFile::Version(const std::string &amp;version)'],['../classutil_1_1syslog_1_1_syslog_message.html#a97ff5d1992b0076e744ef5ac15ed4f6b',1,'util::syslog::SyslogMessage::Version() const'],['../classutil_1_1syslog_1_1_syslog_message.html#a88155e8164b20c8e4632cbebd32791a4',1,'util::syslog::SyslogMessage::Version(uint8_t version)']]]
 ];

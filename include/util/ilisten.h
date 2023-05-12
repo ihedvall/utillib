@@ -135,7 +135,7 @@ class IListen {
    */
   void ListenString(const std::string& text);
 
-  ListenStream ListenOut();
+  ListenStream ListenOut();  ///< Internal debug function (unit tests)
 
   /** \brief Generates a listen text line.
    *
@@ -213,6 +213,12 @@ class IListen {
    */
   virtual bool Stop();
 
+  /** \brief Number of client connects.
+   *
+   * Number of clients currently connected. If no clients are connected, there
+   * is no need of logging.
+   * @return Number of clients connected.
+   */
   [[nodiscard]] virtual size_t NofConnections() const;
 
  protected:
@@ -224,7 +230,7 @@ class IListen {
   uint16_t port_ = 0;                               ///< IP-port to listen on.
   std::map<uint64_t, std::string> log_level_list_;  ///< Log level index and
 
-  IListen() = default;  ///< Default constructor
+  IListen() = default;                              ///< Default constructor
 
   /** \brief Adds a listen message.
    *
@@ -247,18 +253,22 @@ class IListen {
  private:
 };
 
+/** \brief Support stream class when log messages to the listen functionality
+ *
+ * Support class is used internally.
+ */
 class ListenStream final : public std::ostringstream {
  public:
   ListenStream() = delete;
-  explicit ListenStream(IListen& listen) : listen_(listen) {}
+  explicit ListenStream(IListen& listen) : listen_(listen) {}  ///< Constructor
 
-  ~ListenStream() override {
+  ~ListenStream() override {                                   ///< Destructor
     if (listen_.IsActive()) {
       listen_.ListenString(str());
     }
   }
 
  private:
-  IListen& listen_;
+  IListen& listen_;  ///< Listen object
 };
 }  // namespace util::log

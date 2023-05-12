@@ -29,11 +29,11 @@ namespace util::syslog {
  * messages.
  */
 enum class SyslogServerType : uint8_t {
-  UdpServer = 0,    ///< Uses UDP protocol (RFC5426).
-  TlsServer = 1,    ///< Uses TLS on top of TCP (RFC5425).
-  TcpServer = 2,    ///< Uses plain TCP protocol (RFC6587).
-  TcpPublisher = 3, ///< Server that sends syslog messages
-  TcpSubscriber = 4 ///< Client that subscribe on syslog messages
+  UdpServer = 0,     ///< Uses UDP protocol (RFC5426).
+  TlsServer = 1,     ///< Uses TLS on top of TCP (RFC5425).
+  TcpServer = 2,     ///< Uses plain TCP protocol (RFC6587).
+  TcpPublisher = 3,  ///< Server that sends syslog messages
+  TcpSubscriber = 4  ///< Client that subscribe on syslog messages
 };
 
 /** \class ISyslogServer isyslogserver.h "util/gnuplot.h"
@@ -85,8 +85,9 @@ class ISyslogServer {
     return port_;
   }
 
-  virtual void AddMsg(const SyslogMessage& msg);  ///< Adds a syslog message to the
-                                                  ///< internal message queue.
+  virtual void AddMsg(
+      const SyslogMessage& msg);  ///< Adds a syslog message to the
+                                  ///< internal message queue.
 
   /** \brief Returns the next message in the queue.
    *
@@ -123,16 +124,16 @@ class ISyslogServer {
   [[nodiscard]] virtual size_t NofConnections() const;
 
  protected:
-  ISyslogServer() = default;
+  ISyslogServer() = default;           ///< Default constructor
   std::atomic<bool> operable_ = true;  ///< Operable flag.
-  SyslogServerType type_ = SyslogServerType::UdpServer;
+  SyslogServerType type_ = SyslogServerType::UdpServer;  ///< Type of server
 
  private:
   std::string address_ = "0.0.0.0";  ///< Bind address. Default is  0.0.0.0
-  std::string name_;     ///< Display name of the server.
-  uint16_t port_ = 0;    ///< Server port.
+  std::string name_;                 ///< Display name of the server.
+  uint16_t port_ = 0;                ///< Server port.
   std::unique_ptr<log::ThreadSafeQueue<SyslogMessage>>
-      msg_queue_;  ///< Message queue
+      msg_queue_;                    ///< Message queue
 };
 
 }  // namespace util::syslog

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['loc_0',['Loc',['../namespaceutil_1_1log.html#af89872d2f3b06b8f5e5c00932b7d7279',1,'util::log']]]
+  ['directorylist_0',['DirectoryList',['../namespaceutil_1_1log.html#acc8ff34411c674c2540bed4aa02cdfd6',1,'util::log']]]
 ];
