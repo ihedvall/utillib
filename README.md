@@ -22,7 +22,7 @@ The following companion applications exist.
 
 ## Installation
 
-Installation kit for [UtilLib v1.0.0](https://github.com/ihedvall/utillib/releases/download/v1.0.0/utillib.exe).
+Installation kit for Windows [UtilLib v2.0.0](https://github.com/ihedvall/utillib/releases/download/v2.0.0/utillib.exe).
 
 ## Documentation
 

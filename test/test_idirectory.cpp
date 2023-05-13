@@ -40,7 +40,7 @@ void PrintDir(const util::log::IDirectory& dir) {  // NOLINT
 namespace util::test {
 TEST(IDirectory, NormalUse) {
   IDirectory dir;
-  dir.ParentDir(kRootDir1.data());
+  dir.Directory(kRootDir1.data());
   if (kSkipTest) {
     GTEST_SKIP();
   }
@@ -57,7 +57,7 @@ TEST(IDirectory, NormalUse) {
 
 TEST(IDirectory, IncludeFilter) {
   IDirectory dir;
-  dir.ParentDir(kRootDir1.data());
+  dir.Directory(kRootDir1.data());
   dir.StringToIncludeList("*.ini");
 
   const auto& filter_list = dir.IncludeList();
@@ -79,7 +79,7 @@ TEST(IDirectory, IncludeFilter) {
 
 TEST(IDirectory, ExcludeFilter) {
   IDirectory dir;
-  dir.ParentDir(kRootDir1.data());
+  dir.Directory(kRootDir1.data());
   dir.StringToExcludeList("*.ini;net");
 
   const auto& filter_list = dir.ExcludeList();
@@ -98,7 +98,7 @@ TEST(IDirectory, ExcludeFilter) {
 
 TEST(IDirectory, FileProperties) {
   IDirectory dir;
-  dir.ParentDir(kRootDir1.data());
+  dir.Directory(kRootDir1.data());
   if (kSkipTest) {
     GTEST_SKIP();
   }
@@ -144,7 +144,7 @@ TEST(IDirectory, DirectoryProperties) {
     const auto name = sub->Name();
     EXPECT_FALSE(name.empty());
 
-    const auto& sub_path = sub->ParentDir();
+    const auto& sub_path = sub->Directory();
     EXPECT_FALSE(sub_path.empty());
 
     const auto modified = sub->Modified();
@@ -157,7 +157,7 @@ TEST(IDirectory, DirectoryProperties) {
 
 TEST(IDirectory, InvalidRootDir) {
   IDirectory dir;
-  dir.ParentDir(kRootDir2.data());
+  dir.Directory(kRootDir2.data());
   EXPECT_FALSE(dir.ScanDirectory());
 
   const auto& last_error = dir.LastError();
