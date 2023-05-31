@@ -8,6 +8,7 @@
 #include <windows.h>
 #include "serialportinfowin.inc"
 #else
+namespace util::serial {
 SerialPortList SerialPortInfo::AvailableSerialPorts() {
   SerialPortList port_list;
   return port_list;
@@ -17,6 +18,7 @@ SerialPortList SerialPortInfo::AvailableUsbDevices() {
   SerialPortList port_list;
   return port_list;
 }
+}  // namespace util::serial
 #endif
 
 namespace util::serial {}  // namespace util::serial

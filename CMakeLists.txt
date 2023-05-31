@@ -129,10 +129,12 @@ set(UTIL_PUBLIC_HEADERS
         include/util/isyslogserver.h
         include/util/ixmlfile.h
         include/util/ixmlnode.h
+        include/util/listenconfig.h
         include/util/logconfig.h
         include/util/logging.h
         include/util/logmessage.h
         include/util/logstream.h
+        include/util/serialportinfo.h
         include/util/stringparser.h
         include/util/stringutil.h
         include/util/structureddata.h
