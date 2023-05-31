@@ -18,7 +18,7 @@ add_executable(test_util
         testsyslogmessage.cpp
         testsyslog.cpp
         test_syslogflexer.cpp
-        test_base64.cpp test_unithelper.cpp test_idirectory.cpp testsyslog.h)
+        test_base64.cpp test_unithelper.cpp test_idirectory.cpp testsyslog.h test_serial.cpp)
 
 target_include_directories(test_util PRIVATE ../include)
 target_include_directories(test_util PRIVATE ../src)
@@ -36,6 +36,7 @@ if (WIN32)
     target_link_libraries(test_util PRIVATE ws2_32)
     target_link_libraries(test_util PRIVATE mswsock)
     target_link_libraries(test_util PRIVATE bcrypt)
+    target_link_libraries(test_util PRIVATE setupapi)
 endif ()
 
 if (MINGW)

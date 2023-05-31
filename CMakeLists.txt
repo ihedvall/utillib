@@ -96,7 +96,7 @@ add_library(util STATIC
         src/listenconsole.cpp src/listenconsole.h
         src/unithelper.cpp include/util/unithelper.h
         src/idirectory.cpp include/util/idirectory.h
-        src/ifile.cpp include/util/ifile.h src/syslogpublisher.cpp src/syslogpublisher.h src/syslogconnection.cpp src/syslogconnection.h src/syslogsubscriber.cpp src/syslogsubscriber.h src/tcpsyslogserver.cpp src/tcpsyslogserver.h src/ilistenclient.cpp include/util/ilistenclient.h)
+        src/ifile.cpp include/util/ifile.h src/syslogpublisher.cpp src/syslogpublisher.h src/syslogconnection.cpp src/syslogconnection.h src/syslogsubscriber.cpp src/syslogsubscriber.h src/tcpsyslogserver.cpp src/tcpsyslogserver.h src/ilistenclient.cpp include/util/ilistenclient.h src/serialportinfo.cpp include/util/serialportinfo.h src/serialportinfowin.inc)
 
 #get_target_property(PAHO_C_INCLUDE_DIRS eclipse-paho-mqtt-c::paho-mqtt3as-static INTERFACE_INCLUDE_DIRECTORIES)
 

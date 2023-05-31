@@ -90,7 +90,7 @@ Section "Applications" APP
   WriteRegStr HKLM "${ARP}" "Publisher" "Ingemar Hedvall" 
   WriteRegDWORD HKLM "${ARP}" "NoModify" 1 
   WriteRegDWORD HKLM "${ARP}" "NoRepair" 1 
-  WriteRegDWORD HKLM "${ARP}" "VersionMajor" 1 
+  WriteRegDWORD HKLM "${ARP}" "VersionMajor" 2
   WriteRegDWORD HKLM "${ARP}" "VersionMinor" 0 	  
   WriteRegDWORD HKLM "${ARP}" "EstimatedSize" "$0"			 
   WriteRegStr HKLM "${ARP}"  "UninstallString" "$\"$INSTDIR\Uninstall.exe$\""

@@ -22,6 +22,12 @@ namespace log {}
  */
 namespace plot {}
 
+/** \brief The serial namespace is used for serial and USB devices .
+ *
+ * The serial namespace is used for the serial and CAN interfaces.
+ */
+namespace serial {}
+
 /** \brief The string namespace is used for string manipulation functions.
  *
  * The string namespace is used for string manipulation functions.
