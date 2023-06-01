@@ -30,9 +30,12 @@ void ListenMessage::FromHeaderBuffer(const std::array<uint8_t, 8> &source) {
   little_uint16_buf_at version;
   little_uint32_buf_at body_size;
 
-  memcpy(type.data(), source.data(), 2);
-  memcpy(version.data(), source.data() + 2, 2);
-  memcpy(body_size.data(), source.data() + 4, 4);
+  memcpy(const_cast<void *>(static_cast<const void *>(type.data())),
+         source.data(), 2);
+  memcpy(const_cast<void *>(static_cast<const void *>(version.data())),
+         source.data() + 2, 2);
+  memcpy(const_cast<void *>(static_cast<const void *>(body_size.data())),
+         source.data() + 4, 4);
 
   type_ = static_cast<ListenMessageType>(type.value());
   version_ = version.value();
@@ -81,17 +84,20 @@ void LogLevelTextMessage::FromBodyBuffer(const std::vector<uint8_t> &source) {
   }
   uint32_t index = 0;
   little_uint64_buf_at vector_size;
-  memcpy(vector_size.data(), source.data() + index, 8);
+  memcpy(const_cast<void *>(static_cast<const void *>(vector_size.data())),
+         source.data() + index, 8);
   index += 8;
 
   log_level_text_list_.clear();
   for (size_t ind = 0; ind < vector_size.value(); ++ind) {
     little_uint64_buf_at level;
-    memcpy(level.data(), source.data() + index, 8);
+    memcpy(const_cast<void *>(static_cast<const void *>(level.data())),
+           source.data() + index, 8);
     index += 8;
 
     little_uint64_buf_at text_size;
-    memcpy(text_size.data(), source.data() + index, 8);
+    memcpy(const_cast<void *>(static_cast<const void *>(text_size.data())),
+           source.data() + index, 8);
     index += 8;
 
     if (text_size.value() == 0) {
@@ -154,13 +160,15 @@ void ListenTextMessage::FromBodyBuffer(const std::vector<uint8_t> &source) {
   uint32_t index = 0;
 
   little_uint64_buf_at ns1970;
-  memcpy(ns1970.data(), source.data() + index, 8);
+  memcpy(const_cast<void *>(static_cast<const void *>(ns1970.data())),
+         source.data() + index, 8);
   ns1970_ = ns1970.value();
   index += 8;
 
   {
     little_uint64_buf_at pre_text_size;
-    memcpy(pre_text_size.data(), source.data() + index, 8);
+    memcpy(const_cast<void *>(static_cast<const void *>(pre_text_size.data())),
+           source.data() + index, 8);
     index += 8;
 
     if (pre_text_size.value() == 0) {
@@ -173,7 +181,8 @@ void ListenTextMessage::FromBodyBuffer(const std::vector<uint8_t> &source) {
   }
   {
     little_uint64_buf_at text_size;
-    memcpy(text_size.data(), source.data() + index, 8);
+    memcpy(const_cast<void *>(static_cast<const void *>(text_size.data())),
+           source.data() + index, 8);
     index += 8;
 
     if (text_size.value() == 0) {
@@ -204,7 +213,8 @@ void LogLevelMessage::FromBodyBuffer(const std::vector<uint8_t> &source) {
   }
 
   little_uint64_buf_at level;
-  memcpy(level.data(), source.data(), 8);
+  memcpy(const_cast<void *>(static_cast<const void *>(level.data())),
+         source.data(), 8);
   log_level_ = level.value();
 }
 
