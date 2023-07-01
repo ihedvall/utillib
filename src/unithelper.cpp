@@ -4,7 +4,7 @@
  */
 
 #include "util/unithelper.h"
-
+#define BOOST_NO_AUTO_PTR
 #include <boost/locale.hpp>
 #include <numbers>
 #include <set>
