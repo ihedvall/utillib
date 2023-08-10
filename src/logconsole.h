@@ -14,7 +14,7 @@
 
 namespace util::log::detail {
 /** \class LogConsole logconsole.h "logconsole.h"
- * \brief Implements a logger that sends the message to the console window.
+ * \brief Implements a logger that sends the message to the stderr output.
  *
  * This class implements a logger that sends all log messages to the console.
  * This is useful for applications without GUI and where log files are annoying.

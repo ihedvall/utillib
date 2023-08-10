@@ -22,7 +22,7 @@ if (MSVC)
 endif ()
 
 target_link_libraries(serviced PRIVATE util)
-target_link_libraries(serviced PRIVATE expat)
+target_link_libraries(serviced PRIVATE EXPAT::EXPAT)
 target_link_libraries(serviced PRIVATE ${Boost_LIBRARIES})
 if (WIN32)
     #target_link_libraries(serviced PRIVATE iconv)

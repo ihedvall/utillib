@@ -6,8 +6,7 @@ project(utilLib
         DESCRIPTION "Common C++ library with utilities."
         LANGUAGES CXX)
 
-option(UTIL_SHARED_LIBS "Static libraries are preferred" OFF)
-option(UTIL_STATIC_LIBS "Static libraries are normally used" ON)
+option(BUILD_SHARED_LIBS "Static libraries are preferred" OFF)
 option(UTIL_DOC "If doxygen is installed, then build documentation in Release mode" OFF)
 option(UTIL_TOOLS "Building applications" ON)
 option(UTIL_TEST "Building unit test" ON)
@@ -16,20 +15,21 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_DEBUG_POSTFIX d)
 
 include(CMakePrintHelpers)
+
 include(script/boost.cmake)
-#include(script/expat.cmake)
-include(script/fetch_expat.cmake)
+include(script/expat.cmake)
+#include(script/fetch_expat.cmake)
 
 if (UTIL_TOOLS)
     include(script/wxwidgets.cmake)
 endif()
 
 if (UTIL_TEST)
-include(script/googletest.cmake)
+    include(script/googletest.cmake)
 endif()
 
 if (UTIL_DOC)
-include(script/doxygen.cmake)
+    include(script/doxygen.cmake)
 endif()
 
 include(script/flex.cmake)

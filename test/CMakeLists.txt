@@ -29,7 +29,7 @@ target_include_directories(test_util PRIVATE ${FLEX_INCLUDE_DIRS})
 
 target_link_libraries(test_util PRIVATE util)
 target_link_libraries(test_util PRIVATE ${Boost_LIBRARIES})
-target_link_libraries(test_util PRIVATE expat)
+target_link_libraries(test_util PRIVATE EXPAT::EXPAT)
 target_link_libraries(test_util PRIVATE ${GTEST_BOTH_LIBRARIES})
 
 if (WIN32)

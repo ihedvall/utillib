@@ -2,7 +2,6 @@
 # SPDX-License-Identifier: MIT
 
 if (NOT EXPAT_FOUND)
-
     find_package(EXPAT)
     message(STATUS "EXPAT Found (Try 1): "  ${EXPAT_FOUND})
     if (NOT EXPAT_FOUND)
