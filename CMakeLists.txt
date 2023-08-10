@@ -51,9 +51,13 @@ if (FLEX_FOUND)
             FLEX_SYSLOG_SCANNER_OUTPUTS
             FLEX_SYSLOG_SCANNER_INPUT
             FLEX_SYSLOG_SCANNER_OUTPUT_HEADER)
+# Copy FlexLexer.h. This is a dirty trick to avoid flex/bison installation in windows build
+    file(COPY ${FLEX_INCLUDE_DIRS}/FlexLexer.h DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/src/)
 endif ()
 
-ADD_FLEX_BISON_DEPENDENCY(SYSLOG_SCANNER SYSLOG_PARSER)
+if (FLEX_FOUND AND BISON_FOUND)
+    ADD_FLEX_BISON_DEPENDENCY(SYSLOG_SCANNER SYSLOG_PARSER)
+endif()
 
 add_library(util STATIC
         src/logfile.cpp src/logfile.h
@@ -86,8 +90,8 @@ add_library(util STATIC
         src/tempdir.cpp include/util/tempdir.h
         src/syslogmessage.cpp include/util/syslogmessage.h
         src/syslog.cpp src/syslog.h src/ilogger.cpp
-        ${BISON_SYSLOG_PARSER_OUTPUTS}
-        ${FLEX_SYSLOG_SCANNER_OUTPUTS}
+        src/syslogparser.cpp src/syslogparser.hpp
+        src/syslogflexer.cpp src/flexlexer.h
         src/syslogscanner.cpp src/syslogscanner.h
         src/structureddata.cpp include/util/structureddata.h
         src/isyslogserver.cpp include/util/isyslogserver.h
@@ -96,7 +100,14 @@ add_library(util STATIC
         src/listenconsole.cpp src/listenconsole.h
         src/unithelper.cpp include/util/unithelper.h
         src/idirectory.cpp include/util/idirectory.h
-        src/ifile.cpp include/util/ifile.h src/syslogpublisher.cpp src/syslogpublisher.h src/syslogconnection.cpp src/syslogconnection.h src/syslogsubscriber.cpp src/syslogsubscriber.h src/tcpsyslogserver.cpp src/tcpsyslogserver.h src/ilistenclient.cpp include/util/ilistenclient.h src/serialportinfo.cpp include/util/serialportinfo.h src/serialportinfowin.inc)
+        src/ifile.cpp include/util/ifile.h
+        src/syslogpublisher.cpp src/syslogpublisher.h
+        src/syslogconnection.cpp src/syslogconnection.h
+        src/syslogsubscriber.cpp src/syslogsubscriber.h
+        src/tcpsyslogserver.cpp src/tcpsyslogserver.h
+        src/ilistenclient.cpp include/util/ilistenclient.h
+        src/serialportinfo.cpp include/util/serialportinfo.h
+        src/serialportinfowin.inc)
 
 #get_target_property(PAHO_C_INCLUDE_DIRS eclipse-paho-mqtt-c::paho-mqtt3as-static INTERFACE_INCLUDE_DIRECTORIES)
 
