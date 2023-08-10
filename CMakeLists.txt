@@ -118,7 +118,7 @@ target_include_directories(util PUBLIC
 
 target_include_directories(util PRIVATE ${Boost_INCLUDE_DIRS})
 target_include_directories(util PRIVATE ${expat_SOURCE_DIR}/expat/lib)
-target_include_directories(util PRIVATE ${FLEX_INCLUDE_DIRS})
+
 
 
 cmake_print_properties(TARGETS util PROPERTIES INCLUDE_DIRECTORIES)
