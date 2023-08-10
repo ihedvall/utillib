@@ -12,7 +12,7 @@ on:
 env:
   # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
   BUILD_TYPE: Release
-  VCPKG_FILE: $VCPKG_INSTALLATION_ROOT/scripts/buildsystems/vcpkg.cmake
+  VCPKG_FILE: C:/vcpkg/scripts/buildsystems/vcpkg.cmake
 
 jobs:
   build:
@@ -25,14 +25,10 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Configure CMake
+      - name: Run CMake
         # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
         # See https://cmake.org/cmake/help/latest/variable/CMAKE_BUILD_TYPE.html?highlight=cmake_build_type
         run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DCMAKE_TOOLCHAIN_FILE=${{env.VCPKG_FILE}}
-
-      - name: Build CMake
-        # Build your program with the given configuration
-        run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}} -DCMAKE_TOOLCHAIN_FILE=${{env.VCPKG_FILE}}
 
       - name: Google Test
         working-directory: ${{github.workspace}}/build
