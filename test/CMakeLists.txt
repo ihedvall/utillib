@@ -24,7 +24,7 @@ target_include_directories(test_util PRIVATE ../include)
 target_include_directories(test_util PRIVATE ../src)
 target_include_directories(test_util PRIVATE ${GTEST_INCLUDE_DIRS})
 target_include_directories(test_util PRIVATE ${Boost_INCLUDE_DIRS})
-target_include_directories(test_util PRIVATE ${FLEX_INCLUDE_DIRS})
+
 
 
 target_link_libraries(test_util PRIVATE util)
