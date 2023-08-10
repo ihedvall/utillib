@@ -52,7 +52,7 @@ if (FLEX_FOUND)
             FLEX_SYSLOG_SCANNER_INPUT
             FLEX_SYSLOG_SCANNER_OUTPUT_HEADER)
 # Copy FlexLexer.h. This is a dirty trick to avoid flex/bison installation in windows build
-    file(COPY ${FLEX_INCLUDE_DIRS}/FlexLexer.h DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/src/)
+    file(COPY_FILE ${FLEX_INCLUDE_DIRS}/FlexLexer.h ${CMAKE_CURRENT_SOURCE_DIR}/src/FlexLexer.h)
 endif ()
 
 if (FLEX_FOUND AND BISON_FOUND)
@@ -91,7 +91,7 @@ add_library(util STATIC
         src/syslogmessage.cpp include/util/syslogmessage.h
         src/syslog.cpp src/syslog.h src/ilogger.cpp
         src/syslogparser.cpp src/syslogparser.hpp
-        src/syslogflexer.cpp src/flexlexer.h
+        src/syslogflexer.cpp src/FlexLexer.h
         src/syslogscanner.cpp src/syslogscanner.h
         src/structureddata.cpp include/util/structureddata.h
         src/isyslogserver.cpp include/util/isyslogserver.h
@@ -115,7 +115,7 @@ target_include_directories(util PUBLIC
         $<INSTALL_INTERFACE:include>
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
         )
-
+target_include_directories(util PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/src)
 target_include_directories(util PRIVATE ${Boost_INCLUDE_DIRS})
 target_include_directories(util PRIVATE ${expat_SOURCE_DIR}/expat/lib)
 
