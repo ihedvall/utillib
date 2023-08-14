@@ -59,7 +59,7 @@ if (FLEX_FOUND AND BISON_FOUND)
     ADD_FLEX_BISON_DEPENDENCY(SYSLOG_SCANNER SYSLOG_PARSER)
 endif()
 
-add_library(util STATIC
+add_library(util
         src/logfile.cpp src/logfile.h
         include/util/timestamp.h src/timestamp.cpp
         include/util/logconfig.h src/logconfig.cpp
@@ -117,7 +117,7 @@ target_include_directories(util PUBLIC
         )
 target_include_directories(util PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/src)
 target_include_directories(util PRIVATE ${Boost_INCLUDE_DIRS})
-target_include_directories(util PRIVATE ${expat_SOURCE_DIR}/expat/lib)
+target_include_directories(util PRIVATE ${EXPAT_INCLUDE_DIRS})
 
 
 

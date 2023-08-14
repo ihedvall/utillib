@@ -2,6 +2,9 @@
 # SPDX-License-Identifier: MIT
 
 if (NOT EXPAT_FOUND)
+    if (COMP_DIR)
+        set(EXPAT_ROOT ${COMP_DIR}/expat/master)
+    endif()
     find_package(EXPAT)
     message(STATUS "EXPAT Found (Try 1): "  ${EXPAT_FOUND})
     if (NOT EXPAT_FOUND)
