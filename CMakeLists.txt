@@ -1,12 +1,9 @@
 # Copyright 2021 Ingemar Hedvall
 # SPDX-License-Identifier: MIT
 cmake_minimum_required(VERSION 3.20)
-project(utilLib
-        VERSION 2.0
-        DESCRIPTION "Common C++ library with utilities."
-        LANGUAGES CXX)
 
-if("${CMAKE_TOOLCHAIN_FILE}" STREQUAL "")
+include(CMakePrintHelpers)
+if( ${CMAKE_TOOLCHAIN_FILE} STREQUAL "")
     set(USE_VCPKG OFF)
 else()
     set(USE_VCPKG ON)
@@ -17,26 +14,34 @@ option(UTIL_DOC "If doxygen is installed, then build documentation in Release mo
 option(UTIL_TOOLS "Building applications" ON)
 option(UTIL_TEST "Building unit test" ON)
 
+if (UTIL_TOOLS AND USE_VCPKG)
+    list(APPEND VCPKG_MANIFEST_FEATURES "tools")
+endif()
+
+if (UTIL_TEST AND USE_VCPKG)
+    list(APPEND VCPKG_MANIFEST_FEATURES "tests")
+endif()
+
+project(utilLib
+        VERSION 2.0
+        DESCRIPTION "Common C++ library with utilities."
+        LANGUAGES CXX)
+
+
+cmake_print_variables(USE_VCPKG VCPKG_MANIFEST_FEATURES)
+
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_DEBUG_POSTFIX d)
 
-include(CMakePrintHelpers)
-
 include(script/boost.cmake)
 include(script/expat.cmake)
-#include(script/fetch_expat.cmake)
+
 
 if (UTIL_TOOLS)
-    if (USE_VCPKG)
-        list(APPEND VCPKG_MANIFEST_FEATURES "tools")
-     endif()
     include(script/wxwidgets.cmake)
 endif()
 
 if (UTIL_TEST)
-    if (USE_VCPKG)
-        list(APPEND VCPKG_MANIFEST_FEATURES "tests")
-    endif()
     include(script/googletest.cmake)
 endif()
 

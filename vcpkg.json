@@ -23,11 +23,11 @@
           "wxwidgets"
         ]
       },
-    "tests": {
-      "description": "Building unit tests",
-      "dependencies": [
-        "gtest"
-      ]
+      "tests": {
+        "description": "Building unit tests",
+        "dependencies": [
+          "gtest"
+        ]
+      }
     }
-  }
 }
