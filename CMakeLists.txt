@@ -6,6 +6,12 @@ project(utilLib
         DESCRIPTION "Common C++ library with utilities."
         LANGUAGES CXX)
 
+if("${CMAKE_TOOLCHAIN_FILE}" STREQUAL "")
+    set(USE_VCPKG OFF)
+else()
+    set(USE_VCPKG ON)
+endif()
+
 option(BUILD_SHARED_LIBS "Static libraries are preferred" OFF)
 option(UTIL_DOC "If doxygen is installed, then build documentation in Release mode" OFF)
 option(UTIL_TOOLS "Building applications" ON)
@@ -21,10 +27,16 @@ include(script/expat.cmake)
 #include(script/fetch_expat.cmake)
 
 if (UTIL_TOOLS)
+    if (USE_VCPKG)
+        list(APPEND VCPKG_MANIFEST_FEATURES "tools")
+     endif()
     include(script/wxwidgets.cmake)
 endif()
 
 if (UTIL_TEST)
+    if (USE_VCPKG)
+        list(APPEND VCPKG_MANIFEST_FEATURES "tests")
+    endif()
     include(script/googletest.cmake)
 endif()
 

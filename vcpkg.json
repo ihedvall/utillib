@@ -13,8 +13,21 @@
     "boost-beast",
     "boost-circular-buffer",
     "expat",
-    "zlib",
-    "gtest",
-    "wxwidgets"
-    ]
+    "zlib"
+
+    ],
+  "features": {
+      "tools": {
+        "description": "Building GUI tools",
+        "dependencies": [
+          "wxwidgets"
+        ]
+      },
+    "tests": {
+      "description": "Building unit tests",
+      "dependencies": [
+        "gtest"
+      ]
+    }
+  }
 }

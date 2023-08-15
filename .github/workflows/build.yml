@@ -41,10 +41,10 @@ jobs:
           #              BOOST_ROOT /Users/runner/work/boost
           #            pack: 1
 
-          - name: win64
-            os: windows-latest
-            platform: win
-            msvc_arch: x64
+    #      - name: win64
+    #        os: windows-latest
+    #        platform: win
+    #        msvc_arch: x64
     #            cmake_env:
     #              #              CMAKE_RC_FLAGS: "/C 1252"
     #              CC: cl
