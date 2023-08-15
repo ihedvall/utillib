@@ -3,7 +3,7 @@
 cmake_minimum_required(VERSION 3.20)
 
 include(CMakePrintHelpers)
-if( ${CMAKE_TOOLCHAIN_FILE} STREQUAL "")
+if( "${CMAKE_TOOLCHAIN_FILE}" STREQUAL "")
     set(USE_VCPKG OFF)
 else()
     set(USE_VCPKG ON)
