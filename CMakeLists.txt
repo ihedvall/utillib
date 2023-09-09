@@ -13,6 +13,7 @@ option(BUILD_SHARED_LIBS "Static libraries are preferred" OFF)
 option(UTIL_DOC "If doxygen is installed, then build documentation in Release mode" OFF)
 option(UTIL_TOOLS "Building applications" ON)
 option(UTIL_TEST "Building unit test" ON)
+option(UTIL_LEX "Create LEX/BISON" OFF)
 
 if (UTIL_TOOLS AND USE_VCPKG)
     list(APPEND VCPKG_MANIFEST_FEATURES "tools")
@@ -49,10 +50,12 @@ if (UTIL_DOC)
     include(script/doxygen.cmake)
 endif()
 
-include(script/flex.cmake)
-include(script/bison.cmake)
+if (UTIL_LEX)
+    include(script/flex.cmake)
+    include(script/bison.cmake)
+endif()
 
-if (BISON_FOUND)
+if (BISON_FOUND AND UTIL_LEX)
     BISON_TARGET(SYSLOG_PARSER src/syslogparser.y ${CMAKE_CURRENT_SOURCE_DIR}/src/syslogparser.cpp)
     cmake_print_variables(BISON_SYSLOG_PARSER_DEFINED
             BISON_SYSLOG_PARSER_INPUT
@@ -62,7 +65,7 @@ if (BISON_FOUND)
             BISON_SYSLOG_PARSER_COMPILE_FLAGS)
 endif ()
 
-if (FLEX_FOUND)
+if (FLEX_FOUND AND UTIL_LEX)
     FLEX_TARGET(SYSLOG_SCANNER src/syslogflexer.l ${CMAKE_CURRENT_SOURCE_DIR}/src/syslogflexer.cpp)
     cmake_print_variables(FLEX_SYSLOG_SCANNER_DEFINED
             FLEX_SYSLOG_SCANNER_OUTPUTS
@@ -72,7 +75,7 @@ if (FLEX_FOUND)
     file(COPY_FILE ${FLEX_INCLUDE_DIRS}/FlexLexer.h ${CMAKE_CURRENT_SOURCE_DIR}/src/FlexLexer.h)
 endif ()
 
-if (FLEX_FOUND AND BISON_FOUND)
+if (FLEX_FOUND AND BISON_FOUND AND UTIL_LEX)
     ADD_FLEX_BISON_DEPENDENCY(SYSLOG_SCANNER SYSLOG_PARSER)
 endif()
 
