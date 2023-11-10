@@ -28,7 +28,7 @@ jobs:
       - name: CMAKE Configure
         run: >
           cmake -B ${{github.workspace}}/build 
-          -D UTIL_TOOLS=ON -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} 
+          -D UTIL_TOOLS=OFF -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} 
           -D CMAKE_TOOLCHAIN_FILE=${{env.VCPKG_FILE}}
 
       - name: CMake Build
