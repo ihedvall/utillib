@@ -11,6 +11,8 @@
     "boost-endian",
     "boost-lexical-cast",
     "boost-array",
+    "boost-locale",
+    "boost-program-options",
     "expat",
     "zlib"
 
@@ -19,8 +21,7 @@
       "tools": {
         "description": "Building GUI tools",
         "dependencies": [
-          "boost-locale",
-          "boost-program-options",
+
           "wxwidgets"
         ]
       },
