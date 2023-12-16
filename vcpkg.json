@@ -2,16 +2,15 @@
   "name": "utillib",
   "version": "2.0",
   "dependencies": [
-    "boost-core",
-    "boost-interprocess",
-    "boost-filesystem",
-    "boost-system",
-    "boost-locale",
-    "boost-program-options",
-    "boost-asio",
-    "boost-process",
-    "boost-beast",
     "boost-circular-buffer",
+    "boost-asio",
+    "boost-interprocess",
+    "boost-process",
+    "boost-algorithm",
+    "boost-filesystem",
+    "boost-endian",
+    "boost-lexical-cast",
+    "boost-array",
     "expat",
     "zlib"
 
@@ -20,12 +19,15 @@
       "tools": {
         "description": "Building GUI tools",
         "dependencies": [
+          "boost-locale",
+          "boost-program-options",
           "wxwidgets"
         ]
       },
       "tests": {
         "description": "Building unit tests",
         "dependencies": [
+          "boost-beast",
           "gtest"
         ]
       }

@@ -15,11 +15,7 @@ env:
   VCPKG_FILE: C:/vcpkg/scripts/buildsystems/vcpkg.cmake
 
 jobs:
-  build:
-    # The CMake configure and build commands are platform agnostic and should work equally
-    # well on Windows or Mac.  You can convert this to a matrix build if you need
-    # cross-platform coverage.
-    # See: https://docs.github.com/en/free-pro-team@latest/actions/learn-github-actions/managing-complex-workflows#using-a-build-matrix
+  windows-64bit:
     runs-on: windows-latest
 
     steps:
@@ -28,7 +24,8 @@ jobs:
       - name: CMAKE Configure
         run: >
           cmake -B ${{github.workspace}}/build 
-          -D UTIL_TOOLS=ON -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} 
+          -D UTIL_TOOLS=ON -D UTIL_TEST=ON -D UTIL_DOC=OFF 
+          -D CMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} 
           -D CMAKE_TOOLCHAIN_FILE=${{env.VCPKG_FILE}}
 
       - name: CMake Build

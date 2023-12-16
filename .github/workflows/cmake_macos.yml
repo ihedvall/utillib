@@ -2,11 +2,11 @@
 name: CMake Build MacOS
 
 on:
-  push:
-    branches:
-      - master
-  pull_request:
-  page_build:
+  #  push:
+  #    branches:
+  #      - master
+  #  pull_request:
+  #  page_build:
   workflow_dispatch:
 
 env:
@@ -25,11 +25,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install LLVM and Clang
-        uses: KyleMayes/install-llvm-action@v1.9.0
-        with:
-          version: 16
-          
       - name: CMAKE Configure
         run: >
           cmake -B ${{github.workspace}}/build 

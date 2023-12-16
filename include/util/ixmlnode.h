@@ -212,6 +212,9 @@ class IXmlNode {
 
   virtual void Write(std::ostream &dest,
                      size_t level);  ///< Write the node to the stream
+  [[nodiscard]] bool HasChildren() const {
+    return !node_list_.empty();
+  }
  protected:
   std::string tag_name_;  ///< Name of this tag.
   std::string value_;     ///< String value of this tag.
