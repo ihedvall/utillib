@@ -11,8 +11,8 @@ endif()
 
 option(BUILD_SHARED_LIBS "Static libraries are preferred" OFF)
 option(UTIL_DOC "If doxygen is installed, then build documentation in Release mode" OFF)
-option(UTIL_TOOLS "Building applications" ON)
-option(UTIL_TEST "Building unit test" ON)
+option(UTIL_TOOLS "Building applications" OFF)
+option(UTIL_TEST "Building unit test" OFF)
 option(UTIL_LEX "Create LEX/BISON" OFF)
 
 if (UTIL_TOOLS AND USE_VCPKG)
@@ -129,8 +129,6 @@ add_library(util
         src/serialportinfo.cpp include/util/serialportinfo.h
         src/serialportinfowin.inc)
 
-#get_target_property(PAHO_C_INCLUDE_DIRS eclipse-paho-mqtt-c::paho-mqtt3as-static INTERFACE_INCLUDE_DIRECTORIES)
-
 target_include_directories(util PUBLIC
         $<INSTALL_INTERFACE:include>
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
@@ -138,7 +136,6 @@ target_include_directories(util PUBLIC
 target_include_directories(util PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/src)
 target_include_directories(util PRIVATE ${Boost_INCLUDE_DIRS})
 target_include_directories(util PRIVATE ${EXPAT_INCLUDE_DIRS})
-
 
 
 cmake_print_properties(TARGETS util PROPERTIES INCLUDE_DIRECTORIES)
@@ -196,7 +193,7 @@ if (wxWidgets_FOUND AND WIN32 AND UTIL_TOOLS)
     add_subdirectory(serviceexplorer)
 endif ()
 
-if (GTEST_FOUND AND UTIL_TEST)
+if (UTIL_TEST)
     enable_testing()
     add_subdirectory(test)
 endif ()
