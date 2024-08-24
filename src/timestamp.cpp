@@ -394,8 +394,10 @@ uint64_t FileTimeToNs(std::filesystem::file_time_type time) {
       std::chrono::clock_cast<std::chrono::system_clock>(time);
   return TimeStampToNs(sys_time);
 #else
-  const auto sys_time = std::chrono::file_clock::to_sys(time);
-  return TimeStampToNs(sys_time);
+ const auto temp_time = std::chrono::file_clock::to_sys(time);
+ const auto ns = std::chrono::duration_cast<std::chrono::nanoseconds>(
+                              time.time_since_epoch());
+ return ns.count();
 #endif
 }
 

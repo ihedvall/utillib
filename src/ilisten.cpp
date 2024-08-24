@@ -27,7 +27,7 @@ std::string IListen::ParseHex(const std::vector<uint8_t> &buffer) {
   return temp.str();
 }
 
-void IListen::SetLogLevelText(size_t level, const std::string &menu_text) {
+void IListen::SetLogLevelText(uint64_t level, const std::string &menu_text) {
   log_level_list_.insert({level, menu_text});
 }
 

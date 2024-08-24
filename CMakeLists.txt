@@ -15,6 +15,8 @@ option(UTIL_TOOLS "Building applications" OFF)
 option(UTIL_TEST "Building unit test" OFF)
 option(UTIL_LEX "Create LEX/BISON" OFF)
 
+#set(CMAKE_FIND_DEBUG_MODE TRUE)
+
 if (UTIL_TOOLS AND USE_VCPKG)
     list(APPEND VCPKG_MANIFEST_FEATURES "tools")
 endif()
@@ -22,6 +24,9 @@ endif()
 if (UTIL_TEST AND USE_VCPKG)
     list(APPEND VCPKG_MANIFEST_FEATURES "tests")
 endif()
+
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_DEBUG_POSTFIX d)
 
 project(utilLib
         VERSION 2.0
@@ -31,8 +36,7 @@ project(utilLib
 
 cmake_print_variables(USE_VCPKG VCPKG_MANIFEST_FEATURES)
 
-set(CMAKE_CXX_STANDARD 20)
-set(CMAKE_DEBUG_POSTFIX d)
+
 
 include(script/boost.cmake)
 include(script/expat.cmake)

@@ -37,7 +37,7 @@ class ListenServer : public IListen {
   [[nodiscard]] std::string ShareName() const;
 
   [[nodiscard]] size_t LogLevel() override;
-  [[nodiscard]] size_t NofConnections() const;
+  [[nodiscard]] size_t NofConnections() const override;
 
  protected:
   void AddMessage(uint64_t nano_sec_1970, const std::string& pre_text,
