@@ -45,7 +45,7 @@ class UtilFactory {
    * @return Smart pointer to a log source.
    */
   static std::unique_ptr<log::ILogger> CreateLogger(
-      log::LogType type, std::vector<std::string>& arg_list);
+      log::LogType type, std::vector<std::string> &arg_list);
 
   /** \brief Creates a listen object.
    *
@@ -60,15 +60,15 @@ class UtilFactory {
    * 'channel'. This is typically used for protocol drivers.
    *
    * The 'ListenConsole' logs the message onto a console window (std::cout). It
-   * shallbe used when putting messages from a proxy onto a console window. This
+   * shall be used when putting messages from a proxy onto a console window. This
    * object is mainly used for testing.
    *
-   * @param type Select between 'ListenProxy' or 'ListenServer'
+   * @param type Select between 'ListenProxy','ListenServer' or 'ListenConsole'
    * @param share_name Unique share name or empty string.
    * @return A smart pointer to a listen object.
    */
   static std::unique_ptr<log::IListen> CreateListen(
-      const std::string& type, const std::string& share_name);
+      const std::string &type, const std::string &share_name);
 
   /** \brief Creates a listen client.
    *
@@ -78,7 +78,7 @@ class UtilFactory {
    * @return Smart pointer to a IListenClient.
    */
   static std::unique_ptr<log::IListenClient> CreateListenClient(
-      const std::string& host, uint16_t port);
+      const std::string &host, uint16_t port);
 };
 
 }  // namespace util

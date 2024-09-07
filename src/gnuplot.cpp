@@ -10,7 +10,7 @@
 #include <string_view>
 #include <vector>
 #if (_MSC_VER)
-#include <boost/process/windows.hpp>
+#include <boost/process/v1/windows.hpp>
 #endif
 #include "util/gnuplot.h"
 #include "util/logstream.h"
@@ -33,7 +33,7 @@ constexpr std::array<TerminalDef, 1> TerminalNameList{
 std::string TerminalToScriptText(util::plot::GnuTerminal terminal) {
   const auto itr = std::ranges::find_if(
       TerminalNameList,
-      [&](const auto& term) { return term.terminal == terminal; });
+      [&](const auto &term) { return term.terminal == terminal; });
   return itr == TerminalNameList.cend() ? "wxt" : itr->script_name.data();
 }
 
@@ -54,7 +54,7 @@ GnuPlot::GnuPlot() {
       exe_path_ = temp.string();
     }
     LOG_DEBUG() << "Gnuplot exe path: " << exe_path_;
-  } catch (const std::exception& err) {
+  } catch (const std::exception &err) {
     LOG_ERROR() << "Failed to find gnuplot.exe. Error: " << err.what();
     exe_path_.clear();
   }
@@ -76,7 +76,7 @@ std::string GnuPlot::FileName() const {
     std::filesystem::path temp(data_file_.FullName());
     temp.replace_extension(".gp");
     filename = temp.string();
-  } catch (const std::exception& err) {
+  } catch (const std::exception &err) {
     LOG_ERROR() << "Failed to create the gnuplot filename. Error: "
                 << err.what() << ", CSV Name: " << data_file_.FullName();
   }
@@ -90,7 +90,7 @@ std::string GnuPlot::CsvFileName() const {
     temp.append(Name());
     temp.replace_extension(".csv");
     filename = temp.string();
-  } catch (const std::exception& err) {
+  } catch (const std::exception &err) {
     LOG_ERROR() << "Failed to create the CSV filename. Error: " << err.what()
                 << ", Path: " << Path() << ", Name:" << Name();
   }
@@ -104,12 +104,12 @@ void GnuPlot::SaveScript() {
     file.open(filename.c_str(), std::ofstream::out | std::ofstream::trunc);
     MakeScript(file);
     file.close();
-  } catch (const std::exception& err) {
+  } catch (const std::exception &err) {
     LOG_ERROR() << "Failed to save the gnuplot file. File: " << filename;
   }
 }
 
-void GnuPlot::MakeScript(std::ostream& script) const {
+void GnuPlot::MakeScript(std::ostream &script) const {
   std::string unit_y1;
   std::string unit_y2;
   const size_t nof_cols = data_file_.Columns();
@@ -184,7 +184,7 @@ void GnuPlot::Show() {
     boost::process::spawn(exe_path_, "--persist", FileName());
 #endif
     std::filesystem::current_path(curr_dir);
-  } catch (const std::exception& err) {
+  } catch (const std::exception &err) {
     LOG_ERROR() << "Failed to run gnuplot directory. Error: " << err.what();
   }
 }

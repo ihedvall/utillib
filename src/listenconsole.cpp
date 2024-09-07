@@ -44,13 +44,14 @@ bool ListenConsole::Stop() {
 }
 
 void ListenConsole::WorkerTask() {
+  SharedListenMessage msg;
   while (!stop_thread_) {
-    SharedListenMessage msg;
     const auto get = share_mem_queue_->Get(msg, true);
     if (get) {
       AddMessage(msg.ns1970, msg.pre_text, msg.text);
     }
   }
+
 }
 
 bool ListenConsole::IsActive() const {

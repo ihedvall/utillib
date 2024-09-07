@@ -50,12 +50,10 @@ void ListenProxy::AddMessage(uint64_t nano_sec_1970,
       case ' ':
       case '\n':
       case '\r':
-      case '\t':
-        good_line_break = true;
+      case '\t':good_line_break = true;
         break;
 
-      default:
-        break;
+      default:break;
     }
 
     if (count >= sizeof(SharedListenMessage::text) - 1) {
@@ -97,6 +95,9 @@ void ListenProxy::AddMessage(uint64_t nano_sec_1970,
     strcpy(msg.text, out.str().c_str());
     queue_.Add(msg);
   }
+}
+void ListenProxy::SetLogLevel(size_t log_level) {
+  queue_.SetLogLevel(static_cast<uint8_t>(log_level));
 }
 
 }  // namespace util::log::detail

@@ -25,6 +25,7 @@ constexpr std::string_view kServerName = "TestServer";
 constexpr std::string_view kServerPreText = "TS>";
 }  // namespace
 namespace util::test {
+
 void TestListen::SetUpTestCase() {
   auto &log_config = LogConfig::Instance();
   log_config.Type(LogType::LogToConsole);
@@ -113,6 +114,33 @@ TEST_F(TestListen, ListenConfig) {
     AddListenConfig(devils_port);
     DeleteListenConfig(devils_port.port);
   }
+}
+
+TEST_F(TestListen, ListenToConsole) {
+  auto listen_console = UtilFactory::CreateListen("ListenConsole", "LISTEST");
+  ASSERT_TRUE(listen_console);
+  EXPECT_TRUE(listen_console->Start());
+  EXPECT_TRUE(listen_console->IsActive()) << "Listen Console not active";
+  listen_console->SetLogLevel(22);
+  EXPECT_EQ(listen_console->LogLevel(), 22);
+
+  auto listen_client = UtilFactory::CreateListen("ListenProxy", "LISTEST");
+  ASSERT_TRUE(listen_client);
+  listen_client->PreText("CLIENT");
+
+  EXPECT_TRUE(listen_client->IsActive());
+  EXPECT_EQ(listen_client->LogLevel(), 22);
+
+  listen_client->ListenString("Test output 1");
+  listen_client->SetLogLevel(11);
+  EXPECT_EQ(listen_client->LogLevel(), 11);
+  listen_client->ListenString("Test output 2");
+
+  std::this_thread::sleep_for(1000ms);
+  listen_client.reset();
+
+  EXPECT_TRUE(listen_console->Stop());
+  listen_console.reset();
 }
 
 }  // namespace util::test

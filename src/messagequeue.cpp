@@ -22,10 +22,11 @@ MessageQueue::MessageQueue(bool master, const std::string &shared_mem_name)
           create_only, shared_mem_name.c_str(), read_write);
       shared_mem_->truncate(sizeof(SharedListenQueue));
       region_ = std::make_unique<mapped_region>(*shared_mem_, read_write);
-      queue_ = new (region_->get_address()) SharedListenQueue;
+      queue_ = new(region_->get_address()) SharedListenQueue;
       queue_->active = false;
     } else {
       active_ = false;
+      CheckQueue();
       task_ = std::thread(&MessageQueue::ClientTask, this);
     }
 
@@ -137,24 +138,9 @@ size_t MessageQueue::NofMessages() const {
 
 void MessageQueue::ClientTask() {
   while (!task_stop_) {
-    try {
-      shared_memory_object shared_mem(open_only, name_.c_str(), read_write);
-      mapped_region region(shared_mem, read_write);
-      const auto *queue =
-          static_cast<SharedListenQueue *>(region.get_address());
-      if (queue == nullptr) {
-        active_ = false;
-        log_level_ = 0;
-      } else {
-        active_ = queue->active.load();
-        log_level_ = queue->log_level.load();
-      }
-    } catch (const std::exception &) {
-      active_ = false;
-      log_level_ = 0;
-    }
     std::unique_lock<std::mutex> lock(task_mutex_);
     task_event_.wait_for(lock, 1s, [&] { return task_stop_.load(); });
+    CheckQueue();
   }
 }
 
@@ -188,6 +174,25 @@ void MessageQueue::SetLogLevel(uint8_t log_level) {
   log_level_ = log_level;
   if (queue_ != nullptr) {
     queue_->log_level = log_level;
+  }
+}
+
+void MessageQueue::CheckQueue() {
+  try {
+    shared_memory_object shared_mem(open_only, name_.c_str(), read_write);
+    mapped_region region(shared_mem, read_write);
+    const auto *queue =
+        static_cast<SharedListenQueue *>(region.get_address());
+    if (queue == nullptr) {
+      active_ = false;
+      log_level_ = 0;
+    } else {
+      active_ = queue->active.load();
+      log_level_ = queue->log_level.load();
+    }
+  } catch (const std::exception &) {
+    active_ = false;
+    log_level_ = 0;
   }
 }
 

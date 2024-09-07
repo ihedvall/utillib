@@ -18,12 +18,12 @@ namespace util::log::detail {
 
 class MessageQueue {
  public:
-  MessageQueue(bool master, const std::string& shared_mem_name);
+  MessageQueue(bool master, const std::string &shared_mem_name);
   virtual ~MessageQueue();
 
   MessageQueue() = delete;
-  MessageQueue(const MessageQueue&) = delete;
-  MessageQueue& operator=(const MessageQueue&) = delete;
+  MessageQueue(const MessageQueue &) = delete;
+  MessageQueue &operator=(const MessageQueue &) = delete;
 
   [[nodiscard]] bool IsActive() const { return active_; }
 
@@ -32,15 +32,15 @@ class MessageQueue {
   void SetActive(bool active);
   void SetLogLevel(uint8_t log_level);
 
-  void Add(const SharedListenMessage& msg);
-  bool Get(SharedListenMessage& msg, bool block);
+  void Add(const SharedListenMessage &msg);
+  bool Get(SharedListenMessage &msg, bool block);
   [[nodiscard]] size_t NofMessages() const;
   void Stop();
 
  private:
   std::unique_ptr<boost::interprocess::shared_memory_object> shared_mem_;
   std::unique_ptr<boost::interprocess::mapped_region> region_;
-  SharedListenQueue* queue_ = nullptr;
+  SharedListenQueue *queue_ = nullptr;
   bool master_ = false;
   std::string name_;
 
@@ -53,6 +53,14 @@ class MessageQueue {
   std::atomic<uint8_t> log_level_ = 0;
 
   void ClientTask();
+
+  /** \brief function that the thread cyclic calls.
+ *
+ * The function is cyclic called by the thread and checks the log level
+ * and active state. The function is also called before the thread
+ * is started to speed up the connection.
+ */
+  void CheckQueue();
 };
 
 }  // namespace util::log::detail
