@@ -10,7 +10,7 @@
 #include <string_view>
 #include <vector>
 #if (_MSC_VER)
-#include <boost/process/v1/windows.hpp>
+#include <boost/process/windows.hpp>
 #endif
 #include "util/gnuplot.h"
 #include "util/logstream.h"
