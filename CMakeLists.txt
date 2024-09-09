@@ -40,7 +40,7 @@ cmake_print_variables(USE_VCPKG VCPKG_MANIFEST_FEATURES)
 
 include(script/boost.cmake)
 include(script/expat.cmake)
-
+include(script/hwinfo.cmake)
 
 if (UTIL_TOOLS)
     include(script/wxwidgets.cmake)
@@ -131,7 +131,9 @@ add_library(util
         src/tcpsyslogserver.cpp src/tcpsyslogserver.h
         src/ilistenclient.cpp include/util/ilistenclient.h
         src/serialportinfo.cpp include/util/serialportinfo.h
-        src/serialportinfowin.inc)
+        src/serialportinfowin.inc
+        src/ihwinfo.cpp
+        include/util/ihwinfo.h)
 
 target_include_directories(util PUBLIC
         $<INSTALL_INTERFACE:include>
@@ -140,7 +142,7 @@ target_include_directories(util PUBLIC
 target_include_directories(util PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/src)
 target_include_directories(util PRIVATE ${Boost_INCLUDE_DIRS})
 target_include_directories(util PRIVATE ${EXPAT_INCLUDE_DIRS})
-
+target_include_directories(util PRIVATE ${hwinfo_SOURCE_DIR}/include)
 
 cmake_print_properties(TARGETS util PROPERTIES INCLUDE_DIRECTORIES)
 
