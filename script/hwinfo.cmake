@@ -6,13 +6,15 @@
 include(FetchContent)
 include(CMakePrintHelpers)
 
-set(HWINFO_SHARED OFF)
-set(HWINFO_STATIC ON)
+
 
 FetchContent_Declare(hwinfo
         GIT_REPOSITORY https://github.com/lfreist/hwinfo.git
         GIT_TAG HEAD
 )
+
+set(HWINFO_SHARED OFF CACHE INTERNAL "Turn off shared build")
+set(HWINFO_STATIC ON CACHE INTERNAL "Turn on static build")
 
 FetchContent_MakeAvailable(hwinfo)
 
