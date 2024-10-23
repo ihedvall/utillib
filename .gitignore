@@ -97,3 +97,5 @@ odsconfigurator/model/*_?.xml
 CMakeSettings.json
 
 .idea/
+
+.qtcreator/

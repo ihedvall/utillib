@@ -28,7 +28,7 @@ namespace util::test {
 TEST(Timestamp, TestEpoch) {  // NOLINT
   {
     time_t time_t_epoch = 0;
-    struct tm* bt = gmtime(&time_t_epoch);
+    struct tm *bt = gmtime(&time_t_epoch);
     std::ostringstream date_time;
     date_time << std::put_time(bt, "%Y-%m-%d %H:%M:%S");
     std::cout << "Time_t Epoch: " << date_time.str() << std::endl;
@@ -43,7 +43,7 @@ TEST(Timestamp, TestEpoch) {  // NOLINT
 
   {
     const time_t max_time = std::numeric_limits<time_t>::max() / 300'000'000;
-    struct tm* bt = gmtime(&max_time);
+    struct tm *bt = gmtime(&max_time);
     std::ostringstream date_time;
     date_time << std::put_time(bt, "%Y-%m-%d %H:%M:%S");
     std::cout << "Max Time_t: " << date_time.str() << std::endl;
@@ -52,7 +52,7 @@ TEST(Timestamp, TestEpoch) {  // NOLINT
   {
     const uint64_t max = std::numeric_limits<uint64_t>::max();
     const auto max_time = static_cast<time_t>(max / 1'000'000'000);
-    struct tm* bt = gmtime(&max_time);
+    struct tm *bt = gmtime(&max_time);
     std::ostringstream date_time;
     date_time << std::put_time(bt, "%Y-%m-%d %H:%M:%S");
     std::cout << "Max (ns) Time: " << date_time.str() << std::endl;
@@ -127,6 +127,32 @@ TEST(Timestamp, IsoTimeToNs)  // NOLINT
   const uint64_t time4 = TimeStampToNs();
   const auto iso_time4 = NsToIsoTime(time4, 3);
   EXPECT_EQ(time4, IsoTimeToNs(iso_time4));
+
+  constexpr std::string_view format1 = "2024-01-01T01:02:03Z";
+  const uint64_t ref_time1 = IsoTimeToNs(format1.data());
+  EXPECT_GT(ref_time1, 0);
+
+  // Now test the same time strings with different format.
+  constexpr std::string_view format2 = "2024-01-01 01:02:03";
+  const uint64_t ref_time2 = IsoTimeToNs(format2.data());
+  EXPECT_EQ(ref_time2, ref_time1);
+
+  constexpr std::string_view format3 = "2024-01-01 01:02:03.000";
+  const uint64_t ref_time3 = IsoTimeToNs(format3.data());
+  EXPECT_EQ(ref_time3, ref_time1);
+
+  constexpr std::string_view format4 = "2024-01-01T01:02:03.000Z";
+  const uint64_t ref_time4 = IsoTimeToNs(format4.data());
+  EXPECT_EQ(ref_time4, ref_time1);
+
+  constexpr std::string_view format5 = "2024-01-01T01:02:03.000+00:00Z";
+  const uint64_t ref_time5 = IsoTimeToNs(format5.data());
+  EXPECT_EQ(ref_time5, ref_time1);
+
+  // Test with some time < 1970
+  constexpr std::string_view formatInvalid = "1900-01-01T01:02:03.000Z";
+  const uint64_t invalid_time = IsoTimeToNs(formatInvalid.data());
+  EXPECT_EQ(invalid_time, 0);
 }
 
 TEST(Timestamp, TimeStampToNs)  // NOLINT

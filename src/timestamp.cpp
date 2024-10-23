@@ -15,7 +15,7 @@ namespace util::time {
 std::string GetLocalDateTime(
     std::chrono::time_point<std::chrono::system_clock> timestamp) {
   const auto utc = std::chrono::system_clock::to_time_t(timestamp);
-  const struct tm* bt = localtime(&utc);
+  const struct tm *bt = localtime(&utc);
   std::ostringstream date_time;
   date_time << std::put_time(bt, "%Y-%m-%d %H:%M:%S");
   return date_time.str();
@@ -24,10 +24,10 @@ std::string GetLocalDateTime(
 std::string GetLocalTimestampWithMs(
     std::chrono::time_point<std::chrono::system_clock> timestamp) {
   const auto ms = std::chrono::duration_cast<std::chrono::milliseconds>(
-                      timestamp.time_since_epoch()) %
-                  1000;
+      timestamp.time_since_epoch()) %
+      1000;
   const auto timer = std::chrono::system_clock::to_time_t(timestamp);
-  const struct tm* bt = localtime(&timer);
+  const struct tm *bt = localtime(&timer);
 
   std::ostringstream text;
   text << std::put_time(bt, "%Y-%m-%d %H:%M:%S") << '.' << std::setfill('0')
@@ -38,10 +38,10 @@ std::string GetLocalTimestampWithMs(
 std::string GetLocalTimestampWithUs(
     std::chrono::time_point<std::chrono::system_clock> timestamp) {
   const auto us = std::chrono::duration_cast<std::chrono::microseconds>(
-                      timestamp.time_since_epoch()) %
-                  1000'000;
+      timestamp.time_since_epoch()) %
+      1000'000;
   const auto timer = std::chrono::system_clock::to_time_t(timestamp);
-  const auto* bt = localtime(&timer);
+  const auto *bt = localtime(&timer);
 
   std::ostringstream text;
   text << std::put_time(bt, "%Y-%m-%d %H:%M:%S") << '.' << std::setfill('0')
@@ -54,8 +54,8 @@ uint64_t TimeStampToNs(TimeStamp timestamp) {
   // 2 sec since 1970
   // 3 Add them
   const auto ns_midnight = std::chrono::duration_cast<std::chrono::nanoseconds>(
-                               timestamp.time_since_epoch()) %
-                           1000'000'000;
+      timestamp.time_since_epoch()) %
+      1000'000'000;
   const auto sec_1970 = std::chrono::system_clock::to_time_t(timestamp);
   uint64_t ns = sec_1970;
   ns *= 1'000'000'000;
@@ -67,7 +67,7 @@ std::string NsToLocalIsoTime(uint64_t ns_since_1970) {
   const auto ms_sec = (ns_since_1970 / 1'000'000) % 1'000;
   const auto system_time =
       static_cast<std::time_t>(ns_since_1970 / 1'000'000'000);
-  const struct tm* bt = localtime(&system_time);
+  const struct tm *bt = localtime(&system_time);
   std::ostringstream text;
   text << std::put_time(bt, "%Y-%m-%d %H:%M:%S");
   if (ms_sec > 0) {
@@ -79,7 +79,7 @@ std::string NsToLocalIsoTime(uint64_t ns_since_1970) {
 std::string NsToIsoTime(uint64_t ns_since_1970, int format) {
   const auto system_time =
       static_cast<std::time_t>(ns_since_1970 / 1'000'000'000);
-  const struct tm* bt = gmtime(&system_time);
+  const struct tm *bt = gmtime(&system_time);
 
   std::ostringstream text;
   text << std::put_time(bt, "%Y-%m-%dT%H:%M:%S");
@@ -103,15 +103,14 @@ std::string NsToIsoTime(uint64_t ns_since_1970, int format) {
     }
 
     case 0:
-    default:
-      break;
+    default:break;
   }
 
   text << "Z";
   return text.str();
 }
 
-uint64_t IsoTimeToNs(const std::string& iso_time, bool local_time) {
+uint64_t IsoTimeToNs(const std::string &iso_time, bool local_time) {
   if (iso_time.empty()) {
     return 0;
   }
@@ -139,7 +138,7 @@ uint64_t IsoTimeToNs(const std::string& iso_time, bool local_time) {
     temp_list.push_back(temp);
   }
   uint64_t nano_sec = 0;
-  struct tm bt {};
+  struct tm bt{};
   bt.tm_year = 70;
   bt.tm_mon = 0;
   bt.tm_mday = 1;
@@ -152,29 +151,24 @@ uint64_t IsoTimeToNs(const std::string& iso_time, bool local_time) {
     switch (index) {
       case 0:
         if (value < 1970) {
-          value = 1970;
+          return 0;
         }
         bt.tm_year = value - 1900;  // Years since 1900
         break;
 
-      case 1:
-        bt.tm_mon = value - 1;  // Month 0..11
+      case 1:bt.tm_mon = value - 1;  // Month 0..11
         break;
 
-      case 2:
-        bt.tm_mday = value;  // Day 1..31
+      case 2:bt.tm_mday = value;  // Day 1..31
         break;
 
-      case 3:
-        bt.tm_hour = value;
+      case 3:bt.tm_hour = value;
         break;
 
-      case 4:
-        bt.tm_min = value;
+      case 4:bt.tm_min = value;
         break;
 
-      case 5:
-        bt.tm_sec = value;
+      case 5:bt.tm_sec = value;
         break;
 
       case 6: {
@@ -185,8 +179,7 @@ uint64_t IsoTimeToNs(const std::string& iso_time, bool local_time) {
         break;
       }
 
-      default:
-        break;
+      default:break;
     }
   }
   uint64_t ns_1970;
@@ -207,7 +200,7 @@ uint64_t IsoTimeToNs(const std::string& iso_time, bool local_time) {
 std::string NsToLocalDate(uint64_t ns_since_1970) {
   const auto system_time =
       static_cast<std::time_t>(ns_since_1970 / 1'000'000'000);
-  const struct tm* bt = localtime(&system_time);
+  const struct tm *bt = localtime(&system_time);
   std::ostringstream text;
   text << std::put_time(bt, "%x");
   return text.str();
@@ -216,7 +209,7 @@ std::string NsToLocalDate(uint64_t ns_since_1970) {
 std::string NsToLocalTime(uint64_t ns_since_1970, int format) {
   const auto system_time =
       static_cast<std::time_t>(ns_since_1970 / 1'000'000'000);
-  const struct tm* bt = localtime(&system_time);
+  const struct tm *bt = localtime(&system_time);
   std::ostringstream text;
   text << std::put_time(bt, "%X");
 
@@ -241,8 +234,7 @@ std::string NsToLocalTime(uint64_t ns_since_1970, int format) {
     }
 
     case 0:  // Show seconds
-    default:
-      return text.str();
+    default:return text.str();
   }
 
   const std::string input = text.str();
@@ -274,7 +266,7 @@ std::string NsToLocalTime(uint64_t ns_since_1970, int format) {
   return output.str();
 }
 
-uint64_t OdsDateToNs(const std::string& ods_date) {
+uint64_t OdsDateToNs(const std::string &ods_date) {
   if (ods_date.empty()) {
     return 0;
   }
@@ -323,7 +315,7 @@ uint64_t OdsDateToNs(const std::string& ods_date) {
     }
   }
   uint64_t nano_sec = 0;
-  struct tm bt {};
+  struct tm bt{};
   for (size_t index = 0; index < temp_list.size(); ++index) {
     int value = static_cast<int>(temp_list[index]);
     switch (index) {
@@ -334,24 +326,19 @@ uint64_t OdsDateToNs(const std::string& ods_date) {
         bt.tm_year = value - 1900;  // Years since 1900
         break;
 
-      case 1:
-        bt.tm_mon = value - 1;  // Month 0..11
+      case 1:bt.tm_mon = value - 1;  // Month 0..11
         break;
 
-      case 2:
-        bt.tm_mday = value;  // Day 1..31
+      case 2:bt.tm_mday = value;  // Day 1..31
         break;
 
-      case 3:
-        bt.tm_hour = value;
+      case 3:bt.tm_hour = value;
         break;
 
-      case 4:
-        bt.tm_min = value;
+      case 4:bt.tm_min = value;
         break;
 
-      case 5:
-        bt.tm_sec = value;
+      case 5:bt.tm_sec = value;
         break;
 
       case 6: {  // ms
@@ -374,8 +361,7 @@ uint64_t OdsDateToNs(const std::string& ods_date) {
         break;
       }
 
-      default:
-        break;
+      default:break;
     }
   }
 #if (_WIN32)
@@ -394,10 +380,10 @@ uint64_t FileTimeToNs(std::filesystem::file_time_type time) {
       std::chrono::clock_cast<std::chrono::system_clock>(time);
   return TimeStampToNs(sys_time);
 #else
- const auto temp_time = std::chrono::file_clock::to_sys(time);
- const auto ns = std::chrono::duration_cast<std::chrono::nanoseconds>(
-                              time.time_since_epoch());
- return ns.count();
+  const auto temp_time = std::chrono::file_clock::to_sys(time);
+  const auto ns = std::chrono::duration_cast<std::chrono::nanoseconds>(
+                               time.time_since_epoch());
+  return ns.count();
 #endif
 }
 

@@ -132,8 +132,8 @@ add_library(util
         src/ilistenclient.cpp include/util/ilistenclient.h
         src/serialportinfo.cpp include/util/serialportinfo.h
         src/serialportinfowin.inc
-        src/ihwinfo.cpp
-        include/util/ihwinfo.h)
+        src/ihwinfo.cpp include/util/ihwinfo.h
+)
 
 target_include_directories(util PUBLIC
         $<INSTALL_INTERFACE:include>
@@ -178,6 +178,7 @@ set(UTIL_PUBLIC_HEADERS
         include/util/timestamp.h
         include/util/unithelper.h
         include/util/utilfactory.h
+        include/util/redicconnection.h
         )
 
 set_target_properties(util PROPERTIES PUBLIC_HEADER "${UTIL_PUBLIC_HEADERS}")

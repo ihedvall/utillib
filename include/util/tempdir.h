@@ -17,6 +17,7 @@ namespace util::log {
  */
 class TempDir {
  public:
+  TempDir() = delete;
   /** \brief Creates a temporary directory.
    *
    * Creates a temporary directory in the default temporary directory. Normally
@@ -34,9 +35,7 @@ class TempDir {
    * 'utillib' is created.
    * @param unique_dir If set to true, a unique directory name is created.
    */
-  TempDir(const std::string& sub_dir, bool unique_dir);
-
-  TempDir();
+  TempDir(const std::string &sub_dir, bool unique_dir);
 
   /** \brief The destructor removes the temporary directory.
    *
@@ -49,7 +48,7 @@ class TempDir {
    * Returns full path to the temporary directory.
    * @return Path to temporary directory.
    */
-  [[nodiscard]] const std::string& Path() const { return temp_dir_; }
+  [[nodiscard]] const std::string &Path() const { return temp_dir_; }
 
   /** \brief Generates a temporary and optional unique file name.
    *
@@ -59,8 +58,8 @@ class TempDir {
    * @param unique_file Set to true if a unique file name should be generated.
    * @return File name with path and extension.
    */
-  [[nodiscard]] std::string TempFile(const std::string& stem,
-                                     const std::string& extension,
+  [[nodiscard]] std::string TempFile(const std::string &stem,
+                                     const std::string &extension,
                                      bool unique_file) const;
 
  private:
