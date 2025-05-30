@@ -246,12 +246,11 @@ TEST_F(TestSyslog, TestResolveAll) {
     client.reset();
   }
 
-  {
+  for (size_t index1 = 0; index1 < 10; ++index1) {
     auto client =
         UtilFactory::CreateSyslogServer(SyslogServerType::TcpSubscriber);
     ASSERT_TRUE(server != nullptr);
     client->Address(boost::asio::ip::host_name());
-    LOG_TRACE() << "Hostname: " << client->Address();
     client->Port(42514);
     bool connected = false;
 
@@ -267,6 +266,7 @@ TEST_F(TestSyslog, TestResolveAll) {
     client->Stop();
     client.reset();
   }
+
   server->Stop();
   server.reset();
 }
@@ -279,6 +279,7 @@ TEST_F(TestSyslog, TestResolveLocal) {
   server->Start();
 
   {
+    LOG_INFO() << "Testing 127.0.0.1. Should connect";
     auto client =
         UtilFactory::CreateSyslogServer(SyslogServerType::TcpSubscriber);
     ASSERT_TRUE(server != nullptr);
@@ -299,6 +300,7 @@ TEST_F(TestSyslog, TestResolveLocal) {
     client.reset();
   }
   {
+    LOG_INFO() << "Testing localhost. Should connect";
     auto client =
         UtilFactory::CreateSyslogServer(SyslogServerType::TcpSubscriber);
     ASSERT_TRUE(server != nullptr);
@@ -320,6 +322,7 @@ TEST_F(TestSyslog, TestResolveLocal) {
   }
 
   {
+    LOG_INFO() << "Testing BOOST Host Name. Should fail";
     auto client =
         UtilFactory::CreateSyslogServer(SyslogServerType::TcpSubscriber);
     ASSERT_TRUE(server != nullptr);
@@ -340,6 +343,7 @@ TEST_F(TestSyslog, TestResolveLocal) {
     client->Stop();
     client.reset();
   }
+
   server->Stop();
   server.reset();
 }

@@ -4,14 +4,13 @@
  */
 #include <algorithm>
 #include <array>
-#include <boost/filesystem.hpp>
-#include <boost/process.hpp>
 #include <filesystem>
 #include <string_view>
-#include <vector>
-#if (_MSC_VER)
-#include <boost/process/windows.hpp>
-#endif
+
+#include <boost/asio.hpp>
+#include <boost/process.hpp>
+#include <boost/filesystem.hpp>
+
 #include "util/gnuplot.h"
 #include "util/logstream.h"
 
@@ -44,12 +43,12 @@ namespace util::plot {
 GnuPlot::GnuPlot() {
   // 1. Find the path to the 'gnuplot.exe'
   try {
-    std::vector<boost::filesystem::path> path_list =
-        ::boost::this_process::path();
-    path_list.emplace_back("c:/program files (x86)/gnuplot/bin");
-    path_list.emplace_back("c:/program files/gnuplot/bin");
+    //std::vector<boost::filesystem::path> path_list =
+    //    ::boost::this_process::path();
+    //path_list.emplace_back("c:/program files (x86)/gnuplot/bin");
+    //path_list.emplace_back("c:/program files/gnuplot/bin");
 
-    const auto temp = boost::process::search_path("gnuplot", path_list);
+    const auto temp = boost::process::environment::find_executable("gnuplot");
     if (!temp.string().empty()) {
       exe_path_ = temp.string();
     }
@@ -59,8 +58,6 @@ GnuPlot::GnuPlot() {
     exe_path_.clear();
   }
 }
-
-GnuPlot::~GnuPlot() {}
 
 std::string GnuPlot::CreateScript() const {
   std::ostringstream script;
@@ -177,12 +174,10 @@ void GnuPlot::Show() {
     const auto script_dir = temp.parent_path();
     const auto curr_dir = std::filesystem::current_path();
     std::filesystem::current_path(script_dir);
-#if (_MSC_VER)
-    boost::process::spawn(exe_path_, "--persist", FileName(),
-                          boost::process::windows::hide);
-#else
-    boost::process::spawn(exe_path_, "--persist", FileName());
-#endif
+    boost::asio::io_context ctx;
+    boost::process::process(ctx, ExePath(),
+      {"--persist", FileName() });
+
     std::filesystem::current_path(curr_dir);
   } catch (const std::exception &err) {
     LOG_ERROR() << "Failed to run gnuplot directory. Error: " << err.what();

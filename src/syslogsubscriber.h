@@ -6,10 +6,11 @@
 #pragma once
 
 #include <atomic>
-#include <boost/asio.hpp>
+
 #include <memory>
 #include <thread>
 
+#include <boost/asio.hpp>
 #include "util/isyslogserver.h"
 
 namespace util::syslog {
@@ -28,11 +29,14 @@ class SyslogSubscriber : public ISyslogServer {
   boost::asio::ip::tcp::resolver lookup_;
   boost::asio::steady_timer retry_timer_;
   std::unique_ptr<boost::asio::ip::tcp::socket> socket_;
+  // This i actaully a list of endpoints, so we have to iterate through them
+  // and trying to connect.
   boost::asio::ip::tcp::resolver::results_type endpoints_;
+  boost::asio::ip::tcp::resolver::results_type::iterator endpoint_itr_;
   std::string length_buffer_ = " ";
   std::string msg_buffer_;
   size_t length_ = 0;
-
+  std::atomic<bool> stop_subscriber_ = false;
   std::thread worker_thread_;
 
   void WorkerTask();

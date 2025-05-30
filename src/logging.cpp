@@ -5,14 +5,8 @@
 #include <filesystem>
 #include <vector>
 
-#ifdef __GNUC__
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wreturn-type"
+#include <boost/asio.hpp>
 #include <boost/process.hpp>
-#pragma GCC diagnostic pop
-#else
-#include <boost/process.hpp>
-#endif
 
 #include "util/logconfig.h"
 #include "util/logging.h"
@@ -82,13 +76,36 @@ void LogString(const Loc &loc, LogSeverity severity,
 
 std::string FindNotepad() {
   std::string note;
-  // 1. Find the path to the 'notepad++.exe'
+  // Try to find the NotePad++ editor
   try {
-    std::vector<boost::filesystem::path> path_list =
-        ::boost::this_process::path();
-    path_list.emplace_back("c:/program files/notepad++");
+    boost::filesystem::path notepad("c:/program files/notepad++/notepad++.exe");
+    if (boost::filesystem::exists(notepad)) {
+      note = notepad.string();
+    }
+  } catch (const std::exception &err) {
+    LOG_ERROR() << "Failed to find the path to the 'notepad++.exe' file. Error: " << err.what();
+    note.clear();
+  }
+  if (!note.empty()) {
+    return note;
+  }
 
-    auto notepad = boost::process::search_path("notepad++", path_list);
+  try {
+    auto notepad = boost::process::environment::find_executable("notepad++"); // path_list);
+    if (!notepad.string().empty()) {
+      note = notepad.string();
+    }
+  } catch (const std::exception &err) {
+    note.clear();
+  }
+
+  if (!note.empty()) {
+    return note;
+  }
+
+  // Find the path to the 'notepad.exe'
+  try {
+    auto notepad = boost::process::environment::find_executable("notepad");
     if (!notepad.string().empty()) {
       note = notepad.string();
     }
@@ -100,23 +117,9 @@ std::string FindNotepad() {
     return note;
   }
 
-  // 2. Find the path to the 'notepad.exe'
+  // Find the path to the 'gedit' GNOME editor
   try {
-    auto notepad = boost::process::search_path("notepad");
-    if (!notepad.string().empty()) {
-      note = notepad.string();
-    }
-  } catch (const std::exception &) {
-    note.clear();
-  }
-
-  if (!note.empty()) {
-    return note;
-  }
-
-  // 2. Find the path to the 'gedit' GNOME editor
-  try {
-    auto notepad = boost::process::search_path("gedit");
+    auto notepad = boost::process::environment::find_executable("gedit");
     if (!notepad.string().empty()) {
       note = notepad.string();
     }

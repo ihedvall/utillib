@@ -46,7 +46,7 @@ class GnuPlot {
    * path environment. There is a checkbox for this when installing gnuplot.
    */
   GnuPlot();
-  virtual ~GnuPlot();  ///< Destructor
+  virtual ~GnuPlot() = default;  ///< Destructor
 
   /** \brief Returns the full path to the gnuplot application.
    *

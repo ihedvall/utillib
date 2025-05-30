@@ -4,6 +4,7 @@
  */
 #include <filesystem>
 #define BOOST_LOCALE_HIDE_AUTO_PTR
+#include <boost/asio.hpp>
 #include <boost/process.hpp>
 #include <boost/locale.hpp>
 
@@ -15,7 +16,6 @@
 
 #include <wx/config.h>
 #include <wx/utils.h>
-#include <wx/splash.h>
 #include <wx/cmdline.h>
 
 #include "util/logconfig.h"
@@ -29,7 +29,7 @@
 using namespace util::log;
 
 namespace {
-
+  boost::asio::io_context kIoContext;
 } // end namespace
 
 wxIMPLEMENT_APP(util::log::gui::ListenViewer); // NOLINT
@@ -121,7 +121,8 @@ void ListenViewer::OnUpdateOpenLogFile(wxUpdateUIEvent &event) {
 
 void ListenViewer::OpenFile(const std::string& filename) const {
   if (!notepad_.empty()) {
-    boost::process::spawn(notepad_, filename);
+    boost::process::process proc(kIoContext, notepad_, {filename});
+    proc.detach();
   }
 }
 

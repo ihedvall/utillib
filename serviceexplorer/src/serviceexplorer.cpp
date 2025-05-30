@@ -3,7 +3,10 @@
  * SPDX-License-Identifier: MIT
  */
 #include <filesystem>
+
+#include <boost/asio.hpp>
 #include <boost/process.hpp>
+
 #include <shellapi.h>
 
 #include <wx/wx.h>
@@ -26,6 +29,7 @@
 using namespace util::log;
 
 namespace {
+boost::asio::io_context kIoContext;
 
 const wxCmdLineEntryDesc kCmdLineList[] = {
     { wxCMD_LINE_SWITCH, "h", "help", "Displays help", wxCMD_LINE_VAL_NONE, wxCMD_LINE_OPTION_HELP },
@@ -109,7 +113,8 @@ bool ServiceExplorer::OnInit() {
   log_config.CreateDefaultLogger();
   LOG_INFO() << "Log File created. Path: " << log_config.GetLogFile();
 
-  FindNotepad();
+  notepad_ = util::log::FindNotepad();
+
   FindServiceDaemon();
   ServiceHelper::Instance().CheckAccessLevels();
   if (!ServiceHelper::Instance().HaveReadAccess()) {
@@ -170,40 +175,8 @@ void ServiceExplorer::OnUpdateOpenLogFile(wxUpdateUIEvent &event) {
 
 void ServiceExplorer::OpenFile(const std::string& filename) const {
   if (!notepad_.empty()) {
-    boost::process::spawn(notepad_, filename);
-  }
-}
-
-void ServiceExplorer::FindNotepad() {
-
-  // 1. Find the path to the 'notepad++.exe'
-  try {
-    std::vector< boost::filesystem::path > path_list = ::boost::this_process::path();
-    path_list.emplace_back("c:/program files/notepad++");
-
-    auto notepad = boost::process::search_path("notepad++", path_list);
-    if (!notepad.string().empty()) {
-      notepad_ = notepad.string();
-      LOG_INFO() << "Found NotePad++. Path: " << notepad_;
-    }
-  } catch(const std::exception& ) {
-    notepad_.clear();
-  }
-
-  // 2. Find the path to the 'notepad.exe'
-  if (!notepad_.empty()) {
-    return;
-  }
-
-  try {
-    auto notepad = boost::process::search_path("notepad");
-    if (!notepad.string().empty()) {
-      notepad_ = notepad.string();
-      LOG_INFO() << "Found NotePad. Path: " << notepad_;
-    }
-  } catch(const std::exception& ) {
-    notepad_.clear();
-    LOG_INFO() << "NotePad was not found.";
+    boost::process::process proc(kIoContext, notepad_, {filename});
+    proc.detach();
   }
 }
 
@@ -243,14 +216,17 @@ void ServiceExplorer::FindServiceDaemon() {
     return;
   }
   try {
-    auto serv = boost::process::search_path("serviced");
+    auto serv = boost::process::environment::find_executable("serviced");
     if (!serv.string().empty()) {
       serviced_ = serv.string();
       LOG_INFO() << "Found Service Daemon. Path: " << serviced_;
     }
-  } catch(const std::exception& ) {
+  } catch(const std::exception& err ) {
     serviced_.clear();
-    LOG_INFO() << "Service Daemon was not found.";
+    LOG_INFO() << "Service Daemon was not found. Error: " << err.what();
+  }
+  if (serviced_.empty()) {
+    LOG_ERROR() << "Service Daemon was not found.";
   }
 }
 

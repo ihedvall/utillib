@@ -41,7 +41,7 @@ void SyslogPublisher::Start() {
       const ip::tcp::endpoint endpoint(address, Port());
       acceptor_ = std::make_unique<ip::tcp::acceptor>(context_, endpoint);
     } else {
-      const auto address = ip::address::from_string("127.0.0.1");
+      const auto address = ip::make_address("127.0.0.1");
       const ip::tcp::endpoint endpoint(address, Port());
       acceptor_ = std::make_unique<ip::tcp::acceptor>(context_, endpoint);
     }

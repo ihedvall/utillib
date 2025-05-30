@@ -5,6 +5,8 @@
 #pragma once
 #include <string>
 #include <wx/wx.h>
+#include <boost/asio.hpp>
+
 #include "servicehelper.h"
 
 namespace util::service::gui {
@@ -35,7 +37,6 @@ class ServiceExplorer : public wxApp {
   void OnOpenLogFile(wxCommandEvent& event);
   void OnUpdateOpenLogFile(wxUpdateUIEvent& event);
 
-  void FindNotepad();
   void FindServiceDaemon();
 
   bool CheckCmdLine();

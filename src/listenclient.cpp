@@ -70,15 +70,26 @@ void ListenClient::DoRetryWait() {
   });
 }
 void ListenClient::DoConnect() {
-  socket_->async_connect(*endpoints_, [&](const error_code error) {
-    if (error) {
+  bool connected = false;
+  for (const auto& endpoint : endpoints_) {
+    socket_->async_connect(endpoint, [&](const error_code error) {
+    if (error.failed() || !socket_->is_open()) {
       LOG_ERROR() << "Connect error. Error: " << error.message();
-      DoRetryWait();
+      connected = false;
     } else {
-      DoReadHeader();
+      connected = true;
     }
   });
-}
+    if (connected) {
+      break;
+    }
+  }
+  if (!connected) {
+    DoRetryWait();
+  } else {
+    DoReadHeader();
+  }
+ }
 
 void ListenClient::DoReadHeader() {  // NOLINT
   if (!socket_ || !socket_->is_open()) {
