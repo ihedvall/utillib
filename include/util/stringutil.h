@@ -3,6 +3,8 @@
  * SPDX-License-Identifier: MIT
  */
 #pragma once
+
+#include <cstdint>
 #include <string>
 
 namespace util::string {

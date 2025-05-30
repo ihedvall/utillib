@@ -18,8 +18,8 @@ namespace util::xml {
 
 std::string IXmlFile::FileNameWithoutPath() const {
   try {
-    auto filename = std::filesystem::u8path(filename_).stem().u8string();
-    return std::string(filename.begin(), filename.end());
+    auto filename = std::filesystem::path(filename_).stem().u8string();
+    return {filename.begin(), filename.end()};
   } catch (const std::exception &error) {
     LOG_ERROR() << "Invalid path. File: " << filename_
                 << ", Error: " << error.what();
@@ -96,7 +96,7 @@ std::string IXmlFile::WriteString(bool skip_header) {
   return temp.str();
 }
 
-void IXmlFile::WriteRoot(std::ostream &dest, bool skip_header) {
+void IXmlFile::WriteRoot(std::ostream &dest, bool skip_header) const {
   if (!skip_header) {
     dest << "<?xml version='" << Version() << "' encoding='" << Encoding()
          << "'";

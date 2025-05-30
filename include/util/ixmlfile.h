@@ -172,7 +172,7 @@ class IXmlFile {
   virtual std::unique_ptr<IXmlNode> CreateNode(
       const std::string &name);  ///< Creates a new node.
  private:
-  void WriteRoot(std::ostream &dest, bool skip_header);
+  void WriteRoot(std::ostream &dest, bool skip_header) const;
 };
 
 /** \brief Creates an XML object that either parse or write.

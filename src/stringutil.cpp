@@ -3,12 +3,13 @@
  * SPDX-License-Identifier: MIT
  */
 #include "util/stringutil.h"
-
-#include <boost/algorithm/string.hpp>
-#include <boost/lexical_cast.hpp>
 #include <cmath>
 #include <cstring>
 #include <sstream>
+
+#include <boost/algorithm/string.hpp>
+#include <boost/lexical_cast.hpp>
+
 
 namespace util::string {
 bool IEquals(const std::string &s1, const std::string &s2, size_t nChar) {
