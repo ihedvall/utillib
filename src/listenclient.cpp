@@ -22,9 +22,9 @@ ListenClient::ListenClient(const std::string& host_name, uint16_t port)
 }
 
 ListenClient::~ListenClient() {
+  Close();
   if (!context_.stopped()) {
     context_.stop();
-    Close();
   }
   if (worker_thread_.joinable()) {
     worker_thread_.join();
@@ -59,7 +59,7 @@ void ListenClient::DoLookup() {
 }
 
 void ListenClient::DoRetryWait() {
-  Close();
+
   connected_ = false;
   retry_timer_.expires_after(5s);
   retry_timer_.async_wait([&](const error_code error) {
@@ -68,7 +68,9 @@ void ListenClient::DoRetryWait() {
     }
     DoLookup();
   });
+  Close();
 }
+
 void ListenClient::DoConnect() {
   bool connected = false;
   for (const auto& endpoint : endpoints_) {
@@ -185,12 +187,13 @@ void ListenClient::HandleMessage() {
 }
 
 void ListenClient::Close() {
-  if (socket_) {
-    boost::system::error_code dummy;
-    socket_->shutdown(ip::tcp::socket::shutdown_both, dummy);
-    socket_->close(dummy);
+  if (socket_ && socket_->is_open() && connected_) {
+    error_code shutdown_error;
+    error_code sh_error = socket_->shutdown(ip::tcp::socket::shutdown_both, shutdown_error);
+
+    error_code close_error;
+    error_code cl_error = socket_->close(close_error);
   }
-  socket_.reset();
 }
 
 void ListenClient::SendLogLevel(uint64_t level) {

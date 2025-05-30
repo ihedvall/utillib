@@ -23,6 +23,7 @@ namespace {
 constexpr uint64_t kServerPort = 43099;
 constexpr std::string_view kServerName = "TestServer";
 constexpr std::string_view kServerPreText = "TS>";
+bool kLogError = false;
 }  // namespace
 namespace util::test {
 
