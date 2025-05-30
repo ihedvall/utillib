@@ -7,8 +7,7 @@
  * \brief Standard log interfaces.
  */
 #pragma once
-#include <cstdarg>
-#include <cstdio>
+#include <cstdint>
 #include <string>
 
 #if __has_include(<source_location>)

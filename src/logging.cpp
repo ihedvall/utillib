@@ -2,11 +2,13 @@
  * Copyright 2021 Ingemar Hedvall
  * SPDX-License-Identifier: MIT
  */
+#include <cstdarg>
 #include <filesystem>
-#include <vector>
+#include <string>
 
 #include <boost/asio.hpp>
 #include <boost/process.hpp>
+#include <boost/filesystem.hpp>
 
 #include "util/logconfig.h"
 #include "util/logging.h"

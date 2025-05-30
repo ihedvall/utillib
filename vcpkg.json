@@ -13,6 +13,7 @@
     "boost-array",
     "boost-locale",
     "boost-program-options",
+    "boost-container",
     "expat",
     "zlib"
 
@@ -21,15 +22,13 @@
       "tools": {
         "description": "Building GUI tools",
         "dependencies": [
-
           "wxwidgets"
         ]
       },
       "tests": {
         "description": "Building unit tests",
         "dependencies": [
-          "boost-beast",
-          "gtest"
+          "boost-beast"
         ]
       }
     }
