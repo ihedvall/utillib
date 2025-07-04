@@ -42,7 +42,7 @@ ListenServerConnection::~ListenServerConnection() {
   socket_.reset();
 }
 
-bool ListenServerConnection::Cleanup() {
+bool ListenServerConnection::Cleanup() const {
   return !socket_ || !socket_->is_open();
 }
 

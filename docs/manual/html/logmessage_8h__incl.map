@@ -1,9 +1,14 @@
 <map id="include/util/logmessage.h" name="include/util/logmessage.h">
-<area shape="rect" id="node1" title=" " alt="" coords="19,5,189,31"/>
-<area shape="rect" id="node2" title=" " alt="" coords="5,79,67,104"/>
-<area shape="rect" id="node3" title=" " alt="" coords="73,159,127,185"/>
-<area shape="rect" id="node4" href="$logging_8h.html" title="Standard log interfaces." alt="" coords="147,79,221,104"/>
-<area shape="rect" id="node5" title=" " alt="" coords="151,159,217,185"/>
-<area shape="rect" id="node6" title=" " alt="" coords="241,159,298,185"/>
-<area shape="rect" id="node7" title=" " alt="" coords="323,152,461,192"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="19,5,188,32"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,80,66,107"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="94,34,60,70,56,67,90,31"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="74,163,128,189"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="106,33,104,147,99,147,101,33"/>
+<area shape="rect" id="Node000004" href="$logging_8h.html" title="Standard log interfaces." alt="" coords="144,80,218,107"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="119,31,158,67,155,71,115,34"/>
+<area shape="poly" id="edge5_Node000004_Node000003" title=" " alt="" coords="170,109,126,154,122,150,166,105"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="152,163,212,189"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="184,107,184,147,179,147,178,107"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="237,155,375,197"/>
+<area shape="poly" id="edge6_Node000004_Node000006" title=" " alt="" coords="202,105,263,144,260,148,199,109"/>
 </map>

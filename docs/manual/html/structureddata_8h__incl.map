@@ -1,5 +1,7 @@
 <map id="include/util/structureddata.h" name="include/util/structureddata.h">
-<area shape="rect" id="node1" title="Syslog structured data interface." alt="" coords="5,5,188,31"/>
-<area shape="rect" id="node2" title=" " alt="" coords="29,79,84,104"/>
-<area shape="rect" id="node3" title=" " alt="" coords="109,79,165,104"/>
+<area shape="rect" id="Node000001" title="Syslog structured data interface." alt="" coords="5,5,187,32"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="29,80,83,107"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="91,34,73,68,68,65,87,31"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="107,80,165,107"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="105,31,124,65,119,68,101,34"/>
 </map>

@@ -1,5 +1,7 @@
 <map id="include/util/syslogmessage.h" name="include/util/syslogmessage.h">
-<area shape="rect" id="node1" title="Implements an interface against a syslog message." alt="" coords="5,5,196,31"/>
-<area shape="rect" id="node2" href="$isyslogserver_8h.html" title="Defines an interface against a syslog server." alt="" coords="13,79,188,104"/>
-<area shape="rect" id="node3" href="$utilfactory_8h.html" title=" " alt="" coords="23,152,178,177"/>
+<area shape="rect" id="Node000001" title="Implements an interface against a syslog message." alt="" coords="5,5,195,32"/>
+<area shape="rect" id="Node000002" href="$isyslogserver_8h.html" title="Defines an interface against a syslog server." alt="" coords="12,80,188,107"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="103,48,103,80,97,80,97,48"/>
+<area shape="rect" id="Node000003" href="$utilfactory_8h.html" title=" " alt="" coords="23,155,177,181"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="103,122,103,154,97,154,97,122"/>
 </map>

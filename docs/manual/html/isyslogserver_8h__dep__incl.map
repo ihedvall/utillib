@@ -1,4 +1,5 @@
 <map id="include/util/isyslogserver.h" name="include/util/isyslogserver.h">
-<area shape="rect" id="node1" title="Defines an interface against a syslog server." alt="" coords="5,5,180,31"/>
-<area shape="rect" id="node2" href="$utilfactory_8h.html" title=" " alt="" coords="15,79,170,104"/>
+<area shape="rect" id="Node000001" title="Defines an interface against a syslog server." alt="" coords="5,5,181,32"/>
+<area shape="rect" id="Node000002" href="$utilfactory_8h.html" title=" " alt="" coords="16,80,170,107"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="96,48,96,80,90,80,90,48"/>
 </map>

@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 Ingemar Hedvall
+ * Copyright 2025 Ingemar Hedvall
  * SPDX-License-Identifier: MIT
  */
 /** \file ixmlfile.h

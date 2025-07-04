@@ -68,6 +68,7 @@ wxBEGIN_EVENT_TABLE(ServiceExplorer, wxApp) // NOLINT
 wxEND_EVENT_TABLE()
 
 bool ServiceExplorer::OnInit() {
+  SetAppearance(Appearance::System);
   if (!wxApp::OnInit()) {
     return false;
   }

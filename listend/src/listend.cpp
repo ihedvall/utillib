@@ -2,11 +2,8 @@
  * Copyright 2022 Ingemar Hedvall
  * SPDX-License-Identifier: MIT
  */
-#include <util/ixmlfile.h>
-#include <util/listenconfig.h>
-#include <util/logconfig.h>
-#include <util/logstream.h>
-#include <util/utilfactory.h>
+
+
 
 #include <atomic>
 #include <chrono>
@@ -17,26 +14,36 @@
 #include <thread>
 #include <vector>
 
+#ifdef _WIN32
+#include <windows.h>
+#endif
+
+#include <util/ixmlfile.h>
+#include <util/listenconfig.h>
+#include <util/logconfig.h>
+#include <util/logstream.h>
+#include <util/utilfactory.h>
+
 using namespace util::log;
 using namespace util::xml;
 using namespace std::chrono_literals;
 namespace {
+
 std::atomic<bool> kStopMain = false;
 std::vector<std::unique_ptr<IListen>> kServerList;
-uint16_t kFreePort = 49152;
+uint16_t kFreePort = 42511;
 
 void StopMainHandler(int signal) {
+
+  LOG_INFO() << "Stopping. Signal: " << signal;
   kStopMain = true;
-  LOG_DEBUG() << "Stopping. Signal: " << signal;
-  for (size_t count = 0; count < 100 && kStopMain; ++count) {
-    std::this_thread::sleep_for(100ms);
-  }
 }
 
 void AddAllKnownServers() {
   // Add System Logger
   {
-    auto system_log = util::UtilFactory::CreateListen("ListenServer", "LISLOG");
+    auto system_log = util::UtilFactory::CreateListen(
+    "ListenServer", "LISLOG");
     system_log->Name("System Messages");
     system_log->Description("Logs all system messages");
     system_log->HostName("127.0.0.1");
@@ -51,7 +58,8 @@ void AddAllKnownServers() {
   // Add SQLite Logger
   {
     auto sqlite_log =
-        util::UtilFactory::CreateListen("ListenServer", "LISSQLITE");
+        util::UtilFactory::CreateListen(
+        "ListenServer", "LISSQLITE");
     sqlite_log->Name("SQLite messages");
     sqlite_log->Description("Logs all SQL calls");
     sqlite_log->HostName("127.0.0.1");
@@ -62,7 +70,8 @@ void AddAllKnownServers() {
 
   // Add MQTT Logger
   {
-    auto mqtt_log = util::UtilFactory::CreateListen("ListenServer", "LISMQTT");
+    auto mqtt_log = util::UtilFactory::CreateListen(
+    "ListenServer", "LISMQTT");
     mqtt_log->Name("MQTT messages");
     mqtt_log->Description("Logs all MQTT calls");
     mqtt_log->HostName("127.0.0.1");
@@ -73,15 +82,35 @@ void AddAllKnownServers() {
     mqtt_log->SetLogLevelText(3, "Trace MQTT messages");
     kServerList.push_back(std::move(mqtt_log));
   }
+
+    // Add Bus Message Logger
+  {
+    auto mqtt_log = util::UtilFactory::CreateListen(
+    "ListenServer", "LISBUS");
+    mqtt_log->Name("Bus Messages");
+    mqtt_log->Description("Logs all message on a bus message queue");
+    mqtt_log->HostName("127.0.0.1");
+    mqtt_log->Port(kFreePort++);
+    mqtt_log->SetLogLevelText(0, "Show all messages");
+    mqtt_log->SetLogLevelText(1, "Show CAN messages");
+    mqtt_log->SetLogLevelText(2, "Show LIN messages");
+    mqtt_log->SetLogLevelText(3, "Show FlexRay messages");
+    mqtt_log->SetLogLevelText(4, "Show MOST messages");
+    mqtt_log->SetLogLevelText(5, "Show Ethernet messages");
+    kServerList.push_back(std::move(mqtt_log));
+  }
 }
 }  // namespace
 
 int main(int nof_arg, char* arg_list[]) {
   signal(SIGTERM, StopMainHandler);
   signal(SIGABRT, StopMainHandler);
+  signal(SIGINT, StopMainHandler);
 #if (_MSC_VER)
   signal(SIGABRT_COMPAT, StopMainHandler);
   signal(SIGBREAK, StopMainHandler);
+  signal(SIGINT, StopMainHandler);
+ // signal(SIGABRT_COMPAT, StopMainHandler);
 #endif
 
   // Set log file name to the service name
@@ -204,8 +233,27 @@ int main(int nof_arg, char* arg_list[]) {
       server->Start();
     }
 
+
     while (!kStopMain) {
-      std::this_thread::sleep_for(1000ms);
+#ifdef _WIN32
+      MSG msg = {};
+      if (const BOOL peek_msg = ::PeekMessage(&msg, nullptr,
+            0, 0, PM_REMOVE);
+        peek_msg) {
+
+        switch (msg.message) {
+          case WM_QUIT:
+          case WM_CLOSE:
+            LOG_TRACE() << "Close/Quit of application received.";
+            kStopMain = true;
+            continue;
+
+          default:
+            break;
+        }
+      }
+#endif
+      std::this_thread::sleep_for(100ms);
     }
 
     for (auto& server : kServerList) {

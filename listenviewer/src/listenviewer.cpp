@@ -8,10 +8,8 @@
 #include <boost/process.hpp>
 #include <boost/locale.hpp>
 
-#if (_MSC_VER)
-#include <shellapi.h>
-#endif
 #include <wx/wx.h>
+#include <wx/app.h>
 #include <wx/docview.h>
 
 #include <wx/config.h>
@@ -42,6 +40,7 @@ wxBEGIN_EVENT_TABLE(ListenViewer, wxApp) // NOLINT
 wxEND_EVENT_TABLE()
 
 bool ListenViewer::OnInit() {
+  SetAppearance(Appearance::System);
   if (!wxApp::OnInit()) {
     return false;
   }

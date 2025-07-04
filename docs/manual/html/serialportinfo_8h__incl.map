@@ -1,5 +1,7 @@
 <map id="include/util/serialportinfo.h" name="include/util/serialportinfo.h">
-<area shape="rect" id="node1" title="The serial port information is used to list COM and USB ports." alt="" coords="5,5,177,31"/>
-<area shape="rect" id="node2" title=" " alt="" coords="31,79,77,104"/>
-<area shape="rect" id="node3" title=" " alt="" coords="101,79,156,104"/>
+<area shape="rect" id="Node000001" title="The serial port information is used to list COM and USB ports." alt="" coords="5,5,178,32"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="32,80,79,107"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="88,34,71,67,66,65,83,31"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="102,80,156,107"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="100,31,118,65,113,68,96,34"/>
 </map>

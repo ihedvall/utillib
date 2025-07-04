@@ -2,18 +2,18 @@
  * Copyright 2022 Ingemar Hedvall
  * SPDX-License-Identifier: MIT
  */
-
-#include "servicehelper.h"
-
-#include <windows.h>
-
-#include <boost/program_options.hpp>
 #include <chrono>
 #include <sstream>
 #include <string>
 #include <string_view>
 #include <thread>
 #include <vector>
+
+#include <windows.h>
+
+#include "servicehelper.h"
+
+#include <boost/program_options.hpp>
 
 #include "util/logstream.h"
 
@@ -33,7 +33,7 @@ std::string GetLastErrorAsString() {
       FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM |
           FORMAT_MESSAGE_IGNORE_INSERTS,
       nullptr, errorMessageID, MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
-      (LPSTR)&messageBuffer, 0, nullptr);
+      reinterpret_cast<LPSTR>(&messageBuffer), 0, nullptr);
   std::string message(messageBuffer, size);
   LocalFree(messageBuffer);
   return message;
@@ -45,7 +45,7 @@ std::string GetLastErrorAsString(const LSTATUS& error) {
       FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM |
           FORMAT_MESSAGE_IGNORE_INSERTS,
       nullptr, error, MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
-      (LPSTR)&messageBuffer, 0, nullptr);
+      reinterpret_cast<LPSTR>(&messageBuffer), 0, nullptr);
   std::string message(messageBuffer, size);
   LocalFree(messageBuffer);
   return message;
@@ -181,9 +181,8 @@ bool ServiceHelper::RunService() {
   if (!run) {
     LOG_ERROR() << "Failure to run the service. Service: " << name_
                 << ". Error: " << GetLastErrorAsString();
-    return false;
   }
-  return true;
+  return run ? true : false;
 }
 
 void ServiceHelper::ReportStatus() {
@@ -287,8 +286,7 @@ void ServiceHelper::ServiceMain(DWORD nof_arg, char* arg_list[]) {
 void ServiceHelper::DoSuperviseApp() {
   switch (state_) {
     case SERVICE_START_PENDING: {
-      const auto start = StartApp();
-      if (start) {
+      if (const bool start = StartApp(); start) {
         state_ = SERVICE_RUNNING;
       } else {
         ++restarts_;

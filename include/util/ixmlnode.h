@@ -16,7 +16,7 @@
 #include "util/stringutil.h"
 
 namespace {
-template <typename T>
+template<typename T>
 T XValue(const std::string &value) {
   std::string v(value);
   util::string::Trim(v);
@@ -26,7 +26,7 @@ T XValue(const std::string &value) {
   return out;
 }
 
-template <>
+template<>
 bool XValue(const std::string &value) {
   std::string v(value);
   util::string::Trim(v);
@@ -35,7 +35,7 @@ bool XValue(const std::string &value) {
          || util::string::IEquals(v, "Y", 1);  // Yes/No
 }
 
-template <>
+template<>
 std::string XValue(const std::string &value) {
   std::string v(value);
   util::string::Trim(v);
@@ -106,7 +106,7 @@ class IXmlNode {
    * @param [in] def Default value if attribute is missing.
    * @return Returns the attribute value or default value..
    */
-  template <typename T>
+  template<typename T>
   [[nodiscard]] T Attribute(const std::string &key, const T &def = {}) const {
     for (const auto &p : attribute_list_) {
       if (util::string::IEquals(p.first, key)) {
@@ -122,7 +122,7 @@ class IXmlNode {
    * @param key Attribute name
    * @param value Attribute value
    */
-  template <typename T>
+  template<typename T>
   void SetAttribute(const std::string &key, const T &value);
 
   /** \brief Returns a value.
@@ -131,7 +131,7 @@ class IXmlNode {
    * @tparam T Type of value. Can be string, numbers or boolean.
    * @return Returns the tag value
    */
-  template <typename T>
+  template<typename T>
   [[nodiscard]] T Value() const {
     return XValue<T>(value_);
   }
@@ -142,7 +142,7 @@ class IXmlNode {
    * @tparam T Type of value
    * @param value Value
    */
-  template <typename T>
+  template<typename T>
   void Value(const T &value);
 
   /** \brief Returns a specific tag value.
@@ -154,7 +154,7 @@ class IXmlNode {
    * @param [in] def Default value.
    * @return The child tags value.
    */
-  template <typename T>
+  template<typename T>
   [[nodiscard]] T Property(const std::string &key, const T &def = {}) const {
     const IXmlNode *node = GetNode(key);
     return node != nullptr ? node->Value<T>() : def;
@@ -167,7 +167,7 @@ class IXmlNode {
    * @param key Tag name
    * @param value Value.
    */
-  template <typename T>
+  template<typename T>
   void SetProperty(const std::string &key, const T &value) {
     auto &node = AddUniqueNode(key);
     node.Value(value);
@@ -185,7 +185,7 @@ class IXmlNode {
   [[nodiscard]] virtual const IXmlNode *GetNode(const std::string &tag,
                                                 const std::string &key,
                                                 const std::string &attr)
-      const;  ///< Returns a node with a specific attribute.
+  const;  ///< Returns a node with a specific attribute.
 
   /** \brief Returns true if the named property exist.
    *
@@ -207,14 +207,20 @@ class IXmlNode {
 
   virtual void AddNode(std::unique_ptr<IXmlNode> p);  ///< Adds a node
 
-  void DeleteNode(const std::string& name); ///< Deletes all nodes with name
-  void DeleteNode(const IXmlNode* node); ///< Deletes a specific node
+  void DeleteNode(const std::string &name); ///< Deletes all nodes with name
+  void DeleteNode(const IXmlNode *node); ///< Deletes a specific node
 
   virtual void Write(std::ostream &dest,
                      size_t level);  ///< Write the node to the stream
+
+  /**
+   * @brief Returns true if the XML node has children.
+   * @return True if the XML node has children.
+   */
   [[nodiscard]] bool HasChildren() const {
     return !node_list_.empty();
   }
+
  protected:
   std::string tag_name_;  ///< Name of this tag.
   std::string value_;     ///< String value of this tag.
@@ -235,7 +241,7 @@ class IXmlNode {
       const std::string &name) const;  ///< Create a node
 };
 
-template <typename T>
+template<typename T>
 void IXmlNode::Value(const T &value) {
   //  value_ = std::to_string(value);
   std::ostringstream temp;
@@ -247,17 +253,17 @@ void IXmlNode::Value(const T &value) {
  *
  * @param value Boolean value
  */
-template <>
+template<>
 void IXmlNode::Value(const bool &value);
 
 /** \brief Adds a string value
  *
  * @param value String value
  */
-template <>
+template<>
 void IXmlNode::Value(const std::string &value);
 
-template <typename T>
+template<typename T>
 void IXmlNode::SetAttribute(const std::string &key, const T &value) {
   std::ostringstream temp;
   temp << value;
@@ -269,7 +275,7 @@ void IXmlNode::SetAttribute(const std::string &key, const T &value) {
  * @param key Attribute name
  * @param value  Attribute boolean value
  */
-template <>
+template<>
 void IXmlNode::SetAttribute(const std::string &key, const bool &value);
 
 }  // namespace util::xml

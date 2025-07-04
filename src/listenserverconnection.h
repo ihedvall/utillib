@@ -25,7 +25,7 @@ class ListenServerConnection final {
   ListenServerConnection(ListenServerConnection&) = delete;
   ListenServerConnection& operator=(ListenServerConnection&) = delete;
 
-  bool Cleanup();
+  bool Cleanup() const;
   void InMessage(std::unique_ptr<ListenMessage> msg);
 
  private:

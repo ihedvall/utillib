@@ -73,6 +73,7 @@ void ListenConsole::AddMessage(uint64_t nano_sec_1970,
     std::cout << pre_text << " ";
   }
   std::cout << text << std::endl;
+  IncrementNumberOfMessages();
 }
 
 void ListenConsole::SetActive(bool active) {

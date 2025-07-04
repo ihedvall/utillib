@@ -2,10 +2,12 @@
  * Copyright 2022 Ingemar Hedvall
  * SPDX-License-Identifier: MIT
  */
-#include "servicehelper.h"
 
 #include <chrono>
 #include <thread>
+#include <sstream>
+
+#include "servicehelper.h"
 
 #include "util/logstream.h"
 
@@ -31,16 +33,33 @@ std::string GetLastErrorAsString() {
   return message;
 }
 
+std::wstring GetLastErrorAsWString() {
+  auto errorMessageID = ::GetLastError();
+  if (errorMessageID == 0) {
+    return {};
+  }
+
+  LPWSTR messageBuffer = nullptr;
+  size_t size = ::FormatMessageW(
+      FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM |
+          FORMAT_MESSAGE_IGNORE_INSERTS,
+      nullptr, errorMessageID, MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
+      (LPWSTR)&messageBuffer, 0, nullptr);
+  std::wstring message(messageBuffer, size);
+  LocalFree(messageBuffer);
+  return message;
+}
+
 void Start(SC_HANDLE service_manager, const std::wstring& name) {
   auto* service = ::OpenServiceW(service_manager,  // SCM database
                                  name.c_str(),     // name of service
                                  GENERIC_EXECUTE | GENERIC_READ);
 
   if (service == nullptr) {
-    std::ostringstream error;
+    std::wostringstream error;
     error << "Failed to open the service!" << std::endl
           << "Service: " << name << std::endl
-          << "Error: " << GetLastErrorAsString();
+          << "Error: " << GetLastErrorAsWString();
     wxMessageDialog err(nullptr, error.str(), "Error Start Service",
                         wxOK | wxCENTRE | wxICON_ERROR);
     err.ShowModal();
@@ -51,10 +70,10 @@ void Start(SC_HANDLE service_manager, const std::wstring& name) {
 
   if (!start) {
     ::CloseServiceHandle(service);
-    std::ostringstream error;
+    std::wostringstream error;
     error << "Failed to start the service!" << std::endl
           << "Service: " << name << std::endl
-          << "Error: " << GetLastErrorAsString();
+          << "Error: " << GetLastErrorAsWString();
     wxMessageDialog err(nullptr, error.str(), "Error Start Service",
                         wxOK | wxCENTRE | wxICON_WARNING);
     err.ShowModal();
@@ -78,7 +97,7 @@ void Start(SC_HANDLE service_manager, const std::wstring& name) {
   }
   ::CloseServiceHandle(service);
   if (timeout) {
-    std::ostringstream error;
+    std::wostringstream error;
     error << "Failed to start the service!" << std::endl
           << "Service: " << name << std::endl
           << "Error: "
@@ -95,10 +114,10 @@ void Stop(SC_HANDLE service_manager, const std::wstring& name) {
                                  GENERIC_EXECUTE | GENERIC_READ);
 
   if (service == nullptr) {
-    std::ostringstream error;
+    std::wostringstream error;
     error << "Failed to open the service!" << std::endl
           << "Service: " << name << std::endl
-          << "Error: " << GetLastErrorAsString();
+          << "Error: " << GetLastErrorAsWString();
     wxMessageDialog err(nullptr, error.str(), "Error Stop Service",
                         wxOK | wxCENTRE | wxICON_ERROR);
     err.ShowModal();
@@ -110,10 +129,10 @@ void Stop(SC_HANDLE service_manager, const std::wstring& name) {
 
   if (!stop) {
     ::CloseServiceHandle(service);
-    std::ostringstream error;
+    std::wostringstream error;
     error << "Failed to stop the service!" << std::endl
           << "Service: " << name << std::endl
-          << "Error: " << GetLastErrorAsString();
+          << "Error: " << GetLastErrorAsWString();
     wxMessageDialog err(nullptr, error.str(), "Error Stop Service",
                         wxOK | wxCENTRE | wxICON_WARNING);
     err.ShowModal();
@@ -137,7 +156,7 @@ void Stop(SC_HANDLE service_manager, const std::wstring& name) {
   }
   ::CloseServiceHandle(service);
   if (timeout) {
-    std::ostringstream error;
+    std::wostringstream error;
     error << "Failed to stop the service!" << std::endl
           << "Service: " << name << std::endl
           << "Error: "
@@ -199,7 +218,7 @@ void Install(SC_HANDLE service_manager, const std::wstring& name) {
     std::wostringstream error;
     error << L"Failed to create the service!" << std::endl
           << L"Service: " << name << std::endl
-          << L"Error: " << GetLastErrorAsString();
+          << L"Error: " << GetLastErrorAsWString();
     wxMessageDialog err(nullptr, error.str(), L"Error Install Service",
                         wxOK | wxCENTRE | wxICON_ERROR);
     err.ShowModal();
@@ -210,10 +229,10 @@ void Install(SC_HANDLE service_manager, const std::wstring& name) {
   const auto change_delay = ::ChangeServiceConfig2W(
       service, SERVICE_CONFIG_DELAYED_AUTO_START_INFO, &delay);
   if (!change_delay) {
-    std::ostringstream error;
+    std::wostringstream error;
     error << "Failed to set the delayed startup!" << std::endl
           << "Service: " << name << std::endl
-          << "Error: " << GetLastErrorAsString();
+          << "Error: " << GetLastErrorAsWString();
     wxMessageDialog err(nullptr, error.str(), "Error Install Service",
                         wxOK | wxCENTRE | wxICON_WARNING);
     err.ShowModal();
@@ -224,10 +243,10 @@ void Install(SC_HANDLE service_manager, const std::wstring& name) {
   const auto change_description = ::ChangeServiceConfig2W(
       service, SERVICE_CONFIG_DESCRIPTION, &description);
   if (!change_description) {
-    std::ostringstream error;
+    std::wostringstream error;
     error << "Failed to set the delayed startup!" << std::endl
           << "Service: " << name << std::endl
-          << "Error: " << GetLastErrorAsString();
+          << "Error: " << GetLastErrorAsWString();
     wxMessageDialog err(nullptr, error.str(), "Error Install Service",
                         wxOK | wxCENTRE | wxICON_WARNING);
     err.ShowModal();
@@ -235,7 +254,7 @@ void Install(SC_HANDLE service_manager, const std::wstring& name) {
 
   ::CloseServiceHandle(service);
   {
-    std::ostringstream success;
+    std::wostringstream success;
     success << "Installed service successfully." << std::endl
             << "Service: " << name;
     wxMessageDialog message(nullptr, success.str(), "Install Service",
@@ -250,10 +269,10 @@ void Uninstall(SC_HANDLE service_manager, const std::wstring& name) {
                                  SERVICE_ALL_ACCESS);
 
   if (service == nullptr) {
-    std::ostringstream error;
+    std::wostringstream error;
     error << "Failed to open the service!" << std::endl
           << "Service: " << name << std::endl
-          << "Error: " << GetLastErrorAsString();
+          << "Error: " << GetLastErrorAsWString();
     wxMessageDialog err(nullptr, error.str(), "Error Uninstall Service",
                         wxOK | wxCENTRE | wxICON_ERROR);
     err.ShowModal();
@@ -262,17 +281,17 @@ void Uninstall(SC_HANDLE service_manager, const std::wstring& name) {
 
   const auto del = ::DeleteService(service);
   if (!del) {
-    std::ostringstream error;
+    std::wostringstream error;
     error << "Failed to set the delete the service!" << std::endl
           << "Service: " << name << std::endl
-          << "Error: " << GetLastErrorAsString();
+          << "Error: " << GetLastErrorAsWString();
     wxMessageDialog err(nullptr, error.str(), "Error Uninstall Service",
                         wxOK | wxCENTRE | wxICON_WARNING);
     err.ShowModal();
   }
   ::CloseServiceHandle(service);
   {
-    std::ostringstream success;
+    std::wostringstream success;
     success << "Uninstalled service successfully." << std::endl
             << "Service: " << name;
     wxMessageDialog message(nullptr, success.str(), "Install Service",
@@ -359,7 +378,7 @@ void InstallService(const std::wstring& name) {
     std::wostringstream error;
     error << L"Failed to open the service manager!" << std::endl
           << L"Service: " << name << std::endl
-          << "Error: " << GetLastErrorAsString();
+          << "Error: " << GetLastErrorAsWString();
     wxMessageDialog err(nullptr, error.str(), L"Error Install Service",
                         wxOK | wxCENTRE | wxICON_AUTH_NEEDED);
     err.ShowModal();
@@ -373,10 +392,10 @@ void InstallService(const std::wstring& name) {
 void UninstallService(const std::wstring& name) {
   auto service_manager = OpenSCManagerW(nullptr, nullptr, GENERIC_ALL);
   if (service_manager == nullptr) {
-    std::ostringstream error;
+    std::wostringstream error;
     error << "Failed to open the service manager!" << std::endl
           << "Service: " << name << std::endl
-          << "Error: " << GetLastErrorAsString();
+          << "Error: " << GetLastErrorAsWString();
     wxMessageDialog err(nullptr, error.str(), "Error Uninstall Service",
                         wxOK | wxCENTRE | wxICON_AUTH_NEEDED);
     err.ShowModal();
@@ -391,10 +410,10 @@ void StartServiceInt(const std::wstring& name) {
   auto service_manager =
       OpenSCManagerW(nullptr, nullptr, GENERIC_EXECUTE | GENERIC_READ);
   if (service_manager == nullptr) {
-    std::ostringstream error;
+    std::wostringstream error;
     error << "Failed to open the service manager!" << std::endl
           << "Service: " << name << std::endl
-          << "Error: " << GetLastErrorAsString();
+          << "Error: " << GetLastErrorAsWString();
     wxMessageDialog err(nullptr, error.str(), "Error Start Service",
                         wxOK | wxCENTRE | wxICON_AUTH_NEEDED);
     err.ShowModal();
@@ -409,10 +428,10 @@ void StopServiceInt(const std::wstring& name) {
   auto service_manager =
       OpenSCManagerW(nullptr, nullptr, GENERIC_EXECUTE | GENERIC_READ);
   if (service_manager == nullptr) {
-    std::ostringstream error;
+    std::wostringstream error;
     error << "Failed to open the service manager!" << std::endl
           << "Service: " << name << std::endl
-          << "Error: " << GetLastErrorAsString();
+          << "Error: " << GetLastErrorAsWString();
     wxMessageDialog err(nullptr, error.str(), "Error Start Service",
                         wxOK | wxCENTRE | wxICON_AUTH_NEEDED);
     err.ShowModal();

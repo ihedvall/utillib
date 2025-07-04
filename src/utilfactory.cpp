@@ -17,7 +17,10 @@
 #include "syslogsubscriber.h"
 #include "tcpsyslogserver.h"
 #include "udpsyslogserver.h"
+#include "processmaster.h"
 #include "util/stringutil.h"
+#include "util/logstream.h"
+
 using namespace util::syslog;
 using namespace util::log;
 using namespace util::string;
@@ -57,7 +60,7 @@ std::unique_ptr<ISyslogServer> UtilFactory::CreateSyslogServer(
 }
 
 std::unique_ptr<log::ILogger> UtilFactory::CreateLogger(
-    log::LogType type, std::vector<std::string> &arg_list) {
+    log::LogType type, const std::vector<std::string> &arg_list) {
   std::unique_ptr<ILogger> logger;
 
   switch (type) {
@@ -103,10 +106,59 @@ std::unique_ptr<IListen> UtilFactory::CreateListen(
   return listen;
 }
 
+std::unique_ptr<IListen> UtilFactory::CreateListen( TypeOfListen type,
+    const std::string &share_name) {
+  std::unique_ptr<IListen> listen;
+  switch (type) {
+    case TypeOfListen::ListenProxyType:
+      if (!share_name.empty()) {
+        listen = std::make_unique<detail::ListenProxy>(share_name);
+      } else {
+        LOG_ERROR() << "ListenProxy requires a share memory name.";
+      }
+      break;
+
+    case TypeOfListen::ListenServerType:
+      listen = std::make_unique<detail::ListenServer>(share_name);
+      break;
+
+    case TypeOfListen::ListenConsoleType:
+      listen = std::make_unique<detail::ListenConsole>(share_name);
+      break;
+
+    default:
+      LOG_ERROR() << "Unknown listen type: " << static_cast<int>(type);
+      break;
+  }
+  return listen;
+}
+
 std::unique_ptr<log::IListenClient> UtilFactory::CreateListenClient(
     const std::string &host, uint16_t port) {
   auto temp = std::make_unique<log::detail::ListenClient>(host, port);
   return temp;
+}
+
+std::unique_ptr<supervise::ISuperviseMaster> UtilFactory::CreateSuperviseMaster(
+    supervise::TypeOfSuperviseMaster type) {
+  std::unique_ptr<supervise::ISuperviseMaster> master;
+  switch (type) {
+    case supervise::TypeOfSuperviseMaster::SuperviseMasterType: {
+      master = std::make_unique<supervise::ISuperviseMaster>();
+      break;
+    }
+
+    case supervise::TypeOfSuperviseMaster::ProcessMasterType: {
+      master = std::make_unique<supervise::ProcessMaster>();
+      break;
+    }
+    default: {
+      LOG_ERROR() << "Unknown supervise master. Type: "
+        << static_cast<int>(type);
+      break;
+    }
+  }
+  return master;
 }
 
 }  // namespace util

@@ -49,7 +49,7 @@ int main(int nof_arg, char* arg_list[]) {
     return 0;
   }
 
-  const auto run = service.RunService();
+  const bool run = service.RunService();
   if (!run) {
     LOG_ERROR() << "Failed to run service daemon . Service: " << service.Name();
     return 0;

@@ -22,9 +22,9 @@ endif ()
 
 target_link_libraries(listend PRIVATE util)
 target_link_libraries(listend PRIVATE EXPAT::EXPAT)
-target_link_libraries(listend PRIVATE ${Boost_LIBRARIES})
-
-
+target_link_libraries(listend PRIVATE Boost::filesystem)
+target_link_libraries(listend PRIVATE Boost::process)
+target_link_libraries(listend PRIVATE sago::platform_folders)
 if (WIN32)
     target_link_libraries(listend PRIVATE bcrypt)
     target_link_libraries(listend PRIVATE ws2_32)

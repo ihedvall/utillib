@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['logseverity_0',['LogSeverity',['../namespaceutil_1_1log.html#aa21d9be4063c51bfeb18a06859495e8a',1,'util::log']]],
-  ['logtype_1',['LogType',['../namespaceutil_1_1log.html#acce1c2a148c64f8bfbed195ac8c333e4',1,'util::log']]]
+  ['gnuterminal_0',['GnuTerminal',['../namespaceutil_1_1plot.html#ab3cc744037b7f0af56422de9c1472cd8',1,'util::plot']]]
 ];

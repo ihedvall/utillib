@@ -1,5 +1,7 @@
 <map id="include/util/unithelper.h" name="include/util/unithelper.h">
-<area shape="rect" id="node1" title="Support class when creating unit of measure and quantities groups." alt="" coords="5,5,160,31"/>
-<area shape="rect" id="node2" title=" " alt="" coords="15,79,70,104"/>
-<area shape="rect" id="node3" title=" " alt="" coords="95,79,151,104"/>
+<area shape="rect" id="Node000001" title="Support class when creating unit of measure and quantities groups." alt="" coords="5,5,160,32"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="16,80,69,107"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="78,34,59,68,54,65,73,31"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="94,80,151,107"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="92,31,111,65,106,68,87,34"/>
 </map>

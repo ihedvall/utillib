@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: MIT
 
 if (NOT wxWidgets_FOUND )
-  find_package(wxWidgets COMPONENTS adv core base)
+  find_package(wxWidgets COMPONENTS net adv core base)
 endif()
 
 if (wxWidgets_FOUND)
@@ -33,7 +33,7 @@ if (NOT wxWidgets_FOUND)
         endif()
         set(wxWidgets_USE_UNIVERSAL OFF)
     endif()
-    find_package(wxWidgets COMPONENTS adv core base )
+    find_package(wxWidgets COMPONENTS net adv core base )
     include(${wxWidgets_USE_FILE})
 
 endif()

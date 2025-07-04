@@ -7,6 +7,8 @@
 #include <mutex>
 #include <string>
 #include <vector>
+#include <sago/platform_folders.h>
+
 #ifdef WIN32
 #include <shlobj.h>
 #pragma comment(lib, "shell32")
@@ -34,10 +36,14 @@ std::string ProgramDataPath() {
   if (path != nullptr) {
     CoTaskMemFree(path);
   }
+#else
+
+  app_data_path = sago::getStateDir();
 #endif
 
   return app_data_path;
 }
+
 LogConfig &LogConfig::Instance() {
   static LogConfig log_config;
   return log_config;

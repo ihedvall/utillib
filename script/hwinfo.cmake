@@ -6,8 +6,6 @@
 include(FetchContent)
 include(CMakePrintHelpers)
 
-
-
 FetchContent_Declare(hwinfo
         GIT_REPOSITORY https://github.com/lfreist/hwinfo.git
         GIT_TAG HEAD

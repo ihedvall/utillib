@@ -1,5 +1,7 @@
 <map id="include/util/ilogger.h" name="include/util/ilogger.h">
-<area shape="rect" id="node1" title="Defines an interface against a generic logger." alt="" coords="100,5,237,31"/>
-<area shape="rect" id="node2" href="$logconfig_8h.html" title="Singleton that is used to configure default loggers." alt="" coords="5,79,156,104"/>
-<area shape="rect" id="node3" href="$utilfactory_8h.html" title=" " alt="" coords="181,79,335,104"/>
+<area shape="rect" id="Node000001" title="Defines an interface against a generic logger." alt="" coords="100,5,237,32"/>
+<area shape="rect" id="Node000002" href="$logconfig_8h.html" title="Singleton that is used to configure default loggers." alt="" coords="5,80,156,107"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="143,44,97,82,94,78,140,40"/>
+<area shape="rect" id="Node000003" href="$utilfactory_8h.html" title=" " alt="" coords="179,80,334,107"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="197,40,243,78,240,82,194,44"/>
 </map>

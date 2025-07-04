@@ -9,18 +9,33 @@
  * The listen interface object defines a debugging interface that
  * can be used in production code.
  *
- * The listen object is inactive as long as nobody has opened
+ * The listen object is inactive, as long as nobody has opened
  * a listen window GUI application against this listen object.
+ * When a listen window GUI, the debugging is enabled.
+ *
  */
 #pragma once
+
 #include <map>
 #include <memory>
 #include <sstream>
 #include <string>
 #include <vector>
+#include <atomic>
+
 namespace util::log {
 
 class ListenStream;
+
+/** \brief Defines the type of listen objects.
+ *
+ * Define type of listen (server) objects
+ */
+enum class TypeOfListen {
+  ListenProxyType = 0, ///< Forward the listen messages in shared memory.
+  ListenServerType, ///< TCP/IP server that forwards the listen messages.
+  ListenConsoleType, ///< Forward the listen messages to a console window.
+};
 
 /** \class IListen ilisten.h "util/ilisten.h"
  * \brief An interface class that hides the actual implementation of the object.
@@ -34,43 +49,43 @@ class IListen {
 
   /** \brief Display name.
    *
-   * User friendly short name that mainly is used when selecting a listen
+   * User-friendly short name that mainly is used when selecting a listen
    * object.
    * @return Display name.
    */
-  [[nodiscard]] const std::string& Name() const { return name_; }
+  [[nodiscard]] const std::string &Name() const { return name_; }
 
   /** \brief Sets the display name.
    *
    * Sets the display name. The name should be short.
    * @param name Short display name.
    */
-  void Name(const std::string& name) { name_ = name; }
+  void Name(const std::string &name) { name_ = name; }
 
   /** \brief Description of the listen object.
    *
-   * Descriptive text of the listen object. Mainly used for
+   * Descriptive text of the listening object. Mainly used for
    * displaying purpose.
    * @return Description of the listen object.
    */
-  [[nodiscard]] const std::string& Description() const { return description_; }
+  [[nodiscard]] const std::string &Description() const { return description_; }
 
   /** \brief Sets the description for the listen object.
    *
    * Sets the description of the listen object.
-   * @param description
+   * @param description Descriptive text that is used for display purpose.
    */
-  void Description(const std::string& description) {
+  void Description(const std::string &description) {
     description_ = description;
   }
 
   /** \brief Text that always starts a text line.
    *
    * The pre-text is a short text that is added to each listen
-   * text lines. This property defines the default text.
+   * text line. This property defines the default text.
    * @return The default pre-text.
    */
-  [[nodiscard]] const std::string& PreText() const { return pre_text_; }
+  [[nodiscard]] const std::string &PreText() const { return pre_text_; }
 
   /** \brief Sets the default pre-text that starts each line.
    *
@@ -79,13 +94,13 @@ class IListen {
    * sets the default text.
    * @param pre_text Short pre-text before each text line.
    */
-  void PreText(const std::string& pre_text) { pre_text_ = pre_text; }
+  void PreText(const std::string &pre_text) { pre_text_ = pre_text; }
 
   /** \brief Host name for the object.
    *
    * Host name for the listen object. Only valid for listen servers.
    */
-  [[nodiscard]] const std::string& HostName() const { return host_name_; }
+  [[nodiscard]] const std::string &HostName() const { return host_name_; }
 
   /** \brief Sets the host name for the listen object.
    *
@@ -95,7 +110,7 @@ class IListen {
    * Default is localhost (127.0.0.1).
    * @param host_name Host name or IP port.
    */
-  void HostName(const std::string& host_name) { host_name_ = host_name; }
+  void HostName(const std::string &host_name) { host_name_ = host_name; }
 
   /** \brief TCP/IP port
    *
@@ -113,19 +128,19 @@ class IListen {
 
   /** \brief Sets the log level menu texts.
    *
-   * Sets the a log levels menu text. Note that level 0 should
+   * Sets the log level menu text. Note that level 0 should
    * always be defined and it will be the default level.
    * @param level Log level number (index).
    * @param menu_text Menu text
    */
-  void SetLogLevelText(uint64_t level, const std::string& menu_text);
+  void SetLogLevelText(uint64_t level, const std::string &menu_text);
 
   /** \brief Returns all log levels and their menu texts.
    *
    * Returns a list of leg levels and their menu texts
    * @return Sorted list of log levels in use.
    */
-  [[nodiscard]] const std::map<uint64_t, std::string>& LogLevelList() const;
+  [[nodiscard]] const std::map<uint64_t, std::string> &LogLevelList() const;
 
   /** \brief Generates a listen text line.
    *
@@ -133,7 +148,7 @@ class IListen {
    * stmp.
    * @param text text as a string
    */
-  void ListenString(const std::string& text);
+  void ListenString(const std::string &text);
 
   ListenStream ListenOut();  ///< Internal debug function (unit tests)
 
@@ -144,7 +159,8 @@ class IListen {
    * @param format_text C-style text format
    * @param ... Ellipse function.
    */
-  void ListenText(const char* format_text, ...);
+  void ListenText(const char *format_text, ...);
+
   /** \brief Generate a user defined text line.
    *
    * Generates a text line with user defined time stamp and pre-text.
@@ -153,8 +169,8 @@ class IListen {
    * @param format_text C-style text format.
    * @param ... Ellipse function.
    */
-  void ListenTextEx(uint64_t ns1970, const std::string& pre_text,
-                    const char* format_text, ...);
+  void ListenTextEx(uint64_t ns1970, const std::string &pre_text,
+                    const char *format_text, ...);
 
   /** \brief Generates a hex string text from a byte buffer
    *
@@ -165,8 +181,8 @@ class IListen {
    * @param buffer Byte buffer.
    * @param hint Optional hint
    */
-  virtual void ListenTransmit(uint64_t ns1970, const std::string& pre_text,
-                              const std::vector<uint8_t>& buffer, void* hint);
+  virtual void ListenTransmit(uint64_t ns1970, const std::string &pre_text,
+                              const std::vector<uint8_t> &buffer, void *hint);
 
   /** \brief Generates a hex string text from a byte buffer
    *
@@ -177,8 +193,8 @@ class IListen {
    * @param buffer Byte buffer.
    * @param hint Optional hint
    */
-  virtual void ListenReceive(uint64_t ns1970, const std::string& pre_text,
-                             const std::vector<uint8_t>& buffer, void* hint);
+  virtual void ListenReceive(uint64_t ns1970, const std::string &pre_text,
+                             const std::vector<uint8_t> &buffer, void *hint);
 
   virtual void SetActive(
       bool active);  ///< Activate or deactivate the listen object
@@ -221,6 +237,21 @@ class IListen {
    */
   [[nodiscard]] virtual size_t NofConnections() const;
 
+  /** \brief Returns number of generated messages.
+   *
+   * Returns number of messages that have been sent.
+   * This property is used for testing purposes only.
+   * @return Number of forwarded messages.
+   */
+  uint64_t GetNumberOfMessages() const { return number_of_messages_; }
+
+  /** Reset the number of messages.
+   *
+   * Reset the number of message counter.
+   * This function is mostly used in testing applications.
+   */
+  void ResetNumberOfMessages() { number_of_messages_ = 0; }
+
  protected:
   std::string share_name_;   ///< Share memory name
   std::string name_;         ///< Display name.
@@ -229,6 +260,7 @@ class IListen {
   std::string host_name_ = "127.0.0.1";             ///< Host name
   uint16_t port_ = 0;                               ///< IP-port to listen on.
   std::map<uint64_t, std::string> log_level_list_;  ///< Log level index and
+
 
   IListen() = default;                              ///< Default constructor
 
@@ -240,17 +272,25 @@ class IListen {
    * @param pre_text Pre-text string
    * @param text Message text
    */
-  virtual void AddMessage(uint64_t nano_sec_1970, const std::string& pre_text,
-                          const std::string& text) = 0;
+  virtual void AddMessage(uint64_t nano_sec_1970, const std::string &pre_text,
+                          const std::string &text) = 0;
 
   /** \brief Parses a byte buffer into a hexadecimal string.
    *
    * @param buffer
    * @return
    */
-  static std::string ParseHex(const std::vector<uint8_t>& buffer);
+  static std::string ParseHex(const std::vector<uint8_t> &buffer);
+
+  /** Increments the number of messages.
+   *
+   * The function increments the internal message counter.
+   * The message counter is intended for testing purposes.
+   */
+  void IncrementNumberOfMessages() { ++number_of_messages_; }
 
  private:
+  std::atomic<uint64_t> number_of_messages_ = 0;
 };
 
 /** \brief Support stream class when log messages to the listen functionality
@@ -260,7 +300,8 @@ class IListen {
 class ListenStream final : public std::ostringstream {
  public:
   ListenStream() = delete;
-  explicit ListenStream(IListen& listen) : listen_(listen) {}  ///< Constructor
+
+  explicit ListenStream(IListen &listen) : listen_(listen) {}  ///< Constructor
 
   ~ListenStream() override {                                   ///< Destructor
     if (listen_.IsActive()) {
@@ -269,6 +310,6 @@ class ListenStream final : public std::ostringstream {
   }
 
  private:
-  IListen& listen_;  ///< Listen object
+  IListen &listen_;  ///< Listen object
 };
 }  // namespace util::log

@@ -1,0 +1,9 @@
+<map id="include/util/systeminfo.h" name="include/util/systeminfo.h">
+<area shape="rect" id="Node000001" title="Interface against the system information." alt="" coords="57,5,219,32"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,80,87,107"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="124,35,75,73,72,68,120,30"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="111,80,165,107"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="141,33,141,64,135,64,135,33"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="189,80,263,107"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="155,30,201,68,197,72,152,35"/>
+</map>

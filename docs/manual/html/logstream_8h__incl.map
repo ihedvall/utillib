@@ -1,9 +1,14 @@
 <map id="include/util/logstream.h" name="include/util/logstream.h">
-<area shape="rect" id="node1" title="Implements a stream interface to log messages. This is the file to use in most applications...." alt="" coords="34,5,190,31"/>
-<area shape="rect" id="node2" title=" " alt="" coords="5,79,75,104"/>
-<area shape="rect" id="node3" title=" " alt="" coords="85,159,139,185"/>
-<area shape="rect" id="node4" href="$logging_8h.html" title="Standard log interfaces." alt="" coords="150,79,245,104"/>
-<area shape="rect" id="node5" title=" " alt="" coords="163,159,229,185"/>
-<area shape="rect" id="node6" title=" " alt="" coords="253,159,310,185"/>
-<area shape="rect" id="node7" title=" " alt="" coords="335,152,473,192"/>
+<area shape="rect" id="Node000001" title="Implements a stream interface to log messages. This is the file to use in most applications...." alt="" coords="34,5,189,32"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,80,74,107"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="101,34,64,71,61,67,97,31"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="86,163,140,189"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="114,33,115,147,110,147,109,33"/>
+<area shape="rect" id="Node000004" href="$logging_8h.html" title="Standard log interfaces." alt="" coords="148,80,243,107"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="128,31,171,68,168,72,124,35"/>
+<area shape="poly" id="edge5_Node000004_Node000003" title=" " alt="" coords="184,109,138,154,135,150,181,105"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="164,163,224,189"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="198,107,197,147,192,147,193,107"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="249,155,387,197"/>
+<area shape="poly" id="edge6_Node000004_Node000006" title=" " alt="" coords="216,105,276,144,273,148,213,109"/>
 </map>

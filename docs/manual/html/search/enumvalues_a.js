@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['warning_0',['Warning',['../namespaceutil_1_1syslog.html#a4173932d17b5c5713372e13f197de0b0a0eaadb4fcb48a0a0ed7bc9868be9fbaa',1,'util::syslog']]],
-  ['wxt_1',['wxt',['../namespaceutil_1_1plot.html#ab3cc744037b7f0af56422de9c1472cd8a31aa1b74de685d3e992b8b20b29277a6',1,'util::plot']]]
+  ['manual_0',['Manual',['../isuperviseapplication_8h.html#a45f18197920244f0abf3eac282583ce5ae1ba155a9f2e8c3be94020eef32a0301',1,'util::supervise']]]
 ];

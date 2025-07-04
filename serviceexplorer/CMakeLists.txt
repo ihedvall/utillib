@@ -32,7 +32,7 @@ endif()
 
 target_link_libraries(serviceexplorer PRIVATE util)
 target_link_libraries(serviceexplorer PRIVATE EXPAT::EXPAT)
-target_link_libraries(serviceexplorer PRIVATE ${wxWidgets_LIBRARIES})
+target_link_libraries(serviceexplorer PRIVATE wxWidgets::wxWidgets)
 target_link_libraries(serviceexplorer PRIVATE ${Boost_LIBRARIES})
 
 

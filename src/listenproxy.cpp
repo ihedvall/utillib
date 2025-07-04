@@ -95,6 +95,7 @@ void ListenProxy::AddMessage(uint64_t nano_sec_1970,
     strcpy(msg.text, out.str().c_str());
     queue_.Add(msg);
   }
+  IncrementNumberOfMessages();
 }
 void ListenProxy::SetLogLevel(size_t log_level) {
   queue_.SetLogLevel(static_cast<uint8_t>(log_level));

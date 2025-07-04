@@ -18,16 +18,39 @@ namespace util::log {
 
 #define LOG_TRACE()                               \
   util::log::LogStream(util::log::Loc::current(), \
-                       util::log::LogSeverity::kTrace)  ///< Trace log stream
+                       util::log::LogSeverity::kTrace) ///< Trace log stream
+
 #define LOG_DEBUG()                               \
   util::log::LogStream(util::log::Loc::current(), \
-                       util::log::LogSeverity::kDebug)  ///< Debug log stream
+                       util::log::LogSeverity::kDebug) ///< Debug log stream
+
 #define LOG_INFO()                                \
   util::log::LogStream(util::log::Loc::current(), \
-                       util::log::LogSeverity::kInfo)  ///< Info log stream
+                       util::log::LogSeverity::kInfo) ///< Info log stream
+
+#define LOG_NOTICE()                               \
+  util::log::LogStream(util::log::Loc::current(), \
+                       util::log::LogSeverity::kNotice) ///< Notice log stream
+
+#define LOG_WARNING()                               \
+  util::log::LogStream(util::log::Loc::current(), \
+                       util::log::LogSeverity::kWarning) ///< Warning log stream
+
 #define LOG_ERROR()                               \
   util::log::LogStream(util::log::Loc::current(), \
                        util::log::LogSeverity::kError)  ///< Error log stream
+
+#define LOG_CRITICAL()                               \
+  util::log::LogStream(util::log::Loc::current(), \
+                       util::log::LogSeverity::kCritical) ///< Critical log stream
+
+#define LOG_ALERT()                               \
+  util::log::LogStream(util::log::Loc::current(), \
+                       util::log::LogSeverity::kAlert) ///< Alert log stream
+
+#define LOG_EMERGENCY()                               \
+  util::log::LogStream(util::log::Loc::current(), \
+                       util::log::LogSeverity::kEmergency) ///< Emergency log stream
 
 /** \class LogStream logstream.h "util/logstream,h"
  * \brief This class implements a stream interface around a log message.

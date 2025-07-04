@@ -1,10 +1,22 @@
 <map id="include/util/ixmlfile.h" name="include/util/ixmlfile.h">
-<area shape="rect" id="node1" title=" " alt="" coords="5,5,144,31"/>
-<area shape="rect" id="node2" title=" " alt="" coords="40,152,109,177"/>
-<area shape="rect" id="node3" title=" " alt="" coords="374,225,429,251"/>
-<area shape="rect" id="node4" href="$ixmlnode_8h.html" title=" " alt="" coords="244,79,351,104"/>
-<area shape="rect" id="node5" title=" " alt="" coords="528,152,597,177"/>
-<area shape="rect" id="node6" title=" " alt="" coords="134,152,245,177"/>
-<area shape="rect" id="node7" title=" " alt="" coords="269,152,325,177"/>
-<area shape="rect" id="node8" href="$stringutil_8h_source.html" title=" " alt="" coords="350,152,453,177"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,145,32"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="41,155,109,181"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="78,33,78,139,72,139,72,33"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="336,229,390,256"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="67,34,46,63,26,102,20,123,17,143,21,162,30,180,49,194,79,206,158,223,246,233,321,238,321,243,246,239,157,229,77,211,47,199,26,183,16,164,12,143,14,122,21,100,42,60,62,31"/>
+<area shape="rect" id="Node000004" href="$ixmlnode_8h.html" title=" " alt="" coords="244,80,349,107"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="114,30,244,72,242,77,113,35"/>
+<area shape="poly" id="edge4_Node000004_Node000002" title=" " alt="" coords="259,110,125,153,123,148,257,105"/>
+<area shape="poly" id="edge6_Node000004_Node000003" title=" " alt="" coords="308,105,339,154,359,214,354,215,334,156,304,108"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="526,155,594,181"/>
+<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="343,105,512,151,510,156,342,110"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="133,155,244,181"/>
+<area shape="poly" id="edge7_Node000004_Node000006" title=" " alt="" coords="279,109,221,148,218,143,276,105"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="268,155,325,181"/>
+<area shape="poly" id="edge8_Node000004_Node000007" title=" " alt="" coords="299,107,299,139,294,139,294,107"/>
+<area shape="rect" id="Node000008" href="$stringutil_8h_source.html" title=" " alt="" coords="400,155,502,181"/>
+<area shape="poly" id="edge9_Node000004_Node000008" title=" " alt="" coords="324,105,411,145,409,150,322,110"/>
+<area shape="poly" id="edge11_Node000008_Node000003" title=" " alt="" coords="437,184,392,221,388,217,434,180"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="421,229,481,256"/>
+<area shape="poly" id="edge10_Node000008_Node000009" title=" " alt="" coords="454,182,454,214,448,214,448,182"/>
 </map>

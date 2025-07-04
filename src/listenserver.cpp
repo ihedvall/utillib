@@ -28,7 +28,9 @@ ListenServer::ListenServer(const std::string& share_name) : ListenServer() {
   ShareName(share_name);
 }
 
-ListenServer::~ListenServer() { Stop(); }
+ListenServer::~ListenServer() {
+  ListenServer::Stop();
+}
 
 void ListenServer::WorkerTask() {
   try {
@@ -113,6 +115,7 @@ void ListenServer::AddMessage(uint64_t nano_sec_1970,
   msg->pre_text_ = pre_text;
   msg->text_ = text;
   InMessage(std::move(msg));
+  IncrementNumberOfMessages();
 }
 
 void ListenServer::DoAccept() {
@@ -124,9 +127,10 @@ void ListenServer::DoAccept() {
           LOG_ERROR() << "Accept error. Name: " << Name()
                       << ", Error: " << error.message();
         } else {
-          auto connection = std::make_unique<ListenServerConnection>(
-              *this, connection_socket_);
+
           {
+            auto connection = std::make_unique<ListenServerConnection>(
+              *this, connection_socket_);
             std::lock_guard lock(connection_list_lock_);
             connection_list_.push_back(std::move(connection));
           }
@@ -141,7 +145,8 @@ void ListenServer::DoAccept() {
 
 void ListenServer::DoCleanup() {
   cleanup_timer_.expires_after(2s);
-  cleanup_timer_.async_wait([&](const boost::system::error_code error) {
+  cleanup_timer_.async_wait(
+      [&](const boost::system::error_code& error) -> void {
     if (error) {
       LOG_ERROR() << "Cleanup timer error. Name: " << Name()
                   << ", Error: " << error.message();
@@ -167,7 +172,8 @@ void ListenServer::DoCleanup() {
 
 void ListenServer::DoMessageQueue() {
   queue_timer_.expires_after(50ms);
-  queue_timer_.async_wait([&](const boost::system::error_code error) {
+  queue_timer_.async_wait([&](
+    const boost::system::error_code& error) -> void {
     if (error) {
       LOG_ERROR() << "Message queue timer error. Name: " << Name()
                   << ", Error: " << error.message();

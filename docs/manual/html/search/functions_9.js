@@ -11,11 +11,12 @@ var searchData=
   ['listentext_8',['ListenText',['../classutil_1_1log_1_1_i_listen.html#aee8fcdf76ea9c0803ee6b8c9659c2efa',1,'util::log::IListen']]],
   ['listentextex_9',['ListenTextEx',['../classutil_1_1log_1_1_i_listen.html#a0c6524b549b4b988e1fa41d43cb54e45',1,'util::log::IListen']]],
   ['listentransmit_10',['ListenTransmit',['../classutil_1_1log_1_1_i_listen.html#a9cd827eb10eb081f52881498184292ab',1,'util::log::IListen']]],
-  ['logdebug_11',['LogDebug',['../namespaceutil_1_1log.html#a45d1dccb31afbb62c9bf2dbbfd05d8f3',1,'util::log']]],
-  ['logerror_12',['LogError',['../namespaceutil_1_1log.html#a7975b1c262ba1bfb272c3e108a8dfdb4',1,'util::log']]],
-  ['loginfo_13',['LogInfo',['../namespaceutil_1_1log.html#ad4687e7206070d9d90295d7d6bb16f37',1,'util::log']]],
-  ['loglevel_14',['LogLevel',['../classutil_1_1log_1_1_i_listen.html#a0757530916eeff0f80603b93c106a831',1,'util::log::IListen']]],
-  ['loglevellist_15',['LogLevelList',['../classutil_1_1log_1_1_i_listen.html#a38b5b1946224361459cf061c9379caea',1,'util::log::IListen']]],
-  ['logstream_16',['LogStream',['../classutil_1_1log_1_1_log_stream.html#a6453689ae725bc011ffa1fa88095c6af',1,'util::log::LogStream']]],
-  ['logstring_17',['LogString',['../namespaceutil_1_1log.html#ad0f4c23bd22f6820c369f8d69dfcd098',1,'util::log']]]
+  ['location_11',['Location',['../classutil_1_1serial_1_1_serial_port_info.html#ae20ff0960a8b37443c073161c5ec5608',1,'util::serial::SerialPortInfo']]],
+  ['logdebug_12',['LogDebug',['../namespaceutil_1_1log.html#a45d1dccb31afbb62c9bf2dbbfd05d8f3',1,'util::log']]],
+  ['logerror_13',['LogError',['../namespaceutil_1_1log.html#a7975b1c262ba1bfb272c3e108a8dfdb4',1,'util::log']]],
+  ['loginfo_14',['LogInfo',['../namespaceutil_1_1log.html#ad4687e7206070d9d90295d7d6bb16f37',1,'util::log']]],
+  ['loglevel_15',['LogLevel',['../classutil_1_1log_1_1_i_listen.html#a0757530916eeff0f80603b93c106a831',1,'util::log::IListen']]],
+  ['loglevellist_16',['LogLevelList',['../classutil_1_1log_1_1_i_listen.html#a38b5b1946224361459cf061c9379caea',1,'util::log::IListen']]],
+  ['logstream_17',['LogStream',['../classutil_1_1log_1_1_log_stream.html#a6453689ae725bc011ffa1fa88095c6af',1,'util::log::LogStream']]],
+  ['logstring_18',['LogString',['../namespaceutil_1_1log.html#ad0f4c23bd22f6820c369f8d69dfcd098',1,'util::log']]]
 ];

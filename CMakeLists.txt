@@ -41,6 +41,7 @@ cmake_print_variables(USE_VCPKG VCPKG_MANIFEST_FEATURES)
 include(script/boost.cmake)
 include(script/expat.cmake)
 include(script/hwinfo.cmake)
+include(script/platform_folders.cmake)
 
 if (UTIL_TOOLS)
     include(script/wxwidgets.cmake)
@@ -133,6 +134,18 @@ add_library(util
         src/serialportinfo.cpp include/util/serialportinfo.h
         src/serialportinfowin.inc
         src/ihwinfo.cpp include/util/ihwinfo.h
+        src/isuperviseapplication.cpp
+        include/util/isuperviseapplication.h
+        src/isupervisemaster.cpp
+        include/util/isupervisemaster.h
+        src/processmaster.cpp
+        src/processmaster.h
+        src/systeminfo.cpp
+        include/util/systeminfo.h
+        src/processapplication.cpp
+        src/processapplication.h
+        src/windowsapplication.cpp
+        src/windowsapplication.h
 )
 
 target_include_directories(util PUBLIC
@@ -143,6 +156,7 @@ target_include_directories(util PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/src)
 target_include_directories(util PRIVATE ${Boost_INCLUDE_DIRS})
 target_include_directories(util PRIVATE ${EXPAT_INCLUDE_DIRS})
 target_include_directories(util PRIVATE ${hwinfo_SOURCE_DIR}/include)
+target_include_directories(util PRIVATE ${platform-folders_SOURCE_DIR})
 
 cmake_print_properties(TARGETS util PROPERTIES INCLUDE_DIRECTORIES)
 

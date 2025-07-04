@@ -64,9 +64,9 @@ class IDirectory {
   /** \brief Constructor by supplying a full path to a directory.
    *
    * Constructor by supplying a full path to a directory.
-   * @param filename Full path to the directory.
+   * @param dir_path Full path to the directory.
    */
-  explicit IDirectory(const std::string& filename);
+  explicit IDirectory(const std::string& dir_path);
 
   virtual ~IDirectory() = default;  ///< Destructor
 
