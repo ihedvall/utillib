@@ -19,8 +19,8 @@ using namespace std::chrono_literals;
 namespace util::syslog {
 
 SyslogSubscriber::SyslogSubscriber()
- : lookup_(context_),
-   retry_timer_(context_) {
+    : lookup_(context_),
+      retry_timer_(context_) {
   type_ = SyslogServerType::TcpSubscriber;
   operable_ = false;
 }
@@ -35,7 +35,7 @@ void SyslogSubscriber::WorkerTask() {
     DoLookup();
     const auto count = context_.run();
     LOG_TRACE() << "Stopped main worker thread. Count: " << count;
-  } catch (const std::exception& error) {
+  } catch (const std::exception &error) {
     LOG_ERROR() << "Context error. Error: " << error.what();
   }
 }
@@ -76,8 +76,8 @@ void SyslogSubscriber::Close() {
       }
     }
 
-  } catch (const std::exception& err) {
-      LOG_ERROR() << "Close exception error. Error: " << err.what();
+  } catch (const std::exception &err) {
+    LOG_ERROR() << "Close exception error. Error: " << err.what();
   }
 }
 
@@ -88,29 +88,29 @@ void SyslogSubscriber::DoLookup() {
   std::string port(std::to_string(Port()));
 
   lookup_.async_resolve(ip::tcp::v4(), address, port,
-    [&] (const error_code& error, ip::tcp::resolver::results_type result) -> void {
-      if (error.failed()) {
-        LOG_TRACE() << "Lookup error. Host: " << Address() << ":" << Port()
-                          << ",Error (" << error.value() << "): " << error.message();
-        DoRetryWait();
-      } else if (result.empty()) {
-        LOG_TRACE() << "DNS doesn't find any connections. Host: "
-          << Address() << ":" << Port();
-        DoRetryWait();
-      } else {
-        socket_ = std::make_unique<ip::tcp::socket>(context_);
-        endpoints_ = std::move(result);
-        endpoint_itr_ = endpoints_.begin();
-        DoConnect();
-      }
-    });
+                        [&](const error_code &error, ip::tcp::resolver::results_type result) -> void {
+                          if (error.failed()) {
+                            LOG_TRACE() << "Lookup error. Host: " << Address() << ":" << Port()
+                                        << ",Error (" << error.value() << "): " << error.message();
+                            DoRetryWait();
+                          } else if (result.empty()) {
+                            LOG_TRACE() << "DNS doesn't find any connections. Host: "
+                                        << Address() << ":" << Port();
+                            DoRetryWait();
+                          } else {
+                            socket_ = std::make_unique<ip::tcp::socket>(context_);
+                            endpoints_ = std::move(result);
+                            endpoint_itr_ = endpoints_.begin();
+                            DoConnect();
+                          }
+                        });
 }
 
 void SyslogSubscriber::DoRetryWait() {
   operable_ = false;
   retry_timer_.expires_after(5s);
   retry_timer_.async_wait([&](const error_code error) {
-    if (error ) {
+    if (error) {
       LOG_TRACE() << "Retry timer error. Error: " << error.message();
       return;
     }
@@ -123,33 +123,33 @@ void SyslogSubscriber::DoRetryWait() {
 }
 
 void SyslogSubscriber::DoConnect() {
-    auto& endp = *endpoint_itr_;
-    ++endpoint_itr_;
-     socket_->async_connect(endp, [&] ( error_code error) -> void {
-      if (error.failed() ) {
-        LOG_TRACE() << "Connect error. Host: " << endp.host_name()
-          << ", Service/Port:" << endp.service_name()
-          << ", Error: " << error.message();
-        if (endpoint_itr_ == endpoints_.end()) {
-          DoRetryWait();
-        } else {
-          socket_ = std::make_unique<ip::tcp::socket>(context_);
-          DoConnect();
-        }
-      } else if (!socket_->is_open()) {
-        LOG_TRACE() << "Connect failed. Host: " << endp.host_name()
-        << ", Service/Port:" << endp.service_name();
-        if (endpoint_itr_ == endpoints_.end()) {
-          DoRetryWait();
-        } else {
-          socket_ = std::make_unique<ip::tcp::socket>(context_);
-          DoConnect();
-        }
+  auto &end_point = *endpoint_itr_;
+  ++endpoint_itr_;
+  socket_->async_connect(end_point, [&](error_code error) -> void {
+    if (error.failed()) {
+      LOG_TRACE() << "Connect error. Host: " << end_point.host_name()
+                  << ", Service/Port:" << end_point.service_name()
+                  << ", Error: " << error.message();
+      if (endpoint_itr_ == endpoints_.end()) {
+        DoRetryWait();
       } else {
-        operable_ = true;
-        length_ = 0;
-        DoReadLength();
+        socket_ = std::make_unique<ip::tcp::socket>(context_);
+        DoConnect();
       }
+    } else if (!socket_->is_open()) {
+      LOG_TRACE() << "Connect failed. Host: " << end_point.host_name()
+                  << ", Service/Port:" << end_point.service_name();
+      if (endpoint_itr_ == endpoints_.end()) {
+        DoRetryWait();
+      } else {
+        socket_ = std::make_unique<ip::tcp::socket>(context_);
+        DoConnect();
+      }
+    } else {
+      operable_ = true;
+      length_ = 0;
+      DoReadLength();
+    }
   });
 }
 
@@ -158,7 +158,7 @@ void SyslogSubscriber::DoReadLength() {  // NOLINT
     return;
   }
   async_read(*socket_, buffer(length_buffer_.data(), 1),
-             [&](const error_code& error, std::size_t bytes) {  // NOLINT
+             [&](const error_code &error, std::size_t bytes) {  // NOLINT
                if (error) {
                  DoRetryWait();
                } else {
@@ -178,6 +178,7 @@ void SyslogSubscriber::DoReadLength() {  // NOLINT
                }
              });
 }
+
 void SyslogSubscriber::DoReadMessage() {  // NOLINT
   if (!socket_ || !socket_->is_open()) {
     return;
@@ -185,7 +186,7 @@ void SyslogSubscriber::DoReadMessage() {  // NOLINT
   msg_buffer_.clear();
   msg_buffer_.resize(length_, '\0');
   async_read(*socket_, buffer(msg_buffer_.data(), length_),
-             [&](const error_code& error, std::size_t bytes) {  // NOLINT
+             [&](const error_code &error, std::size_t bytes) {  // NOLINT
                if (error) {
                  LOG_TRACE()
                      << "Read message error. Error: " << error.message();

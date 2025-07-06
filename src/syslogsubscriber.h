@@ -18,10 +18,13 @@ namespace util::syslog {
 class SyslogSubscriber : public ISyslogServer {
  public:
   SyslogSubscriber();
-  SyslogSubscriber(const SyslogSubscriber&) = delete;
+
+  SyslogSubscriber(const SyslogSubscriber &) = delete;
+
   ~SyslogSubscriber() override;
 
   void Start() override;
+
   void Stop() override;
 
  private:
@@ -29,7 +32,7 @@ class SyslogSubscriber : public ISyslogServer {
   boost::asio::ip::tcp::resolver lookup_;
   boost::asio::steady_timer retry_timer_;
   std::unique_ptr<boost::asio::ip::tcp::socket> socket_;
-  // This i actaully a list of endpoints, so we have to iterate through them
+  // This is a list of endpoints, so it has to iterate through them
   // and trying to connect.
   boost::asio::ip::tcp::resolver::results_type endpoints_;
   boost::asio::ip::tcp::resolver::results_type::iterator endpoint_itr_;
@@ -40,11 +43,17 @@ class SyslogSubscriber : public ISyslogServer {
   std::thread worker_thread_;
 
   void WorkerTask();
+
   void Close();
+
   void DoLookup();
+
   void DoConnect();
+
   void DoRetryWait();
+
   void DoReadLength();
+
   void DoReadMessage();
 };
 

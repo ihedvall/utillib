@@ -7,6 +7,7 @@
 
 #include "listenmessage.h"
 #include "util/logstream.h"
+
 using namespace util::log;
 using namespace boost::asio;
 using namespace boost::system;
@@ -14,7 +15,7 @@ using namespace std::chrono_literals;
 
 namespace util::log::detail {
 
-ListenClient::ListenClient(const std::string& host_name, uint16_t port)
+ListenClient::ListenClient(const std::string &host_name, uint16_t port)
     : IListenClient(host_name, port),
       retry_timer_(context_),
       lookup_(context_) {
@@ -34,9 +35,9 @@ ListenClient::~ListenClient() {
 void ListenClient::WorkerTask() {
   try {
     DoLookup();
-    const auto& count = context_.run();
+    const auto &count = context_.run();
     LOG_TRACE() << "Stopped main worker thread";
-  } catch (const std::exception& err) {
+  } catch (const std::exception &err) {
     LOG_ERROR() << "Context error. Error: " << err.what();
   }
 }
@@ -45,7 +46,7 @@ void ListenClient::DoLookup() {
   connected_ = false;
   lookup_.async_resolve(
       ip::tcp::v4(), HostName(), std::to_string(Port()),
-      [&](const error_code& error, ip::tcp::resolver::results_type result) {
+      [&](const error_code &error, ip::tcp::resolver::results_type result) {
         if (error) {
           LOG_DEBUG() << "Lookup error. Host: " << HostName() << ":" << Port()
                       << ",Error: (" << error << ") " << error.message();
@@ -53,7 +54,12 @@ void ListenClient::DoLookup() {
         } else {
           socket_ = std::make_unique<ip::tcp::socket>(context_);
           endpoints_ = std::move(result);
-          DoConnect();
+          if (endpoints_.empty()) {
+            DoRetryWait();
+          } else {
+            current_endpoint_ = endpoints_.cbegin();
+            DoConnect();
+          }
         }
       });
 }
@@ -73,25 +79,26 @@ void ListenClient::DoRetryWait() {
 
 void ListenClient::DoConnect() {
   bool connected = false;
-  for (const auto& endpoint : endpoints_) {
-    socket_->async_connect(endpoint, [&](const error_code error) {
+  if (current_endpoint_ == endpoints_.cend()) {
+    DoRetryWait();
+    return;
+  }
+
+  socket_->async_connect(*current_endpoint_, [&](const error_code error) {
     if (error.failed() || !socket_->is_open()) {
       LOG_ERROR() << "Connect error. Error: " << error.message();
       connected = false;
     } else {
       connected = true;
     }
-  });
-    if (connected) {
-      break;
+    if (!connected) {
+      DoRetryWait();
+    } else {
+      DoReadHeader();
     }
-  }
-  if (!connected) {
-    DoRetryWait();
-  } else {
-    DoReadHeader();
-  }
- }
+  });
+
+}
 
 void ListenClient::DoReadHeader() {  // NOLINT
   if (!socket_ || !socket_->is_open()) {
@@ -100,7 +107,7 @@ void ListenClient::DoReadHeader() {  // NOLINT
   }
   connected_ = true;
   async_read(*socket_, buffer(header_data_),
-             [&](const error_code& error, size_t bytes) {  // NOLINT
+             [&](const error_code &error, size_t bytes) {  // NOLINT
                if (error && error == error::eof) {
                  LOG_INFO() << "Connection closed by remote";
                  DoRetryWait();
@@ -132,7 +139,7 @@ void ListenClient::DoReadBody() {  // NOLINT
     return;
   }
   async_read(*socket_, buffer(body_data_),
-             [&](const error_code& error, size_t bytes) {  // NOLINT
+             [&](const error_code &error, size_t bytes) {  // NOLINT
                if (error) {
                  LOG_ERROR() << "Listen body error. Error: " << error.message();
                  DoRetryWait();
@@ -208,7 +215,7 @@ void ListenClient::SendLogLevel(uint64_t level) {
   write(*socket_, boost::asio::buffer(data), error);
 }
 
-bool ListenClient::GetMsg(std::unique_ptr<ListenMessage>& message) {
+bool ListenClient::GetMsg(std::unique_ptr<ListenMessage> &message) {
   return msg_queue_.Get(message, false);
 }
 
