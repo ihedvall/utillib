@@ -317,8 +317,6 @@ void ServiceDialog::OnAppPicker(wxFileDirPickerEvent& event) {
     }
   } catch (const std::exception&) {
   }
-
-
 }
 
 /**
@@ -353,6 +351,7 @@ void ServiceDialog::OnExePicker(wxFileDirPickerEvent& event) {
 
   }
 }
+
 bool ServiceDialog::TransferDataToWindow() {
   std::wostringstream app_arg;
   for (const auto& arg : info_.arguments) {

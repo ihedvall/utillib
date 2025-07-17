@@ -171,9 +171,12 @@ set(UTIL_PUBLIC_HEADERS
         include/util/gnuplot.h
         include/util/idirectory.h
         include/util/ifile.h
-        include/utililisten.h
+        include/util/ihwinfo.h
+        include/util/ilisten.h
         include/util/ilistenclient.h
         include/util/ilogger.h
+        include/util/isuperviseapplication.h
+        include/util/isupervisemaster.h
         include/util/isyslogserver.h
         include/util/ixmlfile.h
         include/util/ixmlnode.h
@@ -187,12 +190,12 @@ set(UTIL_PUBLIC_HEADERS
         include/util/stringutil.h
         include/util/structureddata.h
         include/util/syslogmessage.h
+        include/util/systeminfo.h
         include/util/tempdir.h
         include/util/threadsafequeue.h
         include/util/timestamp.h
         include/util/unithelper.h
         include/util/utilfactory.h
-        include/util/redicconnection.h
         )
 
 set_target_properties(util PROPERTIES PUBLIC_HEADER "${UTIL_PUBLIC_HEADERS}")
@@ -232,10 +235,10 @@ endif ()
 
 install(TARGETS util
         EXPORT UtilLibTargets
-        LIBRARY DESTINATION util/lib
-        ARCHIVE DESTINATION util/lib
-        RUNTIME DESTINATION util/bin
-        PUBLIC_HEADER DESTINATION util/include/util)
+        LIBRARY DESTINATION lib
+        ARCHIVE DESTINATION lib
+        RUNTIME DESTINATION bin
+        PUBLIC_HEADER DESTINATION include/util)
 
 #include(CMakePackageConfigHelpers)
 #write_basic_package_version_file(

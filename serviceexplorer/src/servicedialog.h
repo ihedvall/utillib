@@ -13,7 +13,7 @@ class ServiceDialog : public wxDialog {
  public:
   ServiceDialog(wxWindow *parent, wxWindowID ident, const wxString &title);
   void SetInfo(const ServiceInfo& info, bool new_info);
-  const ServiceInfo& GetInfo() const;
+  [[nodiscard]] const ServiceInfo& GetInfo() const;
   bool TransferDataToWindow() override;
   bool TransferDataFromWindow() override;
  private:
