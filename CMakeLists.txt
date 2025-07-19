@@ -146,6 +146,8 @@ add_library(util
         src/processapplication.h
         src/windowsapplication.cpp
         src/windowsapplication.h
+        src/logtolist.cpp
+        include/util/logtolist.h
 )
 
 target_include_directories(util PUBLIC

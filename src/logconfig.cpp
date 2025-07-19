@@ -2,12 +2,12 @@
  * Copyright 2021 Ingemar Hedvall
  * SPDX-License-Identifier: MIT
  */
+#include <sago/platform_folders.h>
 #include <codecvt>
 #include <locale>
 #include <mutex>
 #include <string>
 #include <vector>
-#include <sago/platform_folders.h>
 
 #ifdef WIN32
 #include <shlobj.h>
@@ -19,6 +19,7 @@
 #include "logfile.h"
 #include "syslog.h"
 #include "util/logconfig.h"
+#include "util/logtolist.h"
 
 namespace util::log {
 
@@ -100,6 +101,14 @@ bool LogConfig::CreateDefaultLogger() {
       break;
     }
 
+    case LogType::LogToList: {
+      auto logger = std::make_unique<LogToList>("Default");
+      ;
+      std::lock_guard<std::mutex> lock(locker_);
+      log_chain_.emplace("Default", std::move(logger));
+      break;
+    }
+
     case LogType::LogToConsole:
       create = true;
       {
@@ -165,6 +174,10 @@ void LogConfig::AddLogger(const std::string &logger_name, const LogType type,
                                                 static_cast<uint16_t>(port));
       break;
     }
+
+    case LogType::LogToList:
+      logger = std::make_unique<LogToList>(logger_name);
+      break;
 
     default:
       return;

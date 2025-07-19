@@ -23,7 +23,8 @@ enum class LogType {
   LogToConsole,    ///< Log to the cout stream.
   LogToFile,       ///< Log to file.
   LogToListen,     ///< Log to listen window (system messages).
-  LogToSyslog      ///< Logs to a syslog server.
+  LogToSyslog,     ///< Logs to a syslog server.
+  LogToList        ///< Logs to an internal list.
 };
 
 /** \class ILogger ilogger.h "util/ilogger.h"
