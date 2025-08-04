@@ -54,10 +54,10 @@ SyslogMessage::SyslogMessage(const LogMessage &log, bool show_location)
   if (show_location) {
     StructuredData location;
     location.Identity("source_location@37916");  // Volvo Car
-    location.AddParameter("Function", log.location.function_name());
-    location.AddParameter("File", log.location.file_name());
-    location.AddParameter("Column", std::to_string(log.location.column()));
-    location.AddParameter("Line", std::to_string(log.location.line()));
+    location.AddParameter("Function", log.function);
+    location.AddParameter("File", log.file);
+    location.AddParameter("Column", std::to_string(log.column));
+    location.AddParameter("Line", std::to_string(log.line));
     AddData(location);
   }
 

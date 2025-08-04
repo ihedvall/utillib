@@ -48,8 +48,12 @@ TEST(SyslogMessage, LogUse) {
   auto& log_config = LogConfig::Instance();
   log_config.ApplicationName("SysLogMessage::LogUse");
 
+  const auto loc = std::source_location::current();
   LogMessage log;
-  log.location = Loc::current();
+  log.line = loc.line();
+  log.column = loc.column();
+  log.file = loc.file_name();
+  log.function = loc.function_name();
   log.message = "Testing log message";
   log.severity = LogSeverity::kWarning;
 

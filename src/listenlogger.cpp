@@ -25,7 +25,7 @@ void ListenLogger::AddLogMessage(const LogMessage &message) {
   std::ostringstream temp;
   temp << message.message;
   if (ShowLocation()) {
-    temp << " [" << message.location.function_name() << "]";
+    temp << " [" << message.function << "]";
   }
   listen_proxy_.AddMessage(time, pre_text, temp.str());
 }

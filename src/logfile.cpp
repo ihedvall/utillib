@@ -180,8 +180,8 @@ void LogFile::HandleMessage(const LogMessage &m) {
     temp << m.message << " ";
   }
   if (ShowLocation()) {
-    temp << "    [" << GetStem(m.location.file_name()) << ":"
-         << m.location.function_name() << ":" << m.location.line() << "]";
+    temp << "    [" << GetStem(m.file) << ":" << m.function << ":" << m.line
+         << "]";
   }
   temp << std::endl;
   std::fwrite(temp.str().data(), 1, temp.str().size(), file_);

@@ -7,8 +7,8 @@
 #include <string>
 
 #include <boost/asio.hpp>
-#include <boost/process.hpp>
 #include <boost/filesystem.hpp>
+#include <boost/process.hpp>
 
 #include "util/logconfig.h"
 #include "util/logging.h"
@@ -66,11 +66,28 @@ void LogError(const Loc &loc, const char *fmt, ...) {
   LogString(loc, LogSeverity::kError, buffer);
 }
 
-void LogString(const Loc &loc, LogSeverity severity,
+void LogString(const Loc &location, LogSeverity severity,
                const std::string &message) {
   LogMessage m;
   m.message = message;
-  m.location = loc;
+  m.line = location.line();
+  m.column = location.column();
+  m.file = location.file_name();
+  m.function = location.function_name();
+  m.severity = severity;
+
+  SendLogMessage(m);
+}
+
+void LogStringEx(uint32_t line, uint32_t column, const std::string &file,
+                 const std::string &function, LogSeverity severity,
+                 const std::string &message) {
+  LogMessage m;
+  m.message = message;
+  m.line = line;
+  m.column = column;
+  m.file = file;
+  m.function = function;
   m.severity = severity;
 
   SendLogMessage(m);
@@ -85,7 +102,9 @@ std::string FindNotepad() {
       note = notepad.string();
     }
   } catch (const std::exception &err) {
-    LOG_ERROR() << "Failed to find the path to the 'notepad++.exe' file. Error: " << err.what();
+    LOG_ERROR()
+        << "Failed to find the path to the 'notepad++.exe' file. Error: "
+        << err.what();
     note.clear();
   }
   if (!note.empty()) {
@@ -93,7 +112,8 @@ std::string FindNotepad() {
   }
 
   try {
-    auto notepad = boost::process::environment::find_executable("notepad++"); // path_list);
+    auto notepad = boost::process::environment::find_executable(
+        "notepad++");  // path_list);
     if (!notepad.string().empty()) {
       note = notepad.string();
     }

@@ -50,6 +50,23 @@ void LogError(const Loc &loc, const char *fmt,
 void LogString(const Loc &loc, LogSeverity severity,
                const std::string &message);  ///< Creates a generic message
 
+/**
+ * @brief Alternate loh function that can be used with legacy loggers.
+ *
+ * This function is an alternative to the standard log function. It shall
+ * be used by legacy logger that cannot use the new source location
+ * interface that was introduced in C++ 20.
+ *
+ * @param line Line number.
+ * @param column Column number.
+ * @param file Source file name.
+ * @param function Source function name.
+ * @param severity Severity code for the log message.
+ * @param message Log message text.
+ */
+void LogStringEx(uint32_t line, uint32_t column, const std::string &file,
+                 const std::string &function, LogSeverity severity,
+                 const std::string &message);
 /** \brief Search and returns the path to the Notepad application..
  * Search primary for the Notepad++ application and second for the Notepad
  * application.

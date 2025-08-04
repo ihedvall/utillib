@@ -37,9 +37,8 @@ void LogConsole::AddLogMessage(const LogMessage &message) {
 
   std::clog << "[" << time << "] " << severity << " " << message.message;
   if (ShowLocation()) {
-    std::clog << " [" << GetStem(message.location.file_name()) << ":"
-              << message.location.function_name() << ":"
-              << message.location.line() << "]";
+    std::clog << " [" << GetStem(message.file) << ":" << message.function << ":"
+              << message.line << "]";
   }
   if (!has_newline) {
     std::clog << std::endl;

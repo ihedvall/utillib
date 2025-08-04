@@ -7,9 +7,10 @@
  */
 #pragma once
 #include <chrono>
+#include <cstdint>
 #include <string>
 
-#include "logging.h"
+#include "util/logging.h"
 
 namespace util::log {
 std::string GetSeverityString(
@@ -28,7 +29,10 @@ struct LogMessage {
       std::chrono::system_clock::now();       ///< Time of the message (UTC)
   std::string message;                        ///< Message text
   LogSeverity severity = LogSeverity::kInfo;  ///< Type of message
-  util::log::Loc location;                    ///< Source file and function
+  uint32_t line = 0;
+  uint32_t column = 0;
+  std::string file;
+  std::string function;
 };
 
 }  // namespace util::log
