@@ -1,16 +1,15 @@
 /*
-* Copyright 2025 Ingemar Hedvall
+ * Copyright 2025 Ingemar Hedvall
  * SPDX-License-Identifier: MIT
  */
 
 #include <chrono>
 #include <filesystem>
 
-
 #include <gtest/gtest.h>
 #include "util/isuperviseapplication.h"
-#include "util/utilfactory.h"
 #include "util/logconfig.h"
+#include "util/utilfactory.h"
 
 using namespace util;
 using namespace util::supervise;
@@ -22,7 +21,6 @@ TEST(Supervise, Test_Properties) {
   auto &log_config = LogConfig::Instance();
   log_config.Type(LogType::LogToConsole);
   log_config.CreateDefaultLogger();
-
 
   auto master = UtilFactory::CreateSuperviseMaster(
       TypeOfSuperviseMaster::SuperviseMasterType);
@@ -52,23 +50,17 @@ TEST(Supervise, Test_Properties) {
   EXPECT_EQ("hello.txt", app->Arguments());
 
   constexpr std::array<ApplicationStartup, 3> startups = {
-      ApplicationStartup::Manual,
-      ApplicationStartup::Once,
-      ApplicationStartup::Automatic
-  };
+      ApplicationStartup::Manual, ApplicationStartup::Once,
+      ApplicationStartup::Automatic};
   for (const auto startup : startups) {
     app->Startup(startup);
     EXPECT_EQ(startup, app->Startup());
   }
 
   constexpr std::array<ApplicationPriority, 6> priorities = {
-      ApplicationPriority::Realtime,
-      ApplicationPriority::High,
-      ApplicationPriority::AboveNormal,
-      ApplicationPriority::Normal,
-      ApplicationPriority::BelowNormal,
-      ApplicationPriority::Idle
-  };
+      ApplicationPriority::Realtime,    ApplicationPriority::High,
+      ApplicationPriority::AboveNormal, ApplicationPriority::Normal,
+      ApplicationPriority::BelowNormal, ApplicationPriority::Idle};
   for (const auto priority : priorities) {
     app->Priority(priority);
     EXPECT_EQ(priority, app->Priority());
@@ -161,6 +153,7 @@ TEST(Supervise, Test_Notepad) {
     std::this_thread::sleep_for(100ms);
   }
   master->Stop();
+  master.reset();
 
   log_config.DeleteLogChain();
 }
@@ -201,6 +194,7 @@ TEST(Supervise, Test_Listend) {
     std::this_thread::sleep_for(100ms);
   }
   master->Stop();
+  master.reset();
 
   log_config.DeleteLogChain();
 }

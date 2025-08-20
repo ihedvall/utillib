@@ -24,7 +24,8 @@ add_executable(test_util
         test_serial.cpp
         test_hwinfo.cpp
         test_platform_folders.cpp
-        test_supervise.cpp)
+        test_supervise.cpp
+        test_consoleapp.cpp)
 
 target_include_directories(test_util PRIVATE ../include)
 target_include_directories(test_util PRIVATE ../src)

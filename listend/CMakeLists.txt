@@ -6,7 +6,9 @@ project(listend
         DESCRIPTION "Daemon  that run all listen servers"
         LANGUAGES CXX)
 
-add_executable(listend src/listend.cpp)
+add_executable(listend src/listend.cpp
+        src/listenapp.cpp
+        src/listenapp.h)
 
 target_include_directories(listend PRIVATE ${Boost_INCLUDE_DIRS})
 target_include_directories(listend PRIVATE "../../utillib/include")

@@ -148,6 +148,8 @@ add_library(util
         src/windowsapplication.h
         src/logtolist.cpp
         include/util/logtolist.h
+        src/consoleapp.cpp
+        include/util/consoleapp.h
 )
 
 target_include_directories(util PUBLIC
@@ -169,6 +171,7 @@ if (MSVC)
 endif ()
 
 set(UTIL_PUBLIC_HEADERS
+        include/util/consoleapp.h
         include/util/csvwriter.h
         include/util/gnuplot.h
         include/util/idirectory.h
@@ -187,6 +190,7 @@ set(UTIL_PUBLIC_HEADERS
         include/util/logging.h
         include/util/logmessage.h
         include/util/logstream.h
+        include/util/logtolist.h
         include/util/serialportinfo.h
         include/util/stringparser.h
         include/util/stringutil.h
