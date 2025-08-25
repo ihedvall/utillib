@@ -15,6 +15,8 @@ option(UTIL_TOOLS "Building applications" OFF)
 option(UTIL_TEST "Building unit test" OFF)
 option(UTIL_LEX "Create LEX/BISON" OFF)
 
+cmake_policy(SET CMP0167 NEW)
+
 #set(CMAKE_FIND_DEBUG_MODE TRUE)
 
 if (UTIL_TOOLS AND USE_VCPKG)

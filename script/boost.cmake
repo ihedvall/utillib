@@ -1,10 +1,6 @@
 # Copyright 2021 Ingemar Hedvall
 # SPDX-License-Identifier: MIT
 
-if(POLICY CMP0167)
-    cmake_policy(SET CMP0167 OLD)
-endif()
-
 if (NOT Boost_FOUND)
     set(Boost_USE_STATIC_LIBS ON)
     set(Boost_USE_MULTITHREADED ON)
