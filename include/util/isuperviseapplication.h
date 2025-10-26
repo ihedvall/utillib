@@ -317,9 +317,9 @@ class ISuperviseApplication {
 
   /**
    * @brief Saves the application configuration.
-   * @param root_node The root XML node.
+   * @param app_node The application XML node.
    */
-  void SaveConfig(xml::IXmlNode &root_node) const;
+  void SaveConfig(xml::IXmlNode &app_node) const;
 
  protected:
 

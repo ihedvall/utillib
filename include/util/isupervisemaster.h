@@ -132,7 +132,7 @@ class ISuperviseMaster {
    * @brief Returns a list af supervise applications.
    * @return List of supervise applications.
    */
-  const std::vector<std::unique_ptr<ISuperviseApplication>> &Applications() const {
+  [[nodiscard]] const std::vector<std::unique_ptr<ISuperviseApplication>> &Applications() const {
     return applications_;
   }
 

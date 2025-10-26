@@ -137,10 +137,11 @@ void ISuperviseMaster::SaveConfig() {
     }
     auto& root_node = xml_file->RootName("SuperviseMaster");
     for (const auto& app : applications_) {
-      if (!app) {
+      if (!app || app->Name().empty()) {
         continue;
       }
-      app->SaveConfig(root_node);
+      auto &app_node = root_node.AddNode("Application");
+      app->SaveConfig(app_node);
     }
     xml_file->FileName(config_file_);
     const bool save = xml_file->WriteFile();

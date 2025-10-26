@@ -8,7 +8,6 @@
 #include <ctime>
 #include <memory>
 
-#include <boost/asio.hpp>
 #include <boost/process.hpp>
 
 #include "util/isuperviseapplication.h"

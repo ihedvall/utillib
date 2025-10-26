@@ -91,12 +91,7 @@ void ISuperviseApplication::ReadConfig(const IXmlNode &application_node) {
   MaxRestarts(application_node.Property<uint32_t>("MaxRestarts"));
 }
 
-void ISuperviseApplication::SaveConfig(IXmlNode &root_node) const {
-  auto &app_node = root_node.AddNode("Application");
-  if (Name().empty()) {
-    LOG_ERROR() << "The application doesn't have any name. Path: "
-                << Path();
-  }
+void ISuperviseApplication::SaveConfig(IXmlNode &app_node) const {
   app_node.SetAttribute("name", Name());
   app_node.SetProperty("Name", Name());
   app_node.SetProperty("Path", Path());
