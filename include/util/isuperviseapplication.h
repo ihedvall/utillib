@@ -321,6 +321,30 @@ class ISuperviseApplication {
    */
   void SaveConfig(xml::IXmlNode &app_node) const;
 
+   /**
+   * @brief Sets the startup mode by a string.
+   * @param startup Startup string.
+   */
+  void StartupAsString(const std::string &startup);
+
+  /**
+   * @brief Returns the startup mode as string.
+   * @return Startup mode as string.
+   */
+  [[nodiscard]] std::string_view StartupAsString() const;
+
+  /**
+   * @brief Sets the priority from a string.
+   * @param priority Priority as a string.
+   */
+  void PriorityAsString(const std::string &priority);
+
+  /**
+   * @brief Returns the priority as a string
+   * @return Priority as a string.
+   */
+  [[nodiscard]] std::string_view PriorityAsString() const;
+
  protected:
 
   /**
@@ -368,29 +392,6 @@ class ISuperviseApplication {
   std::atomic<bool> operable_ = false;
   std::atomic<ApplicationState> state_ = ApplicationState::Stopped;
 
-/**
-   * @brief Sets the startup mode by a string.
-   * @param startup Startup string.
-   */
-  void StartupAsString(const std::string &startup);
-
-  /**
-   * @brief Returns the startup mode as string.
-   * @return Startup mode as string.
-   */
-  [[nodiscard]] std::string_view StartupAsString() const;
-
-  /**
-   * @brief Sets the priority from a string.
-   * @param priority Priority as a string.
-   */
-  void PriorityAsString(const std::string &priority);
-
-  /**
-   * @brief Returns the priority as a string
-   * @return Priority as a string.
-   */
-  [[nodiscard]] std::string_view PriorityAsString() const;
 
 };
 
