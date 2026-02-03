@@ -1,6 +1,6 @@
 # Copyright 2021 Ingemar Hedvall
 # SPDX-License-Identifier: MIT
-cmake_minimum_required(VERSION 3.20)
+cmake_minimum_required(VERSION 3.30)
 
 include(CMakePrintHelpers)
 if( "${CMAKE_TOOLCHAIN_FILE}" STREQUAL "")
@@ -15,7 +15,6 @@ option(UTIL_TOOLS "Building applications" OFF)
 option(UTIL_TEST "Building unit test" OFF)
 option(UTIL_LEX "Create LEX/BISON" OFF)
 
-cmake_policy(SET CMP0167 NEW)
 
 #set(CMAKE_FIND_DEBUG_MODE TRUE)
 
