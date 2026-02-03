@@ -157,8 +157,16 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>Poll</b> ()</
 <tr class="memdesc:abf92cf41dbcb205696116b8ebfc7a3ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Poll the supervisor. <br /></td></tr>
 <tr class="memitem:a489f9eac52cf4eb7a4aba6bf1d470176" id="r_a489f9eac52cf4eb7a4aba6bf1d470176"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a489f9eac52cf4eb7a4aba6bf1d470176">ReadConfig</a> (const <a class="el" href="classutil_1_1xml_1_1_i_xml_node.html">xml::IXmlNode</a> &amp;application_node)</td></tr>
 <tr class="memdesc:a489f9eac52cf4eb7a4aba6bf1d470176"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads in the configuration.  <br /></td></tr>
-<tr class="memitem:af2cd0b83622910cce290741af2ab34e2" id="r_af2cd0b83622910cce290741af2ab34e2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af2cd0b83622910cce290741af2ab34e2">SaveConfig</a> (<a class="el" href="classutil_1_1xml_1_1_i_xml_node.html">xml::IXmlNode</a> &amp;root_node) const</td></tr>
-<tr class="memdesc:af2cd0b83622910cce290741af2ab34e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Saves the application configuration.  <br /></td></tr>
+<tr class="memitem:ac54ace11916adce5d5ba9144d428b17b" id="r_ac54ace11916adce5d5ba9144d428b17b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac54ace11916adce5d5ba9144d428b17b">SaveConfig</a> (<a class="el" href="classutil_1_1xml_1_1_i_xml_node.html">xml::IXmlNode</a> &amp;app_node) const</td></tr>
+<tr class="memdesc:ac54ace11916adce5d5ba9144d428b17b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Saves the application configuration.  <br /></td></tr>
+<tr class="memitem:aa5f47366464ce93f8c9466068f3b4743" id="r_aa5f47366464ce93f8c9466068f3b4743"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa5f47366464ce93f8c9466068f3b4743">StartupAsString</a> (const std::string &amp;startup)</td></tr>
+<tr class="memdesc:aa5f47366464ce93f8c9466068f3b4743"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the startup mode by a string.  <br /></td></tr>
+<tr class="memitem:a8fbce665c7a4536bf8d8e4b7b07ea40b" id="r_a8fbce665c7a4536bf8d8e4b7b07ea40b"><td class="memItemLeft" align="right" valign="top">std::string_view&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8fbce665c7a4536bf8d8e4b7b07ea40b">StartupAsString</a> () const</td></tr>
+<tr class="memdesc:a8fbce665c7a4536bf8d8e4b7b07ea40b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the startup mode as string.  <br /></td></tr>
+<tr class="memitem:aec470da77321ddbb11de759b2c25bd57" id="r_aec470da77321ddbb11de759b2c25bd57"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aec470da77321ddbb11de759b2c25bd57">PriorityAsString</a> (const std::string &amp;priority)</td></tr>
+<tr class="memdesc:aec470da77321ddbb11de759b2c25bd57"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the priority from a string.  <br /></td></tr>
+<tr class="memitem:a08ed6241a6cf0dc8dac7ea1f7bc7ee1d" id="r_a08ed6241a6cf0dc8dac7ea1f7bc7ee1d"><td class="memItemLeft" align="right" valign="top">std::string_view&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a08ed6241a6cf0dc8dac7ea1f7bc7ee1d">PriorityAsString</a> () const</td></tr>
+<tr class="memdesc:a08ed6241a6cf0dc8dac7ea1f7bc7ee1d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the priority as a string.  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pro-methods" class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
@@ -632,6 +640,55 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>ResetNofRestarts</b> 
 
 </div>
 </div>
+<a id="a08ed6241a6cf0dc8dac7ea1f7bc7ee1d" name="a08ed6241a6cf0dc8dac7ea1f7bc7ee1d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a08ed6241a6cf0dc8dac7ea1f7bc7ee1d">&#9670;&#160;</a></span>PriorityAsString() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string_view util::supervise::ISuperviseApplication::PriorityAsString </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>Priority as a string. </dd></dl>
+
+</div>
+</div>
+<a id="aec470da77321ddbb11de759b2c25bd57" name="aec470da77321ddbb11de759b2c25bd57"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aec470da77321ddbb11de759b2c25bd57">&#9670;&#160;</a></span>PriorityAsString() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void util::supervise::ISuperviseApplication::PriorityAsString </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>priority</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">priority</td><td>Priority as a string. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a489f9eac52cf4eb7a4aba6bf1d470176" name="a489f9eac52cf4eb7a4aba6bf1d470176"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a489f9eac52cf4eb7a4aba6bf1d470176">&#9670;&#160;</a></span>ReadConfig()</h2>
 
@@ -655,8 +712,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>ResetNofRestarts</b> 
 
 </div>
 </div>
-<a id="af2cd0b83622910cce290741af2ab34e2" name="af2cd0b83622910cce290741af2ab34e2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af2cd0b83622910cce290741af2ab34e2">&#9670;&#160;</a></span>SaveConfig()</h2>
+<a id="ac54ace11916adce5d5ba9144d428b17b" name="ac54ace11916adce5d5ba9144d428b17b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac54ace11916adce5d5ba9144d428b17b">&#9670;&#160;</a></span>SaveConfig()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -664,14 +721,14 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>ResetNofRestarts</b> 
         <tr>
           <td class="memname">void util::supervise::ISuperviseApplication::SaveConfig </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classutil_1_1xml_1_1_i_xml_node.html">xml::IXmlNode</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>root_node</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="classutil_1_1xml_1_1_i_xml_node.html">xml::IXmlNode</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>app_node</em></span></td><td>)</td>
           <td> const</td>
         </tr>
       </table>
 </div><div class="memdoc">
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">root_node</td><td>The root XML node. </td></tr>
+    <tr><td class="paramname">app_node</td><td>The application XML node. </td></tr>
   </table>
   </dd>
 </dl>
@@ -790,6 +847,55 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>ResetNofRestarts</b> 
 <p>In the Automatic mode, the application is started at startup and then checked that it is running. If the application stops, it will be restarted. Note that the restart is delayed 2-10 seconds. If number of restarts reach a maximum limit, it will stop restarting and a critical log event will be generated. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">startup</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a8fbce665c7a4536bf8d8e4b7b07ea40b" name="a8fbce665c7a4536bf8d8e4b7b07ea40b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8fbce665c7a4536bf8d8e4b7b07ea40b">&#9670;&#160;</a></span>StartupAsString() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string_view util::supervise::ISuperviseApplication::StartupAsString </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>Startup mode as string. </dd></dl>
+
+</div>
+</div>
+<a id="aa5f47366464ce93f8c9466068f3b4743" name="aa5f47366464ce93f8c9466068f3b4743"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa5f47366464ce93f8c9466068f3b4743">&#9670;&#160;</a></span>StartupAsString() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void util::supervise::ISuperviseApplication::StartupAsString </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>startup</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">startup</td><td>Startup string. </td></tr>
   </table>
   </dd>
 </dl>

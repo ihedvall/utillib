@@ -1,0 +1,5 @@
+<map id="util::log::ILogger" name="util::log::ILogger">
+<area shape="rect" id="Node000001" title="Interface against a generic logger." alt="" coords="12,5,126,32"/>
+<area shape="rect" id="Node000002" href="$classutil_1_1log_1_1_log_to_list.html" title=" " alt="" coords="5,80,133,107"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="72,48,72,80,66,80,66,48"/>
+</map>

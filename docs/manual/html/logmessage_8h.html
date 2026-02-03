@@ -94,25 +94,27 @@ $(function(){initNavTree('logmessage_8h.html','',''); });
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &lt;chrono&gt;</code><br />
+<code>#include &lt;cstdint&gt;</code><br />
 <code>#include &lt;string&gt;</code><br />
-<code>#include &quot;<a class="el" href="logging_8h_source.html">logging.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="logging_8h_source.html">util/logging.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for logmessage.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="logmessage_8h__incl.png" border="0" usemap="#ainclude_2util_2logmessage_8h" loading="lazy" alt=""/></div>
 <map name="ainclude_2util_2logmessage_8h" id="ainclude_2util_2logmessage_8h">
-<area shape="rect" title=" " alt="" coords="19,5,188,32"/>
+<area shape="rect" title=" " alt="" coords="61,5,229,32"/>
 <area shape="rect" title=" " alt="" coords="5,80,66,107"/>
-<area shape="poly" title=" " alt="" coords="94,34,60,70,56,67,90,31"/>
-<area shape="rect" title=" " alt="" coords="74,163,128,189"/>
-<area shape="poly" title=" " alt="" coords="106,33,104,147,99,147,101,33"/>
-<area shape="rect" href="logging_8h.html" title="Standard log interfaces." alt="" coords="144,80,218,107"/>
-<area shape="poly" title=" " alt="" coords="119,31,158,67,155,71,115,34"/>
-<area shape="poly" title=" " alt="" coords="170,109,126,154,122,150,166,105"/>
-<area shape="rect" title=" " alt="" coords="152,163,212,189"/>
-<area shape="poly" title=" " alt="" coords="184,107,184,147,179,147,178,107"/>
-<area shape="rect" title=" " alt="" coords="237,155,375,197"/>
-<area shape="poly" title=" " alt="" coords="202,105,263,144,260,148,199,109"/>
+<area shape="poly" title=" " alt="" coords="127,35,68,74,66,69,124,30"/>
+<area shape="rect" title=" " alt="" coords="33,163,94,189"/>
+<area shape="poly" title=" " alt="" coords="141,34,80,150,75,147,136,31"/>
+<area shape="rect" title=" " alt="" coords="281,163,334,189"/>
+<area shape="poly" title=" " alt="" coords="175,30,211,50,248,78,277,113,297,148,293,150,272,116,244,82,208,55,172,35"/>
+<area shape="rect" href="logging_8h.html" title="Standard log interfaces." alt="" coords="140,80,235,107"/>
+<area shape="poly" title=" " alt="" coords="155,31,175,65,170,68,150,34"/>
+<area shape="poly" title=" " alt="" coords="170,109,97,156,94,152,167,105"/>
+<area shape="poly" title=" " alt="" coords="208,105,278,152,275,156,205,109"/>
+<area shape="rect" title=" " alt="" coords="118,155,257,197"/>
+<area shape="poly" title=" " alt="" coords="190,107,190,139,185,139,185,107"/>
 </map>
 </div>
 </div><div class="textblock"><div class="dynheader">
@@ -120,19 +122,22 @@ This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="logmessage_8h__dep__incl.png" border="0" usemap="#ainclude_2util_2logmessage_8hdep" loading="lazy" alt=""/></div>
 <map name="ainclude_2util_2logmessage_8hdep" id="ainclude_2util_2logmessage_8hdep">
-<area shape="rect" title=" " alt="" coords="75,5,243,32"/>
-<area shape="rect" href="ilogger_8h.html" title="Defines an interface against a generic logger." alt="" coords="91,80,227,107"/>
-<area shape="poly" title=" " alt="" coords="162,48,162,80,156,80,156,48"/>
+<area shape="rect" title=" " alt="" coords="162,5,330,32"/>
+<area shape="rect" href="ilogger_8h.html" title="Defines an interface against a generic logger." alt="" coords="126,80,262,107"/>
+<area shape="poly" title=" " alt="" coords="230,46,205,81,201,78,226,43"/>
 <area shape="rect" href="logconfig_8h.html" title="Singleton that is used to configure default loggers." alt="" coords="5,155,156,181"/>
-<area shape="poly" title=" " alt="" coords="120,42,98,59,82,81,76,100,75,119,80,154,74,154,69,120,71,99,77,79,94,56,116,38"/>
-<area shape="rect" href="syslogmessage_8h.html" title="Implements an interface against a syslog message." alt="" coords="251,80,440,107"/>
-<area shape="poly" title=" " alt="" coords="207,35,314,77,312,82,205,40"/>
-<area shape="poly" title=" " alt="" coords="136,120,96,156,92,152,132,116"/>
-<area shape="rect" href="utilfactory_8h.html" title=" " alt="" coords="191,229,346,256"/>
-<area shape="poly" title=" " alt="" coords="180,118,261,227,257,230,175,121"/>
-<area shape="rect" href="isyslogserver_8h.html" title="Defines an interface against a syslog server." alt="" coords="250,155,426,181"/>
-<area shape="poly" title=" " alt="" coords="345,122,342,155,337,154,340,122"/>
-<area shape="poly" title=" " alt="" coords="317,194,282,231,279,227,314,191"/>
+<area shape="poly" title=" " alt="" coords="183,40,147,57,116,82,103,99,94,119,85,155,80,154,89,117,99,97,112,78,144,53,180,35"/>
+<area shape="rect" href="logtolist_8h_source.html" title=" " alt="" coords="230,155,374,181"/>
+<area shape="poly" title=" " alt="" coords="261,45,276,79,301,153,296,155,271,81,256,47"/>
+<area shape="rect" href="syslogmessage_8h.html" title="Implements an interface against a syslog message." alt="" coords="364,80,554,107"/>
+<area shape="poly" title=" " alt="" coords="298,35,423,77,421,82,297,40"/>
+<area shape="poly" title=" " alt="" coords="163,118,102,156,99,152,160,113"/>
+<area shape="poly" title=" " alt="" coords="227,113,284,152,281,156,224,118"/>
+<area shape="rect" href="utilfactory_8h.html" title=" " alt="" coords="262,229,416,256"/>
+<area shape="poly" title=" " alt="" coords="198,122,205,152,220,180,236,195,254,208,294,226,292,231,252,213,232,199,216,183,200,154,193,123"/>
+<area shape="rect" href="isyslogserver_8h.html" title="Defines an interface against a syslog server." alt="" coords="398,155,574,181"/>
+<area shape="poly" title=" " alt="" coords="472,120,484,153,479,155,467,122"/>
+<area shape="poly" title=" " alt="" coords="448,191,366,231,364,226,446,186"/>
 </map>
 </div>
 </div>

@@ -1,5 +1,6 @@
 var hierarchy =
 [
+    [ "util::ConsoleApp", "classutil_1_1_console_app.html", null ],
     [ "util::plot::CsvWriter", "classutil_1_1plot_1_1_csv_writer.html", null ],
     [ "util::plot::GnuPlot", "classutil_1_1plot_1_1_gnu_plot.html", null ],
     [ "util::log::IDirectory", "classutil_1_1log_1_1_i_directory.html", null ],
@@ -8,7 +9,9 @@ var hierarchy =
     [ "util::hw_info::IHwInfo", "classutil_1_1hw__info_1_1_i_hw_info.html", null ],
     [ "util::log::IListen", "classutil_1_1log_1_1_i_listen.html", null ],
     [ "util::log::IListenClient", "classutil_1_1log_1_1_i_listen_client.html", null ],
-    [ "util::log::ILogger", "classutil_1_1log_1_1_i_logger.html", null ],
+    [ "util::log::ILogger", "classutil_1_1log_1_1_i_logger.html", [
+      [ "util::log::LogToList", "classutil_1_1log_1_1_log_to_list.html", null ]
+    ] ],
     [ "util::supervise::ISuperviseApplication", "classutil_1_1supervise_1_1_i_supervise_application.html", null ],
     [ "util::supervise::ISuperviseMaster", "classutil_1_1supervise_1_1_i_supervise_master.html", null ],
     [ "util::syslog::ISyslogServer", "classutil_1_1syslog_1_1_i_syslog_server.html", null ],

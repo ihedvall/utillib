@@ -118,23 +118,26 @@ This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="logging_8h__dep__incl.png" border="0" usemap="#ainclude_2util_2logging_8hdep" loading="lazy" alt=""/></div>
 <map name="ainclude_2util_2logging_8hdep" id="ainclude_2util_2logging_8hdep">
-<area shape="rect" title="Standard log interfaces." alt="" coords="182,5,321,32"/>
-<area shape="rect" href="logmessage_8h.html" title=" " alt="" coords="75,80,243,107"/>
-<area shape="poly" title=" " alt="" coords="225,44,177,82,173,78,222,40"/>
-<area shape="rect" href="logstream_8h.html" title="Implements a stream interface to log messages. This is the file to use in most applications...." alt="" coords="267,80,422,107"/>
-<area shape="poly" title=" " alt="" coords="281,40,330,77,327,82,278,44"/>
-<area shape="rect" href="ilogger_8h.html" title="Defines an interface against a generic logger." alt="" coords="91,155,227,181"/>
-<area shape="poly" title=" " alt="" coords="162,122,162,154,156,154,156,122"/>
+<area shape="rect" title="Standard log interfaces." alt="" coords="268,5,408,32"/>
+<area shape="rect" href="logmessage_8h.html" title=" " alt="" coords="162,80,330,107"/>
+<area shape="poly" title=" " alt="" coords="312,44,263,82,260,78,308,40"/>
+<area shape="rect" href="logstream_8h.html" title="Implements a stream interface to log messages. This is the file to use in most applications...." alt="" coords="354,80,509,107"/>
+<area shape="poly" title=" " alt="" coords="368,40,417,77,413,82,364,44"/>
+<area shape="rect" href="ilogger_8h.html" title="Defines an interface against a generic logger." alt="" coords="126,155,262,181"/>
+<area shape="poly" title=" " alt="" coords="230,121,205,156,201,153,226,118"/>
 <area shape="rect" href="logconfig_8h.html" title="Singleton that is used to configure default loggers." alt="" coords="5,229,156,256"/>
-<area shape="poly" title=" " alt="" coords="120,117,98,134,82,156,76,174,75,194,80,228,74,229,69,194,71,173,77,153,94,130,116,113"/>
-<area shape="rect" href="syslogmessage_8h.html" title="Implements an interface against a syslog message." alt="" coords="251,155,440,181"/>
-<area shape="poly" title=" " alt="" coords="207,110,314,152,312,157,205,115"/>
-<area shape="poly" title=" " alt="" coords="136,194,96,231,92,227,132,190"/>
-<area shape="rect" href="utilfactory_8h.html" title=" " alt="" coords="191,304,346,331"/>
-<area shape="poly" title=" " alt="" coords="180,192,261,302,257,305,175,195"/>
-<area shape="rect" href="isyslogserver_8h.html" title="Defines an interface against a syslog server." alt="" coords="250,229,426,256"/>
-<area shape="poly" title=" " alt="" coords="345,197,342,229,337,229,340,196"/>
-<area shape="poly" title=" " alt="" coords="317,269,282,305,279,302,314,265"/>
+<area shape="poly" title=" " alt="" coords="183,115,147,132,116,157,103,174,94,194,85,230,80,228,89,192,99,171,112,153,144,128,180,110"/>
+<area shape="rect" href="logtolist_8h_source.html" title=" " alt="" coords="230,229,374,256"/>
+<area shape="poly" title=" " alt="" coords="261,120,276,154,301,228,296,230,271,156,256,122"/>
+<area shape="rect" href="syslogmessage_8h.html" title="Implements an interface against a syslog message." alt="" coords="364,155,554,181"/>
+<area shape="poly" title=" " alt="" coords="298,110,423,152,421,157,297,115"/>
+<area shape="poly" title=" " alt="" coords="163,192,102,231,99,226,160,188"/>
+<area shape="poly" title=" " alt="" coords="227,188,284,226,281,231,224,193"/>
+<area shape="rect" href="utilfactory_8h.html" title=" " alt="" coords="262,304,416,331"/>
+<area shape="poly" title=" " alt="" coords="198,196,205,226,220,254,236,270,254,283,294,301,292,306,252,287,232,274,216,258,200,228,193,198"/>
+<area shape="rect" href="isyslogserver_8h.html" title="Defines an interface against a syslog server." alt="" coords="398,229,574,256"/>
+<area shape="poly" title=" " alt="" coords="472,195,484,228,479,230,467,197"/>
+<area shape="poly" title=" " alt="" coords="448,266,366,306,364,301,446,261"/>
 </map>
 </div>
 </div>
@@ -183,6 +186,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>util::log::LogError</
 <tr class="memitem:ad0f4c23bd22f6820c369f8d69dfcd098" id="r_ad0f4c23bd22f6820c369f8d69dfcd098"><td class="memItemLeft" align="right" valign="top"><a id="ad0f4c23bd22f6820c369f8d69dfcd098" name="ad0f4c23bd22f6820c369f8d69dfcd098"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>util::log::LogString</b> (const <a class="el" href="namespaceutil_1_1log.html#a264eeba872bc30d35c39d0dc27048608">Loc</a> &amp;loc, <a class="el" href="namespaceutil_1_1log.html#aa21d9be4063c51bfeb18a06859495e8a">LogSeverity</a> severity, const std::string &amp;message)</td></tr>
 <tr class="memdesc:ad0f4c23bd22f6820c369f8d69dfcd098"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a generic message. <br /></td></tr>
+<tr class="memitem:ade19f54920de246ae337c66375403750" id="r_ade19f54920de246ae337c66375403750"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceutil_1_1log.html#ade19f54920de246ae337c66375403750">util::log::LogStringEx</a> (uint32_t line, uint32_t column, const std::string &amp;file, const std::string &amp;function, <a class="el" href="namespaceutil_1_1log.html#aa21d9be4063c51bfeb18a06859495e8a">LogSeverity</a> severity, const std::string &amp;message)</td></tr>
+<tr class="memdesc:ade19f54920de246ae337c66375403750"><td class="mdescLeft">&#160;</td><td class="mdescRight">Alternate loh function that can be used with legacy loggers.  <br /></td></tr>
 <tr class="memitem:ace98a2909c42f95cd09bfce65db02440" id="r_ace98a2909c42f95cd09bfce65db02440"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceutil_1_1log.html#ace98a2909c42f95cd09bfce65db02440">util::log::FindNotepad</a> ()</td></tr>
 <tr class="memdesc:ace98a2909c42f95cd09bfce65db02440"><td class="mdescLeft">&#160;</td><td class="mdescRight">Search and returns the path to the Notepad application.. Search primary for the Notepad++ application and second for the Notepad application.  <br /></td></tr>
 <tr class="memitem:aba297d7d2cad53eb53effc77f386e1de" id="r_aba297d7d2cad53eb53effc77f386e1de"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceutil_1_1log.html#aba297d7d2cad53eb53effc77f386e1de">util::log::BackupFiles</a> (const std::string &amp;filename, bool remove_file=true)</td></tr>

@@ -16,6 +16,7 @@ var annotated_dup =
         [ "LogConfig", "classutil_1_1log_1_1_log_config.html", "classutil_1_1log_1_1_log_config" ],
         [ "LogMessage", "structutil_1_1log_1_1_log_message.html", "structutil_1_1log_1_1_log_message" ],
         [ "LogStream", "classutil_1_1log_1_1_log_stream.html", "classutil_1_1log_1_1_log_stream" ],
+        [ "LogToList", "classutil_1_1log_1_1_log_to_list.html", "classutil_1_1log_1_1_log_to_list" ],
         [ "TempDir", "classutil_1_1log_1_1_temp_dir.html", "classutil_1_1log_1_1_temp_dir" ],
         [ "ThreadSafeQueue", "classutil_1_1log_1_1_thread_safe_queue.html", "classutil_1_1log_1_1_thread_safe_queue" ]
       ] ],
@@ -46,6 +47,7 @@ var annotated_dup =
         [ "IXmlFile", "classutil_1_1xml_1_1_i_xml_file.html", "classutil_1_1xml_1_1_i_xml_file" ],
         [ "IXmlNode", "classutil_1_1xml_1_1_i_xml_node.html", "classutil_1_1xml_1_1_i_xml_node" ]
       ] ],
+      [ "ConsoleApp", "classutil_1_1_console_app.html", null ],
       [ "UtilFactory", "classutil_1_1_util_factory.html", null ]
     ] ]
 ];

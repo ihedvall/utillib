@@ -1,15 +1,18 @@
 <map id="include/util/logmessage.h" name="include/util/logmessage.h">
-<area shape="rect" id="Node000001" title=" " alt="" coords="75,5,243,32"/>
-<area shape="rect" id="Node000002" href="$ilogger_8h.html" title="Defines an interface against a generic logger." alt="" coords="91,80,227,107"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="162,48,162,80,156,80,156,48"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="162,5,330,32"/>
+<area shape="rect" id="Node000002" href="$ilogger_8h.html" title="Defines an interface against a generic logger." alt="" coords="126,80,262,107"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="230,46,205,81,201,78,226,43"/>
 <area shape="rect" id="Node000003" href="$logconfig_8h.html" title="Singleton that is used to configure default loggers." alt="" coords="5,155,156,181"/>
-<area shape="poly" id="edge4_Node000001_Node000003" title=" " alt="" coords="120,42,98,59,82,81,76,100,75,119,80,154,74,154,69,120,71,99,77,79,94,56,116,38"/>
-<area shape="rect" id="Node000005" href="$syslogmessage_8h.html" title="Implements an interface against a syslog message." alt="" coords="251,80,440,107"/>
-<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="207,35,314,77,312,82,205,40"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="136,120,96,156,92,152,132,116"/>
-<area shape="rect" id="Node000004" href="$utilfactory_8h.html" title=" " alt="" coords="191,229,346,256"/>
-<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="180,118,261,227,257,230,175,121"/>
-<area shape="rect" id="Node000006" href="$isyslogserver_8h.html" title="Defines an interface against a syslog server." alt="" coords="250,155,426,181"/>
-<area shape="poly" id="edge6_Node000005_Node000006" title=" " alt="" coords="345,122,342,155,337,154,340,122"/>
-<area shape="poly" id="edge7_Node000006_Node000004" title=" " alt="" coords="317,194,282,231,279,227,314,191"/>
+<area shape="poly" id="edge5_Node000001_Node000003" title=" " alt="" coords="183,40,147,57,116,82,103,99,94,119,85,155,80,154,89,117,99,97,112,78,144,53,180,35"/>
+<area shape="rect" id="Node000004" href="$logtolist_8h_source.html" title=" " alt="" coords="230,155,374,181"/>
+<area shape="poly" id="edge6_Node000001_Node000004" title=" " alt="" coords="261,45,276,79,301,153,296,155,271,81,256,47"/>
+<area shape="rect" id="Node000006" href="$syslogmessage_8h.html" title="Implements an interface against a syslog message." alt="" coords="364,80,554,107"/>
+<area shape="poly" id="edge7_Node000001_Node000006" title=" " alt="" coords="298,35,423,77,421,82,297,40"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="163,118,102,156,99,152,160,113"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="227,113,284,152,281,156,224,118"/>
+<area shape="rect" id="Node000005" href="$utilfactory_8h.html" title=" " alt="" coords="262,229,416,256"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="198,122,205,152,220,180,236,195,254,208,294,226,292,231,252,213,232,199,216,183,200,154,193,123"/>
+<area shape="rect" id="Node000007" href="$isyslogserver_8h.html" title="Defines an interface against a syslog server." alt="" coords="398,155,574,181"/>
+<area shape="poly" id="edge8_Node000006_Node000007" title=" " alt="" coords="472,120,484,153,479,155,467,122"/>
+<area shape="poly" id="edge9_Node000007_Node000005" title=" " alt="" coords="448,191,366,231,364,226,446,186"/>
 </map>

@@ -21,5 +21,6 @@ var namespaceutil =
       [ "TimeStampToNs", "namespaceutil_1_1time.html#aabb8c33716f5f7e81d3a01fad6b87b6a", null ]
     ] ],
     [ "xml", "namespaceutil_1_1xml.html", "namespaceutil_1_1xml" ],
+    [ "ConsoleApp", "classutil_1_1_console_app.html", null ],
     [ "UtilFactory", "classutil_1_1_util_factory.html", null ]
 ];

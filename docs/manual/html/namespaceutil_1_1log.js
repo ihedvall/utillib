@@ -11,6 +11,7 @@ var namespaceutil_1_1log =
     [ "LogConfig", "classutil_1_1log_1_1_log_config.html", "classutil_1_1log_1_1_log_config" ],
     [ "LogMessage", "structutil_1_1log_1_1_log_message.html", "structutil_1_1log_1_1_log_message" ],
     [ "LogStream", "classutil_1_1log_1_1_log_stream.html", "classutil_1_1log_1_1_log_stream" ],
+    [ "LogToList", "classutil_1_1log_1_1_log_to_list.html", "classutil_1_1log_1_1_log_to_list" ],
     [ "TempDir", "classutil_1_1log_1_1_temp_dir.html", "classutil_1_1log_1_1_temp_dir" ],
     [ "ThreadSafeQueue", "classutil_1_1log_1_1_thread_safe_queue.html", "classutil_1_1log_1_1_thread_safe_queue" ],
     [ "DirectoryList", "namespaceutil_1_1log.html#ae7a613b538a67f33814b66423beab29d", null ],
@@ -33,7 +34,8 @@ var namespaceutil_1_1log =
       [ "LogToConsole", "namespaceutil_1_1log.html#acce1c2a148c64f8bfbed195ac8c333e4a4c6f235bebb247d4b9b4bd6b71ee6719", null ],
       [ "LogToFile", "namespaceutil_1_1log.html#acce1c2a148c64f8bfbed195ac8c333e4a582de149a5b9e814a2ae7f5d7a27db46", null ],
       [ "LogToListen", "namespaceutil_1_1log.html#acce1c2a148c64f8bfbed195ac8c333e4ace40eb3145724b182394b9b5f927dd3a", null ],
-      [ "LogToSyslog", "namespaceutil_1_1log.html#acce1c2a148c64f8bfbed195ac8c333e4a564f6a782b17ae713307d01873d4bc07", null ]
+      [ "LogToSyslog", "namespaceutil_1_1log.html#acce1c2a148c64f8bfbed195ac8c333e4a564f6a782b17ae713307d01873d4bc07", null ],
+      [ "LogToList", "namespaceutil_1_1log.html#acce1c2a148c64f8bfbed195ac8c333e4ad9a524bf3b1ecf5eefec9b8f0171eaad", null ]
     ] ],
     [ "TypeOfListen", "namespaceutil_1_1log.html#a1f1147d18308c079ec70c7c1186eab03", [
       [ "ListenProxyType", "namespaceutil_1_1log.html#a1f1147d18308c079ec70c7c1186eab03a0e4fbf1ada1d0453f76e1d654e12e885", null ],
@@ -50,5 +52,6 @@ var namespaceutil_1_1log =
     [ "LogError", "namespaceutil_1_1log.html#a7975b1c262ba1bfb272c3e108a8dfdb4", null ],
     [ "LogInfo", "namespaceutil_1_1log.html#ad4687e7206070d9d90295d7d6bb16f37", null ],
     [ "LogString", "namespaceutil_1_1log.html#ad0f4c23bd22f6820c369f8d69dfcd098", null ],
+    [ "LogStringEx", "namespaceutil_1_1log.html#ade19f54920de246ae337c66375403750", null ],
     [ "ProgramDataPath", "namespaceutil_1_1log.html#a3c41b09115992c8633233de2672f2225", null ]
 ];

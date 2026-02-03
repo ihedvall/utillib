@@ -18,5 +18,6 @@ var searchData=
   ['loglevel_15',['LogLevel',['../classutil_1_1log_1_1_i_listen.html#a0757530916eeff0f80603b93c106a831',1,'util::log::IListen']]],
   ['loglevellist_16',['LogLevelList',['../classutil_1_1log_1_1_i_listen.html#a38b5b1946224361459cf061c9379caea',1,'util::log::IListen']]],
   ['logstream_17',['LogStream',['../classutil_1_1log_1_1_log_stream.html#a6453689ae725bc011ffa1fa88095c6af',1,'util::log::LogStream']]],
-  ['logstring_18',['LogString',['../namespaceutil_1_1log.html#ad0f4c23bd22f6820c369f8d69dfcd098',1,'util::log']]]
+  ['logstring_18',['LogString',['../namespaceutil_1_1log.html#ad0f4c23bd22f6820c369f8d69dfcd098',1,'util::log']]],
+  ['logstringex_19',['LogStringEx',['../namespaceutil_1_1log.html#ade19f54920de246ae337c66375403750',1,'util::log']]]
 ];

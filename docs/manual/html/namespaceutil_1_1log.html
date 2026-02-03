@@ -120,6 +120,7 @@ Classes</h2></td></tr>
 <tr class="memitem:LogMessage" id="r_LogMessage"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structutil_1_1log_1_1_log_message.html">LogMessage</a></td></tr>
 <tr class="memitem:LogStream" id="r_LogStream"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classutil_1_1log_1_1_log_stream.html">LogStream</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">This class implements a stream interface around a log message.  <a href="classutil_1_1log_1_1_log_stream.html#details">More...</a><br /></td></tr>
+<tr class="memitem:LogToList" id="r_LogToList"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classutil_1_1log_1_1_log_to_list.html">LogToList</a></td></tr>
 <tr class="memitem:TempDir" id="r_TempDir"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classutil_1_1log_1_1_temp_dir.html">TempDir</a></td></tr>
 <tr class="memitem:ThreadSafeQueue" id="r_ThreadSafeQueue"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classutil_1_1log_1_1_thread_safe_queue.html">ThreadSafeQueue</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Implements a thread-safe queue.  <a href="classutil_1_1log_1_1_thread_safe_queue.html#details">More...</a><br /></td></tr>
@@ -148,6 +149,7 @@ Enumerations</h2></td></tr>
 , <a class="el" href="#acce1c2a148c64f8bfbed195ac8c333e4ace40eb3145724b182394b9b5f927dd3a">LogToListen</a>
 , <br />
 &#160;&#160;<a class="el" href="#acce1c2a148c64f8bfbed195ac8c333e4a564f6a782b17ae713307d01873d4bc07">LogToSyslog</a>
+, <a class="el" href="#acce1c2a148c64f8bfbed195ac8c333e4ad9a524bf3b1ecf5eefec9b8f0171eaad">LogToList</a>
 <br />
  }</td></tr>
 <tr class="memitem:aa21d9be4063c51bfeb18a06859495e8a" id="r_aa21d9be4063c51bfeb18a06859495e8a"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa21d9be4063c51bfeb18a06859495e8a">LogSeverity</a> : uint8_t { <br />
@@ -187,6 +189,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>LogError</b> (const <
 <tr class="memitem:ad0f4c23bd22f6820c369f8d69dfcd098" id="r_ad0f4c23bd22f6820c369f8d69dfcd098"><td class="memItemLeft" align="right" valign="top"><a id="ad0f4c23bd22f6820c369f8d69dfcd098" name="ad0f4c23bd22f6820c369f8d69dfcd098"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>LogString</b> (const <a class="el" href="#a264eeba872bc30d35c39d0dc27048608">Loc</a> &amp;loc, <a class="el" href="#aa21d9be4063c51bfeb18a06859495e8a">LogSeverity</a> severity, const std::string &amp;message)</td></tr>
 <tr class="memdesc:ad0f4c23bd22f6820c369f8d69dfcd098"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a generic message. <br /></td></tr>
+<tr class="memitem:ade19f54920de246ae337c66375403750" id="r_ade19f54920de246ae337c66375403750"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ade19f54920de246ae337c66375403750">LogStringEx</a> (uint32_t line, uint32_t column, const std::string &amp;file, const std::string &amp;function, <a class="el" href="#aa21d9be4063c51bfeb18a06859495e8a">LogSeverity</a> severity, const std::string &amp;message)</td></tr>
+<tr class="memdesc:ade19f54920de246ae337c66375403750"><td class="mdescLeft">&#160;</td><td class="mdescRight">Alternate loh function that can be used with legacy loggers.  <br /></td></tr>
 <tr class="memitem:ace98a2909c42f95cd09bfce65db02440" id="r_ace98a2909c42f95cd09bfce65db02440"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ace98a2909c42f95cd09bfce65db02440">FindNotepad</a> ()</td></tr>
 <tr class="memdesc:ace98a2909c42f95cd09bfce65db02440"><td class="mdescLeft">&#160;</td><td class="mdescRight">Search and returns the path to the Notepad application.. Search primary for the Notepad++ application and second for the Notepad application.  <br /></td></tr>
 <tr class="memitem:aba297d7d2cad53eb53effc77f386e1de" id="r_aba297d7d2cad53eb53effc77f386e1de"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aba297d7d2cad53eb53effc77f386e1de">BackupFiles</a> (const std::string &amp;filename, bool remove_file=true)</td></tr>
@@ -331,6 +335,8 @@ std::string&#160;</td><td class="memItemRight" valign="bottom"><b>GetSeverityStr
 <tr><td class="fieldname"><a id="acce1c2a148c64f8bfbed195ac8c333e4ace40eb3145724b182394b9b5f927dd3a" name="acce1c2a148c64f8bfbed195ac8c333e4ace40eb3145724b182394b9b5f927dd3a"></a>LogToListen&#160;</td><td class="fielddoc"><p>Log to listen window (system messages). </p>
 </td></tr>
 <tr><td class="fieldname"><a id="acce1c2a148c64f8bfbed195ac8c333e4a564f6a782b17ae713307d01873d4bc07" name="acce1c2a148c64f8bfbed195ac8c333e4a564f6a782b17ae713307d01873d4bc07"></a>LogToSyslog&#160;</td><td class="fielddoc"><p>Logs to a syslog server. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="acce1c2a148c64f8bfbed195ac8c333e4ad9a524bf3b1ecf5eefec9b8f0171eaad" name="acce1c2a148c64f8bfbed195ac8c333e4ad9a524bf3b1ecf5eefec9b8f0171eaad"></a>LogToList&#160;</td><td class="fielddoc"><p>Logs to an internal list. </p>
 </td></tr>
 </table>
 
@@ -487,6 +493,59 @@ std::string&#160;</td><td class="memItemRight" valign="bottom"><b>GetSeverityStr
 </div><div class="memdoc">
 <p>Returns a list of available listen servers on the computer.</p>
 <dl class="section return"><dt>Returns</dt><dd>List of listen servers. </dd></dl>
+
+</div>
+</div>
+<a id="ade19f54920de246ae337c66375403750" name="ade19f54920de246ae337c66375403750"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ade19f54920de246ae337c66375403750">&#9670;&#160;</a></span>LogStringEx()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void util::log::LogStringEx </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t</td>          <td class="paramname"><span class="paramname"><em>line</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t</td>          <td class="paramname"><span class="paramname"><em>column</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>file</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>function</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="#aa21d9be4063c51bfeb18a06859495e8a">LogSeverity</a></td>          <td class="paramname"><span class="paramname"><em>severity</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>message</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>This function is an alternative to the standard log function. It shall be used by legacy logger that cannot use the new source location interface that was introduced in C++ 20.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">line</td><td>Line number. </td></tr>
+    <tr><td class="paramname">column</td><td>Column number. </td></tr>
+    <tr><td class="paramname">file</td><td>Source file name. </td></tr>
+    <tr><td class="paramname">function</td><td>Source function name. </td></tr>
+    <tr><td class="paramname">severity</td><td>Severity code for the log message. </td></tr>
+    <tr><td class="paramname">message</td><td>Log message text. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

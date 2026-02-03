@@ -17,5 +17,6 @@ var logging_8h =
     [ "util::log::LogDebug", "namespaceutil_1_1log.html#a45d1dccb31afbb62c9bf2dbbfd05d8f3", null ],
     [ "util::log::LogError", "namespaceutil_1_1log.html#a7975b1c262ba1bfb272c3e108a8dfdb4", null ],
     [ "util::log::LogInfo", "namespaceutil_1_1log.html#ad4687e7206070d9d90295d7d6bb16f37", null ],
-    [ "util::log::LogString", "namespaceutil_1_1log.html#ad0f4c23bd22f6820c369f8d69dfcd098", null ]
+    [ "util::log::LogString", "namespaceutil_1_1log.html#ad0f4c23bd22f6820c369f8d69dfcd098", null ],
+    [ "util::log::LogStringEx", "namespaceutil_1_1log.html#ade19f54920de246ae337c66375403750", null ]
 ];

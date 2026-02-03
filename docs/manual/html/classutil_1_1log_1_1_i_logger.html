@@ -98,15 +98,24 @@ $(function(){initNavTree('classutil_1_1log_1_1_i_logger.html','','classutil_1_1l
  <a href="#details">More...</a></p>
 
 <p><code>#include &quot;<a class="el" href="ilogger_8h_source.html">util/ilogger.h</a>&quot;</code></p>
+<div class="dynheader">
+Inheritance diagram for util::log::ILogger:</div>
+<div class="dyncontent">
+<div class="center"><img src="classutil_1_1log_1_1_i_logger__inherit__graph.png" border="0" usemap="#autil_1_1log_1_1_i_logger_inherit__map" loading="lazy" alt="Inheritance graph"/></div>
+<map name="autil_1_1log_1_1_i_logger_inherit__map" id="autil_1_1log_1_1_i_logger_inherit__map">
+<area shape="rect" title="Interface against a generic logger." alt="" coords="12,5,126,32"/>
+<area shape="rect" href="classutil_1_1log_1_1_log_to_list.html" title=" " alt="" coords="5,80,133,107"/>
+<area shape="poly" title=" " alt="" coords="72,48,72,80,66,80,66,48"/>
+</map>
+<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a444ad230d26e17f5a1197b58566dd318" id="r_a444ad230d26e17f5a1197b58566dd318"><td class="memItemLeft" align="right" valign="top"><a id="a444ad230d26e17f5a1197b58566dd318" name="a444ad230d26e17f5a1197b58566dd318"></a>
 virtual&#160;</td><td class="memItemRight" valign="bottom"><b>~ILogger</b> ()=default</td></tr>
 <tr class="memdesc:a444ad230d26e17f5a1197b58566dd318"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor. <br /></td></tr>
-<tr class="memitem:a32eb2d84223cfe86128f6d32b104f8ec" id="r_a32eb2d84223cfe86128f6d32b104f8ec"><td class="memItemLeft" align="right" valign="top"><a id="a32eb2d84223cfe86128f6d32b104f8ec" name="a32eb2d84223cfe86128f6d32b104f8ec"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>AddLogMessage</b> (const <a class="el" href="structutil_1_1log_1_1_log_message.html">LogMessage</a> &amp;message)=0</td></tr>
-<tr class="memdesc:a32eb2d84223cfe86128f6d32b104f8ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handle a log message. <br /></td></tr>
+<tr class="memitem:a32eb2d84223cfe86128f6d32b104f8ec" id="r_a32eb2d84223cfe86128f6d32b104f8ec"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a32eb2d84223cfe86128f6d32b104f8ec">AddLogMessage</a> (const <a class="el" href="structutil_1_1log_1_1_log_message.html">LogMessage</a> &amp;message)=0</td></tr>
+<tr class="memdesc:a32eb2d84223cfe86128f6d32b104f8ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handle a log message.  <br /></td></tr>
 <tr class="memitem:afb085a277ab67bc2bc904de29e8ff56b" id="r_afb085a277ab67bc2bc904de29e8ff56b"><td class="memItemLeft" align="right" valign="top"><a id="afb085a277ab67bc2bc904de29e8ff56b" name="afb085a277ab67bc2bc904de29e8ff56b"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>Stop</b> ()</td></tr>
 <tr class="memdesc:afb085a277ab67bc2bc904de29e8ff56b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stops any worker thread. <br /></td></tr>
@@ -118,9 +127,8 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>Stop</b> ()</
 <tr class="memdesc:ac278819269e2568e283c8b17521e5b50"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable or disable the source location information.  <br /></td></tr>
 <tr class="memitem:a9e677799a1682ade0a64812a670c7de7" id="r_a9e677799a1682ade0a64812a670c7de7"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9e677799a1682ade0a64812a670c7de7">ShowLocation</a> () const</td></tr>
 <tr class="memdesc:a9e677799a1682ade0a64812a670c7de7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if the source location should be shown.  <br /></td></tr>
-<tr class="memitem:a2ca74bd339c261bfd5aa8d3dc54a1336" id="r_a2ca74bd339c261bfd5aa8d3dc54a1336"><td class="memItemLeft" align="right" valign="top"><a id="a2ca74bd339c261bfd5aa8d3dc54a1336" name="a2ca74bd339c261bfd5aa8d3dc54a1336"></a>
-virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>HasLogFile</b> () const</td></tr>
-<tr class="memdesc:a2ca74bd339c261bfd5aa8d3dc54a1336"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if the logger has file. <br /></td></tr>
+<tr class="memitem:a2ca74bd339c261bfd5aa8d3dc54a1336" id="r_a2ca74bd339c261bfd5aa8d3dc54a1336"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2ca74bd339c261bfd5aa8d3dc54a1336">HasLogFile</a> () const</td></tr>
+<tr class="memdesc:a2ca74bd339c261bfd5aa8d3dc54a1336"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if the logger has file.  <br /></td></tr>
 <tr class="memitem:a409543d85185373ac448eb1a86d36c47" id="r_a409543d85185373ac448eb1a86d36c47"><td class="memItemLeft" align="right" valign="top"><a id="a409543d85185373ac448eb1a86d36c47" name="a409543d85185373ac448eb1a86d36c47"></a>
 virtual std::string&#160;</td><td class="memItemRight" valign="bottom"><b>Filename</b> () const</td></tr>
 <tr class="memdesc:a409543d85185373ac448eb1a86d36c47"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return full path to the log file. <br /></td></tr>
@@ -134,6 +142,33 @@ Protected Member Functions</h2></td></tr>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>The class is an interface class for implementing a logger. Its main interface is the <a class="el" href="#a32eb2d84223cfe86128f6d32b104f8ec" title="Handle a log message.">AddLogMessage()</a> function that handles incoming log messages. </p>
 </div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
+<a id="a32eb2d84223cfe86128f6d32b104f8ec" name="a32eb2d84223cfe86128f6d32b104f8ec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a32eb2d84223cfe86128f6d32b104f8ec">&#9670;&#160;</a></span>AddLogMessage()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void util::log::ILogger::AddLogMessage </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structutil_1_1log_1_1_log_message.html">LogMessage</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>message</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel pure-virtual">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implemented in <a class="el" href="classutil_1_1log_1_1_log_to_list.html#aa5c8091bde368460ac92981a38a783f0">util::log::LogToList</a>.</p>
+
+</div>
+</div>
 <a id="a171d2d16d39b754247562f811ae4c8a8" name="a171d2d16d39b754247562f811ae4c8a8"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a171d2d16d39b754247562f811ae4c8a8">&#9670;&#160;</a></span>EnableSeverityLevel()</h2>
 
@@ -159,6 +194,33 @@ Protected Member Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a id="a2ca74bd339c261bfd5aa8d3dc54a1336" name="a2ca74bd339c261bfd5aa8d3dc54a1336"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2ca74bd339c261bfd5aa8d3dc54a1336">&#9670;&#160;</a></span>HasLogFile()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool util::log::ILogger::HasLogFile </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel virtual">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented in <a class="el" href="classutil_1_1log_1_1_log_to_list.html#a92eb31e8af95367e74d35dea5d6925b7">util::log::LogToList</a>.</p>
 
 </div>
 </div>

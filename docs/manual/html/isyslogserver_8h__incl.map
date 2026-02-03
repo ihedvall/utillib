@@ -1,42 +1,43 @@
 <map id="include/util/isyslogserver.h" name="include/util/isyslogserver.h">
-<area shape="rect" id="Node000001" title="Defines an interface against a syslog server." alt="" coords="414,5,590,32"/>
+<area shape="rect" id="Node000001" title="Defines an interface against a syslog server." alt="" coords="481,5,656,32"/>
 <area shape="rect" id="Node000002" title=" " alt="" coords="5,80,66,107"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="415,33,261,53,85,83,81,83,80,78,84,77,260,48,414,28"/>
-<area shape="rect" id="Node000003" title=" " alt="" coords="99,312,159,339"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="459,35,407,53,344,80,278,114,217,157,183,190,159,231,145,265,136,298,131,297,140,263,154,228,179,186,214,153,275,110,341,75,405,48,458,30"/>
-<area shape="rect" id="Node000004" title=" " alt="" coords="635,155,703,181"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="518,31,645,142,642,146,515,35"/>
-<area shape="rect" id="Node000005" title=" " alt="" coords="810,80,877,107"/>
-<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="571,30,796,77,795,82,569,35"/>
-<area shape="rect" id="Node000006" href="$syslogmessage_8h.html" title="Implements an interface against a syslog message." alt="" coords="366,80,510,107"/>
-<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="493,34,461,70,457,66,489,31"/>
-<area shape="rect" id="Node000014" href="$threadsafequeue_8h.html" title="Implements a thread&#45;safe queue." alt="" coords="637,80,786,107"/>
-<area shape="poly" id="edge19_Node000001_Node000014" title=" " alt="" coords="539,30,661,72,660,77,538,35"/>
-<area shape="poly" id="edge6_Node000006_Node000003" title=" " alt="" coords="379,110,319,129,258,157,215,189,182,231,160,265,143,299,138,296,155,263,177,228,212,185,255,152,317,124,377,105"/>
-<area shape="rect" id="Node000007" title=" " alt="" coords="386,312,440,339"/>
-<area shape="poly" id="edge7_Node000006_Node000007" title=" " alt="" coords="439,108,419,297,413,296,434,107"/>
-<area shape="rect" id="Node000008" title=" " alt="" coords="551,229,608,256"/>
-<area shape="poly" id="edge8_Node000006_Node000008" title=" " alt="" coords="500,105,540,123,558,136,574,153,585,183,586,214,581,214,580,184,569,156,555,140,537,128,497,110"/>
-<area shape="rect" id="Node000009" href="$logmessage_8h.html" title=" " alt="" coords="268,155,371,181"/>
-<area shape="poly" id="edge9_Node000006_Node000009" title=" " alt="" coords="419,109,354,149,352,144,416,105"/>
-<area shape="rect" id="Node000013" href="$structureddata_8h.html" title="Syslog structured data interface." alt="" coords="444,155,560,181"/>
-<area shape="poly" id="edge16_Node000006_Node000013" title=" " alt="" coords="451,105,483,141,479,145,447,109"/>
-<area shape="poly" id="edge11_Node000009_Node000007" title=" " alt="" coords="331,180,364,228,402,297,398,299,360,231,327,183"/>
-<area shape="rect" id="Node000010" title=" " alt="" coords="289,229,350,256"/>
-<area shape="poly" id="edge10_Node000009_Node000010" title=" " alt="" coords="322,182,322,214,317,214,317,182"/>
-<area shape="rect" id="Node000011" href="$logging_8h.html" title="Standard log interfaces." alt="" coords="192,229,266,256"/>
-<area shape="poly" id="edge12_Node000009_Node000011" title=" " alt="" coords="305,184,258,222,254,218,302,180"/>
-<area shape="poly" id="edge13_Node000011_Node000003" title=" " alt="" coords="215,259,157,305,154,300,212,254"/>
-<area shape="poly" id="edge14_Node000011_Node000007" title=" " alt="" coords="259,254,373,304,371,309,257,259"/>
-<area shape="rect" id="Node000012" title=" " alt="" coords="184,304,322,347"/>
-<area shape="poly" id="edge15_Node000011_Node000012" title=" " alt="" coords="235,256,245,288,240,290,230,257"/>
-<area shape="poly" id="edge17_Node000013_Node000007" title=" " alt="" coords="498,183,459,257,432,301,427,298,455,255,494,181"/>
-<area shape="poly" id="edge18_Node000013_Node000008" title=" " alt="" coords="517,180,557,217,553,221,514,184"/>
-<area shape="poly" id="edge21_Node000014_Node000004" title=" " alt="" coords="706,109,686,143,682,140,702,106"/>
-<area shape="rect" id="Node000015" title=" " alt="" coords="889,155,1014,181"/>
-<area shape="poly" id="edge20_Node000014_Node000015" title=" " alt="" coords="754,105,895,147,894,152,753,110"/>
-<area shape="rect" id="Node000016" title=" " alt="" coords="727,155,784,181"/>
-<area shape="poly" id="edge22_Node000014_Node000016" title=" " alt="" coords="721,106,742,140,738,143,717,109"/>
-<area shape="rect" id="Node000017" title=" " alt="" coords="809,155,865,181"/>
-<area shape="poly" id="edge23_Node000014_Node000017" title=" " alt="" coords="735,105,803,144,801,149,732,110"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="481,30,298,51,85,83,81,83,80,78,84,77,298,45,481,25"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="129,312,190,339"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="525,35,468,54,398,80,324,115,253,157,210,188,196,206,181,230,169,264,163,297,158,296,163,263,176,228,191,202,207,185,250,152,321,110,396,76,466,49,524,30"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="692,155,760,181"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="584,31,703,142,700,146,580,34"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="885,80,951,107"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="640,30,871,77,870,82,639,35"/>
+<area shape="rect" id="Node000006" href="$syslogmessage_8h.html" title="Implements an interface against a syslog message." alt="" coords="433,80,577,107"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="560,34,528,70,524,66,556,31"/>
+<area shape="rect" id="Node000014" href="$threadsafequeue_8h.html" title="Implements a thread&#45;safe queue." alt="" coords="712,80,861,107"/>
+<area shape="poly" id="edge20_Node000001_Node000014" title=" " alt="" coords="608,30,735,72,733,77,606,35"/>
+<area shape="poly" id="edge6_Node000006_Node000003" title=" " alt="" coords="433,110,376,126,313,150,252,185,225,206,202,231,181,264,169,298,164,296,177,262,197,228,222,202,249,180,311,145,374,121,432,105"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="432,312,485,339"/>
+<area shape="poly" id="edge7_Node000006_Node000007" title=" " alt="" coords="504,108,493,155,490,206,490,228,486,257,472,299,467,297,481,255,485,228,485,205,488,154,499,106"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="612,229,670,256"/>
+<area shape="poly" id="edge8_Node000006_Node000008" title=" " alt="" coords="558,105,597,123,616,136,631,153,643,183,646,214,641,214,638,184,627,156,612,140,594,128,555,110"/>
+<area shape="rect" id="Node000009" href="$logmessage_8h.html" title=" " alt="" coords="322,155,424,181"/>
+<area shape="poly" id="edge9_Node000006_Node000009" title=" " alt="" coords="483,110,410,149,408,145,481,105"/>
+<area shape="rect" id="Node000013" href="$structureddata_8h.html" title="Syslog structured data interface." alt="" coords="502,155,617,181"/>
+<area shape="poly" id="edge17_Node000006_Node000013" title=" " alt="" coords="516,106,543,140,539,144,512,109"/>
+<area shape="poly" id="edge11_Node000009_Node000003" title=" " alt="" coords="327,184,279,203,232,231,199,265,175,300,171,297,195,262,229,227,277,198,326,179"/>
+<area shape="poly" id="edge12_Node000009_Node000007" title=" " alt="" coords="377,181,385,215,401,255,417,279,435,299,431,303,413,282,396,257,380,217,372,182"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="411,229,471,256"/>
+<area shape="poly" id="edge10_Node000009_Node000010" title=" " alt="" coords="387,180,421,216,417,220,383,184"/>
+<area shape="rect" id="Node000011" href="$logging_8h.html" title="Standard log interfaces." alt="" coords="242,229,336,256"/>
+<area shape="poly" id="edge13_Node000009_Node000011" title=" " alt="" coords="360,184,317,221,313,217,356,180"/>
+<area shape="poly" id="edge14_Node000011_Node000003" title=" " alt="" coords="270,259,194,306,191,301,267,254"/>
+<area shape="poly" id="edge15_Node000011_Node000007" title=" " alt="" coords="316,254,419,303,417,308,314,259"/>
+<area shape="rect" id="Node000012" title=" " alt="" coords="220,304,358,347"/>
+<area shape="poly" id="edge16_Node000011_Node000012" title=" " alt="" coords="292,256,292,289,286,289,286,256"/>
+<area shape="poly" id="edge18_Node000013_Node000007" title=" " alt="" coords="559,183,549,218,530,257,510,283,488,304,484,300,506,279,525,255,544,216,554,181"/>
+<area shape="poly" id="edge19_Node000013_Node000008" title=" " alt="" coords="575,180,617,217,614,221,572,184"/>
+<area shape="poly" id="edge22_Node000014_Node000004" title=" " alt="" coords="778,109,748,145,744,141,774,106"/>
+<area shape="rect" id="Node000015" title=" " alt="" coords="785,155,910,181"/>
+<area shape="poly" id="edge21_Node000014_Node000015" title=" " alt="" coords="799,105,829,141,825,145,795,109"/>
+<area shape="rect" id="Node000016" title=" " alt="" coords="935,155,992,181"/>
+<area shape="poly" id="edge23_Node000014_Node000016" title=" " alt="" coords="818,105,922,147,920,152,816,110"/>
+<area shape="rect" id="Node000017" title=" " alt="" coords="1017,155,1073,181"/>
+<area shape="poly" id="edge24_Node000014_Node000017" title=" " alt="" coords="834,105,1002,151,1001,156,832,110"/>
 </map>
