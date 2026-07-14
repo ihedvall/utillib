@@ -19,7 +19,7 @@ class ServiceExplorer : public wxApp {
   }
   void OpenFile(const std::string& filename) const;
   void RunAs(HWND hwnd, const std::wstring& params) const;
- protected:
+
   bool OnCmdLineParsed(wxCmdLineParser &parser) override;
   void OnInitCmdLine(wxCmdLineParser &parser) override;
   bool OnInit() override;

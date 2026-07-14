@@ -6,7 +6,7 @@
 namespace util::log::gui {
 
 constexpr wxWindowID kIdOpenLogFile = 1;
-constexpr wxWindowID kIdListenList = 2;
+constexpr wxWindowID kIdActiveList = 2;
 constexpr wxWindowID kIdSelectionList = 3;
 constexpr wxWindowID kIdEnable = 4;
 constexpr wxWindowID kIdDisable = 5;

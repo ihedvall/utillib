@@ -13,6 +13,7 @@ namespace util {
 
 class ConsoleApp {
  public:
+  virtual ~ConsoleApp() = default;
   ConsoleApp();
   int MainFunc(int argc, char* argv[]);
   static void StopMain();

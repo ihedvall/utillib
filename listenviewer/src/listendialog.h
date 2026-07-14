@@ -35,11 +35,13 @@ class ListenDialog : public wxDialog {
   bool TransferDataFromWindow() override;
  private:
   wxListView* list_ = nullptr;
-  wxImageList image_list_;
-  void OnActivateChange(wxListEvent& event);
+
+  void OnItemChecked(wxListEvent& event);
+  void OnItemUnchecked(wxListEvent& event);
   void OnRightClick(wxListEvent& event);
   void OnEnable(wxCommandEvent& event);
   void OnDisable(wxCommandEvent& event);
+  void OnItemActivated(wxListEvent& event);
  wxDECLARE_EVENT_TABLE();
 };
 } // end namespace

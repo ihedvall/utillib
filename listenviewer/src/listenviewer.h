@@ -13,7 +13,6 @@ class ListenViewer : public wxApp {
  public:
   void OpenFile(const std::string& filename) const;
 
- protected:
   bool OnInit() override;
   int OnExit() override;
 

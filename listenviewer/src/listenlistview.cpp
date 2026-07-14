@@ -10,7 +10,8 @@ using namespace util::log::detail;
 namespace util::log::gui {
 
 ListenListView::ListenListView(wxWindow *parent, MessageBuffer& buffer)
-: wxListView(parent, kIdMessageList, wxDefaultPosition, {1000, 700}, wxLC_REPORT | wxLC_SINGLE_SEL | wxLC_VIRTUAL),
+: wxListView(parent, kIdMessageList, wxDefaultPosition,
+  {1000, 700}, wxLC_REPORT | wxLC_SINGLE_SEL | wxLC_VIRTUAL),
   buffer_(buffer) {
 
 }

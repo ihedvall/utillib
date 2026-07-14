@@ -5,43 +5,33 @@
 #include <wx/config.h>
 #include <wx/textctrl.h>
 #include <wx/valnum.h>
-#include <wx/valgen.h>
 #include "listendialog.h"
 #include "listenviewerid.h"
-namespace {
-#include "img/list.xpm"
-constexpr int kActiveBmp = 5;
-constexpr int kNotActiveBmp = 6;
-}
 
 namespace util::log::gui {
 
 wxBEGIN_EVENT_TABLE(ListenDialog, wxDialog) //NOLINT
-    EVT_LIST_ITEM_ACTIVATED(kIdSelectionList, ListenDialog::OnActivateChange)
+    EVT_LIST_ITEM_CHECKED(kIdSelectionList, ListenDialog::OnItemChecked)
+    EVT_LIST_ITEM_UNCHECKED(kIdSelectionList, ListenDialog::OnItemUnchecked)
     EVT_LIST_ITEM_RIGHT_CLICK(kIdSelectionList, ListenDialog::OnRightClick)
     EVT_MENU(kIdEnable, ListenDialog::OnEnable)
     EVT_MENU(kIdDisable, ListenDialog::OnDisable)
+    EVT_LIST_ITEM_ACTIVATED(kIdSelectionList, ListenDialog::OnItemActivated)
 wxEND_EVENT_TABLE()
 
 ListenDialog::ListenDialog(wxWindow *parent)
-    : wxDialog(parent,wxID_ANY,L"Select Listen Servers", wxDefaultPosition, wxDefaultSize,
-               wxDEFAULT_DIALOG_STYLE | wxRESIZE_BORDER | wxMAXIMIZE_BOX ),
-      image_list_(16, 16, false, 9) {
+    : wxDialog(parent,wxID_ANY,L"Select Listen Servers",
+      wxDefaultPosition, wxDefaultSize,
+     wxDEFAULT_DIALOG_STYLE | wxRESIZE_BORDER | wxMAXIMIZE_BOX ) {
 
-  list_ = new wxListView(this, kIdSelectionList, wxDefaultPosition, {800, 400},wxLC_REPORT | wxLC_SINGLE_SEL );
+  list_ = new wxListView(this, kIdSelectionList,
+    wxDefaultPosition, {800, 400},
+    wxLC_REPORT | wxLC_SINGLE_SEL );
+  list_->EnableCheckBoxes(true);
   list_->AppendColumn(L"Name", wxLIST_FORMAT_LEFT, 150);
   list_->AppendColumn(L"Port", wxLIST_FORMAT_LEFT, 50);
   list_->AppendColumn(L"Host", wxLIST_FORMAT_LEFT, 100);
   list_->AppendColumn(L"Description", wxLIST_FORMAT_LEFT, 500);
-
-#ifdef _WIN32
-    wxBitmap list_bmp("LIST", wxBITMAP_TYPE_BMP_RESOURCE);
-#else
-    wxBitmap list_bmp { wxBITMAP(list) };
-#endif
-  image_list_.Add(list_bmp);
-  list_->SetImageList(&image_list_, wxIMAGE_LIST_SMALL);
-
 
   auto* remote_name = new wxTextCtrl(this, wxID_ANY, wxEmptyString,wxDefaultPosition,wxDefaultSize, 0,
                                   wxTextValidator(wxFILTER_NONE, &remote_name_));
@@ -124,10 +114,11 @@ bool ListenDialog::TransferDataToWindow() {
     list_->DeleteAllItems();
     for (long item = 0; item < static_cast<long>(selection_list_.size()); ++item) {
       const auto& listen = selection_list_[item];
-      list_->InsertItem(item,listen.name,listen.active ? kActiveBmp : kNotActiveBmp);
+      list_->InsertItem(item,listen.name);
       list_->SetItem(item,1,std::to_wstring(listen.port));
       list_->SetItem(item,2,listen.host);
       list_->SetItem(item,3,listen.description);
+      list_->CheckItem(item, listen.active);
     }
     if (selected >= 0) {
       list_->SetItemState(selected, wxLIST_STATE_SELECTED , wxLIST_STATE_SELECTED);
@@ -151,18 +142,22 @@ bool ListenDialog::TransferDataFromWindow() {
   return ret;
 }
 
-void ListenDialog::OnActivateChange(wxListEvent &event) {
-  const auto index = event.GetIndex();
+void ListenDialog::OnItemChecked(wxListEvent &event) {
+  const long index = event.GetIndex();
   if (index < 0 || index >= selection_list_.size() || list_ == nullptr) {
     return;
   }
   auto& listen = selection_list_[index];
-  if (listen.active) {
-    listen.active = false;
-  } else {
-    listen.active = true;
+  listen.active = true;
+}
+
+void ListenDialog::OnItemUnchecked(wxListEvent &event) {
+  const long index = event.GetIndex();
+  if (index < 0 || index >= selection_list_.size() || list_ == nullptr) {
+    return;
   }
-  list_->SetItemImage(index,listen.active ? kActiveBmp : kNotActiveBmp);
+  auto& listen = selection_list_[index];
+  listen.active = false;
 }
 
 void ListenDialog::OnRightClick(wxListEvent &event) {
@@ -182,7 +177,7 @@ void ListenDialog::OnEnable(wxCommandEvent &event) {
   }
   auto& listen = selection_list_[index];
   listen.active = true;
-  list_->SetItemImage(index,listen.active ? kActiveBmp : kNotActiveBmp);
+  list_->CheckItem(index, true);
 }
 
 void ListenDialog::OnDisable(wxCommandEvent &event) {
@@ -195,8 +190,19 @@ void ListenDialog::OnDisable(wxCommandEvent &event) {
   }
   auto& listen = selection_list_[index];
   listen.active = false;
-  list_->SetItemImage(index,listen.active ? kActiveBmp : kNotActiveBmp);
+  list_->CheckItem(index, false);
 }
 
+void ListenDialog::OnItemActivated(wxListEvent& event) {
+  const long index = event.GetIndex();
+  if (index < 0 || index >= selection_list_.size() || list_ == nullptr) {
+    return;
+  }
+  auto& listen = selection_list_[index];
+  listen.active = false;
+  list_->CheckItem(index, true);
+  EndModal(wxID_OK);
+
+}
 
 } // end namespace

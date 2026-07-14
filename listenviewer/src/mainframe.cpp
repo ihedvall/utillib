@@ -11,13 +11,12 @@
 #include <wx/sizer.h>
 #include <wx/srchctrl.h>
 
-#include <boost/algorithm/string.hpp>
-#include <filesystem>
 #include <string>
+
+#include <boost/algorithm/string.hpp>
 
 #include "listenclient.h"
 #include "listendialog.h"
-#include "listenviewer.h"
 #include "listenviewerid.h"
 #include "settingdialog.h"
 #include "util/listenconfig.h"
@@ -42,34 +41,31 @@ namespace {
 namespace util::log::gui {
 
 wxBEGIN_EVENT_TABLE(MainFrame, wxFrame)  // NOLINT
-    EVT_MENU(wxID_ABOUT, MainFrame::OnAbout) EVT_MENU(
-        wxID_EXIT, MainFrame::OnExit) EVT_MENU(wxID_SETUP, MainFrame::OnSetting)
-        EVT_MENU(wxID_OPEN, MainFrame::OnOpen) EVT_RADIOBOX(
-            kIdAutoScroll,
-            MainFrame::OnAutoScroll) EVT_BUTTON(kIdClearList,
-                                                MainFrame::OnClearList)
-            EVT_BUTTON(kIdSettings, MainFrame::OnSetting) EVT_TIMER(
-                kIdMainTimer,
-                MainFrame::OnMainTimer) EVT_SIZE(MainFrame::OnSizeChange)
-                EVT_SEARCHCTRL_SEARCH_BTN(kIdWildCard,
-                                          MainFrame::OnWildcardChange)
-                    EVT_SEARCHCTRL_CANCEL_BTN(kIdWildCard,
-                                              MainFrame::OnWildcardReset)
-                        EVT_TEXT_ENTER(kIdWildCard, MainFrame::OnWildcardChange)
-                            EVT_CHOICE(kIdLogLevel, MainFrame::OnLogLevel)
-                                EVT_LIST_ITEM_ACTIVATED(kIdListenList,
-                                                        MainFrame::OnClientList)
-                                    wxEND_EVENT_TABLE()
+    EVT_MENU(wxID_ABOUT, MainFrame::OnAbout)
+    EVT_MENU(wxID_EXIT, MainFrame::OnExit)
+    EVT_MENU(wxID_SETUP, MainFrame::OnSetting)
+    EVT_MENU(wxID_OPEN, MainFrame::OnOpen)
+    EVT_RADIOBOX( kIdAutoScroll, MainFrame::OnAutoScroll)
+    EVT_BUTTON(kIdClearList, MainFrame::OnClearList)
+    EVT_BUTTON(kIdSettings, MainFrame::OnSetting)
+    EVT_TIMER(kIdMainTimer, MainFrame::OnMainTimer)
+    EVT_SIZE(MainFrame::OnSizeChange)
+    EVT_SEARCH(kIdWildCard, MainFrame::OnWildcardChange)
+    EVT_SEARCH_CANCEL(kIdWildCard, MainFrame::OnWildcardReset)
+    EVT_TEXT_ENTER(kIdWildCard, MainFrame::OnWildcardChange)
+    EVT_CHOICE(kIdLogLevel, MainFrame::OnLogLevel)
+    EVT_LIST_ITEM_ACTIVATED(kIdActiveList, MainFrame::OnDoubleClickActiveList)
+wxEND_EVENT_TABLE()
 
-                                        MainFrame::MainFrame(
-                                            const wxString& title,
-                                            const wxPoint& start_pos,
-                                            const wxSize& start_size,
-                                            bool maximized)
-    : wxFrame(nullptr, wxID_ANY, title, start_pos, start_size),
-      image_list_(16, 16, false, 9),
-      message_buffer_(10),
-      main_timer_(this, kIdMainTimer) {
+MainFrame::MainFrame(
+    const wxString& title,
+    const wxPoint& start_pos,
+    const wxSize& start_size,
+    bool maximized)
+: wxFrame(nullptr, wxID_ANY, title, start_pos, start_size),
+   image_list_(16, 16, false, 9),
+   main_timer_(this, kIdMainTimer),
+   message_buffer_(10) {
 #ifdef _WIN32
   wxIcon app("APP_ICON", wxBITMAP_TYPE_ICO_RESOURCE);
 #else
@@ -130,7 +126,7 @@ wxBEGIN_EVENT_TABLE(MainFrame, wxFrame)  // NOLINT
 
   wxSize list_size(300, 40);
 
-  active_list_ = new wxListView(this, kIdListenList, wxDefaultPosition,
+  active_list_ = new wxListView(this, kIdActiveList, wxDefaultPosition,
                                 list_size, wxLC_SMALL_ICON | wxLC_SINGLE_SEL);
 
   const wxString scroll_list[2] = {L"Auto", L"Manual"};
@@ -350,7 +346,7 @@ void MainFrame::OnOpen(wxCommandEvent&) {
   RedrawActiveList();
 }
 
-void MainFrame::RedrawMessageList() {
+void MainFrame::RedrawMessageList() const {
   wxBusyCursor wait;
   if (message_list_ == nullptr) {
     return;
@@ -361,7 +357,7 @@ void MainFrame::RedrawMessageList() {
   }
 }
 
-void MainFrame::RedrawActiveList() {
+void MainFrame::RedrawActiveList() const {
   wxBusyCursor wait;
   if (active_list_ == nullptr) {
     return;
@@ -374,7 +370,8 @@ void MainFrame::RedrawActiveList() {
     }
     if (listen->Active()) {
       active_list_->InsertItem(item, listen->Name(),
-                               listen->Active() ? kGreenPlay : kGreenStop);
+                               listen->Active() ? kGreenPlay : kBlueStop);
+      ++item;
     }
   }
 }
@@ -470,12 +467,12 @@ void MainFrame::OnWildcardChange(wxCommandEvent& event) {
 
 void MainFrame::OnWildcardReset(wxCommandEvent& event) { wildcard_ = {}; }
 
-void MainFrame::HandleStatusBitmap(const ListenClient& client) {
+void MainFrame::HandleStatusBitmap(const ListenClient& client) const {
   int bitmap = kGreenPlay;
   if (!client.IsConnected()) {
     bitmap = kGrayCircleOff;
   } else if (!client.Active()) {
-    bitmap = kGreenStop;
+    bitmap = kBlueStop;
   }
   const wxString name(client.Name());
   if (active_list_ != nullptr) {
@@ -504,12 +501,15 @@ void MainFrame::OnLogLevel(wxCommandEvent& event) {
   }
 }
 
-void MainFrame::OnClientList(wxListEvent& event) {
+void MainFrame::OnDoubleClickActiveList(wxListEvent& event) {
+  const auto item = event.GetIndex();
   const auto name = event.GetText().ToStdString();
-  auto find = std::ranges::find_if(
+  auto itr_find = std::ranges::find_if(
       client_list_, [&](const auto& client) { return name == client->Name(); });
-  if (find != client_list_.end()) {
-    (*find)->Active(!(*find)->Active());
+  if (itr_find != client_list_.end()) {
+    if (auto& client = *itr_find; client) {
+      client->Active(!client->Active());
+    }
   }
 }
 

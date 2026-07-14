@@ -51,82 +51,89 @@ LogConfig &LogConfig::Instance() {
 }
 
 void LogConfig::BaseName(const std::string &base_name) {
-  std::lock_guard<std::mutex> lock(locker_);
+  std::lock_guard lock(locker_);
   base_name_ = base_name;
 }
 
 const std::string &LogConfig::BaseName() const {
-  std::lock_guard<std::mutex> lock(locker_);
+  std::lock_guard lock(locker_);
   return base_name_;
 }
 
 void LogConfig::RootDir(const std::string &root_dir) {
-  std::lock_guard<std::mutex> lock(locker_);
+  std::lock_guard lock(locker_);
   root_dir_ = root_dir;
 }
 
 [[nodiscard]] const std::string &LogConfig::RootDir() const {
-  std::lock_guard<std::mutex> lock(locker_);
+  std::lock_guard lock(locker_);
   return root_dir_;
 }
 
 void LogConfig::SubDir(const std::string &sub_dir) {
-  std::lock_guard<std::mutex> lock(locker_);
+  std::lock_guard lock(locker_);
   sub_dir_ = sub_dir;
 }
 
 [[nodiscard]] const std::string &LogConfig::SubDir() const {
-  std::lock_guard<std::mutex> lock(locker_);
+  std::lock_guard lock(locker_);
   return sub_dir_;
 }
 
-bool LogConfig::CreateDefaultLogger() {
-  bool create = false;
-
+ILogger* LogConfig::CreateDefaultLogger() {
+  ILogger* logger = nullptr;
   switch (log_type_) {
     case LogType::LogToFile: {
       std::unique_ptr<detail::LogFile> log_file =
           std::make_unique<detail::LogFile>();
-      create = !log_file->Filename().empty();
-      if (create) {
-        std::lock_guard<std::mutex> lock(locker_);
+      logger = log_file.get();
+      if (bool create = !log_file->Filename().empty(); create) {
+        std::lock_guard lock(locker_);
         log_chain_.emplace("Default", std::move(log_file));
       }
-    } break;
+      break;
+    };
+
+    case LogType::LogToListen: {
+      auto listen_logger = std::make_unique<detail::ListenLogger>();
+      logger = listen_logger.get();
+      std::lock_guard lock(locker_);
+      log_chain_.emplace("Default", std::move(listen_logger));
+      break;
+    }
 
     case LogType::LogToSyslog: {
       auto syslog = std::make_unique<detail::Syslog>("localhost", 514);
-      std::lock_guard<std::mutex> lock(locker_);
+      logger = syslog.get();
+      std::lock_guard lock(locker_);
       log_chain_.emplace("Default", std::move(syslog));
       break;
     }
 
     case LogType::LogToList: {
-      auto logger = std::make_unique<LogToList>("Default");
-      ;
-      std::lock_guard<std::mutex> lock(locker_);
-      log_chain_.emplace("Default", std::move(logger));
+      auto list_log = std::make_unique<LogToList>("Default");
+      logger = list_log.get();
+
+      std::lock_guard lock(locker_);
+      log_chain_.emplace("Default", std::move(list_log));
       break;
     }
 
-    case LogType::LogToConsole:
-      create = true;
-      {
-        std::unique_ptr<detail::LogConsole> log_console =
+    case LogType::LogToConsole: {
+      std::unique_ptr<detail::LogConsole> log_console =
             std::make_unique<detail::LogConsole>();
-        std::lock_guard<std::mutex> lock(locker_);
-        log_chain_.emplace("Default", std::move(log_console));
-      }
+      logger = log_console.get();
+      std::lock_guard lock(locker_);
+      log_chain_.emplace("Default", std::move(log_console));
       break;
+    }
+
 
     case LogType::LogNothing:
-      create = true;
-      break;
-
     default:
       break;
   }
-  return create;
+  return logger;
 }
 
 LogConfig::~LogConfig() { DeleteLogChain(); }
@@ -142,7 +149,7 @@ void LogConfig::AddLogMessage(const LogMessage &message) const {
   if (!Enabled()) {
     return;
   }
-  std::lock_guard<std::mutex> lock(locker_);
+  std::lock_guard lock(locker_);
   for (auto &itr : log_chain_) {
     itr.second->AddLogMessage(message);
   }
@@ -153,12 +160,12 @@ void LogConfig::AddLogger(const std::string &logger_name, const LogType type,
   std::unique_ptr<ILogger> logger;
   switch (type) {
     case LogType::LogToConsole:
-      logger = std::make_unique<util::log::detail::LogConsole>();
+      logger = std::make_unique<detail::LogConsole>();
       break;
 
     case LogType::LogToFile: {
       const auto base_name = arg_list.empty() ? logger_name : arg_list[0];
-      logger = std::make_unique<util::log::detail::LogFile>(base_name);
+      logger = std::make_unique<detail::LogFile>(base_name);
       break;
     }
 
@@ -187,7 +194,7 @@ void LogConfig::AddLogger(const std::string &logger_name, const LogType type,
 
 void LogConfig::AddLogger(const std::string &logger_name,
                           std::unique_ptr<ILogger> logger) {
-  std::lock_guard<std::mutex> lock(locker_);
+  std::lock_guard lock(locker_);
   auto itr = log_chain_.find(logger_name);
   if (itr == log_chain_.end()) {
     log_chain_.emplace(logger_name, std::move(logger));
@@ -197,7 +204,7 @@ void LogConfig::AddLogger(const std::string &logger_name,
 }
 
 void LogConfig::DeleteLogger(const std::string &logger_name) {
-  std::lock_guard<std::mutex> lock(locker_);
+  std::lock_guard lock(locker_);
   auto itr = log_chain_.find(logger_name);
   if (itr != log_chain_.end()) {
     log_chain_.erase(itr);
@@ -205,8 +212,10 @@ void LogConfig::DeleteLogger(const std::string &logger_name) {
 }
 
 ILogger *LogConfig::GetLogger(const std::string &logger_name) const {
-  std::lock_guard<std::mutex> lock(locker_);
-  const auto itr = log_chain_.find(logger_name);
+
+  std::lock_guard lock(locker_);
+  const auto itr = logger_name.empty() ? log_chain_.find("Default")
+    : log_chain_.find(logger_name);
   return itr == log_chain_.cend() ? nullptr : itr->second.get();
 }
 

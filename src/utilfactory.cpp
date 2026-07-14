@@ -60,17 +60,17 @@ std::unique_ptr<ISyslogServer> UtilFactory::CreateSyslogServer(
 }
 
 std::unique_ptr<log::ILogger> UtilFactory::CreateLogger(
-    log::LogType type, const std::vector<std::string> &arg_list) {
+    LogType type, const std::vector<std::string> &arg_list) {
   std::unique_ptr<ILogger> logger;
 
   switch (type) {
     case LogType::LogToConsole:
-      logger = std::make_unique<util::log::detail::LogConsole>();
+      logger = std::make_unique<detail::LogConsole>();
       break;
 
     case LogType::LogToFile: {
       const auto base_name = arg_list.empty() ? "default" : arg_list[0];
-      logger = std::make_unique<util::log::detail::LogFile>(base_name);
+      logger = std::make_unique<detail::LogFile>(base_name);
       break;
     }
 

@@ -21,8 +21,8 @@ namespace util::log::gui {
 class MainFrame : public wxFrame {
  public:
   MainFrame(const wxString& title, const wxPoint& start_pos, const wxSize& start_size, bool maximized);
-  void RedrawMessageList();
-  void RedrawActiveList();
+  void RedrawMessageList() const;
+  void RedrawActiveList() const;
  private:
   ListenListView* message_list_ = nullptr;
   wxListView* active_list_ = nullptr;
@@ -43,7 +43,7 @@ class MainFrame : public wxFrame {
   MessageBuffer message_buffer_;
 
   void HandleMessages(util::log::detail::ListenClient& client);
-  void HandleStatusBitmap(const util::log::detail::ListenClient& client);
+  void HandleStatusBitmap(const util::log::detail::ListenClient& client) const;
   [[nodiscard]] bool FilterMessage(const util::log::detail::ListenTextMessage& msg) const;
 
   void OnExit(wxCommandEvent& event);
@@ -57,7 +57,7 @@ class MainFrame : public wxFrame {
   void OnWildcardChange(wxCommandEvent& event);
   void OnWildcardReset(wxCommandEvent& event);
   void OnLogLevel(wxCommandEvent& event);
-  void OnClientList(wxListEvent& event);
+  void OnDoubleClickActiveList(wxListEvent& event);
 wxDECLARE_EVENT_TABLE();
 };
 

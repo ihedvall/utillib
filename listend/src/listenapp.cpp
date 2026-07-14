@@ -193,7 +193,7 @@ bool ListenApp::OnInit() {
     }
   }
 
-  const std::vector<std::string> no_arg;
+  constexpr std::vector<std::string> no_arg;
   log_config.AddLogger("Listen Daemon Message", LogType::LogToListen, no_arg);
   for (auto& server : kServerList) {
     if (!server) {

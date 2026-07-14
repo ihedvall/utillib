@@ -71,7 +71,7 @@ class LogConfig final {
    * logger name is 'Default'.
    * @return True on success.
    */
-  bool CreateDefaultLogger();  ///< Create a logger named 'Default'.
+  ILogger* CreateDefaultLogger();  ///< Create a logger named 'Default'.
 
   /**
    * Remove all loggers from the application.
