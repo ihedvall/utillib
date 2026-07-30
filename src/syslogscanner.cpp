@@ -7,6 +7,8 @@
 namespace util::syslog {
 
 SyslogScanner::SyslogScanner(std::istringstream& message)
-    : yyFlexLexer(&message), yylval(nullptr) {}
+    : yyFlexLexer(&message), yylval(nullptr) {
+  input_text_ = message.str();
+}
 
 }  // namespace util::syslog

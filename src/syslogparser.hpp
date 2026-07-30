@@ -389,6 +389,7 @@ namespace util { namespace syslog {
       // "space"
       // "isotime"
       // NAME
+      // STRING
       // "octet"
       char dummy2[sizeof (std::string)];
     };
@@ -438,8 +439,9 @@ namespace util { namespace syslog {
     NUMBER = 259,                  // "int"
     ISOTIME = 260,                 // "isotime"
     NAME = 261,                    // NAME
-    NIL = 262,                     // NIL
-    OCTET = 263                    // "octet"
+    STRING = 262,                  // STRING
+    NIL = 263,                     // NIL
+    OCTET = 264                    // "octet"
       };
       /// Backward compatibility alias (Bison 3.6).
       typedef token_kind_type yytokentype;
@@ -465,14 +467,14 @@ namespace util { namespace syslog {
         S_NUMBER = 4,                            // "int"
         S_ISOTIME = 5,                           // "isotime"
         S_NAME = 6,                              // NAME
-        S_NIL = 7,                               // NIL
-        S_OCTET = 8,                             // "octet"
-        S_9_ = 9,                                // '<'
-        S_10_ = 10,                              // '>'
-        S_11_ = 11,                              // '['
-        S_12_ = 12,                              // ']'
-        S_13_ = 13,                              // '='
-        S_14_ = 14,                              // '"'
+        S_STRING = 7,                            // STRING
+        S_NIL = 8,                               // NIL
+        S_OCTET = 9,                             // "octet"
+        S_10_ = 10,                              // '<'
+        S_11_ = 11,                              // '>'
+        S_12_ = 12,                              // '['
+        S_13_ = 13,                              // ']'
+        S_14_ = 14,                              // '='
         S_YYACCEPT = 15,                         // $accept
         S_syslog_message = 16,                   // syslog_message
         S_pri = 17,                              // pri
@@ -531,6 +533,7 @@ namespace util { namespace syslog {
       case symbol_kind::S_SP: // "space"
       case symbol_kind::S_ISOTIME: // "isotime"
       case symbol_kind::S_NAME: // NAME
+      case symbol_kind::S_STRING: // STRING
       case symbol_kind::S_OCTET: // "octet"
         value.move< std::string > (std::move (that.value));
         break;
@@ -611,6 +614,7 @@ switch (yykind)
       case symbol_kind::S_SP: // "space"
       case symbol_kind::S_ISOTIME: // "isotime"
       case symbol_kind::S_NAME: // NAME
+      case symbol_kind::S_STRING: // STRING
       case symbol_kind::S_OCTET: // "octet"
         value.template destroy< std::string > ();
         break;
@@ -880,6 +884,21 @@ switch (yykind)
       make_NAME (const std::string& v)
       {
         return symbol_type (token::NAME, v);
+      }
+#endif
+#if 201103L <= YY_CPLUSPLUS
+      static
+      symbol_type
+      make_STRING (std::string v)
+      {
+        return symbol_type (token::STRING, std::move (v));
+      }
+#else
+      static
+      symbol_type
+      make_STRING (const std::string& v)
+      {
+        return symbol_type (token::STRING, v);
       }
 #endif
 #if 201103L <= YY_CPLUSPLUS
@@ -1230,7 +1249,7 @@ switch (yykind)
 
 #line 5 "D:/projects/utillib/src/syslogparser.y"
 } } // util::syslog
-#line 1234 "D:/projects/utillib/src/syslogparser.hpp"
+#line 1253 "D:/projects/utillib/src/syslogparser.hpp"
 
 
 

@@ -48,7 +48,7 @@ void LogInfo(const Loc &loc, const char *fmt,
 void LogError(const Loc &loc, const char *fmt,
               ...);  ///< Creates an error message
 void LogString(const Loc &loc, LogSeverity severity,
-               const std::string &message);  ///< Creates a generic message
+               std::string message);  ///< Creates a generic message
 
 /**
  * @brief Alternate loh function that can be used with legacy loggers.

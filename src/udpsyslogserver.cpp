@@ -6,6 +6,7 @@
 
 #include <boost/array.hpp>
 #include <chrono>
+#include <iostream>
 #include <sstream>
 
 #include "util/logstream.h"
@@ -61,13 +62,18 @@ void UdpSyslogServer::Stop() {
 }
 
 void UdpSyslogServer::ServerThread() {
+  std::array<char, 10000> data = {'\0'};
   while (!stop_thread_) {
     try {
-      std::string data(65000, '\0');
+
       udp::endpoint remote_endpoint;
-      socket_->receive_from(boost::asio::buffer(data), remote_endpoint);
+      size_t nof_bytes = socket_->receive_from(boost::asio::buffer(data), remote_endpoint);
+
+      std::string syslog_text(data.data(), nof_bytes);
+      std::cout << "Receiving: " << nof_bytes
+                << ", Message:" << syslog_text << std::endl;
       SyslogMessage msg;
-      const auto parse = msg.ParseMessage(data);
+      const auto parse = msg.ParseMessage(syslog_text);
       if (parse) {
         AddMsg(msg);
         if (!operable_) {

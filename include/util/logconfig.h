@@ -159,6 +159,26 @@ class LogConfig final {
   [[nodiscard]] const std::string &SubDir()
       const;  ///< Returns the sub directory.
 
+  /** \brief Sets the default host name.
+   *
+   * Some logger includes the host name in their message logs.
+   * The host name is by default the computer name but can be overriden
+   * by this setting.
+   * The host name may not contain any spaces. UTF8 characters should be
+   * avoided.
+   * @param host_name Host name
+   */
+  void HostName(const std::string &host_name);
+
+  /** \brief Returns the default host name.
+   *
+   * The host name property is used by some log related objects.
+   * @return Host name.
+   */
+  [[nodiscard]] const std::string &HostName() {
+    return host_name_;
+  }
+
   /** \brief Sets the default application name.
    *
    * Some logger includes application name in their message logs. The
@@ -166,9 +186,7 @@ class LogConfig final {
    * avoided.
    * @param app_name Application name
    */
-  void ApplicationName(const std::string &app_name) {
-    application_name_ = app_name;
-  }
+  void ApplicationName(const std::string &app_name);
 
   /** \brief Returns the default application name.
    *
@@ -187,6 +205,7 @@ class LogConfig final {
   std::string sub_dir_;
   std::string root_dir_;
   std::string application_name_;
+  std::string host_name_;
 
   mutable std::mutex locker_;
   std::map<std::string, std::unique_ptr<ILogger>, util::string::IgnoreCase>

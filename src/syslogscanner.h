@@ -21,8 +21,9 @@ class SyslogScanner : public yyFlexLexer, public util::syslog::SyslogMessage {
   explicit SyslogScanner(std::istringstream& in);
   int yylex(SyslogParser::value_type* yylval);
 
+  const std::string& Origin() const { return input_text_;}
  private:
-  std::ostringstream utf8_stream_;
+  std::string input_text_;
   SyslogParser::semantic_type* yylval = nullptr;
 };
 

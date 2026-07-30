@@ -18,15 +18,16 @@
 %option yyclass="util::syslog:SyslogScanner"
 %option noinput
 
-number [0-9]
+ws [ \t\n\v\f\r]+
+number [0-9]+
 timestamp [0-9TZ\-:\.]+
-name [!-~]+
-id [!#-<>-\\\^-~]+
+single_line_string \"([^\"\\]|\\.)*\"
+name [a-zA-Z_][-+a-zA-Z0-9_@]*
+
 nil [\-]
-value [!#-[\^-\xFF]*
 octet [\x01-\xFF]*
 
-%s PRI VERSION TIMESTAMP HOSTNAME APPNAME PROCID MSGID SD SDELEMENT SDPAR SDVALUE MSG
+%s PRI VERSION TIMESTAMP HOSTNAME APPNAME PROCID MSGID SD SDELEMENT SDPAR MSG
 %%
 %{
             yylval = yy_value;
@@ -34,7 +35,7 @@ octet [\x01-\xFF]*
 <INITIAL>"<" { BEGIN(PRI);
                return '<';}
 
-<PRI>{number}+ { const auto num = std::stoi(yytext);
+<PRI>{number} { const auto num = std::stoi(yytext);
                  yylval->build<int>(num);
                  return token::NUMBER;}
 
@@ -45,7 +46,7 @@ octet [\x01-\xFF]*
                    yylval->build<int>(num);
                    return token::NUMBER;}
 
-<VERSION>" " { BEGIN TIMESTAMP;
+<VERSION>{ws} { BEGIN TIMESTAMP;
                yylval->build<std::string>(" ");
                return token::SP;}
 
@@ -53,7 +54,7 @@ octet [\x01-\xFF]*
                          yylval->build<std::string>(time);
                          return token::ISOTIME;}
 
-<TIMESTAMP>" "  { BEGIN HOSTNAME;
+<TIMESTAMP>{ws}  { BEGIN HOSTNAME;
                   yylval->build<std::string>(" ");
                   return token::SP;}
 
@@ -61,37 +62,50 @@ octet [\x01-\xFF]*
                 yylval->build<std::string>(name);
                 return token::NAME;}
 
-<HOSTNAME>" "  { BEGIN APPNAME;
+<HOSTNAME>{ws}  { BEGIN APPNAME;
                  yylval->build<std::string>(" ");
                  return token::SP;}
+
+<HOSTNAME>{nil}  { return token::NIL;}
 
 <APPNAME>{name} { const std::string name = yytext;
                    yylval->build<std::string>(name);
                    return token::NAME;}
 
-<APPNAME>" "  { BEGIN PROCID;
+<APPNAME>{ws}  { BEGIN PROCID;
                  yylval->build<std::string>(" ");
                  return token::SP;}
+
+<APPNAME>{nil}  { return token::NIL;}
 
 <PROCID>{name} { const std::string name = yytext;
                    yylval->build<std::string>(name);
                    return token::NAME;}
+<PROCID>{number} { const auto num = std::stoi(yytext);
+                   yylval->build<int>(num);
+                   return token::NUMBER;}
 
-<PROCID>" "  { BEGIN MSGID;
+<PROCID>{ws}  { BEGIN MSGID;
                yylval->build<std::string>(" ");
                return token::SP;}
+
+<PROCID>{nil}  { return token::NIL;}
 
 <MSGID>{name} { const std::string name = yytext;
                 yylval->build<std::string>(name);
                 return token::NAME;}
-
-<MSGID>" "  { BEGIN SD;
+<MSGID>{number} { const auto num = std::stoi(yytext);
+                   yylval->build<int>(num);
+                   return token::NUMBER;}
+<MSGID>{ws}  { BEGIN SD;
               yylval->build<std::string>(" ");
               return token::SP;}
 
+<MSGID>{nil}  { return token::NIL;}
+
 <SD>{nil}  { return token::NIL;}
 
-<SD>" "    { BEGIN MSG;
+<SD>{ws}    { BEGIN MSG;
              yylval->build<std::string>(" ");
              return token::SP;}
 
@@ -101,41 +115,44 @@ octet [\x01-\xFF]*
 <SDELEMENT>"]"  { BEGIN SD;
                   return ']';}
 
-<SDELEMENT>" "  { BEGIN SDPAR;
+<SDELEMENT>{ws}  { BEGIN SDPAR;
                   yylval->build<std::string>(" ");
                   return token::SP; }
 
-<SDELEMENT>{value}  { const std::string name = yytext;
+<SDELEMENT>{name}  { const std::string name = yytext;
                      yylval->build<std::string>(name);
                      return token::NAME; }
 
-
 <SDPAR>"="  { return '='; }
-
-<SDPAR>"\""  { BEGIN SDVALUE;
-              return '\"'; }
 
 <SDPAR>"]"  { BEGIN SD;
               return ']';}
 
-<SDPAR>" "  {   yylval->build<std::string>(" ");
-                return token::SP;}
 
-<SDPAR>{id}  { const std::string name = yytext;
+
+<SDPAR>{name}  { const std::string name = yytext;
                yylval->build<std::string>(name);
                return token::NAME; }
 
-<SDVALUE>"\""  { BEGIN SDPAR;
-                 return '\"'; }
+<SDPAR>{single_line_string}  {
+    std::string text = yytext;
+    if (text.size() >= 2) {
+       text.erase(0,1);
+       text.erase(text.size() -1);
+    }
+    yylval->build<std::string>(text);
+    return token::STRING;
+    }
 
-<SDVALUE>{value}  { const std::string name = yytext;
-                   yylval->build<std::string>(name);
-                   return token::NAME;}
+<SDPAR>{ws}  {   yylval->build<std::string>(" ");
+                return token::SP;}
 
-<MSG>{octet}  { const std::string name = yytext;
+
+<MSG>{octet}  { BEGIN INITIAL;
+                const std::string name = yytext;
                 yylval->build<std::string>(name);
                 return token::NAME;}
 
 . {}
-%%
 
+%%

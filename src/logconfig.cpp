@@ -8,6 +8,8 @@
 #include <mutex>
 #include <string>
 #include <vector>
+#include <algorithm>
+
 
 #ifdef WIN32
 #include <shlobj.h>
@@ -80,7 +82,22 @@ void LogConfig::SubDir(const std::string &sub_dir) {
   return sub_dir_;
 }
 
-ILogger* LogConfig::CreateDefaultLogger() {
+void LogConfig::HostName(const std::string &host_name) {
+  host_name_ = host_name;
+  std::ranges::transform(host_name_, host_name_.begin(),
+    [] (char cin) -> char {
+    return std::isspace(cin) ? '_' : cin;
+  });
+}
+void LogConfig::ApplicationName(const std::string &app_name) {
+  application_name_ = app_name;
+  std::ranges::transform(application_name_, application_name_.begin(),
+    [] (char cin) -> char {
+    return std::isspace(cin) ? '_' : cin;
+  });
+}
+
+ILogger * LogConfig::CreateDefaultLogger() {
   ILogger* logger = nullptr;
   switch (log_type_) {
     case LogType::LogToFile: {

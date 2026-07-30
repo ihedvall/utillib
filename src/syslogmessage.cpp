@@ -5,11 +5,15 @@
 
 #include "util/syslogmessage.h"
 
+#include <algorithm>
+#include <sstream>
+#include <source_location>
+
 #include <util/logconfig.h>
 #include <util/timestamp.h>
 
 #include <boost/asio.hpp>
-#include <sstream>
+
 
 #include "syslogscanner.h"
 
@@ -27,8 +31,11 @@ SyslogMessage::SyslogMessage() {
   timestamp_ = util::time::TimeStampToNs();  // Set it to now
 
   // HOSTNAME
+  hostname_ = LogConfig::Instance().HostName();
   try {
-    hostname_ = boost::asio::ip::host_name();
+    if (hostname_.empty()) {
+      hostname_= boost::asio::ip::host_name();
+    }
   } catch (const std::exception &) {
   }
 
@@ -45,6 +52,27 @@ SyslogMessage::SyslogMessage() {
   process_id_ = std::to_string(pid);
 }
 
+SyslogMessage::SyslogMessage(SyslogSeverity severity)
+: SyslogMessage() {
+  Severity(severity);
+}
+
+SyslogMessage::SyslogMessage(const SyslogMessage &msg)
+  : std::ostringstream(msg.str()),
+    index_(msg.Index()),
+    severity_(msg.Severity()),
+    facility_(msg.Facility()),
+    version_(msg.Version()),
+    timestamp_(msg.Timestamp()),
+    hostname_(msg.Hostname()),
+    application_name_(msg.ApplicationName()),
+    process_id_(msg.ProcessId()),
+    message_id_(msg.MessageId()),
+    sd_list_(msg.DataList())
+  {
+  }
+
+
 SyslogMessage::SyslogMessage(const LogMessage &log, bool show_location)
     : SyslogMessage() {
   Message(log.message);
@@ -53,11 +81,11 @@ SyslogMessage::SyslogMessage(const LogMessage &log, bool show_location)
 
   if (show_location) {
     StructuredData location;
-    location.Identity("source_location@37916");  // Volvo Car
-    location.AddParameter("Function", log.function);
-    location.AddParameter("File", log.file);
-    location.AddParameter("Column", std::to_string(log.column));
-    location.AddParameter("Line", std::to_string(log.line));
+    location.Identity("source-location");
+    location.AddParameter("file", log.file);
+    location.AddParameter("function", log.function);
+    location.AddParameter("line", std::to_string(log.line));
+    location.AddParameter("column", std::to_string(log.column));
     AddData(location);
   }
 
@@ -95,6 +123,24 @@ SyslogMessage::SyslogMessage(const LogMessage &log, bool show_location)
       Severity(SyslogSeverity::Debug);
       break;
   }
+}
+
+SyslogMessage &SyslogMessage::operator= (const SyslogMessage &msg) {
+  if (this == &msg) {
+    return *this;
+  }
+  *this << msg.str();
+  index_ = msg.Index();
+  severity_ = msg.Severity();
+  facility_ = msg.Facility();
+  version_ = msg.Version();
+  timestamp_ = msg.Timestamp();
+  hostname_ = msg.Hostname();
+  application_name_ = msg.ApplicationName();
+  process_id_ = msg.ProcessId();
+  message_id_ = msg.MessageId();
+  sd_list_ = msg.DataList();
+  return *this;
 }
 
 std::string SyslogMessage::GenerateMessage() const {
@@ -160,11 +206,12 @@ std::string SyslogMessage::GenerateMessage() const {
       msg << "]";
     }
   }
-  if (!message_.empty()) {
-    if (IsUtf8(message_)) {
-      msg << " " << '\xEF' << '\xBB' << '\xBF' << message_;
+  const std::string message = str();
+  if (!message.empty()) {
+    if (IsUtf8(message)) {
+      msg << " " << '\xEF' << '\xBB' << '\xBF' << message;
     } else {
-      msg << " " << message_;
+      msg << " " << message;
     }
   }
   return msg.str();
@@ -175,9 +222,9 @@ void SyslogMessage::IsoTime(const std::string &iso_time) {
   // indicating that the sender doesn't have time. In this case, use the
   // computer time.
   if (iso_time.empty() || iso_time == "-") {   //
-    timestamp_ = util::time::TimeStampToNs();  // Use now as
+    timestamp_ = time::TimeStampToNs();  // Use now as
   } else {
-    timestamp_ = util::time::IsoTimeToNs(iso_time, false);
+    timestamp_ = time::IsoTimeToNs(iso_time, false);
   }
 }
 
@@ -187,6 +234,10 @@ void SyslogMessage::Hostname(const std::string &name) {
   } else {
     hostname_ = name;
   }
+  std::ranges::transform(hostname_, hostname_.begin(),
+  [] (char cin) -> char {
+  return std::isspace(cin) ? '_' : cin;
+});
 }
 
 void SyslogMessage::ApplicationName(const std::string &name) {
@@ -195,6 +246,10 @@ void SyslogMessage::ApplicationName(const std::string &name) {
   } else {
     application_name_ = name;
   }
+  std::ranges::transform(application_name_, application_name_.begin(),
+  [] (char cin) -> char {
+    return std::isspace(cin) ? '_' : cin;
+  });
 }
 
 void SyslogMessage::ProcessId(const std::string &pid) {
@@ -203,6 +258,10 @@ void SyslogMessage::ProcessId(const std::string &pid) {
   } else {
     process_id_ = pid;
   }
+  std::ranges::transform(process_id_, process_id_.begin(),
+[] (char cin) -> char {
+  return std::isspace(cin) ? '-' : cin;
+});
 }
 
 void SyslogMessage::MessageId(const std::string &msg_id) {
@@ -211,6 +270,10 @@ void SyslogMessage::MessageId(const std::string &msg_id) {
   } else {
     message_id_ = msg_id;
   }
+  std::ranges::transform(message_id_, message_id_.begin(),
+  [] (char cin) -> char {
+    return std::isspace(cin) ? '-' : cin;
+  });
 }
 
 void SyslogMessage::AddStructuredData(const std::string &identity) {
@@ -240,13 +303,27 @@ void SyslogMessage::Message(const std::string &msg) {
     const auto byte3 = static_cast<uint8_t>(msg[2]);
     bom = (byte1 == 0xEF) && (byte2 == 0xBB) && (byte3 == 0xBF);
   }
-  message_ = bom ? msg.substr(3) : msg;
+  *this <<  (bom ? msg.substr(3) : msg);
+}
+
+std::string SyslogMessage::Message() const { return str(); }
+
+void SyslogMessage::AddSourceLocation(const std::source_location &location) {
+  StructuredData data;
+  data.Identity("source-location");
+  data.AddParameter("filename", location.file_name());
+  data.AddParameter("function", location.function_name());
+  data.AddParameter("line", std::to_string(location.line()));
+  data.AddParameter("column", std::to_string(location.column()));
+  AddData(data);
 }
 
 bool SyslogMessage::ParseMessage(const std::string &msg) {
   std::istringstream temp(msg);
-  syslog::SyslogScanner scanner(temp);
-  syslog::SyslogParser parser(scanner);
+
+  SyslogScanner scanner(temp);
+  SyslogParser parser(scanner);
+  //scanner.set_debug(2);
   const auto ret = parser.parse();
   const SyslogMessage *slicing_fix = &scanner;
   *this = *slicing_fix;

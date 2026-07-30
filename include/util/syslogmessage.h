@@ -9,9 +9,11 @@
  * syslog messages are sent to a syslog server.
  */
 #pragma once
+#include <sstream>
 #include <cstdint>
 #include <string>
 #include <vector>
+
 
 #include "logmessage.h"
 #include "structureddata.h"
@@ -69,7 +71,7 @@ enum class SyslogFacility : uint8_t {
  * The class is a simple interface against a syslog message according to
  * the RFC5424 standard.
  */
-class SyslogMessage {
+class SyslogMessage : public std::ostringstream {
  public:
   /** \brief Standard constructor
    *
@@ -78,7 +80,9 @@ class SyslogMessage {
    */
   SyslogMessage();
 
-  SyslogMessage(const SyslogMessage&) = default; ///< Default copy constructor
+  explicit SyslogMessage(SyslogSeverity severity);
+
+  SyslogMessage(const SyslogMessage& msg); ///< Default copy constructor
 
   /** \brief Constructor that converts a log message,
    *
@@ -87,11 +91,13 @@ class SyslogMessage {
    * @param log Log message
    * @param show_location Set tor true if source location should be included.
    */
-  SyslogMessage(const util::log::LogMessage& log, bool show_location);
+  SyslogMessage(const log::LogMessage& log, bool show_location);
 
-  virtual ~SyslogMessage() = default;  ///< Default destructor
+  ~SyslogMessage() override = default;  ///< Default destructor
 
-  /** \brief Index used to identify the message.
+  SyslogMessage& operator= (const SyslogMessage& msg);
+
+   /** \brief Index used to identify the message.
    *
    * Index that is used as an unique identifier of the message. The index is
    * not received or transmitted.
@@ -127,8 +133,7 @@ class SyslogMessage {
     timestamp_ = ns1970;
   }
 
-  [[nodiscard]] uint64_t Timestamp()
-      const {  ///< Returns the timestamp (ns since 1970).
+  [[nodiscard]] uint64_t Timestamp() const {  ///< Returns the timestamp (ns since 1970).
     return timestamp_;
   }
 
@@ -167,11 +172,11 @@ class SyslogMessage {
    * Returns the message text. Note that the string is UTF8 decoded.
    * @return Messag text.
    */
-  [[nodiscard]] const std::string& Message() const { return message_; }
+  [[nodiscard]] std::string Message() const;
 
-  void AddData(
-      const StructuredData& data) {  ///< Adds structured data to the message.
-    sd_list_.push_back(data);
+  void AddSourceLocation(const std::source_location& location);
+  void AddData( StructuredData data) {  ///< Adds structured data to the message.
+    sd_list_.emplace_back(std::move(data));
   }
 
   [[nodiscard]] const std::vector<StructuredData>& DataList()
@@ -201,7 +206,6 @@ class SyslogMessage {
    */
   void IsoTime(const std::string& iso_time);
 
- protected:
  private:
   int64_t index_ = 0; ///< Used as unique index (database).
   SyslogSeverity severity_ = SyslogSeverity::Informational;
@@ -212,8 +216,6 @@ class SyslogMessage {
   std::string application_name_;
   std::string process_id_;
   std::string message_id_;
-
-  std::string message_;
 
   std::vector<StructuredData> sd_list_;
 };

@@ -6,6 +6,7 @@
 
 #include <boost/asio.hpp>
 #include <chrono>
+#include <iostream>
 
 #include "util/logstream.h"
 #include "util/syslogmessage.h"
@@ -49,7 +50,8 @@ void Syslog::WorkerThread() {
       lock.unlock();
 
       SyslogMessage msg(m, ShowLocation());
-      const auto data = msg.GenerateMessage();
+      const std::string data = msg.GenerateMessage();
+      std::cout << "Sending: " << data << std::endl                                                                                                       ;
       const auto buffer = boost::asio::buffer(data);
 
       try {

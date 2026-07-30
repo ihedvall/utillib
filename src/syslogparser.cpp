@@ -46,12 +46,13 @@
 
     #include <sstream>
     #include "syslogscanner.h"
+    #include "util/logstream.h"
     #undef yylex
     #define yylex scanner.yylex
 
 
 
-#line 55 "D:/projects/utillib/src/syslogparser.cpp"
+#line 56 "D:/projects/utillib/src/syslogparser.cpp"
 
 
 #ifndef YY_
@@ -125,7 +126,7 @@
 
 #line 5 "D:/projects/utillib/src/syslogparser.y"
 namespace util { namespace syslog {
-#line 129 "D:/projects/utillib/src/syslogparser.cpp"
+#line 130 "D:/projects/utillib/src/syslogparser.cpp"
 
   /// Build a parser object.
   SyslogParser::SyslogParser (util::syslog::SyslogScanner &scanner_yyarg)
@@ -163,6 +164,7 @@ namespace util { namespace syslog {
       case symbol_kind::S_SP: // "space"
       case symbol_kind::S_ISOTIME: // "isotime"
       case symbol_kind::S_NAME: // NAME
+      case symbol_kind::S_STRING: // STRING
       case symbol_kind::S_OCTET: // "octet"
         value.copy< std::string > (YY_MOVE (that.value));
         break;
@@ -205,6 +207,7 @@ namespace util { namespace syslog {
       case symbol_kind::S_SP: // "space"
       case symbol_kind::S_ISOTIME: // "isotime"
       case symbol_kind::S_NAME: // NAME
+      case symbol_kind::S_STRING: // STRING
       case symbol_kind::S_OCTET: // "octet"
         value.move< std::string > (YY_MOVE (s.value));
         break;
@@ -316,6 +319,7 @@ namespace util { namespace syslog {
       case symbol_kind::S_SP: // "space"
       case symbol_kind::S_ISOTIME: // "isotime"
       case symbol_kind::S_NAME: // NAME
+      case symbol_kind::S_STRING: // STRING
       case symbol_kind::S_OCTET: // "octet"
         value.YY_MOVE_OR_COPY< std::string > (YY_MOVE (that.value));
         break;
@@ -342,6 +346,7 @@ namespace util { namespace syslog {
       case symbol_kind::S_SP: // "space"
       case symbol_kind::S_ISOTIME: // "isotime"
       case symbol_kind::S_NAME: // NAME
+      case symbol_kind::S_STRING: // STRING
       case symbol_kind::S_OCTET: // "octet"
         value.move< std::string > (YY_MOVE (that.value));
         break;
@@ -368,6 +373,7 @@ namespace util { namespace syslog {
       case symbol_kind::S_SP: // "space"
       case symbol_kind::S_ISOTIME: // "isotime"
       case symbol_kind::S_NAME: // NAME
+      case symbol_kind::S_STRING: // STRING
       case symbol_kind::S_OCTET: // "octet"
         value.copy< std::string > (that.value);
         break;
@@ -392,6 +398,7 @@ namespace util { namespace syslog {
       case symbol_kind::S_SP: // "space"
       case symbol_kind::S_ISOTIME: // "isotime"
       case symbol_kind::S_NAME: // NAME
+      case symbol_kind::S_STRING: // STRING
       case symbol_kind::S_OCTET: // "octet"
         value.move< std::string > (that.value);
         break;
@@ -656,6 +663,7 @@ namespace util { namespace syslog {
       case symbol_kind::S_SP: // "space"
       case symbol_kind::S_ISOTIME: // "isotime"
       case symbol_kind::S_NAME: // NAME
+      case symbol_kind::S_STRING: // STRING
       case symbol_kind::S_OCTET: // "octet"
         yylhs.value.emplace< std::string > ();
         break;
@@ -675,14 +683,14 @@ namespace util { namespace syslog {
           switch (yyn)
             {
   case 2: // syslog_message: pri version "space" isotime "space" hostname "space" appname "space" procid "space" msgid "space" sd msg
-#line 36 "D:/projects/utillib/src/syslogparser.y"
+#line 38 "D:/projects/utillib/src/syslogparser.y"
                                                                                {
     }
-#line 682 "D:/projects/utillib/src/syslogparser.cpp"
+#line 690 "D:/projects/utillib/src/syslogparser.cpp"
     break;
 
   case 3: // pri: '<' "int" '>'
-#line 39 "D:/projects/utillib/src/syslogparser.y"
+#line 41 "D:/projects/utillib/src/syslogparser.y"
                      { if (scanner.debug()) std::cout << "PRI: " << yystack_[1].value.as < int > () << std::endl;
         const auto pri = static_cast<uint8_t>(yystack_[1].value.as < int > ());
         const auto severity = static_cast<util::syslog::SyslogSeverity>(pri % 8);
@@ -690,92 +698,105 @@ namespace util { namespace syslog {
         scanner.Severity(severity);
         scanner.Facility(facility);
     }
-#line 694 "D:/projects/utillib/src/syslogparser.cpp"
-    break;
-
-  case 4: // version: %empty
-#line 47 "D:/projects/utillib/src/syslogparser.y"
-                { if (scanner.debug()) std::cout << "VERSION: 0" << std::endl;
-        scanner.Version(0);
-    }
 #line 702 "D:/projects/utillib/src/syslogparser.cpp"
     break;
 
-  case 5: // version: "int"
-#line 50 "D:/projects/utillib/src/syslogparser.y"
-             { if (scanner.debug()) std::cout << "VERSION: " << yystack_[0].value.as < int > () << std::endl;
-        scanner.Version(static_cast<uint8_t>(yystack_[0].value.as < int > ()));
+  case 4: // version: %empty
+#line 49 "D:/projects/utillib/src/syslogparser.y"
+                { if (scanner.debug()) std::cout << "VERSION: 0" << std::endl;
+        scanner.Version(0);
     }
 #line 710 "D:/projects/utillib/src/syslogparser.cpp"
     break;
 
-  case 6: // isotime: "isotime"
-#line 54 "D:/projects/utillib/src/syslogparser.y"
-                 { if (scanner.debug()) std::cout << "ISOTIME: " << yystack_[0].value.as < std::string > () << std::endl;
-        scanner.IsoTime(yystack_[0].value.as < std::string > ());
+  case 5: // version: "int"
+#line 52 "D:/projects/utillib/src/syslogparser.y"
+             { if (scanner.debug()) std::cout << "VERSION: " << yystack_[0].value.as < int > () << std::endl;
+        scanner.Version(static_cast<uint8_t>(yystack_[0].value.as < int > ()));
     }
 #line 718 "D:/projects/utillib/src/syslogparser.cpp"
     break;
 
-  case 7: // hostname: NAME
-#line 58 "D:/projects/utillib/src/syslogparser.y"
-               { if (scanner.debug()) std::cout << "HOSTNAME: " << yystack_[0].value.as < std::string > () << std::endl;
-        scanner.Hostname(yystack_[0].value.as < std::string > ());
+  case 6: // isotime: "isotime"
+#line 56 "D:/projects/utillib/src/syslogparser.y"
+                 { if (scanner.debug()) std::cout << "ISOTIME: " << yystack_[0].value.as < std::string > () << std::endl;
+        scanner.IsoTime(yystack_[0].value.as < std::string > ());
     }
 #line 726 "D:/projects/utillib/src/syslogparser.cpp"
     break;
 
-  case 8: // appname: NAME
-#line 62 "D:/projects/utillib/src/syslogparser.y"
-              { if (scanner.debug()) std::cout << "APPNAME: " << yystack_[0].value.as < std::string > () << std::endl;
-        scanner.ApplicationName(yystack_[0].value.as < std::string > ());
-     }
+  case 8: // hostname: NAME
+#line 61 "D:/projects/utillib/src/syslogparser.y"
+               { if (scanner.debug()) std::cout << "HOSTNAME: " << yystack_[0].value.as < std::string > () << std::endl;
+        scanner.Hostname(yystack_[0].value.as < std::string > ());
+    }
 #line 734 "D:/projects/utillib/src/syslogparser.cpp"
     break;
 
-  case 9: // procid: NAME
+  case 10: // appname: NAME
 #line 66 "D:/projects/utillib/src/syslogparser.y"
-             { if (scanner.debug()) std::cout << "PID: " << yystack_[0].value.as < std::string > () << std::endl;
-        scanner.ProcessId(yystack_[0].value.as < std::string > ());
+              { if (scanner.debug()) std::cout << "APPNAME: " << yystack_[0].value.as < std::string > () << std::endl;
+        scanner.ApplicationName(yystack_[0].value.as < std::string > ());
      }
 #line 742 "D:/projects/utillib/src/syslogparser.cpp"
     break;
 
-  case 10: // msgid: NAME
-#line 70 "D:/projects/utillib/src/syslogparser.y"
-            { if (scanner.debug()) std::cout << "MSG-ID: " << yystack_[0].value.as < std::string > () << std::endl;
-        scanner.MessageId(yystack_[0].value.as < std::string > ());
+  case 12: // procid: NAME
+#line 71 "D:/projects/utillib/src/syslogparser.y"
+             { if (scanner.debug()) std::cout << "PID: " << yystack_[0].value.as < std::string > () << std::endl;
+        scanner.ProcessId(yystack_[0].value.as < std::string > ());
      }
 #line 750 "D:/projects/utillib/src/syslogparser.cpp"
     break;
 
-  case 16: // sd_id: NAME
-#line 82 "D:/projects/utillib/src/syslogparser.y"
-            { if (scanner.debug()) std::cout << "ID: " << yystack_[0].value.as < std::string > () << std::endl;
+  case 13: // procid: "int"
+#line 74 "D:/projects/utillib/src/syslogparser.y"
+              {scanner.ProcessId(std::to_string(yystack_[0].value.as < int > ()));}
+#line 756 "D:/projects/utillib/src/syslogparser.cpp"
+    break;
+
+  case 15: // msgid: NAME
+#line 77 "D:/projects/utillib/src/syslogparser.y"
+            { if (scanner.debug()) std::cout << "MSG-ID: " << yystack_[0].value.as < std::string > () << std::endl;
+        scanner.MessageId(yystack_[0].value.as < std::string > ());
+     }
+#line 764 "D:/projects/utillib/src/syslogparser.cpp"
+    break;
+
+  case 16: // msgid: "int"
+#line 80 "D:/projects/utillib/src/syslogparser.y"
+              {scanner.MessageId(std::to_string(yystack_[0].value.as < int > ()));}
+#line 770 "D:/projects/utillib/src/syslogparser.cpp"
+    break;
+
+  case 23: // sd_id: NAME
+#line 91 "D:/projects/utillib/src/syslogparser.y"
+            {
+    if (scanner.debug()) std::cout << "ID: " << yystack_[0].value.as < std::string > () << std::endl;
     scanner.AddStructuredData(yystack_[0].value.as < std::string > ());
 }
-#line 758 "D:/projects/utillib/src/syslogparser.cpp"
+#line 779 "D:/projects/utillib/src/syslogparser.cpp"
     break;
 
-  case 20: // sd_param: NAME '=' '"' NAME '"'
-#line 90 "D:/projects/utillib/src/syslogparser.y"
-                                  {
-     if (scanner.debug()) std::cout << "PAR: " << yystack_[4].value.as < std::string > () << ", VALUE: " << yystack_[1].value.as < std::string > () << std::endl;
-     scanner.AppendParameter(yystack_[4].value.as < std::string > (),yystack_[1].value.as < std::string > ());
+  case 26: // sd_param: NAME '=' STRING
+#line 99 "D:/projects/utillib/src/syslogparser.y"
+                          {
+     if (scanner.debug()) std::cout << "PAR: " << yystack_[2].value.as < std::string > () << ", VALUE: " << yystack_[0].value.as < std::string > () << std::endl;
+     scanner.AppendParameter(yystack_[2].value.as < std::string > (),yystack_[0].value.as < std::string > ());
      }
-#line 767 "D:/projects/utillib/src/syslogparser.cpp"
+#line 788 "D:/projects/utillib/src/syslogparser.cpp"
     break;
 
-  case 23: // msg_any: NAME
-#line 98 "D:/projects/utillib/src/syslogparser.y"
+  case 29: // msg_any: NAME
+#line 109 "D:/projects/utillib/src/syslogparser.y"
               { if (scanner.debug()) std::cout << "MSG: " << yystack_[0].value.as < std::string > () << std::endl;
     scanner.Message(yystack_[0].value.as < std::string > ());
     }
-#line 775 "D:/projects/utillib/src/syslogparser.cpp"
+#line 796 "D:/projects/utillib/src/syslogparser.cpp"
     break;
 
 
-#line 779 "D:/projects/utillib/src/syslogparser.cpp"
+#line 800 "D:/projects/utillib/src/syslogparser.cpp"
 
             default:
               break;
@@ -964,86 +985,89 @@ namespace util { namespace syslog {
 
 
 
-  const signed char SyslogParser::yypact_ninf_ = -17;
+  const signed char SyslogParser::yypact_ninf_ = -18;
 
   const signed char SyslogParser::yytable_ninf_ = -1;
 
   const signed char
   SyslogParser::yypact_[] =
   {
-      -7,    -1,     4,     2,    -2,   -17,   -17,     7,   -17,     6,
-     -17,     9,     1,   -17,    10,     8,   -17,    12,    11,   -17,
-      13,    14,   -17,    15,    -6,   -17,    16,    18,    17,   -17,
-     -17,    20,    19,   -17,   -17,    21,   -17,   -17,    22,    -3,
-     -17,     5,    21,   -17,    23,   -17,    24,   -17
+      -9,     5,    17,    15,     9,   -18,   -18,    18,   -18,     6,
+     -18,   -18,    19,     7,   -18,   -18,    20,    10,   -18,   -18,
+      21,    -2,   -18,   -18,   -18,    22,    -1,   -18,   -18,   -18,
+      23,     0,   -18,    24,    25,    26,   -18,   -18,    28,    27,
+     -18,   -18,    29,   -18,   -18,    13,    -3,   -18,    30,    29,
+     -18,   -18,   -18
   };
 
   const signed char
   SyslogParser::yydefact_[] =
   {
        0,     0,     0,     4,     0,     1,     5,     0,     3,     0,
-       6,     0,     0,     7,     0,     0,     8,     0,     0,     9,
-       0,     0,    10,     0,     0,    11,     0,    21,    12,    13,
-      16,     0,     0,     2,    14,    17,    23,    22,     0,     0,
-      18,     0,     0,    15,     0,    19,     0,    20
+       6,     7,     0,     0,     8,     9,     0,     0,    10,    11,
+       0,     0,    13,    12,    14,     0,     0,    16,    15,    17,
+       0,     0,    18,     0,    27,    19,    20,    23,     0,     0,
+       2,    21,     0,    29,    28,     0,     0,    24,     0,     0,
+      22,    26,    25
   };
 
   const signed char
   SyslogParser::yypgoto_[] =
   {
-     -17,   -17,   -17,   -17,   -17,   -17,   -17,   -17,   -17,   -17,
-     -17,    -4,   -17,   -17,   -16,   -17,   -17
+     -18,   -18,   -18,   -18,   -18,   -18,   -18,   -18,   -18,   -18,
+     -18,    -6,   -18,   -18,   -17,   -18,   -18
   };
 
   const signed char
   SyslogParser::yydefgoto_[] =
   {
-       0,     2,     3,     7,    11,    14,    17,    20,    23,    27,
-      28,    29,    31,    39,    40,    33,    37
+       0,     2,     3,     7,    12,    16,    20,    25,    30,    34,
+      35,    36,    38,    46,    47,    40,    44
   };
 
   const signed char
   SyslogParser::yytable_[] =
   {
-      42,    25,     1,     4,     5,    26,     6,    13,     8,    43,
-       9,    10,    12,    15,    16,    18,    21,    19,    24,    44,
-      22,    32,    30,    35,    34,    36,    45,    38,    26,    46,
-       0,     0,     0,     0,     0,    41,     0,     0,    47
+      49,     1,    22,    27,    23,    28,    24,    29,    32,     4,
+      50,    10,    33,    14,    11,    15,    18,     5,    19,     6,
+       8,     9,    13,    17,    21,    26,    31,    48,    39,    41,
+      37,    42,    52,    43,     0,    45,     0,    51,    33
   };
 
   const signed char
   SyslogParser::yycheck_[] =
   {
-       3,     7,     9,     4,     0,    11,     4,     6,    10,    12,
-       3,     5,     3,     3,     6,     3,     3,     6,     3,    14,
-       6,     3,     6,     3,    28,     6,    42,     6,    11,     6,
-      -1,    -1,    -1,    -1,    -1,    13,    -1,    -1,    14
+       3,    10,     4,     4,     6,     6,     8,     8,     8,     4,
+      13,     5,    12,     6,     8,     8,     6,     0,     8,     4,
+      11,     3,     3,     3,     3,     3,     3,    14,     3,    35,
+       6,     3,    49,     6,    -1,     6,    -1,     7,    12
   };
 
   const signed char
   SyslogParser::yystos_[] =
   {
-       0,     9,    16,    17,     4,     0,     4,    18,    10,     3,
-       5,    19,     3,     6,    20,     3,     6,    21,     3,     6,
-      22,     3,     6,    23,     3,     7,    11,    24,    25,    26,
-       6,    27,     3,    30,    26,     3,     6,    31,     6,    28,
-      29,    13,     3,    12,    14,    29,     6,    14
+       0,    10,    16,    17,     4,     0,     4,    18,    11,     3,
+       5,     8,    19,     3,     6,     8,    20,     3,     6,     8,
+      21,     3,     4,     6,     8,    22,     3,     4,     6,     8,
+      23,     3,     8,    12,    24,    25,    26,     6,    27,     3,
+      30,    26,     3,     6,    31,     6,    28,    29,    14,     3,
+      13,     7,    29
   };
 
   const signed char
   SyslogParser::yyr1_[] =
   {
-       0,    15,    16,    17,    18,    18,    19,    20,    21,    22,
-      23,    24,    24,    25,    25,    26,    27,    28,    28,    28,
-      29,    30,    30,    31
+       0,    15,    16,    17,    18,    18,    19,    19,    20,    20,
+      21,    21,    22,    22,    22,    23,    23,    23,    24,    24,
+      25,    25,    26,    27,    28,    28,    29,    30,    30,    31
   };
 
   const signed char
   SyslogParser::yyr2_[] =
   {
        0,     2,    15,     3,     0,     1,     1,     1,     1,     1,
-       1,     1,     1,     1,     2,     5,     1,     0,     1,     3,
-       5,     0,     2,     1
+       1,     1,     1,     1,     1,     1,     1,     1,     1,     1,
+       1,     2,     5,     1,     1,     3,     3,     0,     2,     1
   };
 
 
@@ -1054,8 +1078,8 @@ namespace util { namespace syslog {
   const SyslogParser::yytname_[] =
   {
   "\"end of message\"", "error", "\"invalid token\"", "\"space\"",
-  "\"int\"", "\"isotime\"", "NAME", "NIL", "\"octet\"", "'<'", "'>'",
-  "'['", "']'", "'='", "'\"'", "$accept", "syslog_message", "pri",
+  "\"int\"", "\"isotime\"", "NAME", "STRING", "NIL", "\"octet\"", "'<'",
+  "'>'", "'['", "']'", "'='", "$accept", "syslog_message", "pri",
   "version", "isotime", "hostname", "appname", "procid", "msgid", "sd",
   "sd_element_list", "sd_element", "sd_id", "sd_param_list", "sd_param",
   "msg", "msg_any", YY_NULLPTR
@@ -1067,9 +1091,9 @@ namespace util { namespace syslog {
   const signed char
   SyslogParser::yyrline_[] =
   {
-       0,    36,    36,    39,    47,    50,    54,    58,    62,    66,
-      70,    74,    75,    77,    78,    80,    82,    86,    87,    88,
-      90,    95,    96,    98
+       0,    38,    38,    41,    49,    52,    56,    59,    61,    64,
+      66,    69,    71,    74,    75,    77,    80,    81,    83,    84,
+      86,    87,    89,    91,    96,    97,    99,   106,   107,   109
   };
 
   void
@@ -1111,13 +1135,13 @@ namespace util { namespace syslog {
        0,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
-       2,     2,     2,     2,    14,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
-       9,    13,    10,     2,     2,     2,     2,     2,     2,     2,
+       2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
+      10,    14,    11,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
-       2,    11,     2,    12,     2,     2,     2,     2,     2,     2,
+       2,    12,     2,    13,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
@@ -1134,10 +1158,10 @@ namespace util { namespace syslog {
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     1,     2,     3,     4,
-       5,     6,     7,     8
+       5,     6,     7,     8,     9
     };
     // Last valid token kind.
-    const int code_max = 263;
+    const int code_max = 264;
 
     if (t <= 0)
       return symbol_kind::S_YYEOF;
@@ -1149,12 +1173,21 @@ namespace util { namespace syslog {
 
 #line 5 "D:/projects/utillib/src/syslogparser.y"
 } } // util::syslog
-#line 1153 "D:/projects/utillib/src/syslogparser.cpp"
+#line 1177 "D:/projects/utillib/src/syslogparser.cpp"
 
-#line 101 "D:/projects/utillib/src/syslogparser.y"
+#line 112 "D:/projects/utillib/src/syslogparser.y"
 
 
 
 void util::syslog::SyslogParser::error(const std::string& err) {
-    std::cout << "Error: " << err << std::endl;
+    const auto line = scanner.lineno();
+    const std::string near = scanner.YYText() != nullptr ? scanner.YYText() : "";
+    std::ostringstream error;
+    if (scanner.debug()) {
+    	std::cout << "Parser error: " << err
+          << ", Line: " << line
+          << ", Near: " << near
+          << ", Input: " << scanner.Origin();
+    }
+
 }

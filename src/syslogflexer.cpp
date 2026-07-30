@@ -394,8 +394,8 @@ int yyFlexLexer::yylex()
 /* %% [3.0] code to copy yytext_ptr to yytext[] goes here, if %array \ */\
 	(yy_c_buf_p) = yy_cp;
 /* %% [4.0] data tables for the DFA and the user's section 1 definitions go here */
-#define YY_NUM_RULES 31
-#define YY_END_OF_BUFFER 32
+#define YY_NUM_RULES 35
+#define YY_END_OF_BUFFER 36
 /* This struct is not used in this scanner,
    but its presence is necessary. */
 struct yy_trans_info
@@ -403,170 +403,149 @@ struct yy_trans_info
 	flex_int32_t yy_verify;
 	flex_int32_t yy_nxt;
 	};
-static const flex_int16_t yy_accept[71] =
+static const flex_int16_t yy_accept[96] =
     {   0,
         0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-        0,    0,    0,    0,    0,    0,    0,    0,   21,   21,
-        0,    0,   28,   28,   29,   29,   32,   30,   31,    1,
-        2,    3,    5,    4,    7,    6,    9,    8,   11,   10,
-       13,   12,   15,   14,   17,   16,   18,   20,   21,   19,
-       25,   26,   23,   22,   24,   28,   27,   29,   29,    2,
-        6,    8,   10,   12,   14,   21,   26,   28,   29,    0
+        0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+        0,    0,   33,   33,   36,   34,   35,    1,    2,    3,
+        5,    5,    4,    7,    7,    6,    9,    9,   10,    8,
+       12,   12,   13,   11,   16,   16,   17,   15,   14,   20,
+       20,   21,   19,   18,   23,   23,   22,   24,   26,   26,
+       27,   25,   32,   32,   34,   28,   30,   29,   33,   33,
+        2,    5,    4,    7,    6,    9,    8,   12,   11,   16,
+       15,   14,   20,   19,   18,   23,   26,   27,   32,    0,
+       31,    0,   30,   33,    0
+
     } ;
 
 static const YY_CHAR yy_ec[256] =
     {   0,
-        1,    1,    1,    1,    1,    1,    1,    1,    1,    2,
+        1,    1,    1,    1,    1,    1,    1,    1,    2,    3,
+        2,    2,    2,    1,    1,    1,    1,    1,    1,    1,
+        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
+        1,    2,    1,    4,    1,    1,    1,    1,    1,    1,
+        1,    1,    5,    1,    6,    7,    1,    8,    8,    8,
+        8,    8,    8,    8,    8,    8,    8,    7,    1,    9,
+       10,   11,    1,    5,   12,   12,   12,   12,   12,   12,
+       12,   12,   12,   12,   12,   12,   12,   12,   12,   12,
+       12,   12,   12,   13,   12,   12,   12,   12,   12,   13,
+       14,   15,   16,    1,   12,    1,   12,   12,   12,   12,
+
+       12,   12,   12,   12,   12,   12,   12,   12,   12,   12,
+       12,   12,   12,   12,   12,   12,   12,   12,   12,   12,
+       12,   12,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    3,    4,    5,    4,    4,    4,    4,    4,    4,
-        4,    4,    4,    4,    6,    7,    4,    8,    8,    8,
-        8,    8,    8,    8,    8,    8,    8,    7,    4,    9,
-       10,   11,    4,    4,    4,    4,    4,    4,    4,    4,
-        4,    4,    4,    4,    4,    4,    4,    4,    4,    4,
-        4,    4,    4,    7,    4,    4,    4,    4,    4,    7,
-       12,   13,   14,    4,    4,    4,    4,    4,    4,    4,
+        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
+        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
+        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
+        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
+        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
 
-        4,    4,    4,    4,    4,    4,    4,    4,    4,    4,
-        4,    4,    4,    4,    4,    4,    4,    4,    4,    4,
-        4,    4,    4,    4,    4,    4,   15,   15,   15,   15,
-       15,   15,   15,   15,   15,   15,   15,   15,   15,   15,
-       15,   15,   15,   15,   15,   15,   15,   15,   15,   15,
-       15,   15,   15,   15,   15,   15,   15,   15,   15,   15,
-       15,   15,   15,   15,   15,   15,   15,   15,   15,   15,
-       15,   15,   15,   15,   15,   15,   15,   15,   15,   15,
-       15,   15,   15,   15,   15,   15,   15,   15,   15,   15,
-       15,   15,   15,   15,   15,   15,   15,   15,   15,   15,
-
-       15,   15,   15,   15,   15,   15,   15,   15,   15,   15,
-       15,   15,   15,   15,   15,   15,   15,   15,   15,   15,
-       15,   15,   15,   15,   15,   15,   15,   15,   15,   15,
-       15,   15,   15,   15,   15,   15,   15,   15,   15,   15,
-       15,   15,   15,   15,   15,   15,   15,   15,   15,   15,
-       15,   15,   15,   15,   15
+        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
+        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
+        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
+        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
+        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
+        1,    1,    1,    1,    1
     } ;
 
-static const YY_CHAR yy_meta[17] =
+static const YY_CHAR yy_meta[18] =
     {   0,
-        1,    1,    1,    2,    3,    4,    4,    4,    2,    5,
-        2,    2,    6,    3,    7,    8
+        1,    1,    1,    1,    2,    3,    4,    3,    1,    1,
+        1,    2,    3,    1,    1,    1,    5
     } ;
 
-static const flex_int16_t yy_base[86] =
+static const flex_int16_t yy_base[107] =
     {   0,
-        0,    1,    9,   19,   29,   36,   43,    0,   51,   67,
-       83,   99,  115,  131,  147,  163,  178,    0,  190,    0,
-      206,    0,  222,    0,    2,    3,   13,  331,  331,  331,
-        4,  331,  331,  331,  331,    0,  331,    0,  331,    0,
-      331,    0,  331,    0,  331,  331,  331,  331,    0,  331,
-      331,    0,  331,  331,  331,    0,  331,    0,    0,    0,
-        0,    0,    0,    0,    0,    0,    0,    0,    0,  331,
-      238,  246,  254,  262,  270,  278,    2,  285,  290,  295,
-      300,  305,  311,  316,  323
+        0,    1,    8,   17,   27,   34,   41,    0,   53,    0,
+       65,    0,   77,    0,   89,    0,  101,    0,  114,    0,
+      129,    0,    4,    5,  123,  179,  179,  179,  114,  179,
+        3,   10,  113,   12,   15,    0,   21,   24,  179,    0,
+       29,   31,  179,    0,   36,   38,  179,  112,    0,   43,
+       48,  179,   92,    0,   50,   55,  179,  179,   58,   60,
+        0,  179,   67,   70,   60,  179,    0,  179,    0,    0,
+       88,   79,   80,   84,    0,   91,    0,   96,    0,  103,
+       76,    0,  106,   68,    0,  108,  110,    0,  116,  110,
+      179,   71,    0,    0,  179,  145,  150,  153,  156,  158,
+
+      160,  162,  164,  167,  171,  174
     } ;
 
-static const flex_int16_t yy_def[86] =
+static const flex_int16_t yy_def[107] =
     {   0,
-       71,   71,   71,   71,   71,   71,   71,    7,   72,   72,
-       73,   73,   74,   74,   75,   75,   71,   17,   70,   19,
-       70,   21,   70,   23,   76,   76,   70,   70,   70,   70,
-       70,   70,   70,   70,   70,   77,   70,   78,   70,   79,
-       70,   80,   70,   81,   70,   70,   70,   70,   82,   70,
-       70,   83,   70,   70,   70,   84,   70,   85,   85,   70,
-       77,   78,   79,   80,   81,   82,   83,   84,   85,    0,
-       70,   70,   70,   70,   70,   70,   70,   70,   70,   70,
-       70,   70,   70,   70,   70
+       96,   96,   96,   96,   96,   96,   96,    7,   96,    9,
+        9,   11,   11,   13,   13,   15,   96,   17,   96,   19,
+       19,   21,   97,   97,   95,   95,   95,   95,   95,   95,
+       95,   95,   95,   95,   95,   98,   95,   95,   95,   99,
+       95,   95,   95,  100,   95,   95,   95,   95,  101,   95,
+       95,   95,   95,  102,   95,   95,   95,   95,   95,   95,
+      103,   95,   95,   95,  104,   95,  105,   95,  106,  106,
+       95,   95,   95,   95,   98,   95,   99,   95,  100,   95,
+       95,  101,   95,   95,  102,   95,   95,  103,   95,  104,
+       95,  104,  105,  106,    0,   95,   95,   95,   95,   95,
+
+       95,   95,   95,   95,   95,   95
     } ;
 
-static const flex_int16_t yy_nxt[348] =
+static const flex_int16_t yy_nxt[197] =
     {   0,
-       70,   29,   29,   59,   59,   61,   70,   60,   30,   30,
-       29,   60,   70,   70,   70,   70,   31,   28,   28,   32,
-       29,   70,   70,   70,   70,   70,   31,   70,   70,   32,
-       29,   33,   70,   70,   70,   70,   34,   29,   33,   70,
-       70,   70,   70,   34,   29,   35,   70,   70,   36,   36,
-       36,   28,   29,   37,   70,   70,   70,   70,   70,   70,
-       70,   70,   70,   70,   70,   28,   28,   28,   29,   37,
-       70,   70,   70,   70,   70,   70,   70,   70,   70,   70,
-       70,   28,   28,   28,   29,   39,   70,   70,   70,   70,
-       70,   70,   70,   70,   70,   70,   70,   28,   28,   28,
+       95,   95,   27,   27,   72,   72,   70,   70,   28,   28,
+       27,   72,   72,   74,   74,   29,   74,   74,   30,   27,
+       26,   26,   76,   76,   29,   76,   76,   30,   31,   32,
+       78,   78,   78,   78,   33,   31,   32,   80,   80,   80,
+       80,   33,   34,   35,   83,   83,   36,   36,   36,   83,
+       83,   86,   86,   36,   37,   38,   86,   86,   39,   87,
+       87,   87,   87,   91,   40,   40,   41,   42,   89,   89,
+       43,   89,   89,   95,   92,   84,   44,   44,   45,   46,
+       72,   72,   47,   81,   48,   74,   74,   73,   49,   49,
+       50,   51,   76,   76,   52,   71,   53,   78,   78,   84,
 
-       29,   39,   70,   70,   70,   70,   70,   70,   70,   70,
-       70,   70,   70,   28,   28,   28,   29,   41,   70,   70,
-       70,   70,   70,   70,   70,   70,   70,   70,   70,   28,
-       28,   28,   29,   41,   70,   70,   70,   70,   70,   70,
-       70,   70,   70,   70,   70,   28,   28,   28,   29,   43,
-       70,   70,   70,   70,   70,   70,   70,   70,   70,   70,
-       70,   28,   28,   28,   29,   43,   70,   70,   70,   70,
-       70,   70,   70,   70,   70,   70,   70,   28,   28,   29,
-       45,   70,   70,   46,   70,   70,   70,   70,   70,   47,
-       28,   29,   48,   49,   28,   49,   49,   49,   49,   49,
+       54,   54,   55,   56,   80,   80,   57,   83,   83,   86,
+       86,   87,   87,   91,   58,   59,   60,   89,   89,   81,
+       73,   71,   95,   95,   92,   61,   61,   95,   95,   62,
+       63,   64,   65,   95,   95,   95,   95,   95,   66,   95,
+       67,   67,   95,   95,   68,   26,   26,   26,   26,   26,
+       69,   69,   69,   69,   69,   75,   75,   77,   77,   79,
+       79,   82,   82,   85,   85,   88,   88,   90,   90,   90,
+       90,   90,   93,   93,   94,   94,   94,   94,   25,   95,
+       95,   95,   95,   95,   95,   95,   95,   95,   95,   95,
+       95,   95,   95,   95,   95,   95
 
-       49,   49,   28,   50,   49,   28,   28,   29,   51,   52,
-       53,   52,   52,   52,   52,   54,   52,   52,   52,   55,
-       28,   28,   28,   29,   28,   56,   57,   56,   56,   56,
-       56,   56,   56,   56,   28,   28,   56,   28,   28,   28,
-       28,   28,   28,   28,   28,   28,   38,   38,   38,   38,
-       38,   38,   38,   38,   40,   40,   40,   40,   40,   40,
-       40,   40,   42,   42,   42,   42,   42,   42,   42,   42,
-       44,   44,   44,   44,   44,   44,   44,   44,   58,   58,
-       58,   58,   58,   58,   58,   58,   62,   62,   62,   62,
-       62,   63,   63,   63,   63,   63,   64,   64,   64,   64,
-
-       64,   65,   65,   65,   65,   65,   66,   70,   66,   66,
-       70,   66,   67,   70,   67,   70,   67,   68,   70,   68,
-       68,   70,   68,   69,   69,   69,   69,   69,   69,   69,
-       27,   70,   70,   70,   70,   70,   70,   70,   70,   70,
-       70,   70,   70,   70,   70,   70,   70
     } ;
 
-static const flex_int16_t yy_chk[348] =
+static const flex_int16_t yy_chk[197] =
     {   0,
-        0,    1,    2,   25,   26,   77,    0,   60,    1,    2,
-        3,   31,   27,    0,    0,    0,    3,   25,   26,    3,
-        4,    0,    0,    0,    0,    0,    4,    0,    0,    4,
-        5,    5,    0,    0,    0,    0,    5,    6,    6,    0,
-        0,    0,    0,    6,    7,    7,    0,    0,    7,    7,
-        7,    9,    9,    9,    0,    0,    0,    0,    0,    0,
-        0,    0,    0,    0,    0,    9,    9,   10,   10,   10,
-        0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-        0,   10,   10,   11,   11,   11,    0,    0,    0,    0,
-        0,    0,    0,    0,    0,    0,    0,   11,   11,   12,
+        0,    0,    1,    2,   31,   31,   23,   24,    1,    2,
+        3,   32,   32,   34,   34,    3,   35,   35,    3,    4,
+       23,   24,   37,   37,    4,   38,   38,    4,    5,    5,
+       41,   41,   42,   42,    5,    6,    6,   45,   45,   46,
+       46,    6,    7,    7,   50,   50,    7,    7,    7,   51,
+       51,   55,   55,    7,    9,    9,   56,   56,    9,   59,
+       59,   60,   60,   65,    9,    9,   11,   11,   63,   63,
+       11,   64,   64,   92,   65,   84,   11,   11,   13,   13,
+       72,   72,   13,   81,   13,   74,   74,   73,   13,   13,
+       15,   15,   76,   76,   15,   71,   15,   78,   78,   53,
 
-       12,   12,    0,    0,    0,    0,    0,    0,    0,    0,
-        0,    0,    0,   12,   12,   13,   13,   13,    0,    0,
-        0,    0,    0,    0,    0,    0,    0,    0,    0,   13,
-       13,   14,   14,   14,    0,    0,    0,    0,    0,    0,
-        0,    0,    0,    0,    0,   14,   14,   15,   15,   15,
-        0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-        0,   15,   15,   16,   16,   16,    0,    0,    0,    0,
-        0,    0,    0,    0,    0,    0,    0,   16,   16,   17,
-       17,    0,    0,   17,    0,    0,    0,    0,    0,   17,
-       19,   19,   19,   19,   19,   19,   19,   19,   19,   19,
+       15,   15,   17,   17,   80,   80,   17,   83,   83,   86,
+       86,   87,   87,   90,   17,   19,   19,   89,   89,   48,
+       33,   29,   25,    0,   90,   19,   19,    0,    0,   19,
+       21,   21,   21,    0,    0,    0,    0,    0,   21,    0,
+       21,   21,    0,    0,   21,   96,   96,   96,   96,   96,
+       97,   97,   97,   97,   97,   98,   98,   99,   99,  100,
+      100,  101,  101,  102,  102,  103,  103,  104,  104,  104,
+      104,  104,  105,  105,  106,  106,  106,  106,   95,   95,
+       95,   95,   95,   95,   95,   95,   95,   95,   95,   95,
+       95,   95,   95,   95,   95,   95
 
-       19,   19,   19,   19,   19,   19,   21,   21,   21,   21,
-       21,   21,   21,   21,   21,   21,   21,   21,   21,   21,
-       21,   21,   23,   23,   23,   23,   23,   23,   23,   23,
-       23,   23,   23,   23,   23,   23,   23,   23,   71,   71,
-       71,   71,   71,   71,   71,   71,   72,   72,   72,   72,
-       72,   72,   72,   72,   73,   73,   73,   73,   73,   73,
-       73,   73,   74,   74,   74,   74,   74,   74,   74,   74,
-       75,   75,   75,   75,   75,   75,   75,   75,   76,   76,
-       76,   76,   76,   76,   76,   76,   78,   78,   78,   78,
-       78,   79,   79,   79,   79,   79,   80,   80,   80,   80,
-
-       80,   81,   81,   81,   81,   81,   82,    0,   82,   82,
-        0,   82,   83,    0,   83,    0,   83,   84,    0,   84,
-       84,    0,   84,   85,   85,   85,   85,   85,   85,   85,
-       70,   70,   70,   70,   70,   70,   70,   70,   70,   70,
-       70,   70,   70,   70,   70,   70,   70
     } ;
 
-static const flex_int16_t yy_rule_linenum[31] =
+static const flex_int16_t yy_rule_linenum[35] =
     {   0,
-       35,   38,   42,   45,   49,   53,   57,   61,   65,   69,
-       73,   77,   81,   85,   89,   93,   95,   99,  102,  105,
-      109,  114,  116,  119,  122,  125,  129,  132,  136,  140
+       36,   39,   43,   46,   50,   54,   58,   62,   66,   70,
+       72,   76,   80,   82,   85,   89,   93,   95,   98,  101,
+      105,  107,  109,  113,  116,  119,  123,  127,  129,  134,
+      138,  148,  152,  157
     } ;
 
 /* The intent behind this definition is that it'll catch
@@ -584,11 +563,11 @@ static const flex_int16_t yy_rule_linenum[31] =
     #undef  YY_DECL
     #define YY_DECL int util::syslog::SyslogScanner::yylex(syslog::SyslogParser::value_type* yy_value)
     using token = util::syslog::SyslogParser::token;
-#line 587 "D:/projects/utillib/src/syslogflexer.cpp"
+#line 566 "D:/projects/utillib/src/syslogflexer.cpp"
 #define YY_NO_UNISTD_H 1
 #define YY_NO_INPUT 1
 
-#line 591 "D:/projects/utillib/src/syslogflexer.cpp"
+#line 570 "D:/projects/utillib/src/syslogflexer.cpp"
 
 #define INITIAL 0
 #define PRI 1
@@ -601,8 +580,7 @@ static const flex_int16_t yy_rule_linenum[31] =
 #define SD 8
 #define SDELEMENT 9
 #define SDPAR 10
-#define SDVALUE 11
-#define MSG 12
+#define MSG 11
 
 #ifndef YY_NO_UNISTD_H
 /* Special case for "unistd.h", since it is non-ANSI. We include it way
@@ -792,13 +770,13 @@ YY_DECL
 
 	{
 /* %% [7.0] user's declarations go here */
-#line 30 "D:/projects/utillib/src/syslogflexer.l"
+#line 31 "D:/projects/utillib/src/syslogflexer.l"
 
 
-#line 33 "D:/projects/utillib/src/syslogflexer.l"
+#line 34 "D:/projects/utillib/src/syslogflexer.l"
             yylval = yy_value;
 
-#line 801 "D:/projects/utillib/src/syslogflexer.cpp"
+#line 779 "D:/projects/utillib/src/syslogflexer.cpp"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -827,13 +805,13 @@ yy_match:
 			while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 				{
 				yy_current_state = (int) yy_def[yy_current_state];
-				if ( yy_current_state >= 71 )
+				if ( yy_current_state >= 96 )
 					yy_c = yy_meta[yy_c];
 				}
 			yy_current_state = yy_nxt[yy_base[yy_current_state] + yy_c];
 			++yy_cp;
 			}
-		while ( yy_current_state != 70 );
+		while ( yy_current_state != 95 );
 		yy_cp = (yy_last_accepting_cpos);
 		yy_current_state = (yy_last_accepting_state);
 
@@ -852,12 +830,12 @@ do_action:	/* This label is used only to access EOF actions. */
 			{
 			if ( yy_act == 0 )
 				std::cerr << "--scanner backing up\n";
-			else if ( yy_act < 31 )
+			else if ( yy_act < 35 )
 				std::cerr << "--accepting rule at line " << yy_rule_linenum[yy_act] <<
 				         "(\"" << yytext << "\")\n";
-			else if ( yy_act == 31 )
+			else if ( yy_act == 35 )
 				std::cerr << "--accepting default rule (\"" << yytext << "\")\n";
-			else if ( yy_act == 32 )
+			else if ( yy_act == 36 )
 				std::cerr << "--(end of buffer or a NUL)\n";
 			else
 				std::cerr << "--EOF (start condition " << YY_START << ")\n";
@@ -875,207 +853,246 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 35 "D:/projects/utillib/src/syslogflexer.l"
+#line 36 "D:/projects/utillib/src/syslogflexer.l"
 { BEGIN(PRI);
                return '<';}
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 38 "D:/projects/utillib/src/syslogflexer.l"
+#line 39 "D:/projects/utillib/src/syslogflexer.l"
 { const auto num = std::stoi(yytext);
                  yylval->build<int>(num);
                  return token::NUMBER;}
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 42 "D:/projects/utillib/src/syslogflexer.l"
+#line 43 "D:/projects/utillib/src/syslogflexer.l"
 { BEGIN(VERSION);
            return '>';}
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 45 "D:/projects/utillib/src/syslogflexer.l"
+#line 46 "D:/projects/utillib/src/syslogflexer.l"
 {const auto num = std::stoi(yytext);
                    yylval->build<int>(num);
                    return token::NUMBER;}
 	YY_BREAK
 case 5:
+/* rule 5 can match eol */
 YY_RULE_SETUP
-#line 49 "D:/projects/utillib/src/syslogflexer.l"
+#line 50 "D:/projects/utillib/src/syslogflexer.l"
 { BEGIN TIMESTAMP;
                yylval->build<std::string>(" ");
                return token::SP;}
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 53 "D:/projects/utillib/src/syslogflexer.l"
+#line 54 "D:/projects/utillib/src/syslogflexer.l"
 { const std::string time = yytext;
                          yylval->build<std::string>(time);
                          return token::ISOTIME;}
 	YY_BREAK
 case 7:
+/* rule 7 can match eol */
 YY_RULE_SETUP
-#line 57 "D:/projects/utillib/src/syslogflexer.l"
+#line 58 "D:/projects/utillib/src/syslogflexer.l"
 { BEGIN HOSTNAME;
                   yylval->build<std::string>(" ");
                   return token::SP;}
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 61 "D:/projects/utillib/src/syslogflexer.l"
+#line 62 "D:/projects/utillib/src/syslogflexer.l"
 { const std::string name = yytext;
                 yylval->build<std::string>(name);
                 return token::NAME;}
 	YY_BREAK
 case 9:
+/* rule 9 can match eol */
 YY_RULE_SETUP
-#line 65 "D:/projects/utillib/src/syslogflexer.l"
+#line 66 "D:/projects/utillib/src/syslogflexer.l"
 { BEGIN APPNAME;
                  yylval->build<std::string>(" ");
                  return token::SP;}
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 69 "D:/projects/utillib/src/syslogflexer.l"
+#line 70 "D:/projects/utillib/src/syslogflexer.l"
+{ return token::NIL;}
+	YY_BREAK
+case 11:
+YY_RULE_SETUP
+#line 72 "D:/projects/utillib/src/syslogflexer.l"
 { const std::string name = yytext;
                    yylval->build<std::string>(name);
                    return token::NAME;}
 	YY_BREAK
-case 11:
+case 12:
+/* rule 12 can match eol */
 YY_RULE_SETUP
-#line 73 "D:/projects/utillib/src/syslogflexer.l"
+#line 76 "D:/projects/utillib/src/syslogflexer.l"
 { BEGIN PROCID;
                  yylval->build<std::string>(" ");
                  return token::SP;}
 	YY_BREAK
-case 12:
+case 13:
 YY_RULE_SETUP
-#line 77 "D:/projects/utillib/src/syslogflexer.l"
+#line 80 "D:/projects/utillib/src/syslogflexer.l"
+{ return token::NIL;}
+	YY_BREAK
+case 14:
+YY_RULE_SETUP
+#line 82 "D:/projects/utillib/src/syslogflexer.l"
 { const std::string name = yytext;
                    yylval->build<std::string>(name);
                    return token::NAME;}
 	YY_BREAK
-case 13:
+case 15:
 YY_RULE_SETUP
-#line 81 "D:/projects/utillib/src/syslogflexer.l"
+#line 85 "D:/projects/utillib/src/syslogflexer.l"
+{ const auto num = std::stoi(yytext);
+                   yylval->build<int>(num);
+                   return token::NUMBER;}
+	YY_BREAK
+case 16:
+/* rule 16 can match eol */
+YY_RULE_SETUP
+#line 89 "D:/projects/utillib/src/syslogflexer.l"
 { BEGIN MSGID;
                yylval->build<std::string>(" ");
                return token::SP;}
 	YY_BREAK
-case 14:
-YY_RULE_SETUP
-#line 85 "D:/projects/utillib/src/syslogflexer.l"
-{ const std::string name = yytext;
-                yylval->build<std::string>(name);
-                return token::NAME;}
-	YY_BREAK
-case 15:
-YY_RULE_SETUP
-#line 89 "D:/projects/utillib/src/syslogflexer.l"
-{ BEGIN SD;
-              yylval->build<std::string>(" ");
-              return token::SP;}
-	YY_BREAK
-case 16:
+case 17:
 YY_RULE_SETUP
 #line 93 "D:/projects/utillib/src/syslogflexer.l"
 { return token::NIL;}
 	YY_BREAK
-case 17:
-YY_RULE_SETUP
-#line 95 "D:/projects/utillib/src/syslogflexer.l"
-{ BEGIN MSG;
-             yylval->build<std::string>(" ");
-             return token::SP;}
-	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 99 "D:/projects/utillib/src/syslogflexer.l"
-{ BEGIN SDELEMENT;
-           return '['; }
-	YY_BREAK
-case 19:
-YY_RULE_SETUP
-#line 102 "D:/projects/utillib/src/syslogflexer.l"
-{ BEGIN SD;
-                  return ']';}
-	YY_BREAK
-case 20:
-YY_RULE_SETUP
-#line 105 "D:/projects/utillib/src/syslogflexer.l"
-{ BEGIN SDPAR;
-                  yylval->build<std::string>(" ");
-                  return token::SP; }
-	YY_BREAK
-case 21:
-YY_RULE_SETUP
-#line 109 "D:/projects/utillib/src/syslogflexer.l"
-{ const std::string name = yytext;
-                     yylval->build<std::string>(name);
-                     return token::NAME; }
-	YY_BREAK
-case 22:
-YY_RULE_SETUP
-#line 114 "D:/projects/utillib/src/syslogflexer.l"
-{ return '='; }
-	YY_BREAK
-case 23:
-YY_RULE_SETUP
-#line 116 "D:/projects/utillib/src/syslogflexer.l"
-{ BEGIN SDVALUE;
-              return '\"'; }
-	YY_BREAK
-case 24:
-YY_RULE_SETUP
-#line 119 "D:/projects/utillib/src/syslogflexer.l"
-{ BEGIN SD;
-              return ']';}
-	YY_BREAK
-case 25:
-YY_RULE_SETUP
-#line 122 "D:/projects/utillib/src/syslogflexer.l"
-{   yylval->build<std::string>(" ");
-                return token::SP;}
-	YY_BREAK
-case 26:
-YY_RULE_SETUP
-#line 125 "D:/projects/utillib/src/syslogflexer.l"
-{ const std::string name = yytext;
-               yylval->build<std::string>(name);
-               return token::NAME; }
-	YY_BREAK
-case 27:
-YY_RULE_SETUP
-#line 129 "D:/projects/utillib/src/syslogflexer.l"
-{ BEGIN SDPAR;
-                 return '\"'; }
-	YY_BREAK
-case 28:
-YY_RULE_SETUP
-#line 132 "D:/projects/utillib/src/syslogflexer.l"
-{ const std::string name = yytext;
-                   yylval->build<std::string>(name);
-                   return token::NAME;}
-	YY_BREAK
-case 29:
-/* rule 29 can match eol */
-YY_RULE_SETUP
-#line 136 "D:/projects/utillib/src/syslogflexer.l"
+#line 95 "D:/projects/utillib/src/syslogflexer.l"
 { const std::string name = yytext;
                 yylval->build<std::string>(name);
                 return token::NAME;}
 	YY_BREAK
+case 19:
+YY_RULE_SETUP
+#line 98 "D:/projects/utillib/src/syslogflexer.l"
+{ const auto num = std::stoi(yytext);
+                   yylval->build<int>(num);
+                   return token::NUMBER;}
+	YY_BREAK
+case 20:
+/* rule 20 can match eol */
+YY_RULE_SETUP
+#line 101 "D:/projects/utillib/src/syslogflexer.l"
+{ BEGIN SD;
+              yylval->build<std::string>(" ");
+              return token::SP;}
+	YY_BREAK
+case 21:
+YY_RULE_SETUP
+#line 105 "D:/projects/utillib/src/syslogflexer.l"
+{ return token::NIL;}
+	YY_BREAK
+case 22:
+YY_RULE_SETUP
+#line 107 "D:/projects/utillib/src/syslogflexer.l"
+{ return token::NIL;}
+	YY_BREAK
+case 23:
+/* rule 23 can match eol */
+YY_RULE_SETUP
+#line 109 "D:/projects/utillib/src/syslogflexer.l"
+{ BEGIN MSG;
+             yylval->build<std::string>(" ");
+             return token::SP;}
+	YY_BREAK
+case 24:
+YY_RULE_SETUP
+#line 113 "D:/projects/utillib/src/syslogflexer.l"
+{ BEGIN SDELEMENT;
+           return '['; }
+	YY_BREAK
+case 25:
+YY_RULE_SETUP
+#line 116 "D:/projects/utillib/src/syslogflexer.l"
+{ BEGIN SD;
+                  return ']';}
+	YY_BREAK
+case 26:
+/* rule 26 can match eol */
+YY_RULE_SETUP
+#line 119 "D:/projects/utillib/src/syslogflexer.l"
+{ BEGIN SDPAR;
+                  yylval->build<std::string>(" ");
+                  return token::SP; }
+	YY_BREAK
+case 27:
+YY_RULE_SETUP
+#line 123 "D:/projects/utillib/src/syslogflexer.l"
+{ const std::string name = yytext;
+                     yylval->build<std::string>(name);
+                     return token::NAME; }
+	YY_BREAK
+case 28:
+YY_RULE_SETUP
+#line 127 "D:/projects/utillib/src/syslogflexer.l"
+{ return '='; }
+	YY_BREAK
+case 29:
+YY_RULE_SETUP
+#line 129 "D:/projects/utillib/src/syslogflexer.l"
+{ BEGIN SD;
+              return ']';}
+	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 140 "D:/projects/utillib/src/syslogflexer.l"
-{}
+#line 134 "D:/projects/utillib/src/syslogflexer.l"
+{ const std::string name = yytext;
+               yylval->build<std::string>(name);
+               return token::NAME; }
 	YY_BREAK
 case 31:
+/* rule 31 can match eol */
 YY_RULE_SETUP
-#line 141 "D:/projects/utillib/src/syslogflexer.l"
+#line 138 "D:/projects/utillib/src/syslogflexer.l"
+{
+    std::string text = yytext;
+    if (text.size() >= 2) {
+       text.erase(0,1);
+       text.erase(text.size() -1);
+    }
+    yylval->build<std::string>(text);
+    return token::STRING;
+    }
+	YY_BREAK
+case 32:
+/* rule 32 can match eol */
+YY_RULE_SETUP
+#line 148 "D:/projects/utillib/src/syslogflexer.l"
+{   yylval->build<std::string>(" ");
+                return token::SP;}
+	YY_BREAK
+case 33:
+/* rule 33 can match eol */
+YY_RULE_SETUP
+#line 152 "D:/projects/utillib/src/syslogflexer.l"
+{ BEGIN INITIAL;
+                const std::string name = yytext;
+                yylval->build<std::string>(name);
+                return token::NAME;}
+	YY_BREAK
+case 34:
+YY_RULE_SETUP
+#line 157 "D:/projects/utillib/src/syslogflexer.l"
+{}
+	YY_BREAK
+case 35:
+YY_RULE_SETUP
+#line 159 "D:/projects/utillib/src/syslogflexer.l"
 ECHO;
 	YY_BREAK
-#line 1078 "D:/projects/utillib/src/syslogflexer.cpp"
+#line 1095 "D:/projects/utillib/src/syslogflexer.cpp"
 case YY_STATE_EOF(INITIAL):
 case YY_STATE_EOF(PRI):
 case YY_STATE_EOF(VERSION):
@@ -1087,7 +1104,6 @@ case YY_STATE_EOF(MSGID):
 case YY_STATE_EOF(SD):
 case YY_STATE_EOF(SDELEMENT):
 case YY_STATE_EOF(SDPAR):
-case YY_STATE_EOF(SDVALUE):
 case YY_STATE_EOF(MSG):
 	yyterminate();
 
@@ -1518,7 +1534,7 @@ int yyFlexLexer::yy_get_next_buffer()
 	for ( yy_cp = (yytext_ptr) + YY_MORE_ADJ; yy_cp < (yy_c_buf_p); ++yy_cp )
 		{
 /* %% [16.0] code to find the next state goes here */
-		YY_CHAR yy_c = (*yy_cp ? yy_ec[YY_SC_TO_UI(*yy_cp)] : 16);
+		YY_CHAR yy_c = (*yy_cp ? yy_ec[YY_SC_TO_UI(*yy_cp)] : 17);
 		if ( yy_accept[yy_current_state] )
 			{
 			(yy_last_accepting_state) = yy_current_state;
@@ -1527,7 +1543,7 @@ int yyFlexLexer::yy_get_next_buffer()
 		while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 			{
 			yy_current_state = (int) yy_def[yy_current_state];
-			if ( yy_current_state >= 71 )
+			if ( yy_current_state >= 96 )
 				yy_c = yy_meta[yy_c];
 			}
 		yy_current_state = yy_nxt[yy_base[yy_current_state] + yy_c];
@@ -1551,7 +1567,7 @@ int yyFlexLexer::yy_get_next_buffer()
     /* %% [17.0] code to find the next state, and perhaps do backing up, goes here */
 	char *yy_cp = (yy_c_buf_p);
 
-	YY_CHAR yy_c = 16;
+	YY_CHAR yy_c = 17;
 	if ( yy_accept[yy_current_state] )
 		{
 		(yy_last_accepting_state) = yy_current_state;
@@ -1560,11 +1576,11 @@ int yyFlexLexer::yy_get_next_buffer()
 	while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 		{
 		yy_current_state = (int) yy_def[yy_current_state];
-		if ( yy_current_state >= 71 )
+		if ( yy_current_state >= 96 )
 			yy_c = yy_meta[yy_c];
 		}
 	yy_current_state = yy_nxt[yy_base[yy_current_state] + yy_c];
-	yy_is_jam = (yy_current_state == 70);
+	yy_is_jam = (yy_current_state == 95);
 
 		return yy_is_jam ? 0 : yy_current_state;
 }
@@ -2206,7 +2222,6 @@ void yyfree (void * ptr )
 
 /* %ok-for-header */
 
-#line 141 "D:/projects/utillib/src/syslogflexer.l"
-
+#line 159 "D:/projects/utillib/src/syslogflexer.l"
 
 

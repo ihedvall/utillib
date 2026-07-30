@@ -67,9 +67,9 @@ void LogError(const Loc &loc, const char *fmt, ...) {
 }
 
 void LogString(const Loc &location, LogSeverity severity,
-               const std::string &message) {
+               std::string message) {
   LogMessage m;
-  m.message = message;
+  m.message = std::move(message);
   m.line = location.line();
   m.column = location.column();
   m.file = location.file_name();
