@@ -17,4 +17,10 @@ set(PLATFORMFOLDERS_ENABLE_INSTALL OFF CACHE INTERNAL "Turn off install")
 
 FetchContent_MakeAvailable(platform-folders)
 
-cmake_print_variables(platform-folders_POPULATED platform-folders_SOURCE_DIR platform-folders_BINARY_DIR)
+cmake_print_variables(platform-folders_POPULATED
+                      platform-folders_SOURCE_DIR
+                      platform-folders_BINARY_DIR)
+
+cmake_print_properties(TARGETS sago::platform_folders PROPERTIES
+        INTERFACE_LINK_LIBRARIES
+        INTERFACE_INCLUDE_DIRECTORIES)

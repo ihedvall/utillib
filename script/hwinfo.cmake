@@ -8,7 +8,7 @@ include(CMakePrintHelpers)
 
 FetchContent_Declare(hwinfo
         GIT_REPOSITORY https://github.com/lfreist/hwinfo.git
-        GIT_TAG HEAD
+        GIT_TAG c++17
 )
 
 set(HWINFO_SHARED OFF CACHE INTERNAL "Turn off shared build")
@@ -17,3 +17,6 @@ set(HWINFO_STATIC ON CACHE INTERNAL "Turn on static build")
 FetchContent_MakeAvailable(hwinfo)
 
 cmake_print_variables(hwinfo_POPULATED hwinfo_SOURCE_DIR hwinfo_BINARY_DIR)
+cmake_print_properties(TARGETS lfreist-hwinfo::hwinfo PROPERTIES
+        INTERFACE_LINK_LIBRARIES
+        INTERFACE_INCLUDE_DIRECTORIES)

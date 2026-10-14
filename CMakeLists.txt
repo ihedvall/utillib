@@ -160,8 +160,9 @@ target_include_directories(util PUBLIC
 target_include_directories(util PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/src)
 target_include_directories(util PRIVATE ${Boost_INCLUDE_DIRS})
 target_include_directories(util PRIVATE ${EXPAT_INCLUDE_DIRS})
-target_include_directories(util PRIVATE ${hwinfo_SOURCE_DIR}/include)
-target_include_directories(util PRIVATE ${platform-folders_SOURCE_DIR})
+
+target_link_libraries(util PUBLIC sago::platform_folders)
+target_link_libraries(util PUBLIC lfreist-hwinfo::hwinfo)
 
 cmake_print_properties(TARGETS util PROPERTIES INCLUDE_DIRECTORIES)
 
